@@ -1,22 +1,18 @@
 import './ProjectsSection.css';
-import { useState, useEffect } from 'react';
+import { useInView } from '../hooks/useInView';
 
 function ProjectsSection() {
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  useEffect(() => {
-    setTimeout(() => setIsLoaded(true), 100);
-  }, []);
+  const [projectsRef, isProjectsInView] = useInView({ once: true });
 
   return (
-    <section className="projects-section">
+    <section className="projects-section" id="projects" ref={projectsRef}>
       <div className="projects-container">
-        <div className={`projects-header ${isLoaded ? 'loaded' : ''}`}>
+        <div className={`projects-header ${isProjectsInView ? 'loaded' : ''}`}>
           <h2 className="projects-title">Projects</h2>
           <div className="projects-accent"></div>
         </div>
 
-        <div className={`coming-soon-container ${isLoaded ? 'loaded' : ''}`}>
+        <div className={`coming-soon-container ${isProjectsInView ? 'loaded' : ''}`}>
           <div className="coming-soon-content">
             <div className="coming-soon-icon">🚀</div>
             <h3 className="coming-soon-text">

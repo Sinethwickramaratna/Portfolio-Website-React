@@ -1,24 +1,21 @@
 import './AboutSection.css';
-import { useState, useEffect } from 'react';
-import profileImage from '../assets/Images/profile.jpg';
+import { useState } from 'react';
+import { useInView } from '../hooks/useInView';
+import profileImage from '../assets/Images/profile.png';
 
 function AboutSection() {
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [aboutRef, isAboutInView] = useInView({ once: true });
   const [isExpanded, setIsExpanded] = useState(false);
 
-  useEffect(() => {
-    setTimeout(() => setIsLoaded(true), 100);
-  }, []);
-
   return (
-    <section className="about-section">
+    <section className="about-section" id="about" ref={aboutRef}>
       <div className="about-container">
-        <div className={`about-header ${isLoaded ? 'loaded' : ''}`}>
+        <div className={`about-header ${isAboutInView ? 'loaded' : ''}`}>
           <h2 className="about-title">About Me</h2>
           <div className="about-accent"></div>
         </div>
 
-        <div className={`about-content ${isLoaded ? 'loaded' : ''}`}>
+        <div className={`about-content ${isAboutInView ? 'loaded' : ''}`}>
           <div className="about-text">
             <p>
               I am currently pursuing a degree in Computer Science & Engineering at the University of Moratuwa, specializing in Data Science Engineering. My academic interests center around data analytics, machine learning, statistical modeling, and building data-driven systems that solve real-world problems. I am passionate about transforming complex datasets into meaningful insights and developing intelligent solutions that create measurable impact. Through my studies, I have built a strong foundation in programming, analytical thinking, and computational problem-solving.

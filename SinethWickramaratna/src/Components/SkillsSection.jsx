@@ -1,12 +1,8 @@
 import './SkillsSection.css';
-import { useState, useEffect } from 'react';
+import { useInView } from '../hooks/useInView';
 
 function SkillsSection() {
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  useEffect(() => {
-    setTimeout(() => setIsLoaded(true), 100);
-  }, []);
+  const [skillsRef, isSkillsInView] = useInView({ once: true });
 
   const skillCategories = [
     {
@@ -78,14 +74,14 @@ function SkillsSection() {
   ];
 
   return (
-    <section className="skills-section">
+    <section className="skills-section" id="skills" ref={skillsRef}>
       <div className="skills-container">
-        <div className={`skills-header ${isLoaded ? 'loaded' : ''}`}>
+        <div className={`skills-header ${isSkillsInView ? 'loaded' : ''}`}>
           <h2 className="skills-title">Skills & Expertise</h2>
           <div className="skills-accent"></div>
         </div>
 
-        <div className={`skills-content ${isLoaded ? 'loaded' : ''}`}>
+        <div className={`skills-content ${isSkillsInView ? 'loaded' : ''}`}>
           {skillCategories.map((category, categoryIndex) => (
             <div key={categoryIndex} className="skill-category">
               <div className="category-header">

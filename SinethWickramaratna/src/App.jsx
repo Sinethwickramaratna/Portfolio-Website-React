@@ -6,6 +6,10 @@ import HeroSection from './Components/HeroSection.jsx';
 import AboutSection from './Components/AboutSection.jsx';
 import SkillsSection from './Components/SkillsSection.jsx';
 import ProjectsSection from './Components/ProjectsSection.jsx';
+import VolunteeringSection from './Components/VolunteeringSection.jsx';
+import ImageCarousel3D from './Components/ImageCarousel3D.jsx';
+import ContactSection from './Components/ContactSection.jsx';
+import LoadingPage from './Components/LoadingPage.jsx';
 
 
 function App() {
@@ -104,11 +108,15 @@ function App() {
 
   return (
     <>
+      <LoadingPage />
       <NavBar />
       <HeroSection />
       <AboutSection />
       <SkillsSection />
       <ProjectsSection />
+      <VolunteeringSection />
+      <ImageCarousel3D />
+      <ContactSection />
     </>
   )
 }

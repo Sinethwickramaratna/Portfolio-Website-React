@@ -1,17 +1,73 @@
 import './HeroSection.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 function HeroSection(){
     const [isLoaded, setIsLoaded] = useState(false);
+  const sectionRef = useRef(null);
+  const rafRef = useRef(null);
 
     useEffect(() => {
         // Trigger animation after component mounts
         setTimeout(() => setIsLoaded(true), 100);
     }, []);
 
+    useEffect(() => {
+      const handleMouseMove = (event) => {
+        if (!sectionRef.current) return;
+
+        const rect = sectionRef.current.getBoundingClientRect();
+        const withinX = event.clientX >= rect.left && event.clientX <= rect.right;
+        const withinY = event.clientY >= rect.top && event.clientY <= rect.bottom;
+
+        if (!withinX || !withinY) return;
+
+        const x = (event.clientX - rect.left) / rect.width;
+        const y = (event.clientY - rect.top) / rect.height;
+        const mx = (x - 0.5) * 2;
+        const my = (y - 0.5) * 2;
+
+        if (rafRef.current) cancelAnimationFrame(rafRef.current);
+        rafRef.current = requestAnimationFrame(() => {
+          sectionRef.current.style.setProperty('--mx', mx.toFixed(3));
+          sectionRef.current.style.setProperty('--my', my.toFixed(3));
+        });
+      };
+
+      const handleMouseLeave = () => {
+        if (!sectionRef.current) return;
+        sectionRef.current.style.setProperty('--mx', '0');
+        sectionRef.current.style.setProperty('--my', '0');
+      };
+
+      window.addEventListener('mousemove', handleMouseMove, { passive: true });
+      window.addEventListener('mouseleave', handleMouseLeave);
+
+      return () => {
+        window.removeEventListener('mousemove', handleMouseMove);
+        window.removeEventListener('mouseleave', handleMouseLeave);
+        if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      };
+    }, []);
+
+    const handleContactClick = () => {
+      const target = document.getElementById('contact');
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    };
+
     return(
         <>
-          <div className="hero-section">
+          <div
+            className="hero-section"
+            id="hero"
+            ref={sectionRef}
+          >
+            <div className="hero-bg">
+              <div className="hero-bg-layer layer-1"></div>
+              <div className="hero-bg-layer layer-2"></div>
+              <div className="hero-bg-layer layer-3"></div>
+            </div>
             <div className="hero-container">
               <div className="hero-content">
                 <h1 className={`hero-title ${isLoaded ? 'loaded' : ''}`}>
@@ -26,7 +82,7 @@ function HeroSection(){
                   Transforming data into insights through AI, Machine Learning, and innovative solutions
                 </p>
                 <div className="button-group">
-                  <button className="btn-primary">Get In Touch</button>
+                  <button className="btn-primary" onClick={handleContactClick}>Get In Touch</button>
                   <button className="btn-secondary">
                     <svg className="download-icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
                       <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
