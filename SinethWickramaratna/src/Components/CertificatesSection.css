@@ -233,69 +233,56 @@
   position: relative;
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 16px 40px;
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: #00ccff;
-  background: rgba(20, 35, 70, 0.8);
-  border: 2px solid rgba(0, 204, 255, 0.4);
-  border-radius: 50px;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 40px;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #0a1428;
+  background: linear-gradient(135deg, #00ffff 0%, #00ff88 100%);
+  border: 2px solid transparent;
+  border-radius: 8px;
   cursor: pointer;
-  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  backdrop-filter: blur(12px);
-  box-shadow: 0 8px 25px rgba(0, 204, 255, 0.2),
-              inset 0 0 20px rgba(0, 204, 255, 0.05);
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.4);
   overflow: hidden;
 }
 
 .load-more-btn::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(0, 204, 255, 0.2), transparent);
-  transition: left 0.5s ease;
-}
-
-.load-more-btn:hover::before {
-  left: 100%;
+  display: none;
 }
 
 .load-more-btn:hover {
-  border-color: rgba(0, 204, 255, 0.8);
-  background: rgba(25, 45, 85, 0.95);
-  box-shadow: 0 12px 40px rgba(0, 204, 255, 0.4),
-              inset 0 0 30px rgba(0, 204, 255, 0.1);
-  transform: translateY(-5px) scale(1.05);
-  color: #00ffee;
+  transform: translateY(-3px);
+  box-shadow: 0 0 30px rgba(0, 255, 136, 0.7);
+  background: linear-gradient(135deg, #00ff88 0%, #00ffff 100%);
 }
 
 .load-more-btn:active {
-  transform: translateY(-2px) scale(1.02);
+  transform: translateY(-1px);
 }
 
 .btn-text {
   position: relative;
   z-index: 2;
-  letter-spacing: 0.5px;
+  letter-spacing: inherit;
 }
 
 .btn-icon {
   position: relative;
   z-index: 2;
-  font-size: 1rem;
+  font-size: 1.2rem;
   transition: transform 0.3s ease;
 }
 
 .load-more-btn:hover .btn-icon {
-  transform: translateY(3px);
+  transform: translateX(5px);
 }
 
 .load-more-btn.show-less:hover .btn-icon {
-  transform: translateY(-3px);
+  transform: translateX(-5px);
 }
 
 /* Animations */
@@ -497,8 +484,8 @@
   }
 
   .load-more-btn {
-    padding: 14px 35px;
-    font-size: 1.05rem;
+    padding: 13px 35px;
+    font-size: 0.95rem;
   }
 
   .certificates-modal {
@@ -553,8 +540,8 @@
   }
 
   .load-more-btn {
-    padding: 13px 32px;
-    font-size: 1rem;
+    padding: 12px 32px;
+    font-size: 0.9rem;
   }
 
   .certificates-modal {
