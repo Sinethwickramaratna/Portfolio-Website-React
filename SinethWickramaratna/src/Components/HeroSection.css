@@ -1152,7 +1152,7 @@
   color: #5a9fd4;
   margin-bottom: 6px;
   line-height: 1.5;
-  font-weight: 400;
+  font-weight: 500;
   animation: pulse-glow 2s ease-in-out infinite;
   
   /* Initial hidden state */
@@ -1394,7 +1394,7 @@
   font-size: 1.05rem;
   color: rgba(90, 159, 212, 0.8);
   line-height: 1.7;
-  font-weight: 300;
+  font-weight: 400;
   max-width: 460px;
   opacity: 0;
   transform: translateY(20px);
@@ -1557,3 +1557,4 @@
     font-size: 0.8rem;
   }
 }
+

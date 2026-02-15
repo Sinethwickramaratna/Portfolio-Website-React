@@ -1,0 +1,105 @@
+/* Global Theme Configuration */
+
+/* Dark Mode (Default) */
+:root,
+[data-theme="dark"] {
+  --bg-primary: #0a0e27;
+  --bg-secondary: #1a2847;
+  --bg-tertiary: #2d3e5f;
+  --text-primary: #ffffff;
+  --text-secondary: #5a9fd4;
+  --text-muted: rgba(90, 159, 212, 0.6);
+  --accent-cyan: #00ffff;
+  --accent-green: #00ff88;
+  --accent-magenta: #ff00ff;
+  --accent-blue: #3498db;
+  --border-color: rgba(0, 212, 255, 0.2);
+  --card-bg: rgba(20, 35, 70, 0.8);
+  --glass-bg: rgba(10, 20, 40, 0.4);
+}
+
+/* Light Mode */
+[data-theme="light"] {
+  --bg-primary: #f8f9fa;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #ecf0f5;
+  --text-primary: #2c3e50;
+  --text-secondary: #5a7a8f;
+  --text-muted: rgba(92, 122, 143, 0.6);
+  --accent-cyan: #0892a5;
+  --accent-green: #10a34a;
+  --accent-magenta: #c42a75;
+  --accent-blue: #3498db;
+  --border-color: rgba(52, 152, 219, 0.2);
+  --card-bg: rgba(255, 255, 255, 0.9);
+  --glass-bg: rgba(255, 255, 255, 0.5);
+}
+
+/* Apply theme to body */
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Section backgrounds */
+.hero-section,
+.about-section,
+.skills-section,
+.projects-section,
+.volunteering-section,
+.carousel-3d-section,
+.contact-section {
+  transition: background-color 0.3s ease;
+}
+
+[data-theme="light"] .hero-section,
+[data-theme="light"] .about-section,
+[data-theme="light"] .skills-section,
+[data-theme="light"] .projects-section,
+[data-theme="light"] .volunteering-section,
+[data-theme="light"] .carousel-3d-section,
+[data-theme="light"] .contact-section {
+  background-color: var(--bg-secondary);
+}
+
+/* Light mode text colors */
+[data-theme="light"] h1,
+[data-theme="light"] h2,
+[data-theme="light"] h3,
+[data-theme="light"] h4,
+[data-theme="light"] h5,
+[data-theme="light"] h6 {
+  color: #1a2332;
+}
+
+/* Light mode paragraph text */
+[data-theme="light"] p {
+  color: var(--text-secondary);
+}
+
+/* Light mode card backgrounds */
+[data-theme="light"] .certificate-card,
+[data-theme="light"] .stat-item,
+[data-theme="light"] .skill-card,
+[data-theme="light"] .volunteering-item {
+  background: var(--card-bg);
+  border-color: var(--border-color);
+}
+
+/* Light mode button styles */
+[data-theme="light"] .btn-primary,
+[data-theme="light"] .btn-secondary {
+  color: #ffffff;
+}
+
+/* Smooth transitions for theme changes */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Prevent transitions on theme toggle itself */
+.theme-toggle,
+.theme-toggle * {
+  transition: transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}

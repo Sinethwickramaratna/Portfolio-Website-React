@@ -36,26 +36,6 @@ body.modal-open .glass-navbar {
   display: none;
 }
 
-.glass-navbar:hover {
-  background: rgba(10, 20, 40, 0.5);
-  box-shadow: 
-    0 8px 32px rgba(0, 0, 0, 0.5),
-    0 0 0 1px rgba(255, 255, 255, 0.1) inset,
-    0 0 60px rgba(0, 102, 255, 0.2);
-  border-color: rgba(0, 212, 255, 0.3);
-}
-
-@keyframes navbar-slide-down {
-  from {
-    opacity: 0;
-    transform: translateX(-50%) translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-  }
-}
-
 /* Logo Section */
 .navbar-logo {
   display: flex;
@@ -110,9 +90,9 @@ body.modal-open .glass-navbar {
   
   background: linear-gradient(
     90deg,
-    var(--ds-blue-secondary) 0%,
-    var(--ds-blue-primary) 50%,
-    var(--ds-blue-light) 100%
+    #2980b9 0%,
+    #3498db 50%,
+    #5dade2 100%
   );
   background-size: 200% auto;
   -webkit-background-clip: text;

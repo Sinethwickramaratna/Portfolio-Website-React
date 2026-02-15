@@ -32,7 +32,7 @@ function App() {
       }, 5000);
     };
 
-    const interval = setInterval(createBinaryRain, 150);
+    const interval = setInterval(createBinaryRain, 400);
     return () => clearInterval(interval);
   }, []);
 
@@ -50,11 +50,11 @@ function App() {
       }, 5000);
     };
 
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 2; i++) {
       setTimeout(() => createDataStream(), i * 1000);
     }
 
-    const interval = setInterval(createDataStream, 3000);
+    const interval = setInterval(createDataStream, 5000);
     return () => clearInterval(interval);
   }, []);
 
@@ -77,7 +77,7 @@ function App() {
     };
 
     for (let i = 0; i < 6; i++) {
-      setTimeout(() => createDataPacket(), i * 600);
+      setTimeout(() => createDataPacket(), i * 400);
     }
 
     const interval = setInterval(createDataPacket, 2500);
@@ -99,11 +99,11 @@ function App() {
       }, 9000);
     };
 
-    for (let i = 0; i < 15; i++) {
-      setTimeout(() => createParticle(), i * 200);
+    for (let i = 0; i < 6; i++) {
+      setTimeout(() => createParticle(), i * 300);
     }
 
-    const interval = setInterval(createParticle, 300);
+    const interval = setInterval(createParticle, 800);
     return () => clearInterval(interval);
   }, []);
 
