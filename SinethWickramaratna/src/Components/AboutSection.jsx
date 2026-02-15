@@ -1,10 +1,11 @@
 import './AboutSection.css';
 import { useState } from 'react';
 import { useInView } from '../hooks/useInView';
+import StatItem from './AboutComponents/StatItem';
 import profileImage from '../assets/Images/profile.png';
 
 function AboutSection() {
-  const [aboutRef, isAboutInView] = useInView({ once: true });
+  const [aboutRef, isAboutInView] = useInView();
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
@@ -48,19 +49,11 @@ function AboutSection() {
         </div>
 
         <div className="about-stats">
-          <div className="stat-item">
-            <div className="stat-number">0+</div>
-            <div className="stat-label">Projects</div>
-          </div>
-          <div className="stat-item">
-            <div className="stat-number">0+</div>
-            <div className="stat-label">Technologies</div>
-          </div>
-          <div className="stat-item">
-            <div className="stat-number">100%</div>
-            <div className="stat-label">Dedication</div>
-          </div>
+          <StatItem number="0+" label="Projects" delay={0.3} />
+          <StatItem number="20+" label="Technologies" delay={0.4} />
+          <StatItem number="100%" label="Dedication" delay={0.5} />
         </div>
+
       </div>
     </section>
   );

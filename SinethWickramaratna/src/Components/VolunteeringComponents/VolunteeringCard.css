@@ -1,0 +1,487 @@
+/* Timeline Item Container */
+.timeline-item {
+  display: flex;
+  position: relative;
+  margin-bottom: 60px;
+  opacity: 0;
+  animation: timeline-item-appear 0.8s ease-out forwards;
+}
+
+@keyframes timeline-item-appear {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Left-side items */
+.timeline-left {
+  justify-content: flex-end;
+  padding-right: calc(50% + 60px);
+}
+
+.timeline-left .volunteering-card {
+  transform-origin: right center;
+}
+
+/* Right-side items */
+.timeline-right {
+  justify-content: flex-start;
+  padding-left: calc(50% + 60px);
+}
+
+.timeline-right .volunteering-card {
+  transform-origin: left center;
+}
+
+/* Timeline Marker (dot in the center) */
+.timeline-marker {
+  position: absolute;
+  left: 50%;
+  top: 30px;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+
+.timeline-dot {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, rgba(0, 255, 136, 0.3), rgba(0, 204, 255, 0.3));
+  border: 4px solid #00ff88;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 30px rgba(0, 255, 136, 0.6),
+              0 0 50px rgba(0, 204, 255, 0.4),
+              inset 0 0 20px rgba(0, 255, 136, 0.3);
+  animation: pulse-timeline 2s ease-in-out infinite;
+  transition: all 0.4s ease;
+}
+
+.timeline-item:hover .timeline-dot {
+  transform: scale(1.2) rotate(360deg);
+  border-color: #00ccff;
+  box-shadow: 0 0 40px rgba(0, 255, 136, 0.8),
+              0 0 60px rgba(0, 204, 255, 0.6),
+              inset 0 0 30px rgba(0, 255, 136, 0.5);
+}
+
+@keyframes pulse-timeline {
+  0%, 100% {
+    box-shadow: 0 0 30px rgba(0, 255, 136, 0.6),
+                0 0 50px rgba(0, 204, 255, 0.4),
+                inset 0 0 20px rgba(0, 255, 136, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(0, 255, 136, 0.8),
+                0 0 70px rgba(0, 204, 255, 0.6),
+                inset 0 0 30px rgba(0, 255, 136, 0.5);
+  }
+}
+
+.timeline-dot-inner {
+  font-size: 2.5rem;
+  animation: icon-float 3s ease-in-out infinite;
+}
+
+@keyframes icon-float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+/* Volunteering Card */
+.volunteering-card {
+  background: rgba(20, 35, 70, 0.8);
+  border: 2px solid rgba(0, 255, 136, 0.3);
+  border-radius: 16px;
+  padding: 30px;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(12px);
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 10px 30px rgba(0, 255, 136, 0.2);
+  box-sizing: border-box;
+}
+
+.timeline-left .volunteering-card {
+  margin-left: auto;
+}
+
+.timeline-right .volunteering-card {
+  margin-right: auto;
+}
+
+/* Arrow pointing to timeline */
+.volunteering-card::after {
+  content: '';
+  position: absolute;
+  top: 40px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+}
+
+.timeline-left .volunteering-card::after {
+  right: -20px;
+  border-width: 15px 0 15px 20px;
+  border-color: transparent transparent transparent rgba(0, 255, 136, 0.4);
+}
+
+.timeline-right .volunteering-card::after {
+  left: -20px;
+  border-width: 15px 20px 15px 0;
+  border-color: transparent rgba(0, 255, 136, 0.4) transparent transparent;
+}
+
+.volunteering-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 255, 136, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.volunteering-card:hover {
+  border-color: rgba(0, 255, 136, 0.8);
+  background: rgba(25, 45, 85, 0.95);
+  box-shadow: 0 15px 50px rgba(0, 255, 136, 0.4), 
+              inset 0 0 20px rgba(0, 255, 136, 0.1);
+  transform: translateY(-10px) scale(1.03);
+}
+
+.volunteering-card:hover::after {
+  border-color: transparent transparent transparent rgba(0, 255, 136, 0.8);
+}
+
+.timeline-right .volunteering-card:hover::after {
+  border-color: transparent rgba(0, 255, 136, 0.8) transparent transparent;
+}
+
+.card-content {
+  position: relative;
+  z-index: 2;
+}
+
+.card-header {
+  margin-bottom: 12px;
+}
+
+.position-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #00ff88;
+  margin: 0 0 8px 0;
+  text-shadow: 0 0 10px rgba(0, 255, 136, 0.4);
+}
+
+.date-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: #00ccff;
+  background: rgba(0, 204, 255, 0.1);
+  padding: 4px 10px;
+  border-radius: 20px;
+  border: 1px solid rgba(0, 204, 255, 0.3);
+  width: fit-content;
+}
+
+.start-date {
+  font-weight: 600;
+}
+
+.date-separator {
+  color: #ff00ff;
+  font-weight: 700;
+}
+
+.end-date {
+  font-weight: 600;
+}
+
+.organization-name {
+  font-size: 0.95rem;
+  color: #88ccff;
+  margin: 8px 0 0 0;
+  font-style: italic;
+  opacity: 0.9;
+}
+
+.position-description {
+  font-size: 0.9rem;
+  color: #cccccc;
+  margin: 10px 0 0 0;
+  line-height: 1.5;
+  opacity: 0.85;
+}
+
+/* Animations */
+@keyframes scaleIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.95) translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .volunteering-card {
+    max-width: 380px;
+    padding: 25px;
+  }
+
+  .position-title {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .timeline-item {
+    flex-direction: row;
+    justify-content: flex-start !important;
+    padding: 0 15px 0 105px !important;
+    margin-bottom: 50px;
+  }
+
+  .timeline-left,
+  .timeline-right {
+    padding: 0 !important;
+    justify-content: flex-start !important;
+  }
+
+  .timeline-left .volunteering-card,
+  .timeline-right .volunteering-card {
+    margin: 0;
+  }
+
+  .timeline-marker {
+    left: 35px;
+    top: 20px;
+    transform: translateX(-50%);
+  }
+
+  .timeline-dot {
+    width: 65px;
+    height: 65px;
+  }
+
+  .timeline-dot-inner {
+    font-size: 1.9rem;
+  }
+
+  .volunteering-card {
+    max-width: 100%;
+    padding: 20px;
+  }
+
+  .volunteering-card::after {
+    left: -35px;
+    right: auto;
+    border-width: 15px 35px 15px 0;
+    border-color: transparent rgba(0, 255, 136, 0.4) transparent transparent;
+  }
+
+  .timeline-left .volunteering-card::after {
+    left: -35px;
+    right: auto;
+    border-width: 15px 35px 15px 0;
+    border-color: transparent rgba(0, 255, 136, 0.4) transparent transparent;
+  }
+
+  .timeline-right .volunteering-card::after {
+    left: -35px;
+    right: auto;
+    border-width: 15px 35px 15px 0;
+    border-color: transparent rgba(0, 255, 136, 0.4) transparent transparent;
+  }
+
+  .position-title {
+    font-size: 1.15rem;
+  }
+
+  .date-badge {
+    font-size: 0.75rem;
+    padding: 3px 8px;
+  }
+
+  .organization-name {
+    font-size: 0.9rem;
+  }
+
+  .position-description {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 670px) {
+  .timeline-item {
+    padding: 0 12px 0 95px !important;
+  }
+
+  .timeline-marker {
+    left: 33px;
+  }
+
+  .timeline-dot {
+    width: 60px;
+    height: 60px;
+  }
+
+  .timeline-dot-inner {
+    font-size: 1.7rem;
+  }
+
+  .volunteering-card {
+    padding: 18px;
+  }
+
+  .volunteering-card::after,
+  .timeline-left .volunteering-card::after,
+  .timeline-right .volunteering-card::after {
+    left: -33px;
+    border-width: 14px 33px 14px 0;
+  }
+}
+
+@media (max-width: 576px) {
+  .timeline-item {
+    padding: 0 10px 0 85px !important;
+  }
+
+  .timeline-marker {
+    left: 30px;
+  }
+
+  .timeline-dot {
+    width: 55px;
+    height: 55px;
+  }
+
+  .timeline-dot-inner {
+    font-size: 1.6rem;
+  }
+
+  .volunteering-card {
+    padding: 16px;
+  }
+
+  .volunteering-card::after,
+  .timeline-left .volunteering-card::after,
+  .timeline-right .volunteering-card::after {
+    left: -30px;
+    border-width: 13px 30px 13px 0;
+  }
+
+  .position-title {
+    font-size: 1.05rem;
+  }
+
+  .date-badge {
+    font-size: 0.72rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .timeline-item {
+    padding: 0 8px 0 75px !important;
+  }
+
+  .timeline-marker {
+    left: 28px;
+  }
+
+  .timeline-dot {
+    width: 50px;
+    height: 50px;
+    border-width: 3px;
+  }
+
+  .timeline-dot-inner {
+    font-size: 1.5rem;
+  }
+
+  .volunteering-card {
+    padding: 15px;
+  }
+
+  .volunteering-card::after,
+  .timeline-left .volunteering-card::after,
+  .timeline-right .volunteering-card::after {
+    left: -28px;
+    border-width: 12px 28px 12px 0;
+  }
+
+  .position-title {
+    font-size: 1rem;
+  }
+
+  .date-badge {
+    font-size: 0.7rem;
+    padding: 2px 6px;
+  }
+}
+
+@media (max-width: 375px) {
+  .timeline-item {
+    padding: 0 5px 0 65px !important;
+  }
+
+  .timeline-marker {
+    left: 25px;
+  }
+
+  .timeline-dot {
+    width: 45px;
+    height: 45px;
+  }
+
+  .timeline-dot-inner {
+    font-size: 1.3rem;
+  }
+
+  .volunteering-card {
+    padding: 12px;
+  }
+
+  .volunteering-card::after,
+  .timeline-left .volunteering-card::after,
+  .timeline-right .volunteering-card::after {
+    left: -25px;
+    border-width: 10px 25px 10px 0;
+  }
+
+  .position-title {
+    font-size: 0.95rem;
+  }
+
+  .date-badge {
+    font-size: 0.65rem;
+  }
+
+  .organization-name {
+    font-size: 0.85rem;
+  }
+
+  .position-description {
+    font-size: 0.8rem;
+  }
+}

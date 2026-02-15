@@ -1,9 +1,11 @@
 import './ContactSection.css';
 import { useState } from 'react';
 import { useInView } from '../hooks/useInView';
+import ContactInfoItem from './ContactComponents/ContactInfoItem';
+import SocialLink from './ContactComponents/SocialLink';
 
 function ContactSection() {
-  const [contactRef, isContactInView] = useInView({ once: true });
+  const [contactRef, isContactInView] = useInView();
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -114,21 +116,7 @@ function ContactSection() {
             <h3 className="section-subtitle">Contact Information</h3>
             <div className="contact-info-grid">
               {contactInfo.map((info, index) => (
-                <div key={index} className="contact-info-item" style={{ animationDelay: `${index * 0.1}s` }}>
-                  <div className="info-icon" style={{ '--icon-color': info.color }}>
-                    {info.icon}
-                  </div>
-                  <div className="info-content">
-                    <p className="info-label">{info.label}</p>
-                    {info.link ? (
-                      <a href={info.link} className="info-value">
-                        {info.value}
-                      </a>
-                    ) : (
-                      <p className="info-value">{info.value}</p>
-                    )}
-                  </div>
-                </div>
+                <ContactInfoItem key={index} info={info} index={index} />
               ))}
             </div>
 
@@ -137,19 +125,7 @@ function ContactSection() {
               <h3 className="section-subtitle">Follow Me</h3>
               <div className="social-links-grid">
                 {socialLinks.map((social, index) => (
-                  <a
-                    key={index}
-                    href={social.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="social-link"
-                    title={social.name}
-                    style={{ animationDelay: `${index * 0.1}s` }}
-                  >
-                    <div className="social-icon" style={{ '--social-color': social.color }}>
-                      {social.icon}
-                    </div>
-                  </a>
+                  <SocialLink key={index} social={social} index={index} />
                 ))}
               </div>
             </div>

@@ -4,6 +4,7 @@ import './App.css'
 import NavBar from './Components/public/NavBar'
 import HeroSection from './Components/HeroSection.jsx';
 import AboutSection from './Components/AboutSection.jsx';
+import CertificatesSection from './Components/CertificatesSection.jsx';
 import SkillsSection from './Components/SkillsSection.jsx';
 import ProjectsSection from './Components/ProjectsSection.jsx';
 import VolunteeringSection from './Components/VolunteeringSection.jsx';
@@ -112,6 +113,7 @@ function App() {
       <NavBar />
       <HeroSection />
       <AboutSection />
+      <CertificatesSection />
       <SkillsSection />
       <ProjectsSection />
       <VolunteeringSection />

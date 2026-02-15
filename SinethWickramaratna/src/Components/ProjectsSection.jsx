@@ -2,7 +2,7 @@ import './ProjectsSection.css';
 import { useInView } from '../hooks/useInView';
 
 function ProjectsSection() {
-  const [projectsRef, isProjectsInView] = useInView({ once: true });
+  const [projectsRef, isProjectsInView] = useInView();
 
   return (
     <section className="projects-section" id="projects" ref={projectsRef}>

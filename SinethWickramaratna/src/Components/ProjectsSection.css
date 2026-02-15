@@ -11,7 +11,8 @@
   min-height: 600px;
   display: flex;
   align-items: center;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: visible;
 }
 
 @keyframes section-fade-in {
@@ -461,6 +462,30 @@
   }
 }
 
+@media (max-width: 576px) {
+  .projects-section {
+    padding: 70px 12px;
+    min-height: 480px;
+  }
+
+  .projects-title {
+    font-size: 2rem;
+  }
+
+  .coming-soon-text {
+    font-size: 2rem;
+    letter-spacing: 1.5px;
+  }
+
+  .coming-soon-icon {
+    font-size: 3rem;
+  }
+
+  .coming-soon-subtitle {
+    font-size: 0.95rem;
+  }
+}
+
 @media (max-width: 480px) {
   .projects-section {
     padding: 60px 10px;
@@ -518,5 +543,38 @@
   .float-item {
     font-size: 1.5rem !important;
     opacity: 0.15;
+  }
+}
+
+@media (max-width: 375px) {
+  .projects-section {
+    padding: 50px 8px;
+    min-height: 400px;
+  }
+
+  .projects-title {
+    font-size: 1.6rem;
+  }
+
+  .coming-soon-text {
+    font-size: 1.4rem;
+    letter-spacing: 0.5px;
+  }
+
+  .coming-soon-icon {
+    font-size: 2rem;
+  }
+
+  .coming-soon-subtitle {
+    font-size: 0.85rem;
+  }
+
+  .tech-badge {
+    font-size: 0.7rem;
+    padding: 5px 10px;
+  }
+
+  .preview-label {
+    font-size: 0.8rem;
   }
 }

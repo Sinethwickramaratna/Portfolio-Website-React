@@ -1,0 +1,122 @@
+/* Contact Info Item Component */
+.contact-info-item {
+  display: flex;
+  gap: 15px;
+  padding: 25px;
+  background: linear-gradient(135deg, rgba(20, 35, 70, 0.9) 0%, rgba(25, 45, 85, 0.8) 100%);
+  border: 2px solid rgba(0, 255, 255, 0.3);
+  border-radius: 12px;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  opacity: 0;
+  animation: slideInLeft 0.6s ease-out forwards;
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-info-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.1), transparent);
+  transition: left 0.5s ease;
+  z-index: 0;
+}
+
+.contact-info-item:hover::before {
+  left: 100%;
+}
+
+.contact-info-item:hover {
+  border-color: rgba(0, 255, 255, 0.8);
+  background: rgba(25, 45, 85, 0.95);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.4), inset 0 0 15px rgba(0, 255, 255, 0.1);
+  transform: translateX(10px);
+}
+
+.info-icon {
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, rgba(0, 255, 136, 0.2) 0%, rgba(0, 255, 136, 0.1) 100%);
+  border-radius: 12px;
+  flex-shrink: 0;
+  border: 2.5px solid #00ff88;
+  color: var(--icon-color, #00ff88);
+  transition: all 0.3s ease;
+  box-shadow: 0 0 15px rgba(0, 255, 136, 0.3);
+}
+
+.contact-info-item:hover .info-icon {
+  transform: scale(1.15) rotate(5deg);
+  background: linear-gradient(135deg, rgba(0, 255, 136, 0.3) 0%, rgba(0, 255, 136, 0.2) 100%);
+  box-shadow: 0 0 25px rgba(0, 255, 136, 0.6), inset 0 0 15px rgba(0, 255, 136, 0.2);
+}
+
+.info-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 1;
+}
+
+.info-label {
+  font-size: 0.9rem;
+  color: #88ddff;
+  margin: 0 0 5px 0;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.info-value {
+  font-size: 1.1rem;
+  color: #cccccc;
+  margin: 0;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.info-value:hover {
+  color: #00ffff;
+}
+
+/* Animations */
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .contact-info-item {
+    padding: 20px;
+    gap: 12px;
+  }
+
+  .info-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+    border-width: 2px;
+  }
+
+  .info-label {
+    font-size: 0.8rem;
+  }
+
+  .info-value {
+    font-size: 1rem;
+  }
+}
