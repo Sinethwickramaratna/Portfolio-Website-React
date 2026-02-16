@@ -166,14 +166,6 @@ function ImageCarousel3D() {
             <span className="total">{String(carouselImages.length).padStart(2, '0')}</span>
           </div>
         </div>
-
-        {/* View More Button */}
-        <div className="carousel-view-more">
-          <button className="view-more-btn">
-            <span>View All Designs</span>
-            <span className="btn-arrow">→</span>
-          </button>
-        </div>
       </div>
     </section>
   );
