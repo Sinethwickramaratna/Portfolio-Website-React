@@ -8,11 +8,29 @@ import kaggleDataCleaning from '../assets/Certificates/Sineth Wickramaratna - Da
 import kaggleFeatureEngineering from '../assets/Certificates/Sineth Wickramaratna - Feature Engineering.png';
 import rotaractMembership from '../assets/Certificates/Rotaract Active Membership.jpg';
 import rotaracrDirectorsAppreciation from '../assets/Certificates/Board of Directors.jpg';
+import certificatesDataRaw from '../data/certificatesData.json';
 
 function CertificatesSection() {
   const [certificatesRef, isCertificatesInView] = useInView();
   const [showModal, setShowModal] = useState(false);
   const INITIAL_DISPLAY_COUNT = 3;
+
+  // Map image filenames to imported images
+  const imageMap = {
+    'RoboFest.jpg': robofest2025,
+    'Sineth Wickramaratna - Intro to Machine Learning.png': kaggleML,
+    'Sineth Wickramaratna - Pandas.png': kagglePandas,
+    'Sineth Wickramaratna - Data Cleaning.png': kaggleDataCleaning,
+    'Sineth Wickramaratna - Feature Engineering.png': kaggleFeatureEngineering,
+    'Rotaract Active Membership.jpg': rotaractMembership,
+    'Board of Directors.jpg': rotaracrDirectorsAppreciation
+  };
+
+  // Map JSON data to include actual image imports
+  const certificatesData = certificatesDataRaw.map(cert => ({
+    ...cert,
+    image: imageMap[cert.image] || null
+  }));
 
   // Prevent page scroll and hide navbar when modal is open
   useEffect(() => {
@@ -28,79 +46,6 @@ function CertificatesSection() {
       document.body.classList.remove('modal-open');
     };
   }, [showModal]);
-
-  const certificatesData = [
-    {
-      id: 1,
-      title: 'SLIIT Robofest 2025 - Certificate of Achievements (Finalists)',
-      issuer: 'SLIIT',
-      date: { year: 2025, month: 'Oct' },
-      description: 'Certificate awarded for outstanding performance in the SLIIT Robofest 2025, recognizing the achievement of reaching the finals in a competitive robotics event.',
-      link: 'https://media.licdn.com/dms/image/v2/D562DAQEkokX_i0Yfgg/profile-treasury-image-shrink_800_800/B56ZnemSlQI8AY-/0/1760376209360?e=1771833600&v=beta&t=ml2kHJibTH1pyOGyszvId1q0Kg-oZIFp5g293DjAM5A',
-      icon: '🤖',
-      image: robofest2025
-    },
-    {
-      id: 2,
-      title: 'Kaggle - Intro to Machine Learning',
-      issuer: 'Kaggle',
-      date: { year: 2026, month: 'Feb' },
-      description: 'Certificate awarded for completing the Intro to Machine Learning course on Kaggle.',
-      link: 'https://media.licdn.com/dms/image/v2/D4D2DAQH-ExEVsFamNw/profile-treasury-image-shrink_800_800/B4DZwhCfbeHMAY-/0/1770080830814?e=1771851600&v=beta&t=b_3j853g8MTX7eMNOsHJCqB0XoalVKO7OVdR0t7XmoI',
-      icon: '📊',
-      image: kaggleML
-    },
-    {
-      id: 3,
-      title: 'Kaggle - Intro to Pandas',
-      issuer: 'Kaggle',
-      date: { year: 2026, month: 'Feb' },
-      description: 'Certificate awarded for completing the Intro to Pandas course on Kaggle.',
-      link: 'https://media.licdn.com/dms/image/v2/D4D2DAQGt1kLywqzwlg/profile-treasury-image-shrink_800_800/B4DZwhDeuTHYAY-/0/1770081089876?e=1771851600&v=beta&t=S_e38_MfEpJxwcZ5rVY5B_Etuvjoivtl5Ca0onzAWt4',
-      icon: '📊',
-      image: kagglePandas
-    },
-    {
-      id: 4,
-      title: 'Kaggle - Data Cleaning',
-      issuer: 'Kaggle',
-      date: { year: 2026, month: 'Feb' },
-      description: 'Certificate awarded for completing the Data Cleaning course on Kaggle.',
-      link: 'https://media.licdn.com/dms/image/v2/D562DAQEBwCYFjwTAlw/profile-treasury-image-shrink_800_800/B56Zwsciz2HQAc-/0/1770272213490?e=1771851600&v=beta&t=jxtoJwdOsiF--GaBTom3jHpJa-qmVzimUKbfhcPm0YE',
-      icon: '📊',
-      image: kaggleDataCleaning
-    },
-    {
-      id: 5,
-      title: 'Kaggle - Feature Engineering',
-      issuer: 'Kaggle',
-      date: { year: 2026, month: 'Feb' },
-      description: 'Certificate awarded for completing the Feature Engineering course on Kaggle.',
-      link: 'https://media.licdn.com/dms/image/v2/D562DAQFE18XHlsNCxw/profile-treasury-image-shrink_800_800/B56ZxdRwwrG4Ag-/0/1771091471487?e=1771851600&v=beta&t=K5XDCy48FyI-fHBsBj45DpFozn10_lzmBUnZOLrA6uc',
-      icon: '📊',
-      image: kaggleFeatureEngineering
-    },
-    {
-      id: 6,
-      title: 'Certificate of Active Membership - Rotaract Club of University of Moratuwa',
-      issuer: 'Rotaract Club of University of Moratuwa',
-      date: { year: 2025, month: 'Jun' },
-      description: 'Certificate awarded for active membership and contributions to the Rotaract Club of University of Moratuwa.',
-      link: 'https://media.licdn.com/dms/image/v2/D5622AQFdJBw2kjLonA/feedshare-shrink_480/B56ZhuO41THQAY-/0/1754196100878?e=1772668800&v=beta&t=sZ52549ZJiFFgIgoTb58_B-ruMJufcylWmD1DcrMFHM',
-      icon: '🎗️',
-      image: rotaractMembership
-    },
-    {
-      id: 7,
-      title: 'Board of Directors Certificate of Appreciation - Rotaract Club of University of Moratuwa',
-      issuer: 'Rotaract Club of University of Moratuwa',
-      date: { year: 2025, month: 'Jun' },
-      description: 'Certificate of Appreciation awarded by the Board of Directors of the Rotaract Club of University of Moratuwa for outstanding contributions and dedication.',
-      link: 'https://media.licdn.com/dms/image/v2/D5622AQG-c0T_6QsaVA/feedshare-shrink_480/B56ZhuO400H0AY-/0/1754196097861?e=1772668800&v=beta&t=09A_RFZSevBpHxnI63gwB76E0kl29QI2lx-RdZ6nVEQ',
-      icon: '🎗️',
-      image: rotaracrDirectorsAppreciation
-    }
-  ];
 
   const getMonthNumber = (month) => {
     const months = {

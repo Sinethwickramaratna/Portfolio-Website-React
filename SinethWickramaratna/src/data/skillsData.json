@@ -1,0 +1,192 @@
+{
+  "stats": [
+    {
+      "label": "Total Skills",
+      "value": "27",
+      "icon": "⭐"
+    },
+    {
+      "label": "Categories",
+      "value": "6",
+      "icon": "🎯"
+    },
+    {
+      "label": "Technologies",
+      "value": "20+",
+      "icon": "🚀"
+    }
+  ],
+  "skillCategories": [
+    {
+      "category": "Programming Languages",
+      "icon": "💻",
+      "skills": [
+        {
+          "name": "Python",
+          "iconFile": "python-logo-only.svg",
+          "description": "Data science, ML & web development"
+        },
+        {
+          "name": "JavaScript",
+          "iconFile": "javascript-logo.svg",
+          "description": "Frontend & backend development"
+        },
+        {
+          "name": "Java",
+          "iconFile": "java-logo.svg",
+          "description": "Enterprise applications"
+        },
+        {
+          "name": "SQL",
+          "iconFile": "sql-logo.svg",
+          "description": "Database management & querying"
+        }
+      ]
+    },
+    {
+      "category": "Data Science & ML",
+      "icon": "🤖",
+      "skills": [
+        {
+          "name": "Machine Learning",
+          "iconFile": "machine-learning-icon.svg",
+          "description": "Building ML models"
+        },
+        {
+          "name": "Data Analysis",
+          "iconFile": "data-analytics-icon.png",
+          "description": "Data analysis & visualization"
+        },
+        {
+          "name": "Statistics",
+          "iconFile": "statistics-icon.png",
+          "description": "Statistical analysis & insights"
+        },
+        {
+          "name": "Pandas",
+          "iconFile": "Pandas_mark.svg",
+          "description": "Data manipulation & analysis"
+        },
+        {
+          "name": "NumPy",
+          "iconFile": "numpy-icon.svg",
+          "description": "Numerical computing"
+        },
+        {
+          "name": "Scikit-learn",
+          "iconFile": "scikit-learn.svg",
+          "description": "ML algorithms"
+        }
+      ]
+    },
+    {
+      "category": "Web Development",
+      "icon": "🌐",
+      "skills": [
+        {
+          "name": "React",
+          "iconFile": "react.svg",
+          "description": "Building interactive UIs"
+        },
+        {
+          "name": "HTML",
+          "iconFile": "html5.svg",
+          "description": "Web content structure"
+        },
+        {
+          "name": "CSS",
+          "iconFile": "css3.svg",
+          "description": "Web page styling"
+        },
+        {
+          "name": "Node.js",
+          "iconFile": "node.js.svg",
+          "description": "Server-side development"
+        },
+        {
+          "name": "Express",
+          "iconFile": "express.svg",
+          "description": "Web application framework"
+        },
+        {
+          "name": "Spring Boot",
+          "iconFile": "Spring.svg",
+          "description": "Java web applications"
+        }
+      ]
+    },
+    {
+      "category": "Tools & Platforms",
+      "icon": "🛠️",
+      "skills": [
+        {
+          "name": "Git",
+          "iconFile": "Git.svg",
+          "description": "Version control & collaboration"
+        },
+        {
+          "name": "Jupyter Notebook",
+          "iconFile": "Jupyter.svg",
+          "description": "Interactive data analysis"
+        },
+        {
+          "name": "VS Code",
+          "iconFile": "VS Code.svg",
+          "description": "Code editing & debugging"
+        },
+        {
+          "name": "Docker",
+          "iconFile": "docker.svg",
+          "description": "Containerization & deployment"
+        }
+      ]
+    },
+    {
+      "category": "Databases",
+      "icon": "🗃️",
+      "skills": [
+        {
+          "name": "MySQL",
+          "iconFile": "MySQL.svg",
+          "description": "Relational databases"
+        },
+        {
+          "name": "PostgreSQL",
+          "iconFile": "PostgresSQL.svg",
+          "description": "Advanced databases"
+        }
+      ]
+    },
+    {
+      "category": "Design & Visualization",
+      "icon": "🎭",
+      "skills": [
+        {
+          "name": "Figma",
+          "iconFile": "Figma.svg",
+          "description": "UI/UX design & prototyping"
+        },
+        {
+          "name": "Matplotlib",
+          "iconFile": "matplotlib.svg",
+          "description": "Data visualization"
+        },
+        {
+          "name": "Seaborn",
+          "iconFile": "seaborn.svg",
+          "description": "Statistical visualization"
+        },
+        {
+          "name": "Photoshop",
+          "iconFile": "Adobe Photoshop.svg",
+          "description": "Image editing & design"
+        },
+        {
+          "name": "Canva",
+          "iconFile": "canva.svg",
+          "description": "Visual design creation"
+        }
+      ]
+    }
+  ]
+}

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { Routes, Route } from 'react-router-dom'
 import './App.css'
 
 import NavBar from './Components/public/NavBar'
@@ -12,10 +13,38 @@ import VolunteeringSection from './Components/VolunteeringSection.jsx';
 import ImageCarousel3D from './Components/ImageCarousel3D.jsx';
 import ContactSection from './Components/ContactSection.jsx';
 import LoadingPage from './Components/LoadingPage.jsx';
+import GalleryPage from './Components/GalleryPage.jsx';
 
+// HomePage Component
+function HomePage() {
+  return (
+    <>
+      <NavBar />
+      <HeroSection />
+      <AboutSection />
+      <CertificatesSection />
+      <SkillsSection />
+      <ProjectsSection />
+      <VolunteeringSection />
+      <BlogSection />
+      <ImageCarousel3D />
+      <ContactSection />
+    </>
+  );
+}
 
 function App() {
   const [count, setCount] = useState(0)
+  const [showLoading, setShowLoading] = useState(() => {
+    // Only show loading on initial visit (not when navigating back)
+    const hasVisited = sessionStorage.getItem('hasVisitedPortfolio');
+    return !hasVisited;
+  });
+
+  useEffect(() => {
+    // Mark that user has visited the portfolio in this session
+    sessionStorage.setItem('hasVisitedPortfolio', 'true');
+  }, []);
 
   // Create binary code rain effect
   useEffect(() => {
@@ -110,17 +139,11 @@ function App() {
 
   return (
     <>
-      <LoadingPage />
-      <NavBar />
-      <HeroSection />
-      <AboutSection />
-      <CertificatesSection />
-      <SkillsSection />
-      <ProjectsSection />
-      <VolunteeringSection />
-      <BlogSection />
-      <ImageCarousel3D />
-      <ContactSection />
+      {showLoading && <LoadingPage />}
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/gallery" element={<GalleryPage />} />
+      </Routes>
     </>
   )
 }
