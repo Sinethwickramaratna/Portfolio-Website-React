@@ -42,22 +42,25 @@
 .volunteering-title {
   font-size: 3.5rem;
   font-weight: 700;
-  background: linear-gradient(135deg, #00ff88 0%, #00ccff 50%, #ff00ff 100%);
+  background: linear-gradient(135deg, #0d7377 0%, #20b2aa 50%, #17a2b8 100%);
+  background-size: 200% 200%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   margin: 0 0 20px 0;
   letter-spacing: 2px;
-  text-shadow: 0 0 30px rgba(0, 255, 136, 0.3);
+  text-shadow: 0 0 30px rgba(32, 178, 170, 0.3);
+  animation: gradient-text 4s ease infinite;
 }
 
 .volunteering-accent {
   width: 120px;
   height: 4px;
-  background: linear-gradient(90deg, #00ff88 0%, #00ccff 100%);
+  background: linear-gradient(90deg, transparent, #20b2aa, transparent);
   margin: 0 auto;
   border-radius: 2px;
-  box-shadow: 0 0 20px rgba(0, 255, 136, 0.6);
+  box-shadow: 0 0 20px rgba(32, 178, 170, 0.6);
+  animation: line-grow 2s ease-in-out infinite;
 }
 
 .volunteering-content {
@@ -229,6 +232,29 @@
   to {
     opacity: 1;
     transform: scale(1);
+  }
+}
+
+@keyframes line-grow {
+  0%, 100% {
+    width: 100px;
+    opacity: 0.5;
+  }
+  50% {
+    width: 140px;
+    opacity: 1;
+  }
+}
+
+@keyframes gradient-text {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
   }
 }
 

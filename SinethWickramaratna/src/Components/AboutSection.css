@@ -48,9 +48,9 @@
   margin-bottom: 20px;
   background: linear-gradient(
     135deg,
-    #2c3e50 0%,
-    #3498db 50%,
-    #2980b9 100%
+    #0d7377 0%,
+    #20b2aa 50%,
+    #17a2b8 100%
   );
   background-size: 200% 200%;
   -webkit-background-clip: text;
@@ -62,7 +62,7 @@
 .about-accent {
   width: 80px;
   height: 3px;
-  background: linear-gradient(90deg, transparent, #3498db, transparent);
+  background: linear-gradient(90deg, transparent, #20b2aa, transparent);
   margin: 0 auto;
   animation: line-grow 2s ease-in-out infinite;
 }

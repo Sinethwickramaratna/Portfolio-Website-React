@@ -45,26 +45,26 @@
   margin-bottom: 20px;
   background: linear-gradient(
     135deg,
-    #1e40af 0%,
-    #7c3aed 50%,
-    #ec4899 100%
+    #0d7377 0%,
+    #20b2aa 50%,
+    #17a2b8 100%
   );
   background-size: 200% 200%;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: gradient-text 5s ease infinite;
+  animation: gradient-text 4s ease infinite;
   letter-spacing: -1px;
 }
 
 .skills-accent {
   width: 120px;
   height: 4px;
-  background: linear-gradient(90deg, #10b981, #34d399, #6ee7b7);
+  background: linear-gradient(90deg, transparent, #20b2aa, transparent);
   margin: 0 auto;
   border-radius: 2px;
-  animation: line-grow 2.5s ease-in-out infinite;
-  box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+  animation: line-grow 2s ease-in-out infinite;
+  box-shadow: 0 0 20px rgba(32, 178, 170, 0.6);
 }
 
 /* Stats Container */

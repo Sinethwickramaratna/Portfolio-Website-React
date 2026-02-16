@@ -7,6 +7,7 @@ import AboutSection from './Components/AboutSection.jsx';
 import CertificatesSection from './Components/CertificatesSection.jsx';
 import SkillsSection from './Components/SkillsSection.jsx';
 import ProjectsSection from './Components/ProjectsSection.jsx';
+import BlogSection from './Components/BlogSection.jsx';
 import VolunteeringSection from './Components/VolunteeringSection.jsx';
 import ImageCarousel3D from './Components/ImageCarousel3D.jsx';
 import ContactSection from './Components/ContactSection.jsx';
@@ -117,6 +118,7 @@ function App() {
       <SkillsSection />
       <ProjectsSection />
       <VolunteeringSection />
+      <BlogSection />
       <ImageCarousel3D />
       <ContactSection />
     </>

@@ -30,6 +30,7 @@ function NavBar(){
             <li className="nav-item" onClick={() => scrollToSection('about')}>About</li>
             <li className="nav-item" onClick={() => scrollToSection('skills')}>Skills</li>
             <li className="nav-item" onClick={() => scrollToSection('projects')}>Projects</li>
+            <li className="nav-item" onClick={() => scrollToSection('blog')}>Blog</li>
             <li className="nav-item" onClick={() => scrollToSection('volunteering')}>Volunteering</li>
             <li className="nav-item" onClick={() => scrollToSection('design-gallery')}>Design Gallery</li>
             <li className="nav-item" onClick={() => scrollToSection('contact')}>Contact</li>
