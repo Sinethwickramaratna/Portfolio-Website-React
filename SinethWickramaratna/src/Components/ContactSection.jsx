@@ -16,9 +16,8 @@ function ContactSection() {
   const [formStatus, setFormStatus] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Initialize EmailJS
   useEffect(() => {
-    emailjs.init("lHmVqdyVUxvrXg2sT"); // Replace with your EmailJS public key
+    emailjs.init("lHmVqdyVUxvrXg2sT"); 
   }, []);
 
   const contactInfo = [
@@ -101,10 +100,10 @@ function ContactSection() {
 
     // Send email using EmailJS
     emailjs.send(
-      "service_d3uezga",      // Replace with your EmailJS service ID
-      "template_3skdkol",     // Replace with your EmailJS template ID
+      "service_d3uezga",  
+      "template_3skdkol",  
       {
-        to_email: "sinethwickramaratna@gmail.com",  // Replace with your email
+        to_email: "sinethwickramaratna@gmail.com",
         name: `${formData.firstName} ${formData.lastName}`,
         email: formData.email,
         message: formData.message,
