@@ -27,15 +27,15 @@ function ContactSection() {
   }, []);
 
   const socialIconMap = {
-    LinkedIn: linkedinIcon,
-    GitHub: githubIcon,
-    Facebook: facebookIcon,
-    Instagram: instagramIcon
+    'linkedin.svg': linkedinIcon,
+    'github.svg': githubIcon,
+    'facebook.svg': facebookIcon,
+    'instagram.svg': instagramIcon
   };
 
   const contactInfo = contactData.contactInfo;
   const socialLinks = contactData.socialLinks.map((social) => {
-    const iconSrc = socialIconMap[social.name];
+    const iconSrc = socialIconMap[social.image];
     return {
       ...social,
       icon: iconSrc ? (

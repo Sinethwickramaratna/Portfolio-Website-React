@@ -1,9 +1,10 @@
 import './Footer.css';
-import { useState } from 'react';
+import linkedinIcon from '../assets/Images/Social Media/linkedin.svg';
+import githubIcon from '../assets/Images/Social Media/github.svg';
+import facebookIcon from '../assets/Images/Social Media/facebook.svg';
+import instagramIcon from '../assets/Images/Social Media/instagram.svg';
 
 function Footer() {
-  const [hoveredLink, setHoveredLink] = useState(null);
-
   const quickLinks = [
     { name: 'Home', href: '/' },
     { name: 'About', href: '#about' },
@@ -16,25 +17,25 @@ function Footer() {
   const socialLinks = [
     { 
       name: 'LinkedIn', 
-      icon: '💼',
+      image: linkedinIcon,
       url: 'https://linkedin.com/in/sineth-wickramaratna',
       color: '#0077B5'
     },
     { 
       name: 'GitHub', 
-      icon: '💻',
+      image: githubIcon,
       url: 'https://github.com',
       color: '#333333'
     },
     { 
       name: 'Facebook', 
-      icon: '👤',
+      image: facebookIcon,
       url: 'https://facebook.com',
       color: '#1877F2'
     },
     { 
       name: 'Instagram', 
-      icon: '📷',
+      image: instagramIcon,
       url: 'https://instagram.com',
       color: '#E4405F'
     },
@@ -86,11 +87,13 @@ function Footer() {
                   style={{
                     '--social-color': social.color
                   }}
-                  onMouseEnter={() => setHoveredLink(social.name)}
-                  onMouseLeave={() => setHoveredLink(null)}
                 >
                   <span className="social-icon-content">
-                    {social.icon}
+                    <img
+                      src={social.image}
+                      alt={`${social.name} icon`}
+                      className="footer-social-icon-img"
+                    />
                   </span>
                 </a>
               ))}

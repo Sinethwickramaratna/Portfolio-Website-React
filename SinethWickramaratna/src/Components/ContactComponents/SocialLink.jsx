@@ -14,7 +14,11 @@ function SocialLink({ social, index }) {
       }}
     >
       <div className="social-icon">
-        <img src={social.image} alt={social.name} />
+        {social.icon ? (
+          social.icon
+        ) : (
+          <img src={social.image} alt={social.name} className="social-icon-img" />
+        )}
       </div>
     </a>
   );
