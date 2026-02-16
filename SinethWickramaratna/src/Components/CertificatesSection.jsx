@@ -2,6 +2,8 @@ import './CertificatesSection.css';
 import { useInView } from '../hooks/useInView';
 import { useState, useMemo, useEffect } from 'react';
 import robofest2025 from '../assets/Certificates/RoboFest.jpg';
+import kaggleML from '../assets/Certificates/Sineth Wickramaratna - Intro to Machine Learning.png';
+import kagglePandas from '../assets/Certificates/Sineth Wickramaratna - Pandas.png';
 
 function CertificatesSection() {
   const [certificatesRef, isCertificatesInView] = useInView();
@@ -36,23 +38,23 @@ function CertificatesSection() {
     },
     {
       id: 2,
-      title: 'Another Certificate',
-      issuer: 'Another Organization',
-      date: { year: 2024, month: 'Nov' },
-      description: 'Description of the certificate achievement',
-      link: 'https://example.com/certificate',
-      icon: '🏆',
-      image: 'https://via.placeholder.com/400x250/1a4d6d/00ccff?text=Certificate+2'
+      title: 'Kaggle - Intro to Machine Learning',
+      issuer: 'Kaggle',
+      date: { year: 2026, month: 'Feb' },
+      description: 'Certificate awarded for completing the Intro to Machine Learning course on Kaggle.',
+      link: 'https://media.licdn.com/dms/image/v2/D4D2DAQH-ExEVsFamNw/profile-treasury-image-shrink_800_800/B4DZwhCfbeHMAY-/0/1770080830814?e=1771851600&v=beta&t=b_3j853g8MTX7eMNOsHJCqB0XoalVKO7OVdR0t7XmoI',
+      icon: '📊',
+      image: kaggleML
     },
     {
       id: 3,
-      title: 'Professional Certification',
-      issuer: 'Professional Body',
-      date: { year: 2024, month: 'Oct' },
-      description: 'Professional development certification',
-      link: 'https://example.com/certificate',
-      icon: '🎓',
-      image: 'https://via.placeholder.com/400x250/1a4d6d/00ccff?text=Certificate+3'
+      title: 'Kaggle - Intro to Pandas',
+      issuer: 'Kaggle',
+      date: { year: 2026, month: 'Feb' },
+      description: 'Certificate awarded for completing the Intro to Pandas course on Kaggle.',
+      link: 'https://media.licdn.com/dms/image/v2/D4D2DAQGt1kLywqzwlg/profile-treasury-image-shrink_800_800/B4DZwhDeuTHYAY-/0/1770081089876?e=1771851600&v=beta&t=S_e38_MfEpJxwcZ5rVY5B_Etuvjoivtl5Ca0onzAWt4',
+      icon: '📊',
+      image: kagglePandas
     },
     {
       id: 4,
