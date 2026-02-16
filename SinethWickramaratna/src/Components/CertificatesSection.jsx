@@ -4,6 +4,10 @@ import { useState, useMemo, useEffect } from 'react';
 import robofest2025 from '../assets/Certificates/RoboFest.jpg';
 import kaggleML from '../assets/Certificates/Sineth Wickramaratna - Intro to Machine Learning.png';
 import kagglePandas from '../assets/Certificates/Sineth Wickramaratna - Pandas.png';
+import kaggleDataCleaning from '../assets/Certificates/Sineth Wickramaratna - Data Cleaning.png';
+import kaggleFeatureEngineering from '../assets/Certificates/Sineth Wickramaratna - Feature Engineering.png';
+import rotaractMembership from '../assets/Certificates/Rotaract Active Membership.jpg';
+import rotaracrDirectorsAppreciation from '../assets/Certificates/Board of Directors.jpg';
 
 function CertificatesSection() {
   const [certificatesRef, isCertificatesInView] = useInView();
@@ -58,23 +62,43 @@ function CertificatesSection() {
     },
     {
       id: 4,
-      title: 'Advanced Skills Certificate',
-      issuer: 'Tech Institute',
-      date: { year: 2024, month: 'Sep' },
-      description: 'Certificate for completing advanced technical training',
-      link: 'https://example.com/certificate',
-      icon: '⭐',
-      image: 'https://via.placeholder.com/400x250/1a4d6d/00ccff?text=Certificate+4'
+      title: 'Kaggle - Data Cleaning',
+      issuer: 'Kaggle',
+      date: { year: 2026, month: 'Feb' },
+      description: 'Certificate awarded for completing the Data Cleaning course on Kaggle.',
+      link: 'https://media.licdn.com/dms/image/v2/D562DAQEBwCYFjwTAlw/profile-treasury-image-shrink_800_800/B56Zwsciz2HQAc-/0/1770272213490?e=1771851600&v=beta&t=jxtoJwdOsiF--GaBTom3jHpJa-qmVzimUKbfhcPm0YE',
+      icon: '📊',
+      image: kaggleDataCleaning
     },
     {
       id: 5,
-      title: 'Leadership Excellence Award',
-      issuer: 'Business School',
-      date: { year: 2024, month: 'Aug' },
-      description: 'Recognition for leadership and organizational skills',
-      link: 'https://example.com/certificate',
-      icon: '👑',
-      image: 'https://via.placeholder.com/400x250/1a4d6d/00ccff?text=Certificate+5'
+      title: 'Kaggle - Feature Engineering',
+      issuer: 'Kaggle',
+      date: { year: 2026, month: 'Feb' },
+      description: 'Certificate awarded for completing the Feature Engineering course on Kaggle.',
+      link: 'https://media.licdn.com/dms/image/v2/D562DAQFE18XHlsNCxw/profile-treasury-image-shrink_800_800/B56ZxdRwwrG4Ag-/0/1771091471487?e=1771851600&v=beta&t=K5XDCy48FyI-fHBsBj45DpFozn10_lzmBUnZOLrA6uc',
+      icon: '📊',
+      image: kaggleFeatureEngineering
+    },
+    {
+      id: 6,
+      title: 'Certificate of Active Membership - Rotaract Club of University of Moratuwa',
+      issuer: 'Rotaract Club of University of Moratuwa',
+      date: { year: 2025, month: 'Jun' },
+      description: 'Certificate awarded for active membership and contributions to the Rotaract Club of University of Moratuwa.',
+      link: 'https://media.licdn.com/dms/image/v2/D5622AQFdJBw2kjLonA/feedshare-shrink_480/B56ZhuO41THQAY-/0/1754196100878?e=1772668800&v=beta&t=sZ52549ZJiFFgIgoTb58_B-ruMJufcylWmD1DcrMFHM',
+      icon: '🎗️',
+      image: rotaractMembership
+    },
+    {
+      id: 7,
+      title: 'Board of Directors Certificate of Appreciation - Rotaract Club of University of Moratuwa',
+      issuer: 'Rotaract Club of University of Moratuwa',
+      date: { year: 2025, month: 'Jun' },
+      description: 'Certificate of Appreciation awarded by the Board of Directors of the Rotaract Club of University of Moratuwa for outstanding contributions and dedication.',
+      link: 'https://media.licdn.com/dms/image/v2/D5622AQG-c0T_6QsaVA/feedshare-shrink_480/B56ZhuO400H0AY-/0/1754196097861?e=1772668800&v=beta&t=09A_RFZSevBpHxnI63gwB76E0kl29QI2lx-RdZ6nVEQ',
+      icon: '🎗️',
+      image: rotaracrDirectorsAppreciation
     }
   ];
 
