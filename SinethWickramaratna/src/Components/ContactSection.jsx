@@ -1,8 +1,9 @@
 import './ContactSection.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useInView } from '../hooks/useInView';
 import ContactInfoItem from './ContactComponents/ContactInfoItem';
 import SocialLink from './ContactComponents/SocialLink';
+import emailjs from '@emailjs/browser';
 
 function ContactSection() {
   const [contactRef, isContactInView] = useInView();
@@ -13,6 +14,12 @@ function ContactSection() {
     message: ''
   });
   const [formStatus, setFormStatus] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Initialize EmailJS
+  useEffect(() => {
+    emailjs.init("lHmVqdyVUxvrXg2sT"); // Replace with your EmailJS public key
+  }, []);
 
   const contactInfo = [
     {
@@ -90,12 +97,32 @@ function ContactSection() {
       return;
     }
 
-    // Here you would typically send the form data to a backend
-    console.log('Form submitted:', formData);
-    
-    setFormStatus('success');
-    setFormData({ firstName: '', lastName: '', email: '', message: '' });
-    setTimeout(() => setFormStatus(''), 3000);
+    setIsSubmitting(true);
+
+    // Send email using EmailJS
+    emailjs.send(
+      "service_d3uezga",      // Replace with your EmailJS service ID
+      "template_3skdkol",     // Replace with your EmailJS template ID
+      {
+        to_email: "sinethwickramaratna@gmail.com",  // Replace with your email
+        name: `${formData.firstName} ${formData.lastName}`,
+        email: formData.email,
+        message: formData.message,
+        reply_to: formData.email
+      }
+    )
+    .then(() => {
+      setFormStatus('success');
+      setFormData({ firstName: '', lastName: '', email: '', message: '' });
+      setIsSubmitting(false);
+      setTimeout(() => setFormStatus(''), 3000);
+    })
+    .catch((error) => {
+      console.log('Email error:', error);
+      setFormStatus('sending-error');
+      setIsSubmitting(false);
+      setTimeout(() => setFormStatus(''), 3000);
+    });
   };
 
   return (
@@ -189,8 +216,8 @@ function ContactSection() {
                 ></textarea>
               </div>
 
-              <button type="submit" className="submit-btn">
-                <span className="btn-text">Send Message</span>
+              <button type="submit" className="submit-btn" disabled={isSubmitting}>
+                <span className="btn-text">{isSubmitting ? 'Sending...' : 'Send Message'}</span>
                 <span className="btn-icon">→</span>
               </button>
 
@@ -207,6 +234,11 @@ function ContactSection() {
               {formStatus === 'invalid-email' && (
                 <div className="form-message error">
                   ✗ Please enter a valid email address.
+                </div>
+              )}
+              {formStatus === 'sending-error' && (
+                <div className="form-message error">
+                  ✗ Failed to send message. Please try again.
                 </div>
               )}
             </form>

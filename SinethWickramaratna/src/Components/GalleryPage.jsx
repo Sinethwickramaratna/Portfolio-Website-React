@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './GalleryPage.css';
 import galleryImages from '../data/galleryImages.json';
+import Footer from './Footer';
 
 function GalleryPage() {
   const navigate = useNavigate();
@@ -112,6 +113,7 @@ function GalleryPage() {
           </button>
         </div>
       )}
+      <Footer />
     </div>
   );
 }

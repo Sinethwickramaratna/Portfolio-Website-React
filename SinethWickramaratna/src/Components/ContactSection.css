@@ -201,9 +201,10 @@
 }
 
 .submit-btn {
-  padding: 14px 32px;
-  background: linear-gradient(135deg, #ff00ff 0%, #00ffff 100%);
-  border: none;
+  position: relative;
+  padding: 14px 40px;
+  background: linear-gradient(135deg, #00ffff 0%, #00ff88 100%);
+  border: 2px solid transparent;
   border-radius: 8px;
   color: #0a1428;
   font-weight: 700;
@@ -217,16 +218,24 @@
   text-transform: uppercase;
   letter-spacing: 1px;
   margin-top: 10px;
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.4);
+  overflow: hidden;
 }
 
-.submit-btn:hover {
+.submit-btn:hover:not(:disabled) {
   transform: translateY(-3px);
-  box-shadow: 0 0 30px rgba(0, 255, 255, 0.6);
-  background: linear-gradient(135deg, #00ffff 0%, #ff00ff 100%);
+  box-shadow: 0 0 30px rgba(0, 255, 136, 0.7);
+  background: linear-gradient(135deg, #00ff88 0%, #00ffff 100%);
 }
 
-.submit-btn:active {
+.submit-btn:active:not(:disabled) {
   transform: translateY(-1px);
+}
+
+.submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
 }
 
 .btn-icon {
@@ -234,7 +243,7 @@
   transition: transform 0.3s ease;
 }
 
-.submit-btn:hover .btn-icon {
+.submit-btn:hover:not(:disabled) .btn-icon {
   transform: translateX(5px);
 }
 
