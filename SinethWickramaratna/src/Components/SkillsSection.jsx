@@ -29,81 +29,50 @@ import matplotlibIcon from '../assets/Images/Skills/matplotlib.svg'
 import seabornIcon from '../assets/Images/Skills/seaborn.svg'
 import photoshopIcon from '../assets/Images/Skills/Adobe Photoshop.svg'
 import canvaIcon from '../assets/Images/Skills/canva.svg'
+import skillsData from '../data/skillsData.json';
 
 function SkillsSection() {
   const [skillsRef, isSkillsInView] = useInView();
 
-  const stats = [
-    { label: 'Total Skills', value: '27', icon: '⭐' },
-    { label: 'Categories', value: '6', icon: '🎯' },
-    { label: 'Technologies', value: '20+', icon: '🚀' }
-  ];
+  const iconMap = {
+    'python-logo-only.svg': pythonLogo,
+    'javascript-logo.svg': javaScriptLogo,
+    'java-logo.svg': javaLogo,
+    'sql-logo.svg': sqlLogo,
+    'machine-learning-icon.svg': machineLearningIcon,
+    'data-analytics-icon.png': dataAnalysisIcon,
+    'statistics-icon.png': statisticsIcon,
+    'Pandas_mark.svg': pandasIcon,
+    'numpy-icon.svg': numpyIcon,
+    'scikit-learn.svg': scikitLearnIcon,
+    'react.svg': reactIcon,
+    'html5.svg': htmlIcon,
+    'css3.svg': cssIcon,
+    'node.js.svg': nodejsIcon,
+    'express.svg': expressIcon,
+    'Spring.svg': springBootIcon,
+    'Git.svg': gitIcon,
+    'Jupyter.svg': jupyterIcon,
+    'VS Code.svg': vscodeIcon,
+    'docker.svg': dockerIcon,
+    'MySQL.svg': mysqlIcon,
+    'PostgresSQL.svg': postgresqlIcon,
+    'Figma.svg': figmaIcon,
+    'matplotlib.svg': matplotlibIcon,
+    'seaborn.svg': seabornIcon,
+    'Adobe Photoshop.svg': photoshopIcon,
+    'canva.svg': canvaIcon
+  };
 
-  const skillCategories = [
-    {
-      category: 'Programming Languages',
-      icon: '💻',
-      skills: [
-        { name: 'Python', icon: pythonLogo, description: 'Data science, ML & web development' },
-        { name: 'JavaScript', icon: javaScriptLogo, description: 'Frontend & backend development'},
-        { name: 'Java', icon: javaLogo, description: 'Enterprise applications'},
-        { name: 'SQL', icon: sqlLogo, description: 'Database management & querying'}
-      ]
-    },
-    {
-      category: 'Data Science & ML',
-      icon: '🤖',
-      skills: [
-        { name: 'Machine Learning', icon: machineLearningIcon, description: 'Building ML models'},
-        { name: 'Data Analysis', icon: dataAnalysisIcon, description: 'Data analysis & visualization'},
-        { name: 'Statistics', icon: statisticsIcon, description: 'Statistical analysis & insights'},
-        { name: 'Pandas', icon: pandasIcon, description: 'Data manipulation & analysis'},
-        { name: 'NumPy', icon: numpyIcon, description: 'Numerical computing'},
-        { name: 'Scikit-learn', icon: scikitLearnIcon, description: 'ML algorithms'}
-      ]
-    },
-    {
-      category: 'Web Development',
-      icon: '🌐',
-      skills: [
-        { name: 'React', icon: reactIcon, description: 'Building interactive UIs'},
-        { name: 'HTML', icon: htmlIcon, description: 'Web content structure' },
-        { name: 'CSS', icon: cssIcon, description: 'Web page styling' },
-        { name: 'Node.js', icon: nodejsIcon, description: 'Server-side development'},
-        { name: 'Express', icon: expressIcon, description: 'Web application framework'},
-        { name: 'Spring Boot', icon: springBootIcon, description: 'Java web applications'}
-      ]
-    },
-    {
-      category: 'Tools & Platforms',
-      icon: '🛠️',
-      skills: [
-        { name: 'Git', icon: gitIcon, description: 'Version control & collaboration' },
-        { name: 'Jupyter Notebook', icon: jupyterIcon, description: 'Interactive data analysis'},
-        { name: 'VS Code', icon: vscodeIcon, description: 'Code editing & debugging' },
-        { name: 'Docker', icon: dockerIcon, description: 'Containerization & deployment'}
-      ]
-    },
-    {
-      category: 'Databases',
-      icon: '🗃️',
-      skills: [
-        { name: 'MySQL', icon: mysqlIcon, description: 'Relational databases'},
-        { name: 'PostgreSQL', icon: postgresqlIcon, description: 'Advanced databases'},
-      ]
-    },
-    {
-      category: 'Design & Visualization',
-      icon: '🎭',
-      skills: [
-        { name: 'Figma', icon: figmaIcon, description: 'UI/UX design & prototyping'},
-        { name: 'Matplotlib', icon: matplotlibIcon, description: 'Data visualization'},
-        { name: 'Seaborn', icon: seabornIcon, description: 'Statistical visualization'},
-        { name: 'Photoshop', icon: photoshopIcon, description: 'Image editing & design'},
-        { name: 'Canva', icon: canvaIcon, description: 'Visual design creation'}
-      ]
-    }
-  ];
+  const stats = skillsData.stats;
+
+  const skillCategories = skillsData.skillCategories.map((category) => ({
+    ...category,
+    skills: category.skills.map((skill) => ({
+      ...skill,
+      icon: iconMap[skill.iconFile]
+    }))
+  }));
 
   return (
     <section className="skills-section" id="skills" ref={skillsRef}>

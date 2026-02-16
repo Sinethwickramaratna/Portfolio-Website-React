@@ -4,6 +4,12 @@ import { useInView } from '../hooks/useInView';
 import ContactInfoItem from './ContactComponents/ContactInfoItem';
 import SocialLink from './ContactComponents/SocialLink';
 import emailjs from '@emailjs/browser';
+import contactData from '../data/contactData.json';
+import linkedinIcon from '../assets/Images/Social Media/linkedin.svg';
+import githubIcon from '../assets/Images/Social Media/github.svg';
+import facebookIcon from '../assets/Images/Social Media/facebook.svg';
+import instagramIcon from '../assets/Images/Social Media/instagram.svg';
+
 
 function ContactSection() {
   const [contactRef, isContactInView] = useInView();
@@ -20,55 +26,23 @@ function ContactSection() {
     emailjs.init("lHmVqdyVUxvrXg2sT"); 
   }, []);
 
-  const contactInfo = [
-    {
-      icon: '📍',
-      label: 'Address',
-      value: 'Colombo, Sri Lanka',
-      color: '#00ff88'
-    },
-    {
-      icon: '✉️',
-      label: 'Email',
-      value: 'sineth@example.com',
-      link: 'mailto:sineth@example.com',
-      color: '#00ccff'
-    },
-    {
-      icon: '📱',
-      label: 'Phone',
-      value: '+94 123 456 7890',
-      link: 'tel:+94123456789',
-      color: '#ff00ff'
-    }
-  ];
+  const socialIconMap = {
+    LinkedIn: linkedinIcon,
+    GitHub: githubIcon,
+    Facebook: facebookIcon,
+    Instagram: instagramIcon
+  };
 
-  const socialLinks = [
-    {
-      icon: '💼',
-      name: 'LinkedIn',
-      url: 'https://linkedin.com/in/yourprofile',
-      color: '#0077B5'
-    },
-    {
-      icon: '👨‍💻',
-      name: 'GitHub',
-      url: 'https://github.com/yourprofile',
-      color: '#333333'
-    },
-    {
-      icon: '📘',
-      name: 'Facebook',
-      url: 'https://facebook.com/yourprofile',
-      color: '#1877F2'
-    },
-    {
-      icon: '📷',
-      name: 'Instagram',
-      url: 'https://instagram.com/yourprofile',
-      color: '#E4405F'
-    }
-  ];
+  const contactInfo = contactData.contactInfo;
+  const socialLinks = contactData.socialLinks.map((social) => {
+    const iconSrc = socialIconMap[social.name];
+    return {
+      ...social,
+      icon: iconSrc ? (
+        <img src={iconSrc} alt={`${social.name} icon`} className="social-icon-img" />
+      ) : social.icon
+    };
+  });
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;

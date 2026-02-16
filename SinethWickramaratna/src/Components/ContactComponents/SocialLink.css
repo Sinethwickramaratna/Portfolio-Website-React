@@ -38,6 +38,12 @@
   flex-shrink: 0;
 }
 
+.social-icon-img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
 .social-link:hover .social-icon {
   transform: scale(1.15) rotate(15deg);
   filter: drop-shadow(0 0 10px var(--social-color, rgba(0, 255, 255, 0.6)));
