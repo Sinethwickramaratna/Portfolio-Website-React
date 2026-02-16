@@ -1,8 +1,8 @@
 import './Footer.css';
-import linkedinIcon from '../assets/Images/Social Media/linkedin.svg';
-import githubIcon from '../assets/Images/Social Media/github.svg';
-import facebookIcon from '../assets/Images/Social Media/facebook.svg';
-import instagramIcon from '../assets/Images/Social Media/instagram.svg';
+import linkedinIcon from '../../assets/Images/Social Media/linkedin.svg';
+import githubIcon from '../../assets/Images/Social Media/github.svg';
+import facebookIcon from '../../assets/Images/Social Media/facebook.svg';
+import instagramIcon from '../../assets/Images/Social Media/instagram.svg';
 
 function Footer() {
   const quickLinks = [
@@ -18,25 +18,25 @@ function Footer() {
     { 
       name: 'LinkedIn', 
       image: linkedinIcon,
-      url: 'https://linkedin.com/in/sineth-wickramaratna',
+      url: 'https://www.linkedin.com/in/sineth-wickramaratna-a4332a2b8/',
       color: '#0077B5'
     },
     { 
       name: 'GitHub', 
       image: githubIcon,
-      url: 'https://github.com',
+      url: 'https://github.com/Sinethwickramaratna',
       color: '#333333'
     },
     { 
       name: 'Facebook', 
       image: facebookIcon,
-      url: 'https://facebook.com',
+      url: 'https://www.facebook.com/sineth.wickramaratna.9/',
       color: '#1877F2'
     },
     { 
       name: 'Instagram', 
       image: instagramIcon,
-      url: 'https://instagram.com',
+      url: 'https://www.instagram.com/sineth_wick_/',
       color: '#E4405F'
     },
   ];
@@ -108,9 +108,6 @@ function Footer() {
         <div className="footer-bottom">
           <div className="footer-copyright">
             <p>&copy; {currentYear} Sineth Wickramaratna. All rights reserved.</p>
-          </div>
-          <div className="footer-credits">
-            <p>Crafted with <span className="heart">❤️</span> using React & Modern Web Technologies</p>
           </div>
         </div>
 

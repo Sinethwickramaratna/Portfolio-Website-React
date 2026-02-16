@@ -120,6 +120,19 @@ function ImageCarousel3D() {
     }
   };
 
+  const handleViewGallery = () => {
+    // Scroll to top smoothly
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+    
+    // Navigate after a brief delay to allow scroll animation
+    setTimeout(() => {
+      navigate('/gallery');
+    }, 300);
+  };
+
   const getImagePosition = (index) => {
     let position = index - currentIndex;
     if (position < -3) position += displayImages.length;
@@ -245,7 +258,7 @@ function ImageCarousel3D() {
           
           {/* Load More Button */}
           <div className="load-more-container">
-            <button className="load-more-btn" onClick={() => navigate('/gallery')}>
+            <button className="load-more-btn" onClick={handleViewGallery}>
               <span className="btn-text">View Full Gallery</span>
               <span className="btn-icon">→</span>
               <span className="btn-count">{carouselImages.length} Designs</span>

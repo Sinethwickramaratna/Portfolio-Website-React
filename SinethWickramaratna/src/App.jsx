@@ -14,7 +14,7 @@ import ImageCarousel3D from './Components/ImageCarousel3D.jsx';
 import ContactSection from './Components/ContactSection.jsx';
 import LoadingPage from './Components/LoadingPage.jsx';
 import GalleryPage from './Components/GalleryPage.jsx';
-import Footer from './Components/Footer.jsx';
+import Footer from './Components/public/Footer.jsx';
 
 // HomePage Component
 function HomePage() {

@@ -5,6 +5,9 @@ import ContactInfoItem from './ContactComponents/ContactInfoItem';
 import SocialLink from './ContactComponents/SocialLink';
 import emailjs from '@emailjs/browser';
 import contactData from '../data/contactData.json';
+import addressIcon from '../assets/Images/Icons/address-location.svg';
+import emailIcon from '../assets/Images/Icons/email.svg';
+import phoneIcon from '../assets/Images/Icons/phone-office.svg';
 import linkedinIcon from '../assets/Images/Social Media/linkedin.svg';
 import githubIcon from '../assets/Images/Social Media/github.svg';
 import facebookIcon from '../assets/Images/Social Media/facebook.svg';
@@ -33,7 +36,21 @@ function ContactSection() {
     'instagram.svg': instagramIcon
   };
 
-  const contactInfo = contactData.contactInfo;
+  const contactIconMap = {
+    'address-location.svg': addressIcon,
+    'email.svg': emailIcon,
+    'phone-office.svg': phoneIcon
+  };
+
+  const contactInfo = contactData.contactInfo.map((info) => {
+    const iconSrc = contactIconMap[info.icon];
+    return {
+      ...info,
+      icon: iconSrc ? (
+        <img src={iconSrc} alt={`${info.label} icon`} className="info-icon-img" />
+      ) : info.icon
+    };
+  });
   const socialLinks = contactData.socialLinks.map((social) => {
     const iconSrc = socialIconMap[social.image];
     return {
@@ -144,7 +161,7 @@ function ContactSection() {
                     name="firstName"
                     value={formData.firstName}
                     onChange={handleInputChange}
-                    placeholder="John"
+                    placeholder="Enter your first name"
                     required
                   />
                 </div>
@@ -157,7 +174,7 @@ function ContactSection() {
                     name="lastName"
                     value={formData.lastName}
                     onChange={handleInputChange}
-                    placeholder="Doe"
+                    placeholder="Enter your last name"
                     required
                   />
                 </div>

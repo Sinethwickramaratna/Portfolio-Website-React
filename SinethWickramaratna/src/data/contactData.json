@@ -1,23 +1,23 @@
 {
   "contactInfo": [
     {
-      "icon": "📍",
+      "icon": "address-location.svg",
       "label": "Address",
-      "value": "Colombo, Sri Lanka",
+      "value": "Wickumpa, Pathegama, Balapitiya, Sri Lanka",
       "color": "#00ff88"
     },
     {
-      "icon": "✉️",
+      "icon": "email.svg",
       "label": "Email",
-      "value": "sineth@example.com",
-      "link": "mailto:sineth@example.com",
+      "value": "sinethwickramaratna@gmail.com",
+      "link": "mailto:sinethwickramaratna@gmail.com",
       "color": "#00ccff"
     },
     {
-      "icon": "📱",
+      "icon": "phone-office.svg",
       "label": "Phone",
-      "value": "+94 123 456 7890",
-      "link": "tel:+94123456789",
+      "value": "+94 72 210 5684",
+      "link": "tel:+94722105684",
       "color": "#ff00ff"
     }
   ],
@@ -25,28 +25,28 @@
     {
       "image": "linkedin.svg",
       "name": "LinkedIn",
-      "url": "https://linkedin.com/in/yourprofile",
+      "url": "https://www.linkedin.com/in/sineth-wickramaratna-a4332a2b8/",
       "color": "#0077B5"
     },
     {
       "image": "github.svg",
       "icon": "👨‍💻",
       "name": "GitHub",
-      "url": "https://github.com/yourprofile",
+      "url": "https://github.com/Sinethwickramaratna",
       "color": "#333333"
     },
     {
       "image": "facebook.svg",
       "icon": "📘",
       "name": "Facebook",
-      "url": "https://facebook.com/yourprofile",
+      "url": "https://www.facebook.com/sineth.wickramaratna.9/",
       "color": "#1877F2"
     },
     {
       "image": "instagram.svg",
       "icon": "📷",
       "name": "Instagram",
-      "url": "https://instagram.com/yourprofile",
+      "url": "https://www.instagram.com/sineth_wick_/",
       "color": "#E4405F"
     }
   ]

@@ -52,6 +52,12 @@
   box-shadow: 0 0 15px rgba(0, 255, 136, 0.3);
 }
 
+.info-icon-img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
 .contact-info-item:hover .info-icon {
   transform: scale(1.15) rotate(5deg);
   background: linear-gradient(135deg, rgba(0, 255, 136, 0.3) 0%, rgba(0, 255, 136, 0.2) 100%);
