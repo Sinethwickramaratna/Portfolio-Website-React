@@ -1,6 +1,7 @@
 import './CertificatesSection.css';
 import { useInView } from '../hooks/useInView';
 import { useState, useMemo, useEffect } from 'react';
+import robofest2025 from '../assets/Certificates/RoboFest.jpg';
 
 function CertificatesSection() {
   const [certificatesRef, isCertificatesInView] = useInView();
@@ -25,13 +26,13 @@ function CertificatesSection() {
   const certificatesData = [
     {
       id: 1,
-      title: 'Certificate Name',
-      issuer: 'Issuing Organization',
-      date: { year: 2024, month: 'Dec' },
-      description: 'Brief description of what this certificate represents',
-      link: 'https://example.com/certificate',
-      icon: '📜',
-      image: 'https://via.placeholder.com/400x250/1a4d6d/00ccff?text=Certificate+1'
+      title: 'SLIIT Robofest 2025 - Certificate of Achievements (Finalists)',
+      issuer: 'SLIIT',
+      date: { year: 2025, month: 'Oct' },
+      description: 'Certificate awarded for outstanding performance in the SLIIT Robofest 2025, recognizing the achievement of reaching the finals in a competitive robotics event.',
+      link: 'https://media.licdn.com/dms/image/v2/D562DAQEkokX_i0Yfgg/profile-treasury-image-shrink_800_800/B56ZnemSlQI8AY-/0/1760376209360?e=1771833600&v=beta&t=ml2kHJibTH1pyOGyszvId1q0Kg-oZIFp5g293DjAM5A',
+      icon: '🤖',
+      image: robofest2025
     },
     {
       id: 2,
