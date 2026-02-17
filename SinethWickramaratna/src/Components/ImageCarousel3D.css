@@ -538,6 +538,20 @@
   .carousel-view-more {
     margin-top: 25px;
   }
+
+  .load-more-btn {
+    flex-wrap: wrap;
+    padding: 12px 20px;
+    font-size: 0.9rem;
+    gap: 6px;
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .btn-count {
+    font-size: 0.8rem;
+    padding: 3px 8px;
+  }
 }
 
 @media (max-width: 768px) {
