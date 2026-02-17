@@ -40,63 +40,61 @@ function HomePage() {
 function App() {
   const [count, setCount] = useState(0)
 
-  // Create binary code rain effect - delayed to not affect LCP/CLS
+  // Binary rain effect
   useEffect(() => {
     const createBinaryRain = () => {
+      if (document.querySelectorAll('.binary-rain').length >= 6) return;
+
       const binary = document.createElement('div');
       binary.className = 'binary-rain';
       binary.textContent = Math.random() > 0.5 ? '1' : '0';
-      binary.style.left = Math.random() * 100 + '%';
-      binary.style.animationDuration = (Math.random() * 1.5 + 1) + 's';
-      binary.style.fontSize = (Math.random() * 10 + 10) + 'px';
+      binary.style.left = Math.random() * 50 + '%';
+      binary.style.animationDuration = (Math.random() * 1.2 + 1) + 's';
+      binary.style.fontSize = (Math.random() * 8 + 8) + 'px';
       document.body.appendChild(binary);
-      
-      setTimeout(() => {
-        binary.remove();
-      }, 5000);
+
+      setTimeout(() => binary.remove(), 5000);
     };
 
-    // Delay start to not affect initial page load
     const startDelay = setTimeout(() => {
-      const interval = setInterval(createBinaryRain, 400);
+      const interval = setInterval(createBinaryRain, 600); // was 400
       return () => clearInterval(interval);
     }, 1000);
 
     return () => clearTimeout(startDelay);
   }, []);
 
-  // Create data stream effect - delayed
+  // Data stream effect
   useEffect(() => {
     const createDataStream = () => {
+      if (document.querySelectorAll('.data-stream').length >= 2) return;
+
       const stream = document.createElement('div');
       stream.className = 'data-stream';
-      stream.style.top = Math.random() * 100 + '%';
-      stream.style.animationDuration = (Math.random() * 2 + 3) + 's';
+      stream.style.top = Math.random() * 50 + '%';
+      stream.style.animationDuration = (Math.random() * 1.5 + 2) + 's';
       document.body.appendChild(stream);
-      
-      setTimeout(() => {
-        stream.remove();
-      }, 5000);
+
+      setTimeout(() => stream.remove(), 5000);
     };
 
-    // Delay start to not affect initial page load
     const startDelay = setTimeout(() => {
-      for (let i = 0; i < 2; i++) {
-        setTimeout(() => createDataStream(), i * 1000);
-      }
+      createDataStream(); // single initial stream instead of a loop
 
-      const interval = setInterval(createDataStream, 5000);
+      const interval = setInterval(createDataStream, 8000); // was 5000
       return () => clearInterval(interval);
     }, 1500);
 
     return () => clearTimeout(startDelay);
   }, []);
 
-  // Create data packets - delayed
+  // Data packets
   useEffect(() => {
     const dataLabels = ['ML', 'AI', 'DATA', '01', '10', 'SQL', 'API', 'CSV', 'JSON'];
-    
+
     const createDataPacket = () => {
+      if (document.querySelectorAll('.data-packet').length >= 4) return;
+
       const packet = document.createElement('div');
       packet.className = 'data-packet';
       packet.textContent = dataLabels[Math.floor(Math.random() * dataLabels.length)];
@@ -104,47 +102,43 @@ function App() {
       packet.style.top = Math.random() * 100 + '%';
       packet.style.animationDelay = Math.random() * 2 + 's';
       document.body.appendChild(packet);
-      
-      setTimeout(() => {
-        packet.remove();
-      }, 4000);
+
+      setTimeout(() => packet.remove(), 4000);
     };
 
-    // Delay start to not affect initial page load
     const startDelay = setTimeout(() => {
-      for (let i = 0; i < 6; i++) {
-        setTimeout(() => createDataPacket(), i * 400);
+      for (let i = 0; i < 3; i++) { // was 6
+        setTimeout(() => createDataPacket(), i * 600); // was i * 400
       }
 
-      const interval = setInterval(createDataPacket, 2500);
+      const interval = setInterval(createDataPacket, 5000); // was 2500
       return () => clearInterval(interval);
     }, 2000);
 
     return () => clearTimeout(startDelay);
   }, []);
 
-  // Create floating data particles - delayed
+  // Floating data particles
   useEffect(() => {
     const createParticle = () => {
+      if (document.querySelectorAll('.data-particle').length >= 5) return;
+
       const particle = document.createElement('div');
       particle.className = 'data-particle';
       particle.style.left = Math.random() * 100 + '%';
       particle.style.animationDelay = Math.random() * 2 + 's';
       particle.style.animationDuration = (Math.random() * 4 + 5) + 's';
       document.body.appendChild(particle);
-      
-      setTimeout(() => {
-        particle.remove();
-      }, 9000);
+
+      setTimeout(() => particle.remove(), 9000);
     };
 
-    // Delay start to not affect initial page load
     const startDelay = setTimeout(() => {
-      for (let i = 0; i < 6; i++) {
-        setTimeout(() => createParticle(), i * 300);
+      for (let i = 0; i < 3; i++) { // was 6
+        setTimeout(() => createParticle(), i * 500); // was i * 300
       }
 
-      const interval = setInterval(createParticle, 800);
+      const interval = setInterval(createParticle, 1600); // was 800
       return () => clearInterval(interval);
     }, 2500);
 
