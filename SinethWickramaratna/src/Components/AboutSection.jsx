@@ -43,7 +43,14 @@ function AboutSection() {
 
           <div className="about-image">
             <div className="image-frame">
-              <img src={profileImage} alt="Sineth Wickramaratna" className="profile-image" />
+              <img 
+                src={profileImage} 
+                alt="Sineth Wickramaratna" 
+                className="profile-image" 
+                width="400" 
+                height="550"
+                loading="lazy"
+              />
             </div>
             <div className="profile-description">
               <h3>Data Science Engineer</h3>

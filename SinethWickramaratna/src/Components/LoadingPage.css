@@ -9,6 +9,13 @@
   background: linear-gradient(135deg, #0b1328 0%, #0a1a3a 45%, #12263f 100%);
   overflow: hidden;
   z-index: 9999;
+  opacity: 1;
+  transition: opacity 0.1s ease-out;
+  pointer-events: none;
+}
+
+.loading-page.fade-out {
+  opacity: 0;
 }
 
 .loading-backdrop {

@@ -1,6 +1,7 @@
 import './CertificatesSection.css';
 import { useInView } from '../hooks/useInView';
-import { useState, useMemo, useEffect } from 'react';
+import { useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import robofest2025 from '../assets/Certificates/RoboFest.jpg';
 import kaggleML from '../assets/Certificates/Sineth Wickramaratna - Intro to Machine Learning.png';
 import kagglePandas from '../assets/Certificates/Sineth Wickramaratna - Pandas.png';
@@ -12,7 +13,7 @@ import certificatesDataRaw from '../data/certificatesData.json';
 
 function CertificatesSection() {
   const [certificatesRef, isCertificatesInView] = useInView();
-  const [showModal, setShowModal] = useState(false);
+  const navigate = useNavigate();
   const INITIAL_DISPLAY_COUNT = 3;
 
   // Map image filenames to imported images
@@ -32,20 +33,7 @@ function CertificatesSection() {
     image: imageMap[cert.image] || null
   }));
 
-  // Prevent page scroll and hide navbar when modal is open
-  useEffect(() => {
-    if (showModal) {
-      document.body.style.overflow = 'hidden';
-      document.body.classList.add('modal-open');
-    } else {
-      document.body.style.overflow = 'unset';
-      document.body.classList.remove('modal-open');
-    }
-    return () => {
-      document.body.style.overflow = 'unset';
-      document.body.classList.remove('modal-open');
-    };
-  }, [showModal]);
+
 
   const getMonthNumber = (month) => {
     const months = {
@@ -80,7 +68,6 @@ function CertificatesSection() {
   }, []);
 
   const displayedData = sortedCertificatesData.slice(0, INITIAL_DISPLAY_COUNT);
-  const allCertificatesForModal = sortedCertificatesData;
 
   return (
     <section className="certificates-section" id="certificates" ref={certificatesRef}>
@@ -128,72 +115,14 @@ function CertificatesSection() {
           <div className="load-more-container">
             <button 
               className="load-more-btn" 
-              onClick={() => setShowModal(true)}
+              onClick={() => navigate('/certificates')}
             >
-              <span className="btn-text">Load More Certificates</span>
-              <span className="btn-icon">▼</span>
+              <span className="btn-text">View All Certificates</span>
+              <span className="btn-icon">→</span>
             </button>
           </div>
         </div>
       </div>
-
-      {showModal && (
-        <div className="certificates-modal-overlay" onClick={() => setShowModal(false)}>
-          <div className="certificates-modal" onClick={(e) => e.stopPropagation()}>
-            <button 
-              className="modal-close-btn" 
-              onClick={() => setShowModal(false)}
-            >
-              ✕
-            </button>
-            
-            <div className="modal-header">
-              <h2 className="modal-title">More Certificates</h2>
-              <div className="modal-accent"></div>
-            </div>
-
-            <div className="modal-body">
-              <div className="certificates-grid modal-grid">
-                {allCertificatesForModal.length > 0 ? (
-                  allCertificatesForModal.map((cert, index) => (
-                    <div 
-                      key={cert.id} 
-                      className="certificate-card modal-certificate-card"
-                      style={{ animationDelay: `${index * 0.1}s` }}
-                    >
-                      {cert.image && (
-                        <div className="certificate-image-container">
-                          <img src={cert.image} alt={cert.title} className="certificate-image" />
-                        </div>
-                      )}
-                      <div className="certificate-content">
-                        <h3 className="certificate-title">{cert.title}</h3>
-                        <p className="certificate-issuer">{cert.issuer}</p>
-                        <p className="certificate-date">
-                          {cert.date.month} {cert.date.year}
-                        </p>
-                        <p className="certificate-description">{cert.description}</p>
-                        {cert.link && (
-                          <a 
-                            href={cert.link} 
-                            target="_blank" 
-                            rel="noopener noreferrer" 
-                            className="certificate-link"
-                          >
-                            View Certificate →
-                          </a>
-                        )}
-                      </div>
-                    </div>
-                  ))
-                ) : (
-                  <p style={{ textAlign: 'center', color: '#88ccff' }}>No certificates</p>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
     </section>
   );
 }

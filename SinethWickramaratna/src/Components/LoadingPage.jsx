@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 
 function LoadingPage() {
   const [isVisible, setIsVisible] = useState(true);
+  const [fadeOut, setFadeOut] = useState(false);
   const [progress, setProgress] = useState(0);
   const [phaseIndex, setPhaseIndex] = useState(0);
 
@@ -14,26 +15,31 @@ function LoadingPage() {
   ];
 
   useEffect(() => {
-    const duration = 2800;
+    const duration = 200; // Minimal duration for fastest LCP
     const startTime = Date.now();
 
     const progressInterval = setInterval(() => {
       const elapsed = Date.now() - startTime;
       const pct = Math.min((elapsed / duration) * 100, 100);
       setProgress(pct);
-    }, 40);
+    }, 10); // Very fast updates
 
     const phaseTimer = setInterval(() => {
       setPhaseIndex((prev) => (prev + 1) % phases.length);
-    }, 700);
+    }, 50); // Fast phase transitions
+
+    const fadeTimer = setTimeout(() => {
+      setFadeOut(true);
+    }, duration);
 
     const finishTimer = setTimeout(() => {
       setIsVisible(false);
-    }, duration + 150);
+    }, duration + 100);
 
     return () => {
       clearInterval(progressInterval);
       clearInterval(phaseTimer);
+      clearTimeout(fadeTimer);
       clearTimeout(finishTimer);
     };
   }, []);
@@ -41,7 +47,7 @@ function LoadingPage() {
   if (!isVisible) return null;
 
   return (
-    <div className="loading-page">
+    <div className={`loading-page ${fadeOut ? 'fade-out' : ''}`}>
       <div className="loading-backdrop">
         <div className="bg-blob blob-1"></div>
         <div className="bg-blob blob-2"></div>

@@ -14,6 +14,7 @@ import ImageCarousel3D from './Components/ImageCarousel3D.jsx';
 import ContactSection from './Components/ContactSection.jsx';
 import LoadingPage from './Components/LoadingPage.jsx';
 import GalleryPage from './Components/GalleryPage.jsx';
+import CertificatesPage from './Components/CertificatesPage.jsx';
 import Footer from './Components/public/Footer.jsx';
 
 // HomePage Component
@@ -48,7 +49,7 @@ function App() {
     sessionStorage.setItem('hasVisitedPortfolio', 'true');
   }, []);
 
-  // Create binary code rain effect
+  // Create binary code rain effect - delayed to not affect LCP/CLS
   useEffect(() => {
     const createBinaryRain = () => {
       const binary = document.createElement('div');
@@ -64,11 +65,16 @@ function App() {
       }, 5000);
     };
 
-    const interval = setInterval(createBinaryRain, 400);
-    return () => clearInterval(interval);
+    // Delay start to not affect initial page load
+    const startDelay = setTimeout(() => {
+      const interval = setInterval(createBinaryRain, 400);
+      return () => clearInterval(interval);
+    }, 1000);
+
+    return () => clearTimeout(startDelay);
   }, []);
 
-  // Create data stream effect
+  // Create data stream effect - delayed
   useEffect(() => {
     const createDataStream = () => {
       const stream = document.createElement('div');
@@ -82,15 +88,20 @@ function App() {
       }, 5000);
     };
 
-    for (let i = 0; i < 2; i++) {
-      setTimeout(() => createDataStream(), i * 1000);
-    }
+    // Delay start to not affect initial page load
+    const startDelay = setTimeout(() => {
+      for (let i = 0; i < 2; i++) {
+        setTimeout(() => createDataStream(), i * 1000);
+      }
 
-    const interval = setInterval(createDataStream, 5000);
-    return () => clearInterval(interval);
+      const interval = setInterval(createDataStream, 5000);
+      return () => clearInterval(interval);
+    }, 1500);
+
+    return () => clearTimeout(startDelay);
   }, []);
 
-  // Create data packets
+  // Create data packets - delayed
   useEffect(() => {
     const dataLabels = ['ML', 'AI', 'DATA', '01', '10', 'SQL', 'API', 'CSV', 'JSON'];
     
@@ -108,15 +119,20 @@ function App() {
       }, 4000);
     };
 
-    for (let i = 0; i < 6; i++) {
-      setTimeout(() => createDataPacket(), i * 400);
-    }
+    // Delay start to not affect initial page load
+    const startDelay = setTimeout(() => {
+      for (let i = 0; i < 6; i++) {
+        setTimeout(() => createDataPacket(), i * 400);
+      }
 
-    const interval = setInterval(createDataPacket, 2500);
-    return () => clearInterval(interval);
+      const interval = setInterval(createDataPacket, 2500);
+      return () => clearInterval(interval);
+    }, 2000);
+
+    return () => clearTimeout(startDelay);
   }, []);
 
-  // Create floating data particles
+  // Create floating data particles - delayed
   useEffect(() => {
     const createParticle = () => {
       const particle = document.createElement('div');
@@ -131,12 +147,17 @@ function App() {
       }, 9000);
     };
 
-    for (let i = 0; i < 6; i++) {
-      setTimeout(() => createParticle(), i * 300);
-    }
+    // Delay start to not affect initial page load
+    const startDelay = setTimeout(() => {
+      for (let i = 0; i < 6; i++) {
+        setTimeout(() => createParticle(), i * 300);
+      }
 
-    const interval = setInterval(createParticle, 800);
-    return () => clearInterval(interval);
+      const interval = setInterval(createParticle, 800);
+      return () => clearInterval(interval);
+    }, 2500);
+
+    return () => clearTimeout(startDelay);
   }, []);
 
   return (
@@ -145,6 +166,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/gallery" element={<GalleryPage />} />
+        <Route path="/certificates" element={<CertificatesPage />} />
       </Routes>
     </>
   )

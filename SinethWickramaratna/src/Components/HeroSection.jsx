@@ -7,8 +7,8 @@ function HeroSection(){
   const rafRef = useRef(null);
 
     useEffect(() => {
-        // Trigger animation after component mounts
-        setTimeout(() => setIsLoaded(true), 100);
+        // Trigger animation immediately for better LCP
+        setIsLoaded(true);
     }, []);
 
     useEffect(() => {

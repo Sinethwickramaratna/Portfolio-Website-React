@@ -5,6 +5,8 @@
   background: transparent;
   z-index: 3;
   overflow-x: hidden;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 1200px;
 }
 
 .skills-section::before {
