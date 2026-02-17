@@ -40,7 +40,7 @@ function App() {
   const [count, setCount] = useState(0)
   const [showLoading, setShowLoading] = useState(true);
 
-  // Create binary code rain effect - delayed to not affect LCP/CLS
+  // Create binary code rain effect - disabled during initial load
   useEffect(() => {
     const createBinaryRain = () => {
       const binary = document.createElement('div');
@@ -56,16 +56,16 @@ function App() {
       }, 5000);
     };
 
-    // Delay start to not affect initial page load
+    // Significantly delay to avoid affecting CLS measurement (5s window)
     const startDelay = setTimeout(() => {
-      const interval = setInterval(createBinaryRain, 2000); // Reduced from 400ms
+      const interval = setInterval(createBinaryRain, 3000);
       return () => clearInterval(interval);
-    }, 3000); // Increased delay
+    }, 8000); // Start after CLS measurement window
 
     return () => clearTimeout(startDelay);
   }, []);
 
-  // Create data stream effect - delayed
+  // Create data stream effect - disabled during initial load
   useEffect(() => {
     const createDataStream = () => {
       const stream = document.createElement('div');
@@ -79,16 +79,16 @@ function App() {
       }, 5000);
     };
 
-    // Delay start to not affect initial page load
+    // Start after CLS measurement window
     const startDelay = setTimeout(() => {
-      const interval = setInterval(createDataStream, 8000); // Reduced frequency
+      const interval = setInterval(createDataStream, 10000);
       return () => clearInterval(interval);
-    }, 4000); // Increased delay
+    }, 10000);
 
     return () => clearTimeout(startDelay);
   }, []);
 
-  // Create data packets - delayed
+  // Create data packets - disabled during initial load
   useEffect(() => {
     const dataLabels = ['ML', 'AI', 'DATA', '01', '10', 'SQL', 'API', 'CSV', 'JSON'];
     
@@ -106,16 +106,16 @@ function App() {
       }, 4000);
     };
 
-    // Delay start to not affect initial page load
+    // Start after CLS measurement window
     const startDelay = setTimeout(() => {
-      const interval = setInterval(createDataPacket, 5000); // Reduced frequency
+      const interval = setInterval(createDataPacket, 8000);
       return () => clearInterval(interval);
-    }, 5000); // Increased delay
+    }, 12000);
 
     return () => clearTimeout(startDelay);
   }, []);
 
-  // Create floating data particles - delayed
+  // Create floating data particles - disabled during initial load
   useEffect(() => {
     const createParticle = () => {
       const particle = document.createElement('div');
@@ -130,11 +130,11 @@ function App() {
       }, 9000);
     };
 
-    // Delay start to not affect initial page load
+    // Start after CLS measurement window
     const startDelay = setTimeout(() => {
-      const interval = setInterval(createParticle, 3000); // Reduced frequency
+      const interval = setInterval(createParticle, 5000);
       return () => clearInterval(interval);
-    }, 6000); // Increased delay
+    }, 15000);
 
     return () => clearTimeout(startDelay);
   }, []);
