@@ -205,6 +205,7 @@
   align-items: center;
   gap: 40px;
   margin-top: 20px;
+  order: 1;
 }
 
 .carousel-btn {
@@ -288,11 +289,9 @@
 }
 
 .carousel-counter {
-  position: absolute;
-  bottom: 30px;
-  right: 30px;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   font-size: 1.2rem;
   color: #00ffff;
@@ -301,6 +300,8 @@
   padding: 10px 20px;
   border-radius: 50px;
   border: 2px solid rgba(0, 255, 255, 0.3);
+  margin-top: -20px;
+  order: 2;
 }
 
 .current {
@@ -591,10 +592,9 @@
   }
 
   .carousel-counter {
-    bottom: 20px;
-    right: 20px;
     padding: 8px 15px;
     font-size: 1rem;
+    margin-top: -15px;
   }
 
   .overlay-text h3 {
@@ -648,8 +648,8 @@
 
   .carousel-controls {
     gap: 15px;
-    flex-wrap: wrap;
-  }
+    flex-wrap: wrap;    width: 100%;
+    justify-content: center;  }
 
   .carousel-btn {
     width: 45px;
@@ -659,7 +659,6 @@
 
   .carousel-indicators {
     gap: 8px;
-    order: 3;
     width: 100%;
     justify-content: center;
   }
