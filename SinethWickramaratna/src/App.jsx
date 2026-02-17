@@ -58,9 +58,9 @@ function App() {
 
     // Delay start to not affect initial page load
     const startDelay = setTimeout(() => {
-      const interval = setInterval(createBinaryRain, 2000); // Reduced from 400ms
+      const interval = setInterval(createBinaryRain, 400);
       return () => clearInterval(interval);
-    }, 3000); // Increased delay
+    }, 1000);
 
     return () => clearTimeout(startDelay);
   }, []);
@@ -81,9 +81,13 @@ function App() {
 
     // Delay start to not affect initial page load
     const startDelay = setTimeout(() => {
-      const interval = setInterval(createDataStream, 8000); // Reduced frequency
+      for (let i = 0; i < 2; i++) {
+        setTimeout(() => createDataStream(), i * 1000);
+      }
+
+      const interval = setInterval(createDataStream, 5000);
       return () => clearInterval(interval);
-    }, 4000); // Increased delay
+    }, 1500);
 
     return () => clearTimeout(startDelay);
   }, []);
@@ -108,9 +112,13 @@ function App() {
 
     // Delay start to not affect initial page load
     const startDelay = setTimeout(() => {
-      const interval = setInterval(createDataPacket, 5000); // Reduced frequency
+      for (let i = 0; i < 6; i++) {
+        setTimeout(() => createDataPacket(), i * 400);
+      }
+
+      const interval = setInterval(createDataPacket, 2500);
       return () => clearInterval(interval);
-    }, 5000); // Increased delay
+    }, 2000);
 
     return () => clearTimeout(startDelay);
   }, []);
@@ -132,9 +140,13 @@ function App() {
 
     // Delay start to not affect initial page load
     const startDelay = setTimeout(() => {
-      const interval = setInterval(createParticle, 3000); // Reduced frequency
+      for (let i = 0; i < 6; i++) {
+        setTimeout(() => createParticle(), i * 300);
+      }
+
+      const interval = setInterval(createParticle, 800);
       return () => clearInterval(interval);
-    }, 6000); // Increased delay
+    }, 2500);
 
     return () => clearTimeout(startDelay);
   }, []);
