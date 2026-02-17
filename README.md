@@ -219,6 +219,6 @@ For inquiries, feedback, or collaborations:
 
 ---
 
-**Last Updated**: February 2025
+**Last Updated**: February 2026
 
 Made with ❤️ by Sineth Wickramaratna
