@@ -85,27 +85,27 @@
       "skills": [
         {
           "name": "React",
-          "iconFile": "react.svg",
+          "iconFile": "React.svg",
           "description": "Building interactive UIs"
         },
         {
           "name": "HTML",
-          "iconFile": "html5.svg",
+          "iconFile": "HTML5.svg",
           "description": "Web content structure"
         },
         {
           "name": "CSS",
-          "iconFile": "css3.svg",
+          "iconFile": "CSS3.svg",
           "description": "Web page styling"
         },
         {
           "name": "Node.js",
-          "iconFile": "node.js.svg",
+          "iconFile": "Node.js.svg",
           "description": "Server-side development"
         },
         {
           "name": "Express",
-          "iconFile": "express.svg",
+          "iconFile": "Express.svg",
           "description": "Web application framework"
         },
         {
@@ -136,7 +136,7 @@
         },
         {
           "name": "Docker",
-          "iconFile": "docker.svg",
+          "iconFile": "Docker.svg",
           "description": "Containerization & deployment"
         }
       ]
@@ -168,12 +168,12 @@
         },
         {
           "name": "Matplotlib",
-          "iconFile": "matplotlib.svg",
+          "iconFile": "Matplotlib.svg",
           "description": "Data visualization"
         },
         {
           "name": "Seaborn",
-          "iconFile": "seaborn.svg",
+          "iconFile": "Seaborn.svg",
           "description": "Statistical visualization"
         },
         {
@@ -183,7 +183,7 @@
         },
         {
           "name": "Canva",
-          "iconFile": "canva.svg",
+          "iconFile": "Canva.svg",
           "description": "Visual design creation"
         }
       ]

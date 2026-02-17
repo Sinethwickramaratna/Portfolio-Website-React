@@ -12,23 +12,23 @@ import statisticsIcon from '../assets/Images/Skills/statistics-icon.png'
 import pandasIcon from '../assets/Images/Skills/Pandas_mark.svg'
 import numpyIcon from '../assets/Images/Skills/numpy-icon.svg'
 import scikitLearnIcon from '../assets/Images/Skills/scikit-learn.svg'
-import reactIcon from '../assets/Images/Skills/react.svg'
-import htmlIcon from '../assets/Images/Skills/html5.svg'
-import cssIcon from '../assets/Images/Skills/css3.svg'
-import nodejsIcon from '../assets/Images/Skills/node.js.svg'
-import expressIcon from '../assets/Images/Skills/express.svg'
+import reactIcon from '../assets/Images/Skills/React.svg'
+import htmlIcon from '../assets/Images/Skills/HTML5.svg'
+import cssIcon from '../assets/Images/Skills/CSS3.svg'
+import nodejsIcon from '../assets/Images/Skills/Node.js.svg'
+import expressIcon from '../assets/Images/Skills/Express.svg'
 import springBootIcon from '../assets/Images/Skills/Spring.svg'
 import gitIcon from '../assets/Images/Skills/Git.svg'
 import jupyterIcon from '../assets/Images/Skills/Jupyter.svg'
 import vscodeIcon from '../assets/Images/Skills/VS Code.svg'
-import dockerIcon from '../assets/Images/Skills/docker.svg'
+import dockerIcon from '../assets/Images/Skills/Docker.svg'
 import mysqlIcon from '../assets/Images/Skills/MySQL.svg'
 import postgresqlIcon from '../assets/Images/Skills/PostgresSQL.svg'
 import figmaIcon from '../assets/Images/Skills/Figma.svg'
-import matplotlibIcon from '../assets/Images/Skills/matplotlib.svg'
-import seabornIcon from '../assets/Images/Skills/seaborn.svg'
+import matplotlibIcon from '../assets/Images/Skills/Matplotlib.svg'
+import seabornIcon from '../assets/Images/Skills/Seaborn.svg'
 import photoshopIcon from '../assets/Images/Skills/Adobe Photoshop.svg'
-import canvaIcon from '../assets/Images/Skills/canva.svg'
+import canvaIcon from '../assets/Images/Skills/Canva.svg'
 import skillsData from '../data/skillsData.json';
 
 function SkillsSection() {
@@ -45,23 +45,23 @@ function SkillsSection() {
     'Pandas_mark.svg': pandasIcon,
     'numpy-icon.svg': numpyIcon,
     'scikit-learn.svg': scikitLearnIcon,
-    'react.svg': reactIcon,
-    'html5.svg': htmlIcon,
-    'css3.svg': cssIcon,
-    'node.js.svg': nodejsIcon,
-    'express.svg': expressIcon,
+    'React.svg': reactIcon,
+    'HTML5.svg': htmlIcon,
+    'CSS3.svg': cssIcon,
+    'Node.js.svg': nodejsIcon,
+    'Express.svg': expressIcon,
     'Spring.svg': springBootIcon,
     'Git.svg': gitIcon,
     'Jupyter.svg': jupyterIcon,
     'VS Code.svg': vscodeIcon,
-    'docker.svg': dockerIcon,
+    'Docker.svg': dockerIcon,
     'MySQL.svg': mysqlIcon,
     'PostgresSQL.svg': postgresqlIcon,
     'Figma.svg': figmaIcon,
-    'matplotlib.svg': matplotlibIcon,
-    'seaborn.svg': seabornIcon,
+    'Matplotlib.svg': matplotlibIcon,
+    'Seaborn.svg': seabornIcon,
     'Adobe Photoshop.svg': photoshopIcon,
-    'canva.svg': canvaIcon
+    'Canva.svg': canvaIcon
   };
 
   const stats = skillsData.stats;
