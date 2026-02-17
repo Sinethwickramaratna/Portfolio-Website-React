@@ -15,7 +15,7 @@ function LoadingPage() {
   ];
 
   useEffect(() => {
-    const duration = 5000; // 5 second duration
+    const duration = 2000; // 2 second duration
     const startTime = Date.now();
 
     const progressInterval = setInterval(() => {
@@ -26,7 +26,7 @@ function LoadingPage() {
 
     const phaseTimer = setInterval(() => {
       setPhaseIndex((prev) => (prev + 1) % phases.length);
-    }, 1250); // Cycle through phases
+    }, 500); // Cycle through phases
 
     const fadeTimer = setTimeout(() => {
       setFadeOut(true);
