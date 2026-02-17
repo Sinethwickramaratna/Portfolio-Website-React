@@ -48,8 +48,8 @@
   height: 560px;
   max-width: 600px;
   position: relative;
-  order: 2;                      /* animation second visually on large */
-  transform-origin: top center;
+  order: 2;
+  overflow: hidden;
 }
 
 .desk-animation.loaded {
@@ -64,6 +64,7 @@
   position: relative;
   width: 100%;
   height: 100%;
+  overflow: visible;
 }
 
 /* ===== DESK / TABLE ===== */
@@ -1168,13 +1169,34 @@
 
 /* ============================================================
    RESPONSIVE BREAKPOINTS
+
+   Strategy for small screens:
+   The desk scene internals are built inside a 580px-wide coordinate
+   space. We wrap desk-scene in a fixed 580×560px ".desk-scene-inner"
+   div and scale THAT down so it always fits the viewport without any
+   element being clipped on either side. The outer .desk-animation
+   collapses to the scaled height so no dead space is left behind.
+
+   Scale formula: scale = viewportWidth / 580
+   Scaled height  = 560 * scale = 560 * vw / 580 ≈ 0.9655 * vw
+
+   We apply a fixed scale at each breakpoint using the midpoint vw.
    ============================================================ */
+
+/* ---- Inner wrapper that holds the real 580×560 scene ---- */
+.desk-scene-inner {
+  width: 580px;
+  height: 560px;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%) scale(1);
+  transform-origin: top center;
+}
 
 /* ---- Tablet / medium (≤1024px): stack vertically, animation on top ---- */
 @media (max-width: 1024px) {
-  .hero-section {
-    padding: 100px 30px 60px;
-  }
+  .hero-section { padding: 100px 30px 60px; }
 
   .hero-container {
     flex-direction: column;
@@ -1192,31 +1214,23 @@
     max-width: 600px;
   }
 
+  /* scale 0.80 → height = 560 * 0.80 = 448px */
   .desk-animation {
     order: 1;
     width: 100%;
     max-width: 580px;
-    /* scale(0.88) on 560px height → visible height ≈ 493px; clip the rest */
-    height: 493px;
-    transform-origin: top center;
+    height: 448px;
     margin: 0 auto;
-    overflow: hidden;
+    position: relative;
   }
-
-  .desk-animation.loaded {
-    transform: scale(0.88);
-    transform-origin: top center;
-  }
+  .desk-animation.loaded { transform: none; }
+  .desk-scene-inner { transform: translateX(-50%) scale(0.80); }
 
   .neural-accent { margin: 20px auto; }
   .hero-description { max-width: 100%; }
   .hero-title { font-size: 3.2rem; }
 
-  .bookshelf {
-    width: 160px;
-    height: 300px;
-    transform: translateX(calc(-50% + 170px));
-  }
+  .bookshelf { width: 160px; height: 300px; transform: translateX(calc(-50% + 170px)); }
   .shelf { height: 44px; }
   .shelf-mid  { top: 48px; }
   .shelf-mid2 { top: 96px; }
@@ -1224,118 +1238,75 @@
   .shelf-books { height: 36px; }
 }
 
-/* ---- Small tablets ≤768px ---- */
+/* ---- Small tablets ≤768px — scale 0.62 → height = 347px ---- */
 @media (max-width: 768px) {
   .hero-section { padding: 100px 15px 60px; }
-
   .hero-container { gap: 8px; }
 
-  .desk-animation {
-    max-width: 500px;
-    /* scale(0.72) on 560px → visible ≈ 403px */
-    height: 403px;
-    overflow: hidden;
-  }
-
-  .desk-animation.loaded {
-    transform: scale(0.72);
-    transform-origin: top center;
-  }
+  .desk-animation { height: 347px; }
+  .desk-scene-inner { transform: translateX(-50%) scale(0.62); }
 
   .hero-title { font-size: 3.1rem; letter-spacing: 1.8px; }
   .hero-subtitle { font-size: 1.05rem; }
-
   .button-group { flex-direction: column; gap: 12px; margin-top: 25px; }
   .btn-primary, .btn-secondary { width: 100%; padding: 14px 28px; }
 }
 
-/* ---- Large phones ≤576px ---- */
-@media (max-width: 576px) {
-  .hero-section { padding: 95px 12px 50px; overflow-x: hidden; }
-
-  .hero-container { gap: 6px; }
+/* ---- Large phones ≤570px — scale 0.50 → height = 280px ---- */
+@media (max-width: 570px) {
+  .hero-section { padding: 90px 0 40px; overflow-x: hidden; }
+  .hero-container { gap: 6px; padding: 0; }
 
   .desk-animation {
     width: 100% !important;
     max-width: 100% !important;
-    min-width: 0 !important;
-    /* scale(0.62) on 560px → visible ≈ 347px */
-    height: 347px;
-    overflow: hidden;
+    height: 280px;
+    position: relative;
   }
+  .desk-scene-inner { transform: translateX(-50%) scale(0.50); }
 
-  .desk-animation.loaded {
-    transform: scale(0.62);
-    transform-origin: top center;
-  }
-
-  .hero-title { font-size: 2.7rem; letter-spacing: 1.5px; }
+  .hero-title { font-size: 2.5rem; letter-spacing: 1.5px; }
   .hero-subtitle { font-size: 0.95rem; }
+  .hero-description { font-size: 0.9rem; }
+  .hero-content { padding: 0 16px; align-items: center; text-align: center; }
 }
 
-/* ---- Phones ≤480px ---- */
+/* ---- Phones ≤480px — scale 0.43 → height = 241px ---- */
 @media (max-width: 480px) {
-  .hero-section { padding: 90px 10px 40px; overflow-x: hidden; }
-
+  .hero-section { padding: 85px 0 35px; }
   .hero-container { gap: 4px; }
 
-  .desk-animation {
-    width: 90% !important;
-    max-width: 100% !important;
-    min-width: 0 !important;
-    /* scale(0.55) on 560px → visible ≈ 308px */
-    height: 308px;
-    overflow: hidden;
-  }
+  .desk-animation { height: 241px; }
+  .desk-scene-inner { transform: translateX(-50%) scale(0.43); }
 
-  .desk-animation.loaded {
-    transform: scale(0.55);
-    transform-origin: top center;
-  }
-
-  .hero-title { font-size: 2.3rem; letter-spacing: 1.2px; }
+  .hero-title { font-size: 2.1rem; letter-spacing: 1.2px; }
   .hero-subtitle { font-size: 0.9rem; }
-  .hero-description { font-size: 0.85rem; max-width: 100%; }
-
-  .button-group { gap: 10px; margin-top: 20px; }
+  .hero-description { font-size: 0.82rem; max-width: 100%; }
+  .button-group { gap: 10px; margin-top: 16px; }
   .btn-primary, .btn-secondary { padding: 11px 24px; font-size: 0.9rem; }
 }
 
-/* ---- Very small phones ≤350px ---- */
-@media (max-width: 350px) {
-  .hero-section { padding: 60px 8px 20px; overflow-x: hidden; }
+/* ---- Small phones ≤400px — scale 0.37 → height = 207px ---- */
+@media (max-width: 400px) {
+  .hero-section { padding: 80px 0 30px; }
+  .hero-container { gap: 2px; }
 
-  .hero-container { gap: 4px; }
+  .desk-animation { height: 207px; }
+  .desk-scene-inner { transform: translateX(-50%) scale(0.37); }
 
-  .desk-animation {
-    width: 98vw !important;
-    max-width: 98vw !important;
-    min-width: 0 !important;
-    /* scale(0.45) on 560px → visible ≈ 252px */
-    height: 252px !important;
-    overflow: hidden;
-  }
-
-  .desk-animation.loaded {
-    transform: scale(0.45);
-    transform-origin: top center;
-  }
-
-  .hero-title { font-size: 1.5rem; letter-spacing: 0.5px; word-break: break-word; }
-  .hero-subtitle, .hero-description { font-size: 0.75rem; word-break: break-word; }
-  .hero-content { padding: 0 4px; }
+  .hero-title { font-size: 1.8rem; letter-spacing: 0.8px; word-break: break-word; }
+  .hero-subtitle, .hero-description { font-size: 0.78rem; }
+  .hero-content { padding: 0 12px; }
 }
 
-/* ---- Window override on very small screens ---- */
-@media (max-width: 480px) {
-  .wall-window {
-    z-index: 10 !important;
-    top: 10px !important;
-    left: 50% !important;
-    transform: translateX(-50%) !important;
-    width: 120px !important;
-    height: 90px !important;
-  }
+/* ---- Very small phones ≤320px — scale 0.30 → height = 168px ---- */
+@media (max-width: 320px) {
+  .desk-animation { height: 168px; }
+  .desk-scene-inner { transform: translateX(-50%) scale(0.30); }
+
+  .hero-title { font-size: 1.4rem; }
+  .hero-subtitle, .hero-description { font-size: 0.7rem; word-break: break-word; }
+  .hero-content { padding: 0 8px; }
 }
 
 /* ---- Reduced motion ---- */

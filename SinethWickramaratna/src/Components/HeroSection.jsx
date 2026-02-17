@@ -1,96 +1,104 @@
 import './HeroSection.css';
+import LoadingPage from './LoadingPage.jsx';
 import { useState, useEffect, useRef, useCallback } from 'react';
 
-function HeroSection(){
-    const [isLoaded, setIsLoaded] = useState(true);
-    const sectionRef = useRef(null);
-    const rafRef = useRef(null);
+function HeroSection() {
+  const [isLoaded, setIsLoaded] = useState(false);
+  const sectionRef = useRef(null);
+  const rafRef = useRef(null);
 
-    useEffect(() => {
-      const handleMouseMove = (event) => {
-        if (!sectionRef.current) return;
+  useEffect(() => {
+    // Show loading page for 1 second
+    const timer = setTimeout(() => setIsLoaded(true), 1950);
 
-        const rect = sectionRef.current.getBoundingClientRect();
-        const withinX = event.clientX >= rect.left && event.clientX <= rect.right;
-        const withinY = event.clientY >= rect.top && event.clientY <= rect.bottom;
+    const handleMouseMove = (event) => {
+      if (!sectionRef.current) return;
 
-        if (!withinX || !withinY) return;
+      const rect = sectionRef.current.getBoundingClientRect();
+      const withinX = event.clientX >= rect.left && event.clientX <= rect.right;
+      const withinY = event.clientY >= rect.top && event.clientY <= rect.bottom;
 
-        const x = (event.clientX - rect.left) / rect.width;
-        const y = (event.clientY - rect.top) / rect.height;
-        const mx = (x - 0.5) * 2;
-        const my = (y - 0.5) * 2;
+      if (!withinX || !withinY) return;
 
-        if (rafRef.current) cancelAnimationFrame(rafRef.current);
-        rafRef.current = requestAnimationFrame(() => {
-          sectionRef.current.style.setProperty('--mx', mx.toFixed(3));
-          sectionRef.current.style.setProperty('--my', my.toFixed(3));
-        });
-      };
+      const x = (event.clientX - rect.left) / rect.width;
+      const y = (event.clientY - rect.top) / rect.height;
+      const mx = (x - 0.5) * 2;
+      const my = (y - 0.5) * 2;
 
-      const handleMouseLeave = () => {
-        if (!sectionRef.current) return;
-        sectionRef.current.style.setProperty('--mx', '0');
-        sectionRef.current.style.setProperty('--my', '0');
-      };
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      rafRef.current = requestAnimationFrame(() => {
+        sectionRef.current.style.setProperty('--mx', mx.toFixed(3));
+        sectionRef.current.style.setProperty('--my', my.toFixed(3));
+      });
+    };
 
-      window.addEventListener('mousemove', handleMouseMove, { passive: true });
-      window.addEventListener('mouseleave', handleMouseLeave);
+    const handleMouseLeave = () => {
+      if (!sectionRef.current) return;
+      sectionRef.current.style.setProperty('--mx', '0');
+      sectionRef.current.style.setProperty('--my', '0');
+    };
 
-      return () => {
-        window.removeEventListener('mousemove', handleMouseMove);
-        window.removeEventListener('mouseleave', handleMouseLeave);
-        if (rafRef.current) cancelAnimationFrame(rafRef.current);
-      };
-    }, []);
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    window.addEventListener('mouseleave', handleMouseLeave);
 
-    const handleContactClick = useCallback(() => {
-      const target = document.getElementById('contact');
-      if (target) {
-        target.scrollIntoView({ behavior: 'smooth' });
-      }
-    }, []);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseleave', handleMouseLeave);
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
+  }, []);
 
-    return(
-        <>
-          <div
-            className="hero-section"
-            id="hero"
-            ref={sectionRef}
-          >
-            <div className="hero-bg">
-              <div className="hero-bg-layer layer-1"></div>
-              <div className="hero-bg-layer layer-2"></div>
-              <div className="hero-bg-layer layer-3"></div>
-            </div>
-            <div className="hero-container">
-              {/* Hero Content - always in DOM order first, CSS handles visual order */}
-              <div className="hero-content">
-                <h1 className={`hero-title ${isLoaded ? 'loaded' : ''}`}>
-                  SINETH WICKRAMARATNA
-                </h1>
-                <div className="neural-accent"></div>
-                <p className="hero-subtitle">Computer Science & Engineering Student at University of Moratuwa</p>
-                <div className="stream-box">
-                  <p className="hero-subtitle stream-label">Stream : Data Science Engineering</p>
-                </div>
-                <p className="hero-description">
-                  Transforming data into insights through AI, Machine Learning, and innovative solutions
-                </p>
-                <div className="button-group">
-                  <button className="btn-primary" onClick={handleContactClick}>Get In Touch</button>
-                  <button className="btn-secondary">
-                    <svg className="download-icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-                      <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
-                    </svg>
-                    Download CV
-                  </button>
-                </div>
+  const handleContactClick = useCallback(() => {
+    const target = document.getElementById('contact');
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, []);
+
+  return (
+    <>
+      {!isLoaded && <LoadingPage />}
+      {isLoaded && (
+        <div
+          className="hero-section"
+          id="hero"
+          ref={sectionRef}
+        >
+          <div className="hero-bg">
+            <div className="hero-bg-layer layer-1"></div>
+            <div className="hero-bg-layer layer-2"></div>
+            <div className="hero-bg-layer layer-3"></div>
+          </div>
+          <div className="hero-container">
+            {/* Hero Content - always in DOM order first, CSS handles visual order */}
+            <div className="hero-content">
+              <h1 className={`hero-title ${isLoaded ? 'loaded' : ''}`}>
+                SINETH WICKRAMARATNA
+              </h1>
+              <div className="neural-accent"></div>
+              <p className="hero-subtitle">Computer Science & Engineering Student at University of Moratuwa</p>
+              <div className="stream-box">
+                <p className="hero-subtitle stream-label">Stream : Data Science Engineering</p>
               </div>
+              <p className="hero-description">
+                Transforming data into insights through AI, Machine Learning, and innovative solutions
+              </p>
+              <div className="button-group">
+                <button className="btn-primary" onClick={handleContactClick}>Get In Touch</button>
+                <button className="btn-secondary">
+                  <svg className="download-icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                    <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
+                  </svg>
+                  Download CV
+                </button>
+              </div>
+            </div>
 
-              {/* Desk Scene Animation */}
-              <div className={`desk-animation ${isLoaded ? 'loaded' : ''}`}>
-                <div className="desk-scene">
+            {/* Desk Scene Animation */}
+            <div className={`desk-animation ${isLoaded ? 'loaded' : ''}`}>
+              <div className="desk-scene">
+                <div className="desk-scene-inner">
 
                   {/* Window */}
                   <div className="wall-window">
@@ -301,12 +309,14 @@ function HeroSection(){
 
                   {/* Desk Reflection */}
                   <div className="desk-glow-reflection"></div>
-                </div>
+                </div>{/* end desk-scene-inner */}
               </div>
             </div>
           </div>
-        </>
-    );
+        </div>
+      )}
+    </>
+  );
 }
 
 export default HeroSection;
