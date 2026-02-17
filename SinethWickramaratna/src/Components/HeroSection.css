@@ -1116,17 +1116,18 @@
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: gradient-text 4s ease infinite;
   
   /* Fully visible immediately for best LCP */
   opacity: 1;
   transform: translateZ(0);
   contain: layout style paint;
+  /* Delay animation start to after LCP */
+  animation: gradient-text 4s ease infinite 1s;
 }
 
 /* Loaded state - no opacity change to prevent CLS */
 .hero-title.loaded {
-  animation: gradient-text 4s ease infinite;
+  animation: gradient-text 4s ease infinite 1s;
 }
 
 @keyframes title-glow {
@@ -1156,12 +1157,13 @@
   margin-bottom: 6px;
   line-height: 1.5;
   font-weight: 500;
-  animation: pulse-glow 2s ease-in-out infinite;
   
   /* Fully visible to prevent CLS */
   opacity: 1;
   transform: translateZ(0);
   contain: layout style paint;
+  /* Delay animation start to after LCP */
+  animation: pulse-glow 2s ease-in-out infinite 1.2s;
 }
 
 .hero-title.loaded ~ .neural-accent,
@@ -1181,6 +1183,15 @@
   }
 }
 
+/* Reduce animation overhead for better performance */
+prefers-reduced-motion: reduce {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 /* Button Container */
 .button-group {
   display: flex;
@@ -1190,9 +1201,19 @@
   transform: translateZ(0);
   contain: layout style paint;
 }
+  transform: translateZ(0);
+  contain: layout style paint;
+  /* Delay animation start to after LCP */
+  animation: fade-in-buttons 0.6s ease-out 1.4s both;
+}
 
-.hero-title.loaded ~ .button-group {
-  /* Already visible, no change */
+@keyframes fade-in-buttons {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 /* Primary Button (Get In Touch) */

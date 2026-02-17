@@ -10,10 +10,27 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
-    <!-- Load critical font with swap for better LCP -->
+    <!-- Preload critical font for better LCP -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Antonio:wght@300;400;500;600;700;800&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Antonio:wght@300;400;500;600;700;800&display=swap">
     
     <link href="/src/index.css" rel="stylesheet">
+    
+    <!-- Optimize painting for LCP -->
+    <style>
+      #root { display: contents; }
+      .hero-section { contain: layout style; }
+      /* Defer background animations to after LCP */
+      body {
+        animation-delay: 2s;
+      }
+      body::before {
+        animation-delay: 2s;
+      }
+      body::after {
+        animation-delay: 2.5s;
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>

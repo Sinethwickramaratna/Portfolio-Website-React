@@ -1,15 +1,10 @@
 import './HeroSection.css';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 
 function HeroSection(){
-    const [isLoaded, setIsLoaded] = useState(false);
+    const [isLoaded, setIsLoaded] = useState(true); // Start loaded to prevent CLS
   const sectionRef = useRef(null);
   const rafRef = useRef(null);
-
-    useEffect(() => {
-        // Trigger animation immediately for better LCP
-        setIsLoaded(true);
-    }, []);
 
     useEffect(() => {
       const handleMouseMove = (event) => {
@@ -49,12 +44,12 @@ function HeroSection(){
       };
     }, []);
 
-    const handleContactClick = () => {
+    const handleContactClick = useCallback(() => {
       const target = document.getElementById('contact');
       if (target) {
         target.scrollIntoView({ behavior: 'smooth' });
       }
-    };
+    }, []);
 
     return(
         <>

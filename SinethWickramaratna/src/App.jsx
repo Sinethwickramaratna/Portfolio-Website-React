@@ -40,7 +40,7 @@ function HomePage() {
 
 function App() {
   const [count, setCount] = useState(0)
-  const [showLoading, setShowLoading] = useState(true);
+  const [showLoading, setShowLoading] = useState(false); // Disable loading page for better LCP
 
   // Create binary code rain effect - delayed to not affect LCP/CLS
   useEffect(() => {
