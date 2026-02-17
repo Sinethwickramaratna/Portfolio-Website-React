@@ -15,18 +15,18 @@ function LoadingPage() {
   ];
 
   useEffect(() => {
-    const duration = 200; // Minimal duration for fastest LCP
+    const duration = 5000; // 5 second duration
     const startTime = Date.now();
 
     const progressInterval = setInterval(() => {
       const elapsed = Date.now() - startTime;
       const pct = Math.min((elapsed / duration) * 100, 100);
       setProgress(pct);
-    }, 10); // Very fast updates
+    }, 50);
 
     const phaseTimer = setInterval(() => {
       setPhaseIndex((prev) => (prev + 1) % phases.length);
-    }, 50); // Fast phase transitions
+    }, 1250); // Cycle through phases
 
     const fadeTimer = setTimeout(() => {
       setFadeOut(true);
@@ -34,7 +34,7 @@ function LoadingPage() {
 
     const finishTimer = setTimeout(() => {
       setIsVisible(false);
-    }, duration + 100);
+    }, duration + 500);
 
     return () => {
       clearInterval(progressInterval);
