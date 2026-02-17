@@ -177,6 +177,8 @@ body::after {
   text-shadow: 0 0 10px var(--ds-blue-secondary);
   animation: rain-fall linear forwards;
   opacity: 0;
+  will-change: transform, opacity;
+  contain: layout style paint;
 }
 
 @keyframes rain-fall {
@@ -209,6 +211,8 @@ body::after {
   z-index: -1;
   box-shadow: 0 0 20px var(--ds-blue-secondary);
   animation: stream-flow linear forwards;
+  will-change: transform, opacity;
+  contain: layout style paint;
 }
 
 .data-stream::before {
@@ -259,6 +263,8 @@ body::after {
   box-shadow: 
     0 0 20px rgba(0, 212, 255, 0.5),
     inset 0 0 10px rgba(0, 212, 255, 0.2);
+  will-change: transform, opacity;
+  contain: layout style paint;
 }
 
 @keyframes packet-float {
@@ -291,6 +297,8 @@ body::after {
   z-index: -1;
   box-shadow: 0 0 10px var(--ds-blue-primary);
   animation: particle-rise ease-in-out forwards;
+  will-change: transform, opacity;
+  contain: layout style paint;
 }
 
 @keyframes particle-rise {
