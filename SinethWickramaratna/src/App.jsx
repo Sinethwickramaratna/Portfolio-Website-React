@@ -47,7 +47,7 @@ function App() {
       binary.className = 'binary-rain';
       binary.textContent = Math.random() > 0.5 ? '1' : '0';
       binary.style.left = Math.random() * 100 + '%';
-      binary.style.animationDuration = (Math.random() * 3 + 2) + 's';
+      binary.style.animationDuration = (Math.random() * 1.5 + 1) + 's';
       binary.style.fontSize = (Math.random() * 10 + 10) + 'px';
       document.body.appendChild(binary);
       
