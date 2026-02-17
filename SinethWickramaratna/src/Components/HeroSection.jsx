@@ -2,9 +2,9 @@ import './HeroSection.css';
 import { useState, useEffect, useRef, useCallback } from 'react';
 
 function HeroSection(){
-    const [isLoaded, setIsLoaded] = useState(true); // Start loaded to prevent CLS
-  const sectionRef = useRef(null);
-  const rafRef = useRef(null);
+    const [isLoaded, setIsLoaded] = useState(true);
+    const sectionRef = useRef(null);
+    const rafRef = useRef(null);
 
     useEffect(() => {
       const handleMouseMove = (event) => {
@@ -64,6 +64,7 @@ function HeroSection(){
               <div className="hero-bg-layer layer-3"></div>
             </div>
             <div className="hero-container">
+              {/* Hero Content - always in DOM order first, CSS handles visual order */}
               <div className="hero-content">
                 <h1 className={`hero-title ${isLoaded ? 'loaded' : ''}`}>
                   SINETH WICKRAMARATNA
@@ -86,7 +87,7 @@ function HeroSection(){
                   </button>
                 </div>
               </div>
-              
+
               {/* Desk Scene Animation */}
               <div className={`desk-animation ${isLoaded ? 'loaded' : ''}`}>
                 <div className="desk-scene">
@@ -179,7 +180,7 @@ function HeroSection(){
                     <div className="light-glow"></div>
                   </div>
 
-                  {/* Headphones (side view, lying on table) */}
+                  {/* Headphones */}
                   <div className="desk-headphones">
                     <div className="hp-band"></div>
                     <div className="hp-cup hp-cup-l">
@@ -192,7 +193,6 @@ function HeroSection(){
 
                   {/* Laptop */}
                   <div className="laptop-wrapper">
-                    {/* Screen Lid */}
                     <div className="screen-lid">
                       <div className="screen-bezel">
                         <div className="screen-camera"></div>
@@ -237,7 +237,6 @@ function HeroSection(){
                         </div>
                       </div>
                     </div>
-                    {/* Laptop Body / Keyboard */}
                     <div className="laptop-body">
                       <div className="keyboard-area">
                         {[...Array(30)].map((_, i) => (
