@@ -38,16 +38,7 @@ function HomePage() {
 
 function App() {
   const [count, setCount] = useState(0)
-  const [showLoading, setShowLoading] = useState(() => {
-    // Only show loading on initial visit (not when navigating back)
-    const hasVisited = sessionStorage.getItem('hasVisitedPortfolio');
-    return !hasVisited;
-  });
-
-  useEffect(() => {
-    // Mark that user has visited the portfolio in this session
-    sessionStorage.setItem('hasVisitedPortfolio', 'true');
-  }, []);
+  const [showLoading, setShowLoading] = useState(true);
 
   // Create binary code rain effect - delayed to not affect LCP/CLS
   useEffect(() => {
