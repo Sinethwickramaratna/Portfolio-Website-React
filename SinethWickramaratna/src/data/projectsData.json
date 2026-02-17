@@ -1,0 +1,107 @@
+{
+  "projects": [
+    {
+      "id": 1,
+      "title": "4-bit Nano Processor Implementation",
+      "category": "Web Development",
+      "shortDescription": "A modern, fully responsive portfolio website showcasing projects, skills, experience, and expertise in software development, hardware design, and supply chain management.",
+      "description": "A sleek, gradient-based portfolio website built with React and Vite featuring smooth animations, fully responsive design, and dynamic content management. Includes project showcase, skills section, certificates, volunteering experience, design gallery with 3D carousel, and contact section.",
+      "technologies": ["React 18", "JavaScript", "Vite", "CSS3", "React Router", "JSON"],
+      "features": [
+        "Modern design with gradient-based UI and smooth animations",
+        "Fully responsive - optimized for desktop, tablet, and mobile",
+        "Project showcase with GitHub links",
+        "Interactive 3D design gallery and carousel",
+        "Skills categorized by expertise area",
+        "Certificates and achievements display",
+        "Volunteer work and experience showcase",
+        "Smooth scroll animations and fade-in effects"
+      ],
+      "image": null,
+      "repoUrl": "https://github.com/NirmalKBandara/microProcessorDesign.git",
+      "status": "Completed",
+      "year": "2024"
+    },
+    {
+      "id": 2,
+      "title": "Student Task Management",
+      "category": "Full-Stack Development",
+      "shortDescription": "A full-stack application with Flutter client and Spring Boot backend featuring JWT authentication and role-based access control for Admin, Teacher, and Student users.",
+      "description": "A comprehensive task management system with Flutter mobile client and Spring Boot REST API. Implements JWT authentication with role-based access control, secure BCrypt password hashing, and PostgreSQL database with role segregation. Supports separate dashboards for Admin, Teacher, and Student roles.",
+      "technologies": ["Flutter", "Dart", "Spring Boot", "Java 17", "PostgreSQL", "JWT", "Spring Security 6", "BCrypt"],
+      "features": [
+        "JWT authentication with role-based access control (Admin, Teacher, Student)",
+        "Secure password hashing with BCrypt",
+        "Role-specific dashboards and navigation",
+        "Spring Boot REST API with security",
+        "PostgreSQL database with user roles"
+      ],
+      "image": null,
+      "repoUrl": "https://github.com/Sinethwickramaratna/Student-Task-Manager.git",
+      "status": "In Progress",
+      "year": "2025"
+    },
+    {
+      "id": 3,
+      "title": "Maze Solver Using Floodfill Algorithm",
+      "category": "Algorithm & Data Structures",
+      "shortDescription": "A C++ implementation of maze-solving using the Floodfill (BFS) algorithm, simulating robot navigation with dynamic wall discovery and shortest path computation.",
+      "description": "An intelligent maze solver that simulates how a robot (micromouse) navigates through an 8x8 maze by discovering walls, updating its environment knowledge, and finding the shortest path to the goal. Uses Breadth-First Search (Floodfill) algorithm with dynamic pathfinding.",
+      "technologies": ["C++", "Algorithm", "BFS", "Pathfinding", "Data Structures"],
+      "features": [
+        "8x8 maze representation with wall information per cell",
+        "Floodfill algorithm for distance calculation from goal",
+        "Dynamic wall discovery as the robot moves",
+        "Movement output with directions (F, L, R, B)",
+        "Shortest path computation and visualization",
+        "Hardcoded maze structure (easily modifiable)"
+      ],
+      "image": null,
+      "repoUrl": "https://github.com/Sinethwickramaratna/Maze-solving-algorithm-using-Flood-Fill-algorithm.git",
+      "status": "Completed",
+      "year": "2024"
+    },
+    {
+      "id": 4,
+      "title": "KandyPack Railway",
+      "category": "Supply Chain Management",
+      "shortDescription": "A rail and road-based supply chain distribution system for KandyPack FMCG manufacturer, replacing Excel-based logistics with a modern web platform.",
+      "description": "A comprehensive web-based logistics platform for coordinating orders, scheduling, inventory management, and role-based operations across rail and road distribution networks. Includes real-time-friendly architecture with role-based portals for admins, managers, warehouse teams, drivers, and customers.",
+      "technologies": ["React", "TypeScript", "Vite", "Python", "FastAPI", "REST API", "WebSocket"],
+      "features": [
+        "Role-based portals (admin, manager, warehouse, driver, assistant, customer)",
+        "Order creation and tracking with supporting dashboards",
+        "Inventory and stock alert views for warehouse teams",
+        "Reporting and audit views for management",
+        "Real-time support with WebSocket architecture",
+        "REST API endpoints for all operations"
+      ],
+      "image": null,
+      "repoUrl": "https://github.com/yasiboy989/kandypack-railway.git",
+      "status": "Completed",
+      "year": "2025"
+    },
+    {
+      "id": 5,
+      "title": "Personal Portfolio Website",
+      "category": "Web Development",
+      "shortDescription": "A modern, fully responsive portfolio website showcasing projects, skills, experience, and expertise in software development, hardware design, and supply chain management.",
+      "description": "A sleek, gradient-based portfolio website built with React and Vite featuring smooth animations, fully responsive design, and dynamic content management. Includes project showcase, skills section, certificates, volunteering experience, design gallery with 3D carousel, and contact section.",
+      "technologies": ["React 18", "JavaScript", "Vite", "CSS3", "React Router", "JSON"],
+      "features": [
+        "Modern design with gradient-based UI and smooth animations",
+        "Fully responsive - optimized for desktop, tablet, and mobile",
+        "Project showcase with GitHub links",
+        "Interactive 3D design gallery and carousel",
+        "Skills categorized by expertise area",
+        "Certificates and achievements display",
+        "Volunteer work and experience showcase",
+        "Smooth scroll animations and fade-in effects"
+      ],
+      "image": null,
+      "repoUrl": "https://github.com/Sinethwickramaratna/Portfolio-Website-React.git",
+      "status": "Completed",
+      "year": "2026"
+    }
+  ]
+}

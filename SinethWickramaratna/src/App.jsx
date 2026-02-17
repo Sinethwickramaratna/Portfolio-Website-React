@@ -16,6 +16,7 @@ import LoadingPage from './Components/LoadingPage.jsx';
 import GalleryPage from './Components/GalleryPage.jsx';
 import CertificatesPage from './Components/CertificatesPage.jsx';
 import Footer from './Components/public/Footer.jsx';
+import GoToTopButton from './Components/GoToTopButton.jsx';
 
 // HomePage Component
 function HomePage() {
@@ -32,6 +33,7 @@ function HomePage() {
       <ImageCarousel3D />
       <ContactSection />
       <Footer />
+      <GoToTopButton />
     </>
   );
 }

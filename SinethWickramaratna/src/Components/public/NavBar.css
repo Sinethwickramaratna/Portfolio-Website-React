@@ -28,7 +28,21 @@
     0 0 40px rgba(0, 102, 255, 0.1);
   
   animation: navbar-slide-down 0.8s ease-out;
-  transition: all 0.3s ease;
+  transition: all 0.4s ease;
+}
+
+/* Navbar visible state */
+.glass-navbar.visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+}
+
+/* Navbar hidden state */
+.glass-navbar.hidden {
+  opacity: 0;
+  transform: translateX(-50%) translateY(-120%);
+  pointer-events: none;
 }
 
 /* Hide navbar when modal is open */
@@ -147,6 +161,21 @@ body.modal-open .glass-navbar {
 }
 
 .nav-item:hover::before {
+  transform: translateY(-50%) scale(1);
+}
+
+/* Active nav item styling */
+.nav-item.active {
+  filter: brightness(1.5);
+  text-shadow: 0 0 20px rgba(0, 212, 255, 0.6);
+}
+
+.nav-item.active::after {
+  width: 100%;
+  box-shadow: 0 0 20px var(--ds-blue-secondary);
+}
+
+.nav-item.active::before {
   transform: translateY(-50%) scale(1);
 }
 
