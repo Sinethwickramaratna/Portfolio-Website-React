@@ -28,7 +28,7 @@ body {
   background-size: 400% 400%;
   animation: gradient-shift 15s ease infinite;
   color: #ffffff;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Antonio', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
   overflow-x: hidden;
   position: relative;
 }
