@@ -12,7 +12,6 @@ import BlogSection from './Components/BlogSection.jsx';
 import VolunteeringSection from './Components/VolunteeringSection.jsx';
 import ImageCarousel3D from './Components/ImageCarousel3D.jsx';
 import ContactSection from './Components/ContactSection.jsx';
-import LoadingPage from './Components/LoadingPage.jsx';
 import GalleryPage from './Components/GalleryPage.jsx';
 import CertificatesPage from './Components/CertificatesPage.jsx';
 import Footer from './Components/public/Footer.jsx';
@@ -40,7 +39,6 @@ function HomePage() {
 
 function App() {
   const [count, setCount] = useState(0)
-  const [showLoading, setShowLoading] = useState(false); // Disable loading page for better LCP
 
   // Create binary code rain effect - delayed to not affect LCP/CLS
   useEffect(() => {
@@ -154,14 +152,11 @@ function App() {
   }, []);
 
   return (
-    <>
-      {showLoading && <LoadingPage />}
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/gallery" element={<GalleryPage />} />
-        <Route path="/certificates" element={<CertificatesPage />} />
-      </Routes>
-    </>
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/gallery" element={<GalleryPage />} />
+      <Route path="/certificates" element={<CertificatesPage />} />
+    </Routes>
   )
 }
 
