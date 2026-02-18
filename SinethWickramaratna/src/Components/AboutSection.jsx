@@ -60,7 +60,7 @@ function AboutSection() {
         </div>
 
         <div className="about-stats">
-          <StatItem icon="🎯" number="0+" label="Projects" delay={0.3} />
+          <StatItem icon="🎯" number="4+" label="Projects" delay={0.3} />
           <StatItem icon="💻" number="20+" label="Technologies" delay={0.4} />
           <StatItem icon="⚡" number="100%" label="Dedication" delay={0.5} />
         </div>
