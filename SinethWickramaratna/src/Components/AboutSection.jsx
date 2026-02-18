@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useInView } from '../hooks/useInView';
 import StatItem from './AboutComponents/StatItem';
 import profileImage from '../assets/Images/profile.png';
+import projectData from '../data/projectsData.json';
 
 function AboutSection() {
   const [aboutRef, isAboutInView] = useInView();
@@ -60,7 +61,7 @@ function AboutSection() {
         </div>
 
         <div className="about-stats">
-          <StatItem icon="🎯" number="4+" label="Projects" delay={0.3} />
+          <StatItem icon="🎯" number={projectData.length} label="Projects" delay={0.3} />
           <StatItem icon="💻" number="20+" label="Technologies" delay={0.4} />
           <StatItem icon="⚡" number="100%" label="Dedication" delay={0.5} />
         </div>
