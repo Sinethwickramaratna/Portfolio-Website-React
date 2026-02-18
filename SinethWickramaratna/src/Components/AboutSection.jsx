@@ -3,7 +3,15 @@ import { useState } from 'react';
 import { useInView } from '../hooks/useInView';
 import StatItem from './AboutComponents/StatItem';
 import profileImage from '../assets/Images/profile.png';
-import projectsData from '../data/projectsData.json';
+import projectsDataRaw from '../data/projectsData.json';
+
+
+function getProjectsCount() {
+  // Handle both possible import styles
+  if (projectsDataRaw.projects) return projectsDataRaw.projects.length;
+  if (projectsDataRaw.default && projectsDataRaw.default.projects) return projectsDataRaw.default.projects.length;
+  return 0;
+}
 
 function AboutSection() {
   const [aboutRef, isAboutInView] = useInView();
@@ -61,7 +69,7 @@ function AboutSection() {
         </div>
 
         <div className="about-stats">
-          <StatItem icon="🎯" number={`${projectsData.projects.length}`} label="Projects" delay={0.3} />
+          <StatItem icon="🎯" number={getProjectsCount()} label="Projects" delay={0.3} />
           <StatItem icon="💻" number="20+" label="Technologies" delay={0.4} />
           <StatItem icon="⚡" number="100%" label="Dedication" delay={0.5} />
         </div>
