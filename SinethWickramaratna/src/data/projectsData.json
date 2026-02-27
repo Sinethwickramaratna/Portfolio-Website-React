@@ -6,7 +6,14 @@
       "category": "Web Development",
       "shortDescription": "A modern, fully responsive portfolio website showcasing projects, skills, experience, and expertise in software development, hardware design, and supply chain management.",
       "description": "A sleek, gradient-based portfolio website built with React and Vite featuring smooth animations, fully responsive design, and dynamic content management. Includes project showcase, skills section, certificates, volunteering experience, design gallery with 3D carousel, and contact section.",
-      "technologies": ["React 18", "JavaScript", "Vite", "CSS3", "React Router", "JSON"],
+      "technologies": [
+        "React 18",
+        "JavaScript",
+        "Vite",
+        "CSS3",
+        "React Router",
+        "JSON"
+      ],
       "features": [
         "Modern design with gradient-based UI and smooth animations",
         "Fully responsive - optimized for desktop, tablet, and mobile",
@@ -28,7 +35,16 @@
       "category": "Full-Stack Development",
       "shortDescription": "A full-stack application with Flutter client and Spring Boot backend featuring JWT authentication and role-based access control for Admin, Teacher, and Student users.",
       "description": "A comprehensive task management system with Flutter mobile client and Spring Boot REST API. Implements JWT authentication with role-based access control, secure BCrypt password hashing, and PostgreSQL database with role segregation. Supports separate dashboards for Admin, Teacher, and Student roles.",
-      "technologies": ["Flutter", "Dart", "Spring Boot", "Java 17", "PostgreSQL", "JWT", "Spring Security 6", "BCrypt"],
+      "technologies": [
+        "Flutter",
+        "Dart",
+        "Spring Boot",
+        "Java 17",
+        "PostgreSQL",
+        "JWT",
+        "Spring Security 6",
+        "BCrypt"
+      ],
       "features": [
         "JWT authentication with role-based access control (Admin, Teacher, Student)",
         "Secure password hashing with BCrypt",
@@ -47,7 +63,13 @@
       "category": "Algorithm & Data Structures",
       "shortDescription": "A C++ implementation of maze-solving using the Floodfill (BFS) algorithm, simulating robot navigation with dynamic wall discovery and shortest path computation.",
       "description": "An intelligent maze solver that simulates how a robot (micromouse) navigates through an 8x8 maze by discovering walls, updating its environment knowledge, and finding the shortest path to the goal. Uses Breadth-First Search (Floodfill) algorithm with dynamic pathfinding.",
-      "technologies": ["C++", "Algorithm", "BFS", "Pathfinding", "Data Structures"],
+      "technologies": [
+        "C++",
+        "Algorithm",
+        "BFS",
+        "Pathfinding",
+        "Data Structures"
+      ],
       "features": [
         "8x8 maze representation with wall information per cell",
         "Floodfill algorithm for distance calculation from goal",
@@ -67,7 +89,15 @@
       "category": "Supply Chain Management",
       "shortDescription": "A rail and road-based supply chain distribution system for KandyPack FMCG manufacturer, replacing Excel-based logistics with a modern web platform.",
       "description": "A comprehensive web-based logistics platform for coordinating orders, scheduling, inventory management, and role-based operations across rail and road distribution networks. Includes real-time-friendly architecture with role-based portals for admins, managers, warehouse teams, drivers, and customers.",
-      "technologies": ["React", "TypeScript", "Vite", "Python", "FastAPI", "REST API", "WebSocket"],
+      "technologies": [
+        "React",
+        "TypeScript",
+        "Vite",
+        "Python",
+        "FastAPI",
+        "REST API",
+        "WebSocket"
+      ],
       "features": [
         "Role-based portals (admin, manager, warehouse, driver, assistant, customer)",
         "Order creation and tracking with supporting dashboards",
@@ -87,7 +117,14 @@
       "category": "Web Development",
       "shortDescription": "A modern, fully responsive portfolio website showcasing projects, skills, experience, and expertise in software development, hardware design, and supply chain management.",
       "description": "A sleek, gradient-based portfolio website built with React and Vite featuring smooth animations, fully responsive design, and dynamic content management. Includes project showcase, skills section, certificates, volunteering experience, design gallery with 3D carousel, and contact section.",
-      "technologies": ["React 18", "JavaScript", "Vite", "CSS3", "React Router", "JSON"],
+      "technologies": [
+        "React 18",
+        "JavaScript",
+        "Vite",
+        "CSS3",
+        "React Router",
+        "JSON"
+      ],
       "features": [
         "Modern design with gradient-based UI and smooth animations",
         "Fully responsive - optimized for desktop, tablet, and mobile",
@@ -100,6 +137,36 @@
       ],
       "image": null,
       "repoUrl": "https://github.com/Sinethwickramaratna/Portfolio-Website-React.git",
+      "status": "Completed",
+      "year": "2026"
+    },
+    {
+      "id": 6,
+      "title": "CineMatch AI 🎬",
+      "category": "AI / Full-Stack Development",
+      "shortDescription": "A modern, responsive web application that provides personalized movie recommendations powered by artificial intelligence.",
+      "description": "A full-stack web application featuring an AI-Powered Discovery Engine for tailored movie recommendations. Includes smart search with debouncing, personalized local watchlists, and a sleek, dark-themed glassmorphism UI with custom Tailwind animations.",
+      "technologies": [
+        "React 19",
+        "Vite",
+        "React Router v7",
+        "Tailwind CSS v4",
+        "FastAPI",
+        "Python",
+        "scikit-learn",
+        "pandas",
+        "TMDB API"
+      ],
+      "features": [
+        "AI-Powered Discovery Engine for curated movie recommendations",
+        "Real-time, debounced smart search functionality",
+        "Personalized Watchlist saved locally",
+        "Sleek, dark-themed glassmorphism UI with custom animations",
+        "Fully responsive optimized for desktop and mobile",
+        "TMDB API integration for live movie data"
+      ],
+      "image": null,
+      "repoUrl": "https://github.com/Sinethwickramaratna/Movie-Recommendation-Website.git",
       "status": "Completed",
       "year": "2026"
     }
