@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520" role="img" aria-labelledby="title desc">
+  <title id="title">Sliding Window Segmentation</title>
+  <desc id="desc">Illustration of overlapping sliding windows on IMU time-series data.</desc>
+  <rect width="1200" height="520" fill="#ffffff"/>
+  <text x="60" y="68" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="700" fill="#0f172a">Sliding Window Segmentation</text>
+  <text x="60" y="100" font-family="Segoe UI, Arial, sans-serif" font-size="18" fill="#334155">Window: 5s (50 samples), Step: 2.5s overlap</text>
+
+  <line x1="80" y1="300" x2="1120" y2="300" stroke="#94a3b8" stroke-width="2"/>
+  <polyline points="80,300 140,250 200,290 260,210 320,270 380,240 440,320 500,200 560,260 620,230 680,340 740,220 800,260 860,235 920,290 980,225 1040,250 1100,245" fill="none" stroke="#0284c7" stroke-width="4"/>
+
+  <rect x="120" y="150" width="280" height="220" fill="#22c55e" fill-opacity="0.16" stroke="#16a34a" stroke-width="2"/>
+  <rect x="260" y="150" width="280" height="220" fill="#f59e0b" fill-opacity="0.16" stroke="#d97706" stroke-width="2"/>
+  <rect x="400" y="150" width="280" height="220" fill="#3b82f6" fill-opacity="0.14" stroke="#2563eb" stroke-width="2"/>
+
+  <text x="170" y="138" font-family="Segoe UI, Arial, sans-serif" font-size="16" fill="#166534">Window 1</text>
+  <text x="310" y="138" font-family="Segoe UI, Arial, sans-serif" font-size="16" fill="#92400e">Window 2</text>
+  <text x="450" y="138" font-family="Segoe UI, Arial, sans-serif" font-size="16" fill="#1d4ed8">Window 3</text>
+
+  <rect x="760" y="130" width="340" height="250" rx="12" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="786" y="170" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700" fill="#0f172a">One Window => One Feature Vector</text>
+  <text x="786" y="210" font-family="Segoe UI, Arial, sans-serif" font-size="17" fill="#334155">AX_mean, AY_mean, AZ_mean</text>
+  <text x="786" y="240" font-family="Segoe UI, Arial, sans-serif" font-size="17" fill="#334155">GX_mean, GY_mean, GZ_mean</text>
+  <text x="786" y="270" font-family="Segoe UI, Arial, sans-serif" font-size="17" fill="#334155">AccMag_mean, GyroMag_mean</text>
+  <text x="786" y="300" font-family="Segoe UI, Arial, sans-serif" font-size="17" fill="#334155">AX_std ... GyroMag_std</text>
+</svg>

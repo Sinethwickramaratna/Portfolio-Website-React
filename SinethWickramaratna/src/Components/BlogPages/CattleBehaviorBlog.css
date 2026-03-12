@@ -1,0 +1,246 @@
+.blog-article-page {
+  min-height: 100vh;
+  background: #f7f9fc;
+  padding: 2rem;
+  padding-top: 110px;
+}
+
+.blog-article-header {
+  max-width: 960px;
+  margin: 0 auto 2rem;
+}
+
+.blog-back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.2rem;
+  background: #ffffff;
+  border: 1px solid #d8e0ea;
+  border-radius: 999px;
+  color: #1f2937;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.blog-back-button:hover {
+  border-color: #9db1c7;
+  background: #f8fbff;
+}
+
+.blog-article-category {
+  margin: 1.8rem 0 0.6rem;
+  color: #0f766e;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 1.8px;
+  font-weight: 700;
+}
+
+.blog-article-title {
+  margin: 0;
+  font-size: clamp(1.8rem, 3.5vw, 3rem);
+  line-height: 1.25;
+  color: #111827;
+}
+
+.blog-article-subtitle {
+  margin: 1rem 0 0;
+  color: #475569;
+  font-size: 1.05rem;
+  line-height: 1.65;
+}
+
+.blog-article-content {
+  max-width: 960px;
+  margin: 0 auto;
+  display: block;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  box-shadow: 0 6px 14px rgba(15, 23, 42, 0.06);
+  padding: 1.5rem;
+}
+
+.blog-article-content section {
+  padding: 0;
+  margin: 0;
+}
+
+.blog-article-content section + section {
+  margin-top: 1.8rem;
+  padding-top: 1.6rem;
+  border-top: 1px solid #e5edf5;
+}
+
+.blog-article-content h2 {
+  margin: 0 0 0.8rem;
+  font-size: 1.35rem;
+  color: #0f172a;
+}
+
+.blog-article-content h3 {
+  margin: 1rem 0 0.5rem;
+  color: #1e293b;
+  font-size: 1.02rem;
+}
+
+.blog-article-content h4 {
+  margin: 0 0 0.4rem;
+  color: #334155;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.blog-article-content p {
+  margin: 0.6rem 0;
+  color: #334155;
+  line-height: 1.72;
+}
+
+.blog-article-content a {
+  color: #0f766e;
+  font-weight: 600;
+}
+
+.blog-article-content a:hover {
+  color: #115e59;
+}
+
+.blog-article-content ul {
+  margin: 0.6rem 0;
+  padding-left: 1.2rem;
+}
+
+.blog-article-content li {
+  color: #334155;
+  margin: 0.45rem 0;
+}
+
+.feature-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.feature-col {
+  background: #f8fafc;
+  border: 1px solid #dbe3ed;
+  border-radius: 8px;
+  padding: 0.8rem;
+}
+
+.feature-col h4 {
+  margin-top: 0;
+}
+
+.feature-col ul {
+  list-style: disc;
+  padding-left: 1.2rem;
+  font-size: 0.9rem;
+}
+
+.feature-col li {
+  margin: 0.3rem 0;
+}
+
+.blog-image-figure {
+  margin: 1rem 0;
+}
+
+.blog-image-figure img {
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid #d9e3ef;
+  display: block;
+}
+
+.blog-image-figure figcaption {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: #64748b;
+}
+
+.blog-table-wrap {
+  overflow-x: auto;
+  margin: 0.8rem 0;
+}
+
+.blog-table-wrap table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 620px;
+}
+
+.blog-table-wrap th,
+.blog-table-wrap td {
+  border: 1px solid #d8e1ec;
+  padding: 0.65rem 0.7rem;
+  text-align: left;
+  color: #334155;
+}
+
+.blog-table-wrap th {
+  background: #f1f5f9;
+  color: #1f2937;
+  font-weight: 700;
+}
+
+.blog-table-wrap tr:nth-child(even) td {
+  background: #fafcff;
+}
+
+.formula-box {
+  margin: 0.9rem 0;
+  border: 1px dashed #b8d3d0;
+  border-radius: 12px;
+  background: #f3faf9;
+  padding: 0.8rem 0.9rem;
+}
+
+.blog-article-content pre {
+  margin: 0.8rem 0 0;
+  background: #f8fafc;
+  border: 1px solid #dbe3ed;
+  border-radius: 12px;
+  padding: 0.9rem;
+  color: #1f2937;
+  line-height: 1.45;
+  overflow-x: auto;
+  font-size: 0.85rem;
+}
+
+@media (max-width: 768px) {
+  .blog-article-page {
+    padding: 1rem;
+    padding-top: 96px;
+  }
+
+  .blog-article-header {
+    margin-bottom: 1.4rem;
+  }
+
+  .blog-article-category {
+    margin-top: 1.2rem;
+  }
+
+  .blog-article-content {
+    padding: 1.1rem;
+  }
+
+  .blog-article-content h2 {
+    font-size: 1.15rem;
+  }
+
+  .blog-article-content p,
+  .blog-article-content li {
+    font-size: 0.95rem;
+  }
+
+  .feature-list {
+    grid-template-columns: 1fr;
+  }
+}

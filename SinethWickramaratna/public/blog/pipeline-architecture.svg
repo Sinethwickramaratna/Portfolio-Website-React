@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" role="img" aria-labelledby="title desc">
+  <title id="title">Cattle Behavior ML Architecture</title>
+  <desc id="desc">Pipeline from sensor data to farm monitoring dashboard.</desc>
+  <rect width="1200" height="560" fill="#ffffff"/>
+  <text x="60" y="70" font-family="Segoe UI, Arial, sans-serif" font-size="32" font-weight="700" fill="#0f172a">System Architecture</text>
+
+  <g font-family="Segoe UI, Arial, sans-serif" font-size="17" fill="#0f172a">
+    <rect x="70" y="160" width="180" height="72" rx="12" fill="#ecfeff" stroke="#14b8a6"/>
+    <text x="102" y="204">IoT Sensor</text>
+
+    <rect x="290" y="160" width="180" height="72" rx="12" fill="#eff6ff" stroke="#3b82f6"/>
+    <text x="317" y="204">Raw IMU Data</text>
+
+    <rect x="510" y="160" width="200" height="72" rx="12" fill="#fefce8" stroke="#eab308"/>
+    <text x="538" y="204">Preprocessing</text>
+
+    <rect x="760" y="160" width="190" height="72" rx="12" fill="#f0fdf4" stroke="#22c55e"/>
+    <text x="788" y="204">Sliding Window</text>
+
+    <rect x="980" y="160" width="160" height="72" rx="12" fill="#fdf4ff" stroke="#a855f7"/>
+    <text x="1005" y="204">Features</text>
+
+    <rect x="330" y="340" width="220" height="72" rx="12" fill="#fff7ed" stroke="#f97316"/>
+    <text x="377" y="384">SVM Model</text>
+
+    <rect x="620" y="340" width="220" height="72" rx="12" fill="#f8fafc" stroke="#64748b"/>
+    <text x="688" y="384">FastAPI</text>
+
+    <rect x="910" y="340" width="230" height="72" rx="12" fill="#f0fdfa" stroke="#0f766e"/>
+    <text x="942" y="384">Farm Dashboard</text>
+  </g>
+
+  <g stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#arrow)">
+    <line x1="250" y1="196" x2="290" y2="196"/>
+    <line x1="470" y1="196" x2="510" y2="196"/>
+    <line x1="710" y1="196" x2="760" y2="196"/>
+    <line x1="950" y1="196" x2="980" y2="196"/>
+    <line x1="1060" y1="232" x2="1060" y2="300"/>
+    <line x1="1060" y1="300" x2="550" y2="376"/>
+    <line x1="550" y1="376" x2="620" y2="376"/>
+    <line x1="840" y1="376" x2="910" y2="376"/>
+  </g>
+
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#64748b"/>
+    </marker>
+  </defs>
+</svg>

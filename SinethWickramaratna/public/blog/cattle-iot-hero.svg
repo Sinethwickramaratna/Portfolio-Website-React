@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="650" viewBox="0 0 1200 650" role="img" aria-labelledby="title desc">
+  <title id="title">Cattle IoT Monitoring</title>
+  <desc id="desc">Illustration showing a cow with a collar sensor sending data to cloud analytics.</desc>
+  <rect width="1200" height="650" fill="#f6fafc"/>
+  <rect x="0" y="490" width="1200" height="160" fill="#e9f5ef"/>
+  <circle cx="1080" cy="95" r="52" fill="#fff3c9"/>
+
+  <rect x="145" y="322" width="420" height="160" rx="34" fill="#7a4f34"/>
+  <rect x="505" y="352" width="92" height="92" rx="26" fill="#7a4f34"/>
+  <circle cx="612" cy="383" r="34" fill="#7a4f34"/>
+  <circle cx="622" cy="372" r="6" fill="#111827"/>
+  <rect x="630" y="387" width="16" height="8" rx="4" fill="#111827"/>
+  <rect x="196" y="464" width="28" height="76" rx="10" fill="#5c3a27"/>
+  <rect x="286" y="464" width="28" height="76" rx="10" fill="#5c3a27"/>
+  <rect x="406" y="464" width="28" height="76" rx="10" fill="#5c3a27"/>
+  <rect x="486" y="464" width="28" height="76" rx="10" fill="#5c3a27"/>
+
+  <rect x="430" y="334" width="78" height="38" rx="12" fill="#0f766e"/>
+  <circle cx="448" cy="352" r="5" fill="#a7f3d0"/>
+  <rect x="462" y="348" width="30" height="7" rx="3" fill="#d1fae5"/>
+
+  <path d="M520 352 C630 280, 740 280, 850 220" fill="none" stroke="#0f766e" stroke-width="4" stroke-dasharray="8 10"/>
+  <circle cx="850" cy="220" r="10" fill="#0f766e"/>
+
+  <rect x="860" y="120" width="270" height="190" rx="16" fill="#ffffff" stroke="#d1d5db"/>
+  <text x="886" y="154" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700" fill="#0f172a">Live Activity Feed</text>
+  <rect x="886" y="172" width="210" height="10" rx="5" fill="#dbeafe"/>
+  <rect x="886" y="198" width="178" height="10" rx="5" fill="#c7d2fe"/>
+  <rect x="886" y="224" width="238" height="10" rx="5" fill="#bfdbfe"/>
+  <text x="886" y="266" font-family="Segoe UI, Arial, sans-serif" font-size="18" fill="#334155">Behavior: Grazing</text>
+
+  <rect x="725" y="365" width="320" height="170" rx="16" fill="#ffffff" stroke="#d1d5db"/>
+  <text x="748" y="397" font-family="Segoe UI, Arial, sans-serif" font-size="21" font-weight="700" fill="#0f172a">Cloud Analytics</text>
+  <polyline points="748,455 790,430 834,445 878,408 922,430 968,395 1010,420" fill="none" stroke="#0284c7" stroke-width="5"/>
+  <text x="748" y="505" font-family="Segoe UI, Arial, sans-serif" font-size="17" fill="#475569">SVM Classification + API</text>
+</svg>
