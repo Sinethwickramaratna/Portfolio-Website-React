@@ -14,7 +14,11 @@ function VolunteeringCard({ item, index }) {
         </div>
       </div>
       
-      <div className="volunteering-card">
+      <div className="volunteering-card shogun-card">
+        <div className="hud-corner top-left"></div>
+        <div className="hud-corner top-right"></div>
+        <div className="hud-corner bottom-left"></div>
+        <div className="hud-corner bottom-right"></div>
         <div className="card-content">
           <div className="card-header">
             <h3 className="position-title">{item.position}</h3>

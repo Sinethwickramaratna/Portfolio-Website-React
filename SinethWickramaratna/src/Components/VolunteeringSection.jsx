@@ -3,6 +3,7 @@ import { useInView } from '../hooks/useInView';
 import VolunteeringCard from './VolunteeringComponents/VolunteeringCard';
 import { useState, useMemo } from 'react';
 import volunteeringDataRaw from '../data/volunteeringData.json';
+import AtmosphericBackground from './AtmosphericBackground';
 
 function VolunteeringSection() {
   const [volunteeringRef, isVolunteeringInView] = useInView();
@@ -55,13 +56,17 @@ function VolunteeringSection() {
 
   return (
     <section className="volunteering-section" id="volunteering" ref={volunteeringRef}>
-      <div className="volunteering-container">
-        <div className={`volunteering-header ${isVolunteeringInView ? 'loaded' : ''}`}>
-          <h2 className="volunteering-title">Volunteering & Leadership</h2>
-          <div className="volunteering-accent"></div>
+      <AtmosphericBackground type="profile" />
+      <div className="volunteering-container spatial-container">
+        <div className={`volunteering-header section-header-hud ${isVolunteeringInView ? 'loaded' : ''}`}>
+          <span className="section-number-bg">005</span>
+          <h2 className="section-title-hud font-display" data-kanji="志">
+            [005] <span className="text-gradient">LEADERSHIP DOSSIER</span>
+          </h2>
+          <span className="section-telemetry-hud monospace-val">VOLUNTEER_CHRONICLES_ACTIVE</span>
         </div>
 
-        <div className={`volunteering-content ${isVolunteeringInView ? 'loaded' : ''}`}>
+        <div className={`volunteering-content shoji-reveal ${isVolunteeringInView ? 'loaded' : ''}`}>
           <div className="volunteering-list">
             {displayedData.map((item, index) => (
               <VolunteeringCard key={item.id} item={item} index={index} />

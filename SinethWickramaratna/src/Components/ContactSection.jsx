@@ -12,7 +12,7 @@ import linkedinIcon from '../assets/Images/Social Media/linkedin.svg';
 import githubIcon from '../assets/Images/Social Media/github.svg';
 import facebookIcon from '../assets/Images/Social Media/facebook.svg';
 import instagramIcon from '../assets/Images/Social Media/instagram.svg';
-
+import AtmosphericBackground from './AtmosphericBackground';
 
 function ContactSection() {
   const [contactRef, isContactInView] = useInView();
@@ -72,14 +72,12 @@ function ContactSection() {
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    // Validate form
     if (!formData.firstName.trim() || !formData.lastName.trim() || !formData.email.trim() || !formData.message.trim()) {
       setFormStatus('error');
       setTimeout(() => setFormStatus(''), 3000);
       return;
     }
 
-    // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(formData.email)) {
       setFormStatus('invalid-email');
@@ -89,7 +87,6 @@ function ContactSection() {
 
     setIsSubmitting(true);
 
-    // Send email using EmailJS
     emailjs.send(
       "service_d3uezga",  
       "template_3skdkol",  
@@ -117,29 +114,39 @@ function ContactSection() {
 
   return (
     <section className="contact-section" id="contact" ref={contactRef}>
-      <div className="contact-container">
-        <div className={`contact-header ${isContactInView ? 'loaded' : ''}`}>
-          <h2 className="contact-title">Get In Touch</h2>
-          <p className="contact-subtitle">Let's connect and collaborate</p>
-          <p className="contact-description">
-            I'm always interested in hearing about new projects and opportunities. Whether you have questions, ideas, or just want to say hello, feel free to reach out! I'll get back to you as soon as possible.
-          </p>
-          <div className="contact-accent"></div>
+      {/* Background Energy Reactor & Scanlines */}
+      <AtmosphericBackground type="terminal" />
+
+      <div className="spatial-container">
+        
+        {/* Section Header HUD */}
+        <div className="section-header-hud">
+          <span className="section-number-bg">009</span>
+          <h2 className="section-title-hud font-display" data-kanji="信">
+            [009] <span className="text-gradient">COMMUNICATION TERMINAL</span>
+          </h2>
+          <span className="section-telemetry-hud monospace-val">TERMINAL_LINK_ONLINE</span>
         </div>
 
-        <div className={`contact-content ${isContactInView ? 'loaded' : ''}`}>
-          {/* Contact Information */}
-          <div className="contact-info-section">
-            <h3 className="section-subtitle">Contact Information</h3>
+        <div className={`contact-content shoji-reveal ${isContactInView ? 'loaded' : ''}`}>
+          
+          {/* Left Panel: Contact Information Card Hulls */}
+          <div className="contact-info-section shogun-card">
+            <div className="hud-corner top-left"></div>
+            <div className="hud-corner top-right"></div>
+            <div className="hud-corner bottom-left"></div>
+            <div className="hud-corner bottom-right"></div>
+
+            <h3 className="section-subtitle font-display">// TELEMETRY NODES //</h3>
             <div className="contact-info-grid">
               {contactInfo.map((info, index) => (
                 <ContactInfoItem key={index} info={info} index={index} />
               ))}
             </div>
 
-            {/* Social Links */}
+            {/* Social Links Case */}
             <div className="social-links-container">
-              <h3 className="section-subtitle">Follow Me</h3>
+              <h3 className="section-subtitle font-display text-gold">// SECURE LINKAGE //</h3>
               <div className="social-links-grid">
                 {socialLinks.map((social, index) => (
                   <SocialLink key={index} social={social} index={index} />
@@ -148,96 +155,102 @@ function ContactSection() {
             </div>
           </div>
 
-          {/* Contact Form */}
-          <div className="contact-form-section">
-            <h3 className="section-subtitle">Send Me a Message</h3>
+          {/* Right Panel: High-Tech Input Terminal Form */}
+          <div className="contact-form-section shogun-card">
+            <div className="hud-corner top-left"></div>
+            <div className="hud-corner top-right"></div>
+            <div className="hud-corner bottom-left"></div>
+            <div className="hud-corner bottom-right"></div>
+
+            <h3 className="section-subtitle font-display">// INITIATE COMM_LINK //</h3>
+            
             <form className="contact-form" onSubmit={handleSubmit}>
               <div className="form-row">
                 <div className="form-group">
-                  <label htmlFor="firstName">First Name</label>
+                  <label htmlFor="firstName" className="font-display text-gold">&gt; FIRST_NAME</label>
                   <input
                     type="text"
                     id="firstName"
                     name="firstName"
                     value={formData.firstName}
                     onChange={handleInputChange}
-                    placeholder="Enter your first name"
+                    placeholder="Enter first name"
                     required
                   />
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="lastName">Last Name</label>
+                  <label htmlFor="lastName" className="font-display text-gold">&gt; LAST_NAME</label>
                   <input
                     type="text"
                     id="lastName"
                     name="lastName"
                     value={formData.lastName}
                     onChange={handleInputChange}
-                    placeholder="Enter your last name"
+                    placeholder="Enter last name"
                     required
                   />
                 </div>
               </div>
 
               <div className="form-group">
-                <label htmlFor="email">Email</label>
+                <label htmlFor="email" className="font-display text-gold">&gt; SENDER_EMAIL</label>
                 <input
                   type="email"
                   id="email"
                   name="email"
                   value={formData.email}
                   onChange={handleInputChange}
-                  placeholder="your.email@example.com"
+                  placeholder="name@example.com"
                   required
                 />
               </div>
 
               <div className="form-group form-group-full">
-                <label htmlFor="message">Message</label>
+                <label htmlFor="message" className="font-display text-gold">&gt; SECURE_TRANSMISSION</label>
                 <textarea
                   id="message"
                   name="message"
                   value={formData.message}
                   onChange={handleInputChange}
-                  placeholder="Your message here..."
-                  rows="5"
+                  placeholder="Buffer transmission payload here..."
+                  rows="4"
                   required
                 ></textarea>
               </div>
 
-              <button type="submit" className="submit-btn" disabled={isSubmitting}>
-                <span className="btn-text">{isSubmitting ? 'Sending...' : 'Send Message'}</span>
-                <span className="btn-icon">→</span>
-              </button>
+              <div className="form-submit-row">
+                <button type="submit" className="btn-premium btn-primary-glow submit-btn font-display" disabled={isSubmitting}>
+                  {isSubmitting ? '[ TRANSMITTING... ]' : '[ EXECUTE TRANSMIT ]'}
+                </button>
+              </div>
 
+              {/* Status alerts */}
               {formStatus === 'success' && (
-                <div className="form-message success">
-                  ✓ Message sent successfully! I'll get back to you soon.
+                <div className="form-message success monospace-val">
+                  ✔ SUCCESS: TRANSMISSION DELIVERED SUCCESSFULLY.
                 </div>
               )}
               {formStatus === 'error' && (
-                <div className="form-message error">
-                  ✗ Please fill in all fields correctly.
+                <div className="form-message error monospace-val">
+                  ✘ FAILED: CORRUPT INPUT DATA. FILL ALL FIELDS.
                 </div>
               )}
               {formStatus === 'invalid-email' && (
-                <div className="form-message error">
-                  ✗ Please enter a valid email address.
+                <div className="form-message error monospace-val">
+                  ✘ FAILED: INVALID EMAIL ROUTE.
                 </div>
               )}
               {formStatus === 'sending-error' && (
-                <div className="form-message error">
-                  ✗ Failed to send message. Please try again.
+                <div className="form-message error monospace-val">
+                  ✘ FAILED: GATEWAY CONNECTION TIME_OUT.
                 </div>
               )}
             </form>
           </div>
+
         </div>
       </div>
-
-      {/* Decorative Elements */}
-      <div className="contact-decoration"></div>
     </section>
   );
 }

@@ -5,79 +5,109 @@ function LoadingPage() {
   const [isVisible, setIsVisible] = useState(true);
   const [fadeOut, setFadeOut] = useState(false);
   const [progress, setProgress] = useState(0);
-  const [phaseIndex, setPhaseIndex] = useState(0);
+  const [activeLines, setActiveLines] = useState([]);
 
-  const phases = [
-    'Sketching the interface...',
-    'Wiring up the experience...',
-    'Polishing the visuals...',
-    'Almost ready...',
+  const bootLines = [
+    '⚔ PROJECT SHOGUN',
+    'INITIALIZING PERSONAL OS...',
+    'LOADING NEURAL NETWORKS...',
+    'LOADING COMBAT MODULES...',
+    'LOADING PROJECT DATABASE...',
+    'LOADING KNOWLEDGE ARCHIVE...',
+    'SYSTEM ONLINE'
   ];
 
   useEffect(() => {
-    const duration = 2000; // 2 second duration
+    const duration = 2000; // 2 seconds
     const startTime = Date.now();
 
+    // Progress percentage loop
     const progressInterval = setInterval(() => {
       const elapsed = Date.now() - startTime;
       const pct = Math.min((elapsed / duration) * 100, 100);
       setProgress(pct);
-    }, 50);
+    }, 30);
 
-    const phaseTimer = setInterval(() => {
-      setPhaseIndex((prev) => (prev + 1) % phases.length);
-    }, 500); // Cycle through phases
+    // Line printing loop staggered over 2 seconds
+    const linesInterval = setInterval(() => {
+      const elapsed = Date.now() - startTime;
+      const linesToShow = Math.floor((elapsed / duration) * bootLines.length);
+      setActiveLines(bootLines.slice(0, Math.max(1, linesToShow)));
+    }, 250);
 
+    // Fade out trigger
     const fadeTimer = setTimeout(() => {
       setFadeOut(true);
     }, duration);
 
+    // Remove from DOM trigger
     const finishTimer = setTimeout(() => {
       setIsVisible(false);
-    }, duration + 500);
+    }, duration + 400);
 
     return () => {
       clearInterval(progressInterval);
-      clearInterval(phaseTimer);
+      clearInterval(linesInterval);
       clearTimeout(fadeTimer);
       clearTimeout(finishTimer);
     };
   }, []);
 
+  const handleSkip = () => {
+    setFadeOut(true);
+    setTimeout(() => {
+      setIsVisible(false);
+    }, 400);
+  };
+
   if (!isVisible) return null;
+
+  // Custom text progress bar builder
+  const blocks = Math.floor(progress / 8.33); // 12 blocks total
+  const barString = '[' + '█'.repeat(blocks) + '░'.repeat(12 - blocks) + ']';
 
   return (
     <div className={`loading-page ${fadeOut ? 'fade-out' : ''}`}>
-      <div className="loading-backdrop">
-        <div className="bg-blob blob-1"></div>
-        <div className="bg-blob blob-2"></div>
-        <div className="bg-blob blob-3"></div>
-        <div className="bg-grid"></div>
-        <div className="bg-stars"></div>
-        <div className="bg-streaks"></div>
-        <div className="bg-scanline"></div>
+      {/* Background Cinematic Atmosphere */}
+      <div className="boot-background">
+        <div className="boot-grid"></div>
+        <div className="boot-scanlines"></div>
+        {/* Rotating Red Ring */}
+        <div className="boot-ring-container">
+          <div className="boot-rotating-ring"></div>
+        </div>
+        {/* Subtle Samurai Silhouette */}
+        <div className="boot-samurai-silhouette"></div>
       </div>
 
-      <div className="loader-card">
-        <div className="brand">
-          <span className="brand-mark">SW</span>
-          <span className="brand-sub">Portfolio</span>
+      <div className="boot-console">
+        <div className="boot-header-hud">
+          <span className="shogun-mark">⚔ SHOGUN_OS_v3.5</span>
+          <span className="telemetry-readout">SYSTEM_BOOT_INIT</span>
         </div>
 
-        <div className="loader-orbit">
-          <span className="orbit-ring"></span>
-          <span className="orbit-dot dot-1"></span>
-          <span className="orbit-dot dot-2"></span>
-          <span className="orbit-dot dot-3"></span>
+        {/* Text lines print list */}
+        <div className="boot-log">
+          {activeLines.map((line, idx) => (
+            <div 
+              key={idx} 
+              className={`boot-log-line ${idx === bootLines.length - 1 ? 'line-online' : ''}`}
+            >
+              {line}
+            </div>
+          ))}
         </div>
 
-        <div className="loader-phrase">{phases[phaseIndex]}</div>
-
-        <div className="loader-bar">
-          <span className="loader-bar-fill" style={{ width: `${progress}%` }}></span>
+        {/* Progress HUD Bar */}
+        <div className="boot-progress-container">
+          <div className="boot-progress-bar font-display">{barString}</div>
+          <div className="boot-percent font-display">{Math.floor(progress)}%</div>
         </div>
 
-        <div className="loader-percent">{Math.floor(progress)}%</div>
+        {/* Skippable trigger */}
+        <button className="btn-premium btn-outline boot-skip-btn" onClick={handleSkip}>
+          SKIP BOOT
+        </button>
       </div>
     </div>
   );

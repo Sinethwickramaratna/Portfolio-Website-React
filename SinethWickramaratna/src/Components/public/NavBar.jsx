@@ -1,21 +1,76 @@
 import logo from '../../assets/Logos/light-logo.png';
 import './NavBar.css';
 import { useState, useEffect } from 'react';
+import { useAmbientSynth } from '../../hooks/useAmbientSynth';
 
-function NavBar(){
+function NavBar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [activeSection, setActiveSection] = useState('hero');
+  const [easterEggActive, setEasterEggActive] = useState(false);
+  
+  // Ambient Sound hook
+  const { isPlaying, toggleSound } = useAmbientSynth();
 
-  // Section IDs and their corresponding nav items
-  const sections = ['hero', 'about', 'skills', 'projects', 'volunteering','blog', 'design-gallery', 'contact'];
+  // Section IDs mapping
+  const sections = [
+    'hero',
+    'core-telemetry',
+    'about',
+    'skills',
+    'projects',
+    'volunteering',
+    'certificates',
+    'blog',
+    'design-gallery',
+    'contact'
+  ];
 
-  // Track which section is in view
+  // Map IDs to OS menu readouts
+  const labelMap = {
+    'hero': 'HOME',
+    'core-telemetry': 'STATUS',
+    'about': 'IDENTITY',
+    'skills': 'SKILLS',
+    'projects': 'MISSIONS',
+    'volunteering': 'DOSSIER',
+    'certificates': 'HONORS',
+    'blog': 'SCROLLS',
+    'design-gallery': 'CREATIVE',
+    'contact': 'TERMINAL'
+  };
+
+  // Keyboard Easter Egg Key Listener
+  useEffect(() => {
+    let keys = [];
+    const handleKeyDown = (e) => {
+      keys.push(e.key.toLowerCase());
+      if (keys.length > 15) keys.shift();
+      
+      const typed = keys.join('');
+      if (typed.includes('bushido') || typed.includes('samurai')) {
+        // Trigger Easter Egg
+        setEasterEggActive(true);
+        window.dispatchEvent(new CustomEvent('BUSHIDO_ACTIVATED'));
+        keys = []; // reset buffer
+        
+        // Disable after 3 seconds
+        setTimeout(() => {
+          setEasterEggActive(false);
+        }, 3500);
+      }
+    };
+    
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
+  // Tracking section in viewport
   useEffect(() => {
     const observerOptions = {
       root: null,
-      rootMargin: '-50% 0px -50% 0px',
+      rootMargin: '-40% 0px -40% 0px',
       threshold: 0
     };
 
@@ -29,7 +84,6 @@ function NavBar(){
 
     const observer = new IntersectionObserver(observerCallback, observerOptions);
 
-    // Observe all sections
     sections.forEach((sectionId) => {
       const element = document.getElementById(sectionId);
       if (element) {
@@ -47,30 +101,22 @@ function NavBar(){
     };
   }, []);
 
+  // Show/Hide Navbar on scroll direction
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-
-      // Show navbar when at the top
-      if (currentScrollY < 50) {
+      if (currentScrollY < 60) {
         setIsVisible(true);
-      } 
-      // Hide navbar when scrolling down, show when scrolling up
-      else if (currentScrollY > lastScrollY) {
-        // Scrolling down
-        setIsVisible(false);
+      } else if (currentScrollY > lastScrollY) {
+        setIsVisible(false); // scrolling down
       } else {
-        // Scrolling up
-        setIsVisible(true);
+        setIsVisible(true); // scrolling up
       }
-
       setLastScrollY(currentScrollY);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+    return () => window.removeEventListener('scroll', handleScroll);
   }, [lastScrollY]);
 
   const scrollToSection = (sectionId) => {
@@ -81,30 +127,54 @@ function NavBar(){
     }
   };
 
-  return(
+  return (
     <>
       <nav className={`glass-navbar ${isVisible ? 'visible' : 'hidden'}`}>
         <div className="navbar-logo" onClick={() => scrollToSection('hero')}>
-          <img src={logo} alt="Logo" width="120px"/>
+          <img src={logo} alt="Shogun Logo" width="105px" />
         </div>
-        <button className={`hamburger ${menuOpen ? 'active' : ''}`} onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">
+
+        <button 
+          className={`hamburger ${menuOpen ? 'active' : ''}`} 
+          onClick={() => setMenuOpen(!menuOpen)} 
+          aria-label="Toggle command menu"
+        >
           <span className="hamburger-line"></span>
           <span className="hamburger-line"></span>
           <span className="hamburger-line"></span>
         </button>
+
         <div className={`navbar-menu ${menuOpen ? 'open' : ''}`}>
           <ul className="nav-list">
-            <li className={`nav-item ${activeSection === 'hero' ? 'active' : ''}`} onClick={() => scrollToSection('hero')}>Home</li>
-            <li className={`nav-item ${activeSection === 'about' ? 'active' : ''}`} onClick={() => scrollToSection('about')}>About</li>
-            <li className={`nav-item ${activeSection === 'skills' ? 'active' : ''}`} onClick={() => scrollToSection('skills')}>Skills</li>
-            <li className={`nav-item ${activeSection === 'projects' ? 'active' : ''}`} onClick={() => scrollToSection('projects')}>Projects</li>
-            <li className={`nav-item ${activeSection === 'volunteering' ? 'active' : ''}`} onClick={() => scrollToSection('volunteering')}>Volunteering</li>
-            <li className={`nav-item ${activeSection === 'blog' ? 'active' : ''}`} onClick={() => scrollToSection('blog')}>Blog</li>
-            <li className={`nav-item ${activeSection === 'design-gallery' ? 'active' : ''}`} onClick={() => scrollToSection('design-gallery')}>Design Gallery</li>
-            <li className={`nav-item ${activeSection === 'contact' ? 'active' : ''}`} onClick={() => scrollToSection('contact')}>Contact</li>
+            {sections.map((sec) => (
+              <li 
+                key={sec}
+                className={`nav-item monospace-val ${activeSection === sec ? 'active' : ''}`} 
+                onClick={() => scrollToSection(sec)}
+              >
+                {labelMap[sec]}
+              </li>
+            ))}
+            
+            {/* Audio Toggle control inside Shogun bar */}
+            <li 
+              className={`nav-item sound-toggle-btn monospace-val ${isPlaying ? 'sound-active' : ''}`}
+              onClick={toggleSound}
+            >
+              SOUND: {isPlaying ? 'ON' : 'OFF'}
+            </li>
           </ul>
         </div>
       </nav>
+
+      {/* Keyboard Easter Egg Alert Overlay */}
+      {easterEggActive && (
+        <div className="shogun-easter-egg-banner font-display">
+          <span className="banner-glow-text">BUSHIDO PROTOCOL ACTIVATED</span>
+          <span className="banner-sub monospace-val">// OVERLOAD_DETECTOR // CORES_BURST</span>
+        </div>
+      )}
+
       {menuOpen && <div className="menu-overlay" onClick={() => setMenuOpen(false)}></div>}
     </>
   );

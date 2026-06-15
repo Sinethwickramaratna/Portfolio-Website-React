@@ -1,156 +1,208 @@
 .about-section {
   position: relative;
-  padding: 100px 20px;
-  z-index: 3;
-}
-
-.about-container {
-  max-width: 1200px;
-  margin: 0 auto;
   width: 100%;
+  background-image: linear-gradient(rgba(11, 11, 11, 0.72), rgba(11, 11, 11, 0.72)), url('../assets/Images/dark_sun_textured.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  border-bottom: 1px solid var(--border-hairline);
+  overflow: hidden;
+  z-index: 10;
 }
 
-.section-title {
-  font-size: clamp(2.5rem, 5vw, 3.5rem);
-  text-align: center;
-  margin-bottom: 60px;
-  font-weight: 800;
+[data-theme="light"] .about-section {
+  background-image: linear-gradient(rgba(248, 245, 239, 0.82), rgba(248, 245, 239, 0.82)), url('../assets/Images/dark_sun_textured.jpg');
 }
 
-.about-content {
+/* Dashboard grid layout */
+.profile-dashboard-layout {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
-  align-items: center;
-  margin-bottom: 80px;
-  opacity: 0;
+  grid-template-columns: 35% 65%;
+  gap: 40px;
+  align-items: start;
+  margin-top: 25px;
 }
 
-.about-text {
+/* Portrait column with armored styling */
+.profile-portrait-column {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-.about-text p {
-  font-size: 1.1rem;
-  color: var(--text-muted);
-  line-height: 1.8;
-}
-
-.about-read-more {
-  align-self: flex-start;
-  margin-top: 10px;
-}
-
-.about-image-wrapper {
+.portrait-armor-frame {
   position: relative;
+  padding: 15px !important;
   display: flex;
   justify-content: center;
   align-items: center;
+  transform: perspective(1000px) rotateY(10deg);
+  transition: var(--transition-cinematic);
 }
 
-.image-frame {
-  width: 100%;
-  max-width: 400px;
-  border-radius: 24px;
-  overflow: hidden;
-  padding: 8px;
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-  transition: transform 0.4s ease;
-}
-
-.image-frame:hover {
-  transform: translateY(-10px);
+.portrait-armor-frame:hover {
+  transform: perspective(1000px) rotateY(0deg) translateY(-5px);
   border-color: var(--primary);
-  box-shadow: 0 20px 40px var(--primary-glow);
 }
 
-.profile-image {
+.portrait-image-wrapper {
   width: 100%;
-  height: auto;
-  border-radius: 16px;
-  display: block;
+  height: 400px;
+  overflow: hidden;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-secondary);
 }
 
-.profile-description {
+.profile-portrait-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: var(--transition-cinematic);
+}
+
+.portrait-armor-frame:hover .profile-portrait-img {
+  transform: scale(1.05);
+}
+
+.profile-tag-overlay {
   position: absolute;
-  bottom: -30px;
-  right: -20px;
-  padding: 20px 28px;
-  border-radius: 16px;
-  text-align: center;
-  box-shadow: 0 15px 35px rgba(0,0,0,0.4);
-  animation: float-card 6s ease-in-out infinite alternate;
-  z-index: 2;
-}
-
-@keyframes float-card {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(-15px); }
-}
-
-.profile-description h3 {
-  font-size: 1.2rem;
-  margin-bottom: 8px;
+  bottom: 25px;
+  left: 25px;
+  background: rgba(22, 22, 22, 0.9);
+  border: 1px solid var(--primary);
+  padding: 6px 14px;
+  font-size: 0.65rem;
+  letter-spacing: 1px;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
   color: var(--text-main);
 }
 
-.profile-description p {
-  font-size: 0.9rem;
-  color: var(--primary);
-  font-weight: 500;
-  margin: 0;
+.tag-indicator {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--accent-neon);
+  box-shadow: 0 0 6px var(--accent-neon);
 }
 
-.about-stats {
+/* Quick Readout panel below portrait */
+.profile-quick-readout {
+  padding: 20px 25px !important;
+}
+
+.readout-role {
+  font-size: 1.1rem;
+  color: var(--text-main);
+  letter-spacing: 1px;
+  margin-bottom: 5px;
+}
+
+.readout-sub {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+/* Bio Dossier details column (Right) */
+.profile-details-column {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.bio-dossier-panel {
+  padding: 40px !important;
+}
+
+.dossier-line-header {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border-hairline);
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+.dossier-text-body p {
+  font-size: 0.98rem;
+  line-height: 1.7;
+  color: var(--text-main);
+  margin-bottom: 20px;
+}
+
+.dossier-expanded-content p {
+  animation: printLine 0.4s ease forwards;
+}
+
+.action-button-row {
+  margin-top: 25px;
+  border-top: 1px solid var(--border-hairline);
+  padding-top: 20px;
+}
+
+.profile-expand-btn {
+  width: 100%;
+  text-align: center;
+  font-size: 0.8rem;
+}
+
+/* Tactical stats row */
+.tactical-stats-row {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
-  opacity: 0;
-  padding-top: 30px;
-  border-top: 1px solid var(--border-color);
+  gap: 20px;
 }
 
-@media (max-width: 992px) {
-  .about-content {
+.tactical-stat-box {
+  padding: 25px 20px !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.tactical-stat-val {
+  font-size: 2.2rem;
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--text-main);
+}
+
+.tactical-stat-label {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+  margin-top: 6px;
+}
+
+/* Responsive Overrides */
+@media (max-width: 1024px) {
+  .profile-dashboard-layout {
     grid-template-columns: 1fr;
-    text-align: center;
+    gap: 30px;
+  }
+
+  .portrait-armor-frame {
+    transform: none;
+  }
+
+  .portrait-armor-frame:hover {
+    transform: translateY(-5px);
+  }
+}
+
+@media (max-width: 580px) {
+  .tactical-stats-row {
+    grid-template-columns: 1fr;
+    gap: 15px;
   }
   
-  .about-read-more {
-    align-self: center;
-  }
-
-  .about-image-wrapper {
-    margin-top: 40px;
-  }
-  
-  .profile-description {
-    right: auto;
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: -40px;
-    width: 90%;
-    max-width: 320px;
-    animation: none;
-  }
-
-  .profile-description:hover {
-    transform: translateX(-50%) translateY(-5px);
-  }
-}
-
-@media (max-width: 768px) {
-  .about-stats {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 480px) {
-  .about-section {
-    padding: 60px 20px;
+  .bio-dossier-panel {
+    padding: 25px 20px !important;
   }
 }

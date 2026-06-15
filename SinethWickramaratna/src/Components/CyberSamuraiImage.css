@@ -1,0 +1,405 @@
+.samurai-centerpiece-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: auto;
+  width: 55%;
+  height: 100%;
+  overflow: hidden;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  transition: var(--transition-cinematic);
+  z-index: 3;
+  -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 35%, rgba(0,0,0,0) 95%);
+  mask-image: linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 35%, rgba(0,0,0,0) 95%);
+}
+
+.samurai-centerpiece-container:hover {
+  border: none;
+  box-shadow: none;
+}
+
+/* Layer 1: Background Full Scene */
+.samurai-background-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.95; /* always visible */
+  z-index: 1;
+  transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+  pointer-events: none;
+}
+
+.samurai-centerpiece-container:hover .samurai-background-layer {
+  opacity: 1;
+}
+
+/* When reveal system is in active states, show background */
+.reveal-mode-revealed .samurai-background-layer,
+.reveal-mode-glitching .samurai-background-layer {
+  opacity: 0.95;
+}
+
+.samurai-bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: left center;
+  filter: brightness(0.65) contrast(1.15);
+  transition: var(--transition-cinematic);
+}
+
+.samurai-centerpiece-container:hover .samurai-bg-img {
+  filter: brightness(0.75) contrast(1.15) scale(1.02);
+}
+
+/* Layer 2: Cutout transparent Samurai */
+.samurai-cutout-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  transition: var(--transition-cinematic);
+  pointer-events: none;
+  animation: samurai-breath-float 5s ease-in-out infinite;
+}
+
+@keyframes samurai-breath-float {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-8px) scale(1.015);
+  }
+}
+
+.samurai-cutout-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: left center;
+  filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.85)) drop-shadow(0 0 2px var(--primary-glow));
+  transition: var(--transition-cinematic);
+}
+
+.samurai-centerpiece-container:hover .samurai-cutout-img {
+  filter: drop-shadow(0 8px 25px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 12px var(--primary-glow-heavy));
+  transform: scale(1.02);
+}
+
+/* Layer 3: Vertical Sweeping Scanning Laser Line */
+.samurai-scan-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  pointer-events: none;
+  background: rgba(185, 23, 23, 0.08);
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding-bottom: 25px;
+}
+
+.scan-laser-line {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--accent-neon);
+  box-shadow: 0 0 15px var(--accent-neon), 0 0 35px var(--accent-neon);
+  animation: vertical-laser-sweep 2.2s ease-in-out infinite;
+}
+
+@keyframes vertical-laser-sweep {
+  0%, 100% {
+    top: 5%;
+  }
+  50% {
+    top: 95%;
+  }
+}
+
+.scan-telemetry-overlay {
+  color: var(--accent-neon);
+  font-size: 0.72rem;
+  letter-spacing: 1px;
+  text-shadow: 0 0 5px var(--accent-neon);
+  animation: terminal-text-blink 0.35s infinite alternate;
+}
+
+@keyframes terminal-text-blink {
+  from { opacity: 0.5; }
+  to { opacity: 1; }
+}
+
+/* Layer 4: Holographic Profile ID Card */
+.samurai-hologram-face {
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+  right: auto;
+  width: 120px;
+  height: 155px;
+  border-radius: 6px;
+  border: 1px solid var(--primary);
+  background: rgba(22, 22, 22, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 4;
+  overflow: hidden;
+  box-shadow: 0 0 25px var(--primary-glow-heavy);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px;
+  pointer-events: none;
+  
+  /* Scanline gradient pattern */
+  background-image: linear-gradient(rgba(185, 23, 23, 0.08) 50%, transparent 50%);
+  background-size: 100% 4px;
+}
+
+.reveal-mode-glitching .samurai-hologram-face {
+  animation: hologram-glitch 0.6s ease infinite;
+}
+
+.reveal-mode-revealed .samurai-hologram-face {
+  animation: hologram-float-pulse 3s ease-in-out infinite;
+}
+
+@keyframes hologram-glitch {
+  0%, 100% {
+    opacity: 0.2;
+    transform: scale(0.95) skewX(4deg);
+    filter: hue-rotate(90deg);
+  }
+  20% {
+    opacity: 0.9;
+    transform: scale(1.03) skewX(-4deg);
+    filter: hue-rotate(0deg);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(0.98);
+  }
+  80% {
+    opacity: 1;
+    transform: scale(1.01) skewX(2deg);
+  }
+}
+
+@keyframes hologram-float-pulse {
+  0%, 100% {
+    opacity: 0.9;
+    transform: translateY(0);
+    box-shadow: 0 0 15px var(--primary-glow);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-4px);
+    box-shadow: 0 0 25px var(--primary-glow-heavy);
+  }
+}
+
+.hologram-face-img {
+  width: 100%;
+  height: calc(100% - 18px);
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid var(--border-hairline);
+  filter: sepia(100%) hue-rotate(-50deg) saturate(300%) contrast(1.25);
+}
+
+[data-theme="light"] .hologram-face-img {
+  filter: sepia(100%) hue-rotate(0deg) saturate(220%) contrast(1.15);
+}
+
+.hologram-glow-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--accent-neon);
+  box-shadow: 0 0 8px var(--accent-neon);
+  animation: vertical-laser-sweep 1.8s linear infinite;
+}
+
+.hologram-tag {
+  font-size: 0.5rem;
+  color: var(--primary);
+  letter-spacing: 1px;
+  text-shadow: 0 0 4px var(--primary-glow);
+  margin-top: 4px;
+}
+
+[data-theme="light"] .hologram-tag {
+  color: var(--accent-gold);
+  text-shadow: 0 0 4px var(--accent-gold-glow);
+}
+
+/* Light Theme overrides */
+[data-theme="light"] .samurai-centerpiece-container {
+  background: transparent;
+  box-shadow: none;
+}
+[data-theme="light"] .samurai-centerpiece-container:hover {
+  border: none;
+  box-shadow: none;
+}
+[data-theme="light"] .samurai-centerpiece-container:hover .samurai-cutout-img {
+  filter: drop-shadow(0 8px 25px rgba(0, 0, 0, 0.15)) drop-shadow(0 0 10px var(--accent-gold-glow));
+}
+
+/* Mobile responsive background centerpiece positioning */
+@media (max-width: 900px) {
+  .samurai-centerpiece-container {
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* Sit in the background behind mobile metrics and cards */
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+}
+
+/* HUD System */
+.samurai-hud-system {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.samurai-hud-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.samurai-hud-card {
+  position: absolute;
+  width: 135px;
+  min-height: 55px !important;
+  padding: 6px 10px !important;
+  background: rgba(11, 11, 11, 0.92) !important;
+  border-radius: 4px !important;
+  border-color: rgba(185, 23, 23, 0.3) !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6) !important;
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1),
+              transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  pointer-events: none;
+}
+
+/* Hover trigger state */
+.samurai-centerpiece-container:hover .samurai-hud-card,
+.samurai-centerpiece-container:hover .samurai-hud-svg {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.samurai-centerpiece-container:hover .samurai-hud-card {
+  transform: scale(1);
+}
+
+/* Card placements */
+.hud-top-left {
+  top: 13%;
+  left: 3%;
+  transition-delay: 0.05s;
+}
+
+.hud-bottom-left {
+  top: 63%;
+  left: 1%;
+  transition-delay: 0.15s;
+}
+
+.hud-top-right {
+  top: 18%;
+  left: 47%;
+  transition-delay: 0.1s;
+}
+
+.hud-bottom-right {
+  top: 68%;
+  left: 52%;
+  transition-delay: 0.2s;
+}
+
+/* Card typography styling */
+.hud-card-title {
+  font-size: 0.52rem;
+  color: var(--color-steel);
+  letter-spacing: 0.5px;
+  margin-bottom: 2px;
+}
+
+.hud-card-stat {
+  font-size: 0.55rem;
+  color: var(--text-main);
+}
+
+.hud-card-status {
+  font-size: 0.52rem;
+  font-weight: 700;
+  margin-top: 2px;
+  letter-spacing: 0.5px;
+}
+
+/* Line & Node Styling */
+.hud-connecting-line {
+  stroke: var(--primary);
+  stroke-width: 0.3px;
+  stroke-dasharray: 4;
+  stroke-dashoffset: 40;
+  animation: hud-line-flow 2s linear infinite;
+  opacity: 0.6;
+}
+
+@keyframes hud-line-flow {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.hud-center-node {
+  fill: var(--accent-neon);
+  filter: drop-shadow(0 0 4px var(--accent-neon));
+  animation: node-pulse-hud 1.5s ease-in-out infinite alternate;
+}
+
+.hud-end-node {
+  fill: var(--primary);
+  filter: drop-shadow(0 0 2px var(--primary-glow));
+}
+
+@keyframes node-pulse-hud {
+  from { r: 1.0px; opacity: 0.8; }
+  to { r: 1.5px; opacity: 1; }
+}
+
+/* Mobile responsive hide HUD system */
+@media (max-width: 900px) {
+  .samurai-hud-system {
+    display: none;
+  }
+}

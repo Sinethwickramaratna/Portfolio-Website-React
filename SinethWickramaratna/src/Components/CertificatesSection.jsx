@@ -10,6 +10,7 @@ import kaggleFeatureEngineering from '../assets/Certificates/Sineth Wickramaratn
 import rotaractMembership from '../assets/Certificates/Rotaract Active Membership.jpg';
 import rotaracrDirectorsAppreciation from '../assets/Certificates/Board of Directors.jpg';
 import certificatesDataRaw from '../data/certificatesData.json';
+import AtmosphericBackground from './AtmosphericBackground';
 
 function CertificatesSection() {
   const [certificatesRef, isCertificatesInView] = useInView();
@@ -32,8 +33,6 @@ function CertificatesSection() {
     ...cert,
     image: imageMap[cert.image] || null
   }));
-
-
 
   const getMonthNumber = (month) => {
     const months = {
@@ -71,41 +70,60 @@ function CertificatesSection() {
 
   return (
     <section className="certificates-section" id="certificates" ref={certificatesRef}>
-      <div className="certificates-container">
-        <div className={`certificates-header ${isCertificatesInView ? 'loaded' : ''}`}>
-          <h2 className="certificates-title">Certificates & Achievements</h2>
-          <div className="certificates-accent"></div>
+      {/* Background Slow Drifting Gold Dust */}
+      <AtmosphericBackground type="honor" />
+      
+      <div className="spatial-container">
+        
+        {/* Section Header HUD */}
+        <div className="section-header-hud">
+          <span className="section-number-bg">006</span>
+          <h2 className="section-title-hud font-display" data-kanji="誉">
+            [006] <span className="text-gradient">HONOR ARCHIVE</span>
+          </h2>
+          <span className="section-telemetry-hud monospace-val">HONORS_INDEXED</span>
         </div>
 
-        <div className={`certificates-content ${isCertificatesInView ? 'loaded' : ''}`}>
+        <div className={`certificates-content shoji-reveal ${isCertificatesInView ? 'loaded' : ''}`}>
           <div className="certificates-grid">
             {displayedData.map((cert, index) => (
               <div 
                 key={cert.id} 
-                className="certificate-card"
-                style={{ animationDelay: `${index * 0.1}s` }}
+                className="certificate-card shogun-card honor-casing"
+                style={{ animationDelay: `${index * 0.15}s` }}
+                data-cursor="open"
               >
+                <div className="hud-corner top-left"></div>
+                <div className="hud-corner top-right"></div>
+                <div className="hud-corner bottom-left"></div>
+                <div className="hud-corner bottom-right"></div>
+
                 {cert.image && (
                   <div className="certificate-image-container">
-                    <img src={cert.image} alt={cert.title} className="certificate-image" />
+                    <img src={cert.image} alt={cert.title} className="certificate-image" loading="lazy" />
                   </div>
                 )}
-                <div className="certificate-content">
-                  <h3 className="certificate-title">{cert.title}</h3>
-                  <p className="certificate-issuer">{cert.issuer}</p>
-                  <p className="certificate-date">
-                    {cert.date.month} {cert.date.year}
-                  </p>
+                <div className="certificate-body-content">
+                  <div className="certificate-issuer-row">
+                    <span className="cert-badge monospace-val">HONOR_{cert.id}</span>
+                    <span className="cert-date monospace-val">{cert.date.month.toUpperCase()} {cert.date.year}</span>
+                  </div>
+                  
+                  <h3 className="certificate-title font-display">{cert.title}</h3>
+                  <p className="certificate-issuer monospace-val">ISSUER: {cert.issuer.toUpperCase()}</p>
                   <p className="certificate-description">{cert.description}</p>
+                  
                   {cert.link && (
-                    <a 
-                      href={cert.link} 
-                      target="_blank" 
-                      rel="noopener noreferrer" 
-                      className="certificate-link"
-                    >
-                      View Certificate →
-                    </a>
+                    <div className="cert-action-row">
+                      <a 
+                        href={cert.link} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="btn-premium btn-primary-glow cert-view-btn"
+                      >
+                        [ SECURE LINK ]
+                      </a>
+                    </div>
                   )}
                 </div>
               </div>
@@ -114,11 +132,10 @@ function CertificatesSection() {
 
           <div className="load-more-container">
             <button 
-              className="load-more-btn" 
+              className="btn-premium btn-outline load-more-btn font-display" 
               onClick={() => navigate('/certificates')}
             >
-              <span className="btn-text">View All Certificates</span>
-              <span className="btn-icon">→</span>
+              [ VIEW ALL ARCHIVED HONORS ]
             </button>
           </div>
         </div>

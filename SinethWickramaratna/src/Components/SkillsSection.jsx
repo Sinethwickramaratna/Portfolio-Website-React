@@ -2,34 +2,35 @@ import './SkillsSection.css';
 import { useInView } from '../hooks/useInView';
 import StatCard from './SkillsComponents/StatCard';
 import SkillCard from './SkillsComponents/SkillCard';
-import pythonLogo from '../assets/Images/Skills/python-logo-only.svg'
-import javaScriptLogo from '../assets/Images/Skills/javascript-logo.svg'
-import javaLogo from '../assets/Images/Skills/java-logo.svg'
-import sqlLogo from '../assets/Images/Skills/sql-logo.svg'
-import machineLearningIcon from '../assets/Images/Skills/machine-learning-icon.svg'
-import dataAnalysisIcon from '../assets/Images/Skills/data-analytics-icon.png'
-import statisticsIcon from '../assets/Images/Skills/statistics-icon.png'
-import pandasIcon from '../assets/Images/Skills/Pandas_mark.svg'
-import numpyIcon from '../assets/Images/Skills/numpy-icon.svg'
-import scikitLearnIcon from '../assets/Images/Skills/scikit-learn.svg'
-import reactIcon from '../assets/Images/Skills/React.svg'
-import htmlIcon from '../assets/Images/Skills/HTML5.svg'
-import cssIcon from '../assets/Images/Skills/CSS3.svg'
-import nodejsIcon from '../assets/Images/Skills/Node.js.svg'
-import expressIcon from '../assets/Images/Skills/Express.svg'
-import springBootIcon from '../assets/Images/Skills/Spring.svg'
-import gitIcon from '../assets/Images/Skills/Git.svg'
-import jupyterIcon from '../assets/Images/Skills/Jupyter.svg'
-import vscodeIcon from '../assets/Images/Skills/VS Code.svg'
-import dockerIcon from '../assets/Images/Skills/Docker.svg'
-import mysqlIcon from '../assets/Images/Skills/MySQL.svg'
-import postgresqlIcon from '../assets/Images/Skills/PostgresSQL.svg'
-import figmaIcon from '../assets/Images/Skills/Figma.svg'
-import matplotlibIcon from '../assets/Images/Skills/Matplotlib.svg'
-import seabornIcon from '../assets/Images/Skills/Seaborn.svg'
-import photoshopIcon from '../assets/Images/Skills/Adobe Photoshop.svg'
-import canvaIcon from '../assets/Images/Skills/Canva.svg'
+import pythonLogo from '../assets/Images/Skills/python-logo-only.svg';
+import javaScriptLogo from '../assets/Images/Skills/javascript-logo.svg';
+import javaLogo from '../assets/Images/Skills/java-logo.svg';
+import sqlLogo from '../assets/Images/Skills/sql-logo.svg';
+import machineLearningIcon from '../assets/Images/Skills/machine-learning-icon.svg';
+import dataAnalysisIcon from '../assets/Images/Skills/data-analytics-icon.png';
+import statisticsIcon from '../assets/Images/Skills/statistics-icon.png';
+import pandasIcon from '../assets/Images/Skills/Pandas_mark.svg';
+import numpyIcon from '../assets/Images/Skills/numpy-icon.svg';
+import scikitLearnIcon from '../assets/Images/Skills/scikit-learn.svg';
+import reactIcon from '../assets/Images/Skills/React.svg';
+import htmlIcon from '../assets/Images/Skills/HTML5.svg';
+import cssIcon from '../assets/Images/Skills/CSS3.svg';
+import nodejsIcon from '../assets/Images/Skills/Node.js.svg';
+import expressIcon from '../assets/Images/Skills/Express.svg';
+import springBootIcon from '../assets/Images/Skills/Spring.svg';
+import gitIcon from '../assets/Images/Skills/Git.svg';
+import jupyterIcon from '../assets/Images/Skills/Jupyter.svg';
+import vscodeIcon from '../assets/Images/Skills/VS Code.svg';
+import dockerIcon from '../assets/Images/Skills/Docker.svg';
+import mysqlIcon from '../assets/Images/Skills/MySQL.svg';
+import postgresqlIcon from '../assets/Images/Skills/PostgresSQL.svg';
+import figmaIcon from '../assets/Images/Skills/Figma.svg';
+import matplotlibIcon from '../assets/Images/Skills/Matplotlib.svg';
+import seabornIcon from '../assets/Images/Skills/Seaborn.svg';
+import photoshopIcon from '../assets/Images/Skills/Adobe Photoshop.svg';
+import canvaIcon from '../assets/Images/Skills/Canva.svg';
 import skillsData from '../data/skillsData.json';
+import AtmosphericBackground from './AtmosphericBackground';
 
 function SkillsSection() {
   const [skillsRef, isSkillsInView] = useInView();
@@ -76,24 +77,27 @@ function SkillsSection() {
 
   return (
     <section className="skills-section" id="skills" ref={skillsRef}>
-      <div className="skills-container">
-        <div className={`skills-header ${isSkillsInView ? 'loaded' : ''}`}>
-          <h2 className="skills-title">Skills & Expertise</h2>
-          <div className="skills-accent"></div>
-          
-          <div className={`stats-container ${isSkillsInView ? 'loaded' : ''}`}>
-            {stats.map((stat, index) => (
-              <StatCard key={index} stat={stat} index={index} />
-            ))}
-          </div>
+      {/* Background Matrix-Style Code Streams */}
+      <AtmosphericBackground type="combat" />
+      
+      <div className="spatial-container">
+        
+        {/* Section Header HUD */}
+        <div className="section-header-hud">
+          <span className="section-number-bg">003</span>
+          <h2 className="section-title-hud font-display" data-kanji="技">
+            [003] <span className="text-gradient">COMBAT ABILITIES</span>
+          </h2>
+          <span className="section-telemetry-hud monospace-val">SKILLS_DATABASE_LOADED</span>
         </div>
 
-        <div className={`skills-content ${isSkillsInView ? 'loaded' : ''}`}>
+        {/* Dynamic Category Tabs / Grids */}
+        <div className={`skills-content shoji-reveal ${isSkillsInView ? 'loaded' : ''}`}>
           {skillCategories.map((category, categoryIndex) => (
             <div key={categoryIndex} className="skill-category">
               <div className="category-header">
                 <span className="category-icon">{category.icon}</span>
-                <h3 className="category-title">{category.category}</h3>
+                <h3 className="category-title font-display">{category.category}</h3>
               </div>
               <div className="skills-cards-grid">
                 {category.skills.map((skill, skillIndex) => (
@@ -108,6 +112,14 @@ function SkillsSection() {
             </div>
           ))}
         </div>
+
+        {/* Global Statistics Telemetry */}
+        <div className={`stats-container ${isSkillsInView ? 'loaded' : ''}`}>
+          {stats.map((stat, index) => (
+            <StatCard key={index} stat={stat} index={index} />
+          ))}
+        </div>
+
       </div>
     </section>
   );

@@ -1,0 +1,129 @@
+/* Custom OS Cursor Styling */
+
+.custom-cursor-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10000;
+  pointer-events: none;
+}
+
+/* Inner Core: Crimson Red */
+.cursor-dot-inner {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  background-color: var(--color-crimson);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 10002;
+  box-shadow: 0 0 8px var(--primary-glow-heavy);
+  transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease;
+}
+
+/* Outer Ring: Samurai Gold */
+.cursor-ring-outer {
+  position: fixed;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--accent-gold);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 10001;
+  transition: width 0.2s ease, height 0.2s ease, border-color 0.2s ease, transform 0.1s ease;
+  box-shadow: 0 0 4px var(--accent-gold-glow);
+}
+
+/* Floating HUD label near cursor core */
+.cursor-hud-label {
+  position: absolute;
+  left: 14px;
+  top: 14px;
+  font-family: var(--font-display);
+  font-size: 0.6rem;
+  letter-spacing: 1.5px;
+  color: var(--accent-gold);
+  background: rgba(11, 11, 11, 0.85);
+  border: 1px solid var(--accent-gold);
+  padding: 3px 8px;
+  border-radius: 2px;
+  white-space: nowrap;
+  animation: cursorLabelFade 0.2s ease forwards;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+
+@keyframes cursorLabelFade {
+  from { opacity: 0; transform: scale(0.8) translate(-5px, -5px); }
+  to { opacity: 1; transform: scale(1) translate(0, 0); }
+}
+
+/* Radar ping indicator inside ring */
+.ring-radar {
+  position: absolute;
+  top: -1px; left: -1px; right: -1px; bottom: -1px;
+  border: 1px solid var(--accent-gold);
+  border-radius: 50%;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Interactive Cursor States */
+.state-explore .cursor-ring-outer {
+  width: 44px;
+  height: 44px;
+  border-color: var(--primary);
+  box-shadow: 0 0 12px var(--primary-glow);
+}
+.state-explore .cursor-hud-label {
+  color: var(--text-main);
+  border-color: var(--primary);
+  background: rgba(185, 23, 23, 0.9);
+}
+.state-explore .ring-radar {
+  animation: radarPing 1.2s infinite;
+  border-color: var(--primary);
+}
+
+.state-execute .cursor-ring-outer {
+  width: 40px;
+  height: 40px;
+  border-color: var(--accent-gold);
+  box-shadow: 0 0 10px var(--accent-gold-glow);
+}
+.state-execute .cursor-hud-label {
+  color: var(--text-main);
+  border-color: var(--accent-gold);
+  background: rgba(219, 196, 14, 0.9);
+}
+.state-execute .cursor-dot-inner {
+  background-color: var(--accent-gold);
+  box-shadow: 0 0 8px var(--accent-gold-glow);
+}
+
+.state-open .cursor-ring-outer {
+  width: 40px;
+  height: 40px;
+  border-color: var(--accent-gold);
+  box-shadow: 0 0 10px var(--accent-gold-glow);
+}
+.state-open .cursor-hud-label {
+  color: var(--text-main);
+  border-color: var(--accent-gold);
+  background: rgba(219, 196, 14, 0.9);
+}
+
+@keyframes radarPing {
+  0% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+/* Disable default mouse cursor globally when active */
+@media (hover: hover) and (pointer: fine) {
+  body, a, button, [role="button"], input, textarea, select {
+    cursor: none !important;
+  }
+}

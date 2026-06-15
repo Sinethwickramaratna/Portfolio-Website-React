@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import './GalleryPage.css';
 import galleryImages from '../data/galleryImages.json';
 import Footer from './public/Footer';
+import AtmosphericBackground from './AtmosphericBackground';
 
 function GalleryPage() {
   const navigate = useNavigate();
@@ -46,18 +47,21 @@ function GalleryPage() {
   return (
     <>
       <div className="gallery-page">
+        {/* Background Atmosphere */}
+        <AtmosphericBackground type="hero" />
+        
         {/* Header */}
-        <header className="gallery-header">
-          <button className="back-button" onClick={handleBackClick}>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <header className="gallery-header section-header-hud">
+          <button className="back-button btn-premium btn-outline" onClick={handleBackClick}>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ marginRight: '6px' }}>
               <path d="M19 12H5M12 19l-7-7 7-7"/>
             </svg>
-            Back to Portfolio
+            [ BACK_TO_OS ]
           </button>
-          <h1 className="gallery-title">
-            <span className="gradient-text">Design Gallery</span>
+          <h1 className="gallery-title section-title-hud font-display">
+            [008] <span className="text-gradient">DESIGN ARCHIVE</span>
           </h1>
-          <p className="gallery-subtitle">Explore all my graphic design works</p>
+          <span className="section-telemetry-hud monospace-val">GALLERY_ARCHIVE_LOADED</span>
         </header>
 
         {/* Gallery Grid */}
@@ -67,8 +71,13 @@ function GalleryPage() {
               key={item.id} 
               className={`gallery-item ${imageLoaded[item.id] ? 'loaded' : ''}`}
               onClick={() => openLightbox(item)}
+              data-cursor="open"
             >
-              <div className="gallery-item-inner">
+              <div className="gallery-item-inner shogun-card">
+                <div className="hud-corner top-left"></div>
+                <div className="hud-corner top-right"></div>
+                <div className="hud-corner bottom-left"></div>
+                <div className="hud-corner bottom-right"></div>
                 <img 
                   src={item.image} 
                   alt={item.title}
@@ -78,7 +87,7 @@ function GalleryPage() {
                   }}
                 />
                 <div className="gallery-item-overlay">
-                  <h3>{item.title}</h3>
+                  <h3 className="font-display">{item.title}</h3>
                   <p>{item.subtitle}</p>
                   <span className="view-icon">🔍</span>
                 </div>
@@ -105,10 +114,14 @@ function GalleryPage() {
               </svg>
             </button>
             
-            <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
+            <div className="lightbox-content shogun-card" onClick={(e) => e.stopPropagation()}>
+              <div className="hud-corner top-left"></div>
+              <div className="hud-corner top-right"></div>
+              <div className="hud-corner bottom-left"></div>
+              <div className="hud-corner bottom-right"></div>
               <img src={selectedImage.image} alt={selectedImage.title} />
               <div className="lightbox-info">
-                <h2>{selectedImage.title}</h2>
+                <h2 className="font-display">{selectedImage.title}</h2>
                 <p>{selectedImage.subtitle}</p>
               </div>
             </div>

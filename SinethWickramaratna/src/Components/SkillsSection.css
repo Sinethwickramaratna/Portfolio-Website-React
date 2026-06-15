@@ -1,8 +1,15 @@
 .skills-section {
   position: relative;
   padding: 120px 20px;
-  background: transparent;
+  background-image: linear-gradient(rgba(11, 11, 11, 0.70), rgba(11, 11, 11, 0.70)), url('../assets/Images/temple_courtyard.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
   z-index: 3;
+}
+
+[data-theme="light"] .skills-section {
+  background-image: linear-gradient(rgba(248, 245, 239, 0.80), rgba(248, 245, 239, 0.80)), url('../assets/Images/temple_courtyard.jpg');
 }
 
 .skills-container {

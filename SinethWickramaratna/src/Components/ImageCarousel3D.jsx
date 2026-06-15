@@ -2,6 +2,7 @@ import './ImageCarousel3D.css';
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import galleryImages from '../data/galleryImages.json';
+import AtmosphericBackground from './AtmosphericBackground';
 
 const carouselImages = galleryImages;
 
@@ -142,14 +143,17 @@ function ImageCarousel3D() {
 
   return (
     <section className="carousel-3d-section" id="design-gallery">
-      <div className="carousel-3d-container">
-        <div className={`carousel-3d-header ${isLoaded ? 'loaded' : ''}`}>
-          <h2 className="carousel-3d-title">Design Gallery</h2>
-          <p className="carousel-3d-subtitle">Explore my creative design work</p>
-          <div className="carousel-accent"></div>
+      <AtmosphericBackground type="honor" />
+      <div className="carousel-3d-container spatial-container">
+        <div className={`carousel-3d-header section-header-hud ${isLoaded ? 'loaded' : ''}`}>
+          <span className="section-number-bg">008</span>
+          <h2 className="section-title-hud font-display" data-kanji="創">
+            [008] <span className="text-gradient">CREATIVE OUTPOST</span>
+          </h2>
+          <span className="section-telemetry-hud monospace-val">GALLERY_CORE_STREAMING</span>
         </div>
 
-        <div className={`carousel-3d-wrapper ${isLoaded ? 'loaded' : ''}`}>
+        <div className={`carousel-3d-wrapper shoji-reveal ${isLoaded ? 'loaded' : ''}`}>
           <div 
             className="carousel-3d-scene"
             style={{
@@ -179,6 +183,10 @@ function ImageCarousel3D() {
                     }}
                   >
                     <div className="carousel-item-inner">
+                      <div className="hud-corner top-left"></div>
+                      <div className="hud-corner top-right"></div>
+                      <div className="hud-corner bottom-left"></div>
+                      <div className="hud-corner bottom-right"></div>
                       <img 
                         ref={el => imageRefs.current[image.id] = el}
                         src={image.image} 
@@ -258,7 +266,7 @@ function ImageCarousel3D() {
           
           {/* Load More Button */}
           <div className="load-more-container">
-            <button className="load-more-btn" onClick={handleViewGallery}>
+            <button className="load-more-btn btn-premium btn-primary-glow" onClick={handleViewGallery}>
               <span className="btn-text">View Full Gallery</span>
               <span className="btn-icon">→</span>
               <span className="btn-count">{carouselImages.length} Designs</span>

@@ -1,42 +1,93 @@
-/* Global Theme Configuration */
+/* Shogun OS Design System Custom Properties */
 
-/* Dark Mode (Default) */
+:root {
+  /* Fonts */
+  --font-display: 'Asimovian', -apple-system, sans-serif;
+  --font-body: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+  
+  /* Color Palette Tokens */
+  --color-crimson: #b91717;
+  --color-crimson-dark: #840b0b;
+  --color-crimson-neon: #ff3b3b;
+  --color-obsidian: #161616;
+  --color-obsidian-deep: #0a0a0a;
+  --color-steel: #9d9d9d;
+  --color-steel-light: #c0c0c0;
+  --color-gold: #dbc40e;
+  --color-gold-soft: #f4e490;
+  --color-ivory: #f8f5ef;
+  
+  /* Transitions */
+  --transition-fast: all 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --transition-smooth: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-cinematic: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* SHADOW SHOGUN (Default Dark Mode) */
 :root,
 [data-theme="dark"] {
-  --bg-primary: var(--bg-dark);
-  --bg-secondary: transparent;
-  --bg-tertiary: rgba(17, 24, 39, 0.4);
-  --text-primary: var(--text-main);
-  --text-secondary: var(--text-muted);
-  --text-muted: #6B7280;
-  --accent-cyan: var(--primary);
-  --accent-green: #10B981;
-  --accent-magenta: var(--secondary);
-  --accent-blue: var(--primary);
-  --border-color: rgba(255, 255, 255, 0.1);
-  --card-bg: var(--bg-card);
-  --glass-bg: rgba(17, 24, 39, 0.4);
+  /* Backgrounds (60% Obsidian Black) */
+  --bg-primary: var(--color-obsidian);
+  --bg-secondary: var(--color-obsidian-deep);
+  --bg-card: rgba(22, 22, 22, 0.75);
+  --bg-card-hover: rgba(30, 10, 10, 0.85);
+  
+  /* Glowing / Accent Colors (25% Crimson Red) */
+  --primary: var(--color-crimson);
+  --primary-glow: rgba(185, 23, 23, 0.4);
+  --primary-glow-heavy: rgba(185, 23, 23, 0.7);
+  --secondary: var(--color-crimson-dark);
+  --accent-neon: var(--color-crimson-neon);
+  
+  /* Typography (10% Steel Gray) */
+  --text-main: #ffffff;
+  --text-muted: var(--color-steel);
+  --text-dim: #555555;
+  
+  /* Borders */
+  --border-color: rgba(157, 157, 157, 0.15);
+  --border-hover: rgba(185, 23, 23, 0.3);
+  --border-hairline: rgba(157, 157, 157, 0.1);
+  
+  /* Rare Accents (5% Samurai Gold) */
+  --accent-gold: var(--color-gold);
+  --accent-gold-glow: rgba(219, 196, 14, 0.4);
+  
+  /* Ambient shadow depths (subtle purple) */
+  --ambient-purple-glow: rgba(33, 16, 47, 0.35);
+  --card-shadow: 0 12px 40px -15px rgba(0, 0, 0, 0.8), 0 0 1px 1px rgba(185, 23, 23, 0.15);
 }
 
-/* Light Mode */
+/* IMPERIAL STUDIO (Ivory Light Mode) */
 [data-theme="light"] {
-  --bg-primary: #f8f9fa;
+  /* Backgrounds (Ivory / Design Studio concrete) */
+  --bg-primary: var(--color-ivory);
   --bg-secondary: #ffffff;
-  --bg-tertiary: #ecf0f5;
-  --text-primary: #111827;
-  --text-secondary: #374151;
-  --text-muted: #6B7280;
-  --accent-cyan: #3B82F6;
-  --accent-green: #10B981;
-  --accent-magenta: #8B5CF6;
-  --accent-blue: #3B82F6;
-  --border-color: rgba(0, 0, 0, 0.1);
-  --card-bg: rgba(255, 255, 255, 0.9);
-  --glass-bg: rgba(255, 255, 255, 0.5);
-}
-
-/* Prevent transitions on theme toggle itself */
-.theme-toggle,
-.theme-toggle * {
-  transition: transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  --bg-card: rgba(255, 255, 255, 0.8);
+  --bg-card-hover: rgba(244, 228, 144, 0.15);
+  
+  /* Accents */
+  --primary: var(--color-crimson);
+  --primary-glow: rgba(185, 23, 23, 0.15);
+  --primary-glow-heavy: rgba(185, 23, 23, 0.3);
+  --secondary: var(--color-crimson-dark);
+  --accent-neon: var(--color-crimson);
+  
+  /* Typography */
+  --text-main: #161616;
+  --text-muted: #666666;
+  --text-dim: #999999;
+  
+  /* Borders */
+  --border-color: rgba(22, 22, 22, 0.1);
+  --border-hover: var(--color-gold);
+  --border-hairline: rgba(22, 22, 22, 0.05);
+  
+  /* Highlights (Gold Reflections) */
+  --accent-gold: var(--color-gold);
+  --accent-gold-glow: rgba(219, 196, 14, 0.25);
+  
+  /* Ambient shadow depths */
+  --ambient-purple-glow: rgba(157, 157, 157, 0.05);
+  --card-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.1), 0 0 1px 1px rgba(219, 196, 14, 0.2);
 }
