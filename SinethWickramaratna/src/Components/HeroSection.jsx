@@ -21,17 +21,11 @@ function HeroSection() {
   };
 
   const handleUnsheathe = () => {
-    triggerSliceEffect();
-    setTimeout(() => {
-      setShowKatana3D(true);
-    }, 150);
+    setShowKatana3D(true);
   };
 
   const handleSheathe = () => {
-    triggerSliceEffect();
-    setTimeout(() => {
-      setShowKatana3D(false);
-    }, 150);
+    setShowKatana3D(false);
   };
 
   // Listen for the custom event TRIGGER_3D_SLASH from 3D Katana

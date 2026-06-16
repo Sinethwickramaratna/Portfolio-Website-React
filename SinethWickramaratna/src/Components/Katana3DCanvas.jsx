@@ -47,7 +47,7 @@ function Katana3DCanvas({ onClose }) {
     // 1. Scene & Camera Setup
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(40, width / height, 0.1, 100);
-    camera.position.set(0, 0, 6.5);
+    camera.position.set(0, 0, 5.0);
 
     // 2. Renderer
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -537,15 +537,24 @@ function Katana3DCanvas({ onClose }) {
 
     frameIdRef.current = requestAnimationFrame(animate);
 
-    // Resize listener
+    // Resize listener with dynamic responsive scale
     const handleResize = () => {
       width = container.clientWidth || 600;
       height = container.clientHeight || 600;
       camera.aspect = width / height;
       camera.updateProjectionMatrix();
       renderer.setSize(width, height);
+
+      // Calculate dynamic scale factor (larger on desktop, responsive on mobile)
+      const minDimension = Math.min(width, height);
+      const scaleFactor = Math.max(0.85, Math.min(minDimension / 380, 1.45));
+      swordGroup.scale.set(scaleFactor, scaleFactor, scaleFactor);
+      sayaGroup.scale.set(scaleFactor, scaleFactor, scaleFactor);
     };
     window.addEventListener('resize', handleResize);
+
+    // Call handleResize once initially to establish dynamic scale
+    handleResize();
 
     // Cleanup
     return () => {

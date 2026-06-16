@@ -3,7 +3,7 @@
   top: 0;
   left: 0;
   right: auto;
-  width: 55%;
+  width: 62%;
   height: 100%;
   overflow: hidden;
   background: transparent;
@@ -11,8 +11,8 @@
   box-shadow: none;
   transition: var(--transition-cinematic);
   z-index: 4;
-  -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 35%, rgba(0,0,0,0) 95%);
-  mask-image: linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 35%, rgba(0,0,0,0) 95%);
+  -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 45%, rgba(0,0,0,0) 98%);
+  mask-image: linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 45%, rgba(0,0,0,0) 98%);
 }
 
 .katana-canvas-mount {
