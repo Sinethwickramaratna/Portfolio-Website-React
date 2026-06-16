@@ -52,8 +52,8 @@ function ImageCarousel3D() {
       const isMobile = window.innerWidth <= 768;
       const isSmallMobile = window.innerWidth <= 480;
       
-      const maxWidth = isSmallMobile ? 290 : isMobile ? 380 : 640;
-      const maxHeight = isSmallMobile ? 220 : isMobile ? 300 : 420;
+      const maxWidth = isSmallMobile ? Math.min(window.innerWidth - 32, 360) : isMobile ? Math.min(window.innerWidth - 64, 520) : 640;
+      const maxHeight = isSmallMobile ? 260 : isMobile ? 360 : 420;
       
       let width = naturalWidth;
       let height = naturalHeight;
@@ -79,8 +79,8 @@ function ImageCarousel3D() {
     const isMobile = window.innerWidth <= 768;
     const isSmallMobile = window.innerWidth <= 480;
     
-    const maxWidth = isSmallMobile ? 290 : isMobile ? 380 : 640;
-    const maxHeight = isSmallMobile ? 220 : isMobile ? 300 : 420;
+    const maxWidth = isSmallMobile ? Math.min(window.innerWidth - 32, 360) : isMobile ? Math.min(window.innerWidth - 64, 520) : 640;
+    const maxHeight = isSmallMobile ? 260 : isMobile ? 360 : 420;
     
     let width = naturalWidth;
     let height = naturalHeight;
@@ -206,7 +206,7 @@ function ImageCarousel3D() {
                       marginLeft: `-${carouselDimensions.width / 2}px`,
                       marginTop: `-${carouselDimensions.height / 2}px`,
                       transform: isVisible
-                        ? `rotateY(${position * -35}deg) translateX(${position * (window.innerWidth <= 768 ? 200 : 340)}px) translateZ(${-Math.abs(position) * 150}px) scale(${position === 0 ? 1 : 0.78})`
+                        ? `rotateY(${position * -35}deg) translateX(${position * (window.innerWidth <= 480 ? (window.innerWidth * 0.44) : (window.innerWidth <= 768 ? 200 : 340))}px) translateZ(${-Math.abs(position) * 150}px) scale(${position === 0 ? 1 : 0.78})`
                         : `rotateY(0deg) translateX(0px) translateZ(-400px) scale(0)`,
                       opacity: position === 0 ? 1 : isVisible ? 0.45 : 0,
                       filter: position === 0 ? 'blur(0px)' : `blur(3px)`,
