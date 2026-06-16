@@ -10,21 +10,36 @@ function CustomCursor() {
   const ringRef = useRef(null);
   const requestRef = useRef(null);
   const mouseRef = useRef({ x: 0, y: 0 });
+  const hasMovedRef = useRef(false);
 
   useEffect(() => {
     // Disable custom cursor on mobile/tablets
     const isMobile = window.matchMedia('(hover: none)').matches;
     if (isMobile) return;
 
-    setIsVisible(true);
-
     const handleMouseMove = (e) => {
       mouseRef.current = { x: e.clientX, y: e.clientY };
       setPosition({ x: e.clientX, y: e.clientY });
+
+      if (!hasMovedRef.current) {
+        hasMovedRef.current = true;
+        setRingPosition({ x: e.clientX, y: e.clientY });
+        setIsVisible(true);
+        document.body.classList.add('has-custom-cursor');
+      }
     };
 
-    const handleMouseLeave = () => setIsVisible(false);
-    const handleMouseEnter = () => setIsVisible(true);
+    const handleMouseLeave = () => {
+      setIsVisible(false);
+      document.body.classList.remove('has-custom-cursor');
+    };
+
+    const handleMouseEnter = () => {
+      if (hasMovedRef.current) {
+        setIsVisible(true);
+        document.body.classList.add('has-custom-cursor');
+      }
+    };
 
     window.addEventListener('mousemove', handleMouseMove);
     document.addEventListener('mouseleave', handleMouseLeave);
@@ -84,6 +99,7 @@ function CustomCursor() {
       document.removeEventListener('mouseenter', handleMouseEnter);
       window.removeEventListener('mouseover', handleMouseOver);
       cancelAnimationFrame(requestRef.current);
+      document.body.classList.remove('has-custom-cursor');
     };
   }, []);
 

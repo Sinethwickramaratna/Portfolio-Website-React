@@ -253,9 +253,9 @@ a:hover {
 }
 
 /* Custom Cursor labels mapping */
-[data-cursor="explore"] { cursor: none; }
-[data-cursor="execute"] { cursor: none; }
-[data-cursor="open"] { cursor: none; }
+.has-custom-cursor [data-cursor="explore"] { cursor: none; }
+.has-custom-cursor [data-cursor="execute"] { cursor: none; }
+.has-custom-cursor [data-cursor="open"] { cursor: none; }
 
 #root {
   position: relative;

@@ -121,9 +121,13 @@
   100% { transform: scale(1.6); opacity: 0; }
 }
 
-/* Disable default mouse cursor globally when active */
-@media (hover: hover) and (pointer: fine) {
-  body, a, button, [role="button"], input, textarea, select {
-    cursor: none !important;
-  }
+/* Disable default mouse cursor globally when custom cursor is active */
+.has-custom-cursor,
+.has-custom-cursor a,
+.has-custom-cursor button,
+.has-custom-cursor [role="button"],
+.has-custom-cursor input,
+.has-custom-cursor textarea,
+.has-custom-cursor select {
+  cursor: none !important;
 }
