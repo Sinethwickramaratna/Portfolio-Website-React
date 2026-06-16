@@ -7,7 +7,7 @@ import faceProfile from '../assets/Images/profile.webp';
 
 // Preload critical images as early as possible
 preload(samuraiCutout, { as: 'image', fetchPriority: 'high' });
-preload(samuraiBg, { as: 'image', fetchPriority: 'low' });
+preload(samuraiBg, { as: 'image', fetchPriority: 'high' });
 
 function CyberSamuraiImage({ revealState, setRevealState }) {
   
@@ -48,8 +48,8 @@ function CyberSamuraiImage({ revealState, setRevealState }) {
           width="800"
           height="550"
           loading="eager"
-          fetchPriority="low"
-          decoding="async"
+          fetchPriority="high"
+          decoding="sync"
         />
       </div>
 
