@@ -2,12 +2,11 @@ import { useState, useEffect, useRef } from 'react';
 import './CustomCursor.css';
 
 function CustomCursor() {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [ringPosition, setRingPosition] = useState({ x: 0, y: 0 });
   const [cursorState, setCursorState] = useState('default'); // default, explore, execute, open
   const [isVisible, setIsVisible] = useState(false);
 
   const ringRef = useRef(null);
+  const dotRef = useRef(null);
   const requestRef = useRef(null);
   const mouseRef = useRef({ x: 0, y: 0 });
 
@@ -20,7 +19,10 @@ function CustomCursor() {
 
     const handleMouseMove = (e) => {
       mouseRef.current = { x: e.clientX, y: e.clientY };
-      setPosition({ x: e.clientX, y: e.clientY });
+      if (dotRef.current) {
+        dotRef.current.style.left = `${e.clientX}px`;
+        dotRef.current.style.top = `${e.clientY}px`;
+      }
     };
 
     const handleMouseLeave = () => setIsVisible(false);
@@ -32,14 +34,19 @@ function CustomCursor() {
 
     // Smooth lerp for outer gold ring follow delay
     const updateRingPosition = () => {
-      setRingPosition((prev) => {
-        const dx = mouseRef.current.x - prev.x;
-        const dy = mouseRef.current.y - prev.y;
-        return {
-          x: prev.x + dx * 0.15,
-          y: prev.y + dy * 0.15
-        };
-      });
+      if (ringRef.current) {
+        const prevX = parseFloat(ringRef.current.style.left) || mouseRef.current.x;
+        const prevY = parseFloat(ringRef.current.style.top) || mouseRef.current.y;
+        
+        const dx = mouseRef.current.x - prevX;
+        const dy = mouseRef.current.y - prevY;
+        
+        const nextX = prevX + dx * 0.15;
+        const nextY = prevY + dy * 0.15;
+        
+        ringRef.current.style.left = `${nextX}px`;
+        ringRef.current.style.top = `${nextY}px`;
+      }
       requestRef.current = requestAnimationFrame(updateRingPosition);
     };
     requestRef.current = requestAnimationFrame(updateRingPosition);
@@ -103,7 +110,7 @@ function CustomCursor() {
       {/* Outer Ring: Gold */}
       <div 
         className="cursor-ring-outer" 
-        style={{ left: `${ringPosition.x}px`, top: `${ringPosition.y}px` }}
+        style={{ left: '-100px', top: '-100px' }}
         ref={ringRef}
       >
         <span className="ring-radar"></span>
@@ -112,7 +119,8 @@ function CustomCursor() {
       {/* Inner Dot: Red */}
       <div 
         className="cursor-dot-inner" 
-        style={{ left: `${position.x}px`, top: `${position.y}px` }}
+        style={{ left: '-100px', top: '-100px' }}
+        ref={dotRef}
       >
         {/* Dynamic HUD Label floating next to cursor */}
         {cursorState !== 'default' && (

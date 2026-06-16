@@ -85,8 +85,10 @@ function CyberSamuraiImage({ revealState, setRevealState }) {
             src={faceProfile} 
             alt="Sineth Profile Hologram" 
             className="hologram-face-img" 
+            width="162"
+            height="199"
             loading="lazy"
-            decoding="async"
+            decoding="sync"
           />
           <div className="hologram-glow-bar"></div>
           <span className="hologram-tag monospace-val">
