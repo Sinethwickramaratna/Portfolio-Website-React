@@ -86,6 +86,52 @@ function LoadingPage() {
           <span className="telemetry-readout">SYSTEM_BOOT_INIT</span>
         </div>
 
+        {/* ⚔ Katana Collision Animation HUD ⚔ */}
+        <div className="katana-collision-wrapper">
+          <svg viewBox="0 0 400 160" className="katana-collision-svg">
+            <defs>
+              <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur stdDeviation="3" result="blur" />
+                <feMerge>
+                  <feMergeNode in="blur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+            </defs>
+            
+            {/* Left Katana */}
+            <g className="clash-katana left-katana">
+              <path d="M 80,40 L 120,60" stroke="#991b1b" strokeWidth="6" strokeLinecap="round" />
+              <path d="M 80,40 L 120,60" stroke="#111" strokeWidth="6" strokeLinecap="round" strokeDasharray="3 3" />
+              <ellipse cx="120" cy="60" rx="4" ry="10" fill="#dbc40e" transform="rotate(26.5 120 60)" />
+              <line x1="120" y1="60" x2="220" y2="110" stroke="#e2e8f0" strokeWidth="3.5" strokeLinecap="round" />
+              <line x1="120" y1="60" x2="220" y2="110" stroke="#ff3b3b" strokeWidth="1.2" strokeLinecap="round" filter="url(#glow)" />
+            </g>
+
+            {/* Right Katana */}
+            <g className="clash-katana right-katana">
+              <path d="M 320,40 L 280,60" stroke="#991b1b" strokeWidth="6" strokeLinecap="round" />
+              <path d="M 320,40 L 280,60" stroke="#111" strokeWidth="6" strokeLinecap="round" strokeDasharray="3 3" />
+              <ellipse cx="280" cy="60" rx="4" ry="10" fill="#dbc40e" transform="rotate(-26.5 280 60)" />
+              <line x1="280" y1="60" x2="180" y2="110" stroke="#e2e8f0" strokeWidth="3.5" strokeLinecap="round" />
+              <line x1="280" y1="60" x2="180" y2="110" stroke="#ff3b3b" strokeWidth="1.2" strokeLinecap="round" filter="url(#glow)" />
+            </g>
+
+            {/* Spark Lines */}
+            <g className="clash-sparks">
+              <line x1="200" y1="100" x2="155" y2="70" className="spark-line spark-1" />
+              <line x1="200" y1="100" x2="245" y2="70" className="spark-line spark-2" />
+              <line x1="200" y1="100" x2="160" y2="120" className="spark-line spark-3" />
+              <line x1="200" y1="100" x2="240" y2="120" className="spark-line spark-4" />
+              <line x1="200" y1="100" x2="200" y2="50" className="spark-line spark-5" />
+              <line x1="200" y1="100" x2="200" y2="150" className="spark-line spark-6" />
+            </g>
+
+            {/* Glow / Flash Circle */}
+            <circle cx="200" cy="100" r="0" className="clash-flash" />
+          </svg>
+        </div>
+
         {/* Text lines print list */}
         <div className="boot-log">
           {activeLines.map((line, idx) => (

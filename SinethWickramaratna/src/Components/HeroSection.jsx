@@ -13,6 +13,35 @@ function HeroSection() {
   const [colomboTime, setColomboTime] = useState('');
   const [activeTheme, setActiveTheme] = useState('MODE: SHADOW SHOGUN');
   const [showKatana3D, setShowKatana3D] = useState(false);
+  const [isSlicing, setIsSlicing] = useState(false);
+
+  const triggerSliceEffect = () => {
+    setIsSlicing(true);
+    setTimeout(() => setIsSlicing(false), 650);
+  };
+
+  const handleUnsheathe = () => {
+    triggerSliceEffect();
+    setTimeout(() => {
+      setShowKatana3D(true);
+    }, 150);
+  };
+
+  const handleSheathe = () => {
+    triggerSliceEffect();
+    setTimeout(() => {
+      setShowKatana3D(false);
+    }, 150);
+  };
+
+  // Listen for the custom event TRIGGER_3D_SLASH from 3D Katana
+  useEffect(() => {
+    const handleSlash = () => {
+      triggerSliceEffect();
+    };
+    window.addEventListener('TRIGGER_3D_SLASH', handleSlash);
+    return () => window.removeEventListener('TRIGGER_3D_SLASH', handleSlash);
+  }, []);
 
   // Load boot sequence
   useEffect(() => {
@@ -82,15 +111,17 @@ function HeroSection() {
 
         {/* Centerpiece Image background layer or 3D Katana */}
         {isLoaded && (
-          showKatana3D ? (
-            <Katana3DCanvas onClose={() => setShowKatana3D(false)} />
-          ) : (
-            <CyberSamuraiImage 
-              revealState={revealState} 
-              setRevealState={setRevealState} 
-              onUnsheathe={() => setShowKatana3D(true)}
-            />
-          )
+          <div className={isSlicing ? "slice-shift-active centerpiece-wrapper" : "centerpiece-wrapper"}>
+            {showKatana3D ? (
+              <Katana3DCanvas onClose={handleSheathe} />
+            ) : (
+              <CyberSamuraiImage 
+                revealState={revealState} 
+                setRevealState={setRevealState} 
+                onUnsheathe={handleUnsheathe}
+              />
+            )}
+          </div>
         )}
 
         <div className="hero-command-center">
@@ -154,7 +185,13 @@ function HeroSection() {
                 
                 <button 
                   className={`btn-premium ${showKatana3D ? 'btn-primary-glow' : 'btn-outline'} hud-katana-toggle-btn`}
-                  onClick={() => setShowKatana3D(prev => !prev)}
+                  onClick={() => {
+                    if (showKatana3D) {
+                      handleSheathe();
+                    } else {
+                      handleUnsheathe();
+                    }
+                  }}
                 >
                   {showKatana3D ? '[ SHEATHE BLADE ]' : '[ 3D WEAPON VIEWER ]'}
                 </button>
@@ -225,6 +262,14 @@ function HeroSection() {
           </div>
 
         </div>
+
+        {/* ⚔ Full Screen Katana Slice Cut Overlay ⚔ */}
+        {isSlicing && (
+          <div className="katana-slice-cut-screen">
+            <div className="slice-diagonal-line"></div>
+            <div className="slice-flash-screen"></div>
+          </div>
+        )}
       </section>
     </>
   );
