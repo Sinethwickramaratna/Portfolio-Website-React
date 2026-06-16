@@ -9,7 +9,7 @@ import faceProfile from '../assets/Images/profile.webp';
 preload(samuraiCutout, { as: 'image', fetchPriority: 'high' });
 preload(samuraiBg, { as: 'image', fetchPriority: 'high' });
 
-function CyberSamuraiImage({ revealState, setRevealState }) {
+function CyberSamuraiImage({ revealState, setRevealState, onUnsheathe }) {
   
   // Auto-transition revealState stages when scanning is triggered
   useEffect(() => {
@@ -133,14 +133,19 @@ function CyberSamuraiImage({ revealState, setRevealState }) {
         </div>
 
         {/* Card 2: Bottom-Left */}
-        <div className="samurai-hud-card hud-bottom-left shogun-card">
+        <div 
+          className="samurai-hud-card hud-bottom-left shogun-card interactive-hud-card"
+          onClick={onUnsheathe}
+          style={{ cursor: 'pointer', pointerEvents: 'auto' }}
+          title="Click to unsheathe 3D Katana"
+        >
           <div className="hud-corner top-left"></div>
           <div className="hud-corner top-right"></div>
           <div className="hud-corner bottom-left"></div>
           <div className="hud-corner bottom-right"></div>
           <div className="hud-card-title monospace-val">// KATANA_STRIKE //</div>
           <div className="hud-card-stat monospace-val">CHARGE: 100%</div>
-          <div className="hud-card-status text-gold">STRIKE: READY</div>
+          <div className="hud-card-status text-gold">STRIKE: [ ACTIVE ]</div>
         </div>
 
         {/* Card 3: Top-Right */}

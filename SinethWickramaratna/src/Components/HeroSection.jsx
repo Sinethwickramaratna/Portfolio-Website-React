@@ -1,6 +1,7 @@
 import './HeroSection.css';
 import LoadingPage from './LoadingPage.jsx';
 import CyberSamuraiImage from './CyberSamuraiImage.jsx';
+import Katana3DCanvas from './Katana3DCanvas.jsx';
 import AtmosphericBackground from './AtmosphericBackground.jsx';
 import { useState, useEffect } from 'react';
 import projectsDataRaw from '../data/projectsData.json';
@@ -11,6 +12,7 @@ function HeroSection() {
   const [revealState, setRevealState] = useState('idle'); // idle, scanning, pulse, separating, glitching, revealed
   const [colomboTime, setColomboTime] = useState('');
   const [activeTheme, setActiveTheme] = useState('MODE: SHADOW SHOGUN');
+  const [showKatana3D, setShowKatana3D] = useState(false);
 
   // Load boot sequence
   useEffect(() => {
@@ -78,12 +80,17 @@ function HeroSection() {
         {/* Cyber Grid Overlay */}
         <div className="hero-grid-overlay"></div>
 
-        {/* Centerpiece Image background layer */}
+        {/* Centerpiece Image background layer or 3D Katana */}
         {isLoaded && (
-          <CyberSamuraiImage 
-            revealState={revealState} 
-            setRevealState={setRevealState} 
-          />
+          showKatana3D ? (
+            <Katana3DCanvas onClose={() => setShowKatana3D(false)} />
+          ) : (
+            <CyberSamuraiImage 
+              revealState={revealState} 
+              setRevealState={setRevealState} 
+              onUnsheathe={() => setShowKatana3D(true)}
+            />
+          )
         )}
 
         <div className="hero-command-center">
@@ -136,13 +143,20 @@ function HeroSection() {
               </div>
 
               {/* IDENTIFY CLI Button Trigger */}
-              <div className="hud-action-wrapper">
+              <div className="hud-action-wrapper" style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                 <button 
                   className={`btn-premium ${revealState === 'idle' ? 'btn-primary-glow' : 'btn-outline'} hud-identify-btn`}
                   onClick={triggerIdentify}
                   disabled={revealState !== 'idle' && revealState !== 'revealed'}
                 >
                   {revealState === 'idle' ? '[ IDENTIFY ]' : `[ STATUS: ${revealState.toUpperCase()} ]`}
+                </button>
+                
+                <button 
+                  className={`btn-premium ${showKatana3D ? 'btn-primary-glow' : 'btn-outline'} hud-katana-toggle-btn`}
+                  onClick={() => setShowKatana3D(prev => !prev)}
+                >
+                  {showKatana3D ? '[ SHEATHE BLADE ]' : '[ 3D WEAPON VIEWER ]'}
                 </button>
               </div>
             </div>

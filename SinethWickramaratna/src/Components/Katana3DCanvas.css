@@ -1,0 +1,161 @@
+.katana-3d-centerpiece-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: auto;
+  width: 55%;
+  height: 100%;
+  overflow: hidden;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  transition: var(--transition-cinematic);
+  z-index: 4;
+  -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 35%, rgba(0,0,0,0) 95%);
+  mask-image: linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 35%, rgba(0,0,0,0) 95%);
+}
+
+.katana-canvas-mount {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  cursor: crosshair;
+}
+
+.katana-hud-dashboard {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.katana-hud-card {
+  position: absolute;
+  width: 145px;
+  min-height: 55px !important;
+  padding: 8px 12px !important;
+  background: rgba(11, 11, 11, 0.94) !important;
+  border-radius: 4px !important;
+  border-color: rgba(185, 23, 23, 0.35) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7) !important;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  pointer-events: auto;
+}
+
+.katana-hud-card:hover {
+  border-color: var(--primary) !important;
+  box-shadow: 0 4px 25px var(--primary-glow-heavy) !important;
+}
+
+.katana-hud-core {
+  top: 13%;
+  left: 3%;
+}
+
+.katana-hud-combat {
+  top: 63%;
+  left: 1%;
+}
+
+.katana-hud-actions {
+  position: absolute;
+  bottom: 30px;
+  left: 20%;
+  display: flex;
+  gap: 12px;
+  pointer-events: auto;
+}
+
+.slash-trigger-btn {
+  background: var(--primary);
+  border-color: var(--primary);
+  box-shadow: 0 0 15px var(--primary-glow);
+  font-weight: 700;
+}
+
+.slash-trigger-btn:hover {
+  background: var(--color-crimson-dark);
+  box-shadow: 0 0 25px var(--primary-glow-heavy);
+}
+
+.sheathe-btn {
+  border-color: var(--border-color);
+  color: var(--text-main);
+}
+
+.sheathe-btn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  box-shadow: 0 0 12px var(--primary-glow);
+}
+
+.katana-instruction-overlay {
+  position: absolute;
+  top: 25px;
+  left: 22%;
+  font-size: 0.65rem;
+  letter-spacing: 1px;
+  color: var(--primary);
+  text-shadow: 0 0 5px var(--primary-glow);
+  pointer-events: none;
+  z-index: 5;
+  animation: telemetry-pulse 2s infinite alternate;
+}
+
+@keyframes telemetry-pulse {
+  from { opacity: 0.5; }
+  to { opacity: 1; }
+}
+
+/* Light Theme tweaks */
+[data-theme="light"] .katana-hud-card {
+  background: rgba(255, 255, 255, 0.94) !important;
+  border-color: rgba(219, 196, 14, 0.35) !important;
+}
+
+[data-theme="light"] .katana-hud-card:hover {
+  border-color: var(--accent-gold) !important;
+  box-shadow: 0 4px 20px var(--accent-gold-glow) !important;
+}
+
+[data-theme="light"] .katana-instruction-overlay {
+  color: var(--accent-gold);
+  text-shadow: 0 0 4px var(--accent-gold-glow);
+}
+
+/* Mobile responsive centering and overlay behavior */
+@media (max-width: 900px) {
+  .katana-3d-centerpiece-container {
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* behind mobile dashboard cards */
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+  
+  .katana-hud-core,
+  .katana-hud-combat {
+    display: none; /* Hide floating HUD dashboard cards on tablet/mobile to avoid overlapping text */
+  }
+
+  .katana-hud-actions {
+    left: 5%;
+    right: 5%;
+    width: 90%;
+    justify-content: center;
+    bottom: 20px;
+  }
+
+  .katana-instruction-overlay {
+    left: 5%;
+    right: 5%;
+    width: 90%;
+    text-align: center;
+    top: 15px;
+  }
+}
