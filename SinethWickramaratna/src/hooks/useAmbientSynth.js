@@ -4,7 +4,9 @@ import bgMusicUrl from '../assets/Music/onetent-ethnic-flute-samurai-relaxing-ci
 const SoundContext = createContext();
 
 export function AudioProvider({ children }) {
-  const [isPlaying, setIsPlaying] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(() => {
+    return typeof window !== 'undefined' && window.innerWidth > 768;
+  });
   
   // Web Audio API refs (for ambient drone/wind/bell)
   const audioCtxRef = useRef(null);
@@ -161,12 +163,19 @@ export function AudioProvider({ children }) {
 
   // Auto-play music loop on mount (or first interaction fallback)
   useEffect(() => {
+    const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
+
     // Pre-initialize background music element
     if (!bgAudioRef.current) {
       const audio = new Audio(bgMusicUrl);
       audio.loop = true;
       audio.volume = 0.22;
       bgAudioRef.current = audio;
+    }
+
+    if (isMobile) {
+      setIsPlaying(false);
+      return;
     }
 
     let cleanupInteraction = null;
