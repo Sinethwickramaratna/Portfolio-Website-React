@@ -55,7 +55,7 @@ function AboutSection() {
 
               <div className="profile-tag-overlay monospace-val">
                 <span className="tag-indicator"></span>
-                RANK: SPECIALIST_DEVELOPER
+                RANK: INTERMEDIATE_DEVELOPER
               </div>
             </div>
 

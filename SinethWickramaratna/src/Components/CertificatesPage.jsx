@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './CertificatesPage.css';
 import Footer from './public/Footer';
+import AtmosphericBackground from './AtmosphericBackground';
 import robofest2025 from '../assets/Certificates/RoboFest.jpg';
 import kaggleML from '../assets/Certificates/Sineth Wickramaratna - Intro to Machine Learning.png';
 import kagglePandas from '../assets/Certificates/Sineth Wickramaratna - Pandas.png';
@@ -97,18 +98,21 @@ function CertificatesPage() {
   return (
     <>
       <div className="certificates-page">
+        {/* Background Canvas (Gold Dust) */}
+        <AtmosphericBackground type="honor" />
+
         {/* Header */}
-        <header className="certificates-page-header">
-          <button className="back-button" onClick={handleBackClick}>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <header className="certificates-page-header section-header-hud">
+          <button className="back-button btn-premium btn-outline" onClick={handleBackClick}>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ marginRight: '6px' }}>
               <path d="M19 12H5M12 19l-7-7 7-7"/>
             </svg>
-            Back to Portfolio
+            [ BACK_TO_OS ]
           </button>
-          <h1 className="certificates-page-title">
-            <span className="gradient-text">Certificates & Achievements</span>
+          <h1 className="certificates-page-title section-title-hud font-display">
+            [009] <span className="text-gradient">HONOR ARCHIVE</span>
           </h1>
-          <p className="certificates-page-subtitle">All my certifications and achievements</p>
+          <span className="section-telemetry-hud monospace-val">HONOR_REGISTRY_LOADED</span>
         </header>
 
         {/* Certificates Grid */}
@@ -116,9 +120,13 @@ function CertificatesPage() {
           {sortedCertificates.map((cert, index) => (
             <div 
               key={cert.id} 
-              className="certificate-page-card"
+              className="certificate-page-card shogun-card"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
+              <div className="hud-corner top-left"></div>
+              <div className="hud-corner top-right"></div>
+              <div className="hud-corner bottom-left"></div>
+              <div className="hud-corner bottom-right"></div>
               {cert.image && (
                 <div 
                   className="certificate-page-image-container"
@@ -137,7 +145,7 @@ function CertificatesPage() {
               )}
               <div className="certificate-page-content">
                 <div className="certificate-page-icon">{cert.icon}</div>
-                <h3 className="certificate-page-title">{cert.title}</h3>
+                <h3 className="certificate-page-card-title font-display">{cert.title}</h3>
                 <p className="certificate-page-issuer">{cert.issuer}</p>
                 <p className="certificate-page-date">
                   {cert.date.month} {cert.date.year}
@@ -176,10 +184,14 @@ function CertificatesPage() {
               </svg>
             </button>
             
-            <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
+            <div className="lightbox-content shogun-card" onClick={(e) => e.stopPropagation()}>
+              <div className="hud-corner top-left"></div>
+              <div className="hud-corner top-right"></div>
+              <div className="hud-corner bottom-left"></div>
+              <div className="hud-corner bottom-right"></div>
               <img src={selectedCertificate.image} alt={selectedCertificate.title} />
               <div className="lightbox-info">
-                <h2>{selectedCertificate.title}</h2>
+                <h2 className="font-display">{selectedCertificate.title}</h2>
                 <p className="lightbox-issuer">{selectedCertificate.issuer}</p>
                 <p className="lightbox-date">
                   {selectedCertificate.date.month} {selectedCertificate.date.year}

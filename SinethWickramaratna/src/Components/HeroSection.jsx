@@ -126,7 +126,7 @@ function HeroSection() {
 
                 <div className="hud-stat-item">
                   <span className="hud-label">YEARS_LEARNING</span>
-                  <span className="hud-val monospace-val">4+ YEARS</span>
+                  <span className="hud-val monospace-val">2+ YEARS</span>
                 </div>
 
                 <div className="hud-stat-item">

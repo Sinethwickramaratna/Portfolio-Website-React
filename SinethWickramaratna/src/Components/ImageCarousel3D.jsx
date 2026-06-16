@@ -1,5 +1,5 @@
 import './ImageCarousel3D.css';
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import galleryImages from '../data/galleryImages.json';
 import AtmosphericBackground from './AtmosphericBackground';
@@ -16,7 +16,10 @@ function ImageCarousel3D() {
     width: 600,
     height: 400
   });
+
   const imageRefs = useRef({});
+  const dragStartRef = useRef(null);
+  const isDraggingRef = useRef(false);
   
   // Only show first 10 images in carousel
   const displayImages = carouselImages.slice(0, 10);
@@ -49,8 +52,8 @@ function ImageCarousel3D() {
       const isMobile = window.innerWidth <= 768;
       const isSmallMobile = window.innerWidth <= 480;
       
-      const maxWidth = isSmallMobile ? 300 : isMobile ? 400 : 700;
-      const maxHeight = isSmallMobile ? 250 : isMobile ? 350 : 500;
+      const maxWidth = isSmallMobile ? 290 : isMobile ? 380 : 640;
+      const maxHeight = isSmallMobile ? 220 : isMobile ? 300 : 420;
       
       let width = naturalWidth;
       let height = naturalHeight;
@@ -69,24 +72,19 @@ function ImageCarousel3D() {
   }, [currentIndex]);
 
   const handleImageLoad = (e, imageId) => {
-    console.log(`Image ${imageId} loaded successfully`);
-    
-    // Get natural image dimensions
     const img = e.target;
     const naturalWidth = img.naturalWidth;
     const naturalHeight = img.naturalHeight;
     
-    // Calculate scaled dimensions based on screen size
     const isMobile = window.innerWidth <= 768;
     const isSmallMobile = window.innerWidth <= 480;
     
-    const maxWidth = isSmallMobile ? 300 : isMobile ? 400 : 700;
-    const maxHeight = isSmallMobile ? 250 : isMobile ? 350 : 500;
+    const maxWidth = isSmallMobile ? 290 : isMobile ? 380 : 640;
+    const maxHeight = isSmallMobile ? 220 : isMobile ? 300 : 420;
     
     let width = naturalWidth;
     let height = naturalHeight;
     
-    // Scale down if too large
     if (width > maxWidth || height > maxHeight) {
       const widthRatio = maxWidth / width;
       const heightRatio = maxHeight / height;
@@ -96,7 +94,6 @@ function ImageCarousel3D() {
       height = Math.round(height * ratio);
     }
     
-    // Update dimensions for the current image
     setCarouselDimensions({ width, height });
   };
 
@@ -109,7 +106,7 @@ function ImageCarousel3D() {
     if (!isTransitioning) {
       setIsTransitioning(true);
       setCurrentIndex((prevIndex) => (prevIndex + 1) % displayImages.length);
-      setTimeout(() => setIsTransitioning(false), 600);
+      setTimeout(() => setIsTransitioning(false), 500);
     }
   };
 
@@ -117,18 +114,16 @@ function ImageCarousel3D() {
     if (!isTransitioning) {
       setIsTransitioning(true);
       setCurrentIndex((prevIndex) => (prevIndex - 1 + displayImages.length) % displayImages.length);
-      setTimeout(() => setIsTransitioning(false), 600);
+      setTimeout(() => setIsTransitioning(false), 500);
     }
   };
 
   const handleViewGallery = () => {
-    // Scroll to top smoothly
     window.scrollTo({
       top: 0,
       behavior: 'smooth'
     });
     
-    // Navigate after a brief delay to allow scroll animation
     setTimeout(() => {
       navigate('/gallery');
     }, 300);
@@ -136,10 +131,37 @@ function ImageCarousel3D() {
 
   const getImagePosition = (index) => {
     let position = index - currentIndex;
-    if (position < -3) position += displayImages.length;
-    if (position > 3) position -= displayImages.length;
+    if (position < -5) position += displayImages.length;
+    if (position > 5) position -= displayImages.length;
     return position;
   };
+
+  // Drag and Swipe Handlers
+  const handleDragStart = (clientX) => {
+    dragStartRef.current = clientX;
+    isDraggingRef.current = true;
+  };
+
+  const handleDragMove = (clientX) => {
+    if (!isDraggingRef.current || dragStartRef.current === null) return;
+    
+    const diff = clientX - dragStartRef.current;
+    
+    if (diff > 80) {
+      handlePrev();
+      handleDragEnd();
+    } else if (diff < -80) {
+      handleNext();
+      handleDragEnd();
+    }
+  };
+
+  const handleDragEnd = () => {
+    dragStartRef.current = null;
+    isDraggingRef.current = false;
+  };
+
+  const activeImage = displayImages[currentIndex];
 
   return (
     <section className="carousel-3d-section" id="design-gallery">
@@ -154,31 +176,40 @@ function ImageCarousel3D() {
         </div>
 
         <div className={`carousel-3d-wrapper shoji-reveal ${isLoaded ? 'loaded' : ''}`}>
+          
+          {/* Holographic 3D Curved Stage */}
           <div 
             className="carousel-3d-scene"
             style={{
-              height: `${carouselDimensions.height + 100}px`
+              height: `${carouselDimensions.height + 60}px`
             }}
+            onMouseDown={(e) => handleDragStart(e.clientX)}
+            onMouseMove={(e) => handleDragMove(e.clientX)}
+            onMouseUp={handleDragEnd}
+            onMouseLeave={handleDragEnd}
+            onTouchStart={(e) => handleDragStart(e.touches[0].clientX)}
+            onTouchMove={(e) => handleDragMove(e.touches[0].clientX)}
+            onTouchEnd={handleDragEnd}
           >
             <div className={`carousel-3d-viewer ${isTransitioning ? 'transitioning' : ''}`}>
               {displayImages.map((image, index) => {
                 const position = getImagePosition(index);
+                const isVisible = Math.abs(position) <= 1; // Only render active, left, and right cards
+                
                 return (
                   <div
                     key={image.id}
-                    className={`carousel-3d-item carousel-position-${position}`}
+                    className={`carousel-3d-item carousel-position-${position} ${isVisible ? 'visible' : 'hidden'}`}
                     style={{
                       width: `${carouselDimensions.width}px`,
                       height: `${carouselDimensions.height}px`,
                       marginLeft: `-${carouselDimensions.width / 2}px`,
                       marginTop: `-${carouselDimensions.height / 2}px`,
-                      transform: `
-                        rotateY(${position * 35}deg) 
-                        translateZ(${position === 0 ? '0px' : -Math.abs(position) * 200 + 'px'})
-                        scale(${position === 0 ? 1 : 0.6 - Math.abs(position) * 0.08})
-                      `,
-                      opacity: Math.abs(position) > 2 ? 0 : 1 - Math.abs(position) * 0.15,
-                      filter: position === 0 ? 'blur(0px)' : `blur(${Math.abs(position) * 8}px)`,
+                      transform: isVisible
+                        ? `rotateY(${position * -35}deg) translateX(${position * (window.innerWidth <= 768 ? 200 : 340)}px) translateZ(${-Math.abs(position) * 150}px) scale(${position === 0 ? 1 : 0.78})`
+                        : `rotateY(0deg) translateX(0px) translateZ(-400px) scale(0)`,
+                      opacity: position === 0 ? 1 : isVisible ? 0.45 : 0,
+                      filter: position === 0 ? 'blur(0px)' : `blur(3px)`,
                       zIndex: 100 - Math.abs(position) * 10
                     }}
                   >
@@ -187,6 +218,9 @@ function ImageCarousel3D() {
                       <div className="hud-corner top-right"></div>
                       <div className="hud-corner bottom-left"></div>
                       <div className="hud-corner bottom-right"></div>
+                      
+                      <div className="active-scanline"></div>
+                      
                       <img 
                         ref={el => imageRefs.current[image.id] = el}
                         src={image.image} 
@@ -194,6 +228,7 @@ function ImageCarousel3D() {
                         onError={() => handleImageError(image.id, image.image)}
                         onLoad={(e) => handleImageLoad(e, image.id)}
                         style={{ display: imageErrors[image.id] ? 'none' : 'block' }}
+                        draggable="false"
                       />
                       {imageErrors[image.id] && (
                         <div className="image-error-placeholder">
@@ -202,69 +237,85 @@ function ImageCarousel3D() {
                           <small>{image.title}</small>
                         </div>
                       )}
-                      {position === 0 && !imageErrors[image.id] && (
-                        <div className="carousel-item-overlay">
-                          <div className="overlay-text">
-                            <h3>{image.title}</h3>
-                            <p>{image.subtitle}</p>
-                          </div>
-                        </div>
-                      )}
                     </div>
                   </div>
                 );
               })}
             </div>
 
-            {/* Light effect */}
+            {/* Glowing active core behind the active image */}
             <div className="carousel-light-effect"></div>
           </div>
 
-          {/* Navigation Controls */}
-          <div className="carousel-controls">
+          {/* Dedicated Dynamic HUD Metadata Dashboard */}
+          {activeImage && (
+            <div className="carousel-metadata-panel shogun-card">
+              <div className="hud-corner top-left"></div>
+              <div className="hud-corner top-right"></div>
+              <div className="hud-corner bottom-left"></div>
+              <div className="hud-corner bottom-right"></div>
+              
+              <div className="metadata-header">
+                <span className="monospace-val">// ARCHIVE_METADATA_DEC //</span>
+                <span className="status-badge monospace-val">RECORD_00{currentIndex + 1}_ACTIVE</span>
+              </div>
+              
+              <div className="metadata-content">
+                <div className="meta-row">
+                  <span className="meta-label">DESIGN_TITLE:</span>
+                  <span className="meta-val font-display text-gradient">{activeImage.title}</span>
+                </div>
+                <div className="meta-row">
+                  <span className="meta-label">CREATIVE_SCOPE:</span>
+                  <span className="meta-val">{activeImage.subtitle}</span>
+                </div>
+                <div className="meta-row">
+                  <span className="meta-label">STREAM_STATUS:</span>
+                  <span className="meta-val monospace-val text-gold">STABLE // SYSTEM_RESOLVED</span>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Navigation Controls & Gauge */}
+          <div className="carousel-controls-wrapper">
             <button
-              className="carousel-btn carousel-btn-prev"
+              className="btn-premium btn-outline carousel-control-btn"
               onClick={handlePrev}
               disabled={isTransitioning}
-              title="Previous"
             >
-              <span className="arrow-icon">←</span>
+              [ PREV_SLIDE ]
             </button>
 
-            <div className="carousel-indicators">
+            {/* Numeric Gauge Segments */}
+            <div className="carousel-gauge monospace-val">
               {displayImages.map((_, index) => (
-                <button
+                <span 
                   key={index}
-                  className={`indicator-dot ${index === currentIndex ? 'active' : ''}`}
+                  className={`gauge-segment ${index === currentIndex ? 'active' : ''}`}
                   onClick={() => {
                     if (!isTransitioning && index !== currentIndex) {
                       setIsTransitioning(true);
                       setCurrentIndex(index);
-                      setTimeout(() => setIsTransitioning(false), 600);
+                      setTimeout(() => setIsTransitioning(false), 500);
                     }
                   }}
-                />
+                >
+                  {String(index + 1).padStart(2, '0')}
+                </span>
               ))}
             </div>
 
             <button
-              className="carousel-btn carousel-btn-next"
+              className="btn-premium btn-outline carousel-control-btn"
               onClick={handleNext}
               disabled={isTransitioning}
-              title="Next"
             >
-              <span className="arrow-icon">→</span>
+              [ NEXT_SLIDE ]
             </button>
           </div>
-
-          {/* Image Counter */}
-          <div className="carousel-counter">
-            <span className="current">{String(currentIndex + 1).padStart(2, '0')}</span>
-            <span className="separator">/</span>
-            <span className="total">{String(displayImages.length).padStart(2, '0')}</span>
-          </div>
           
-          {/* Load More Button */}
+          {/* View Full Gallery Link */}
           <div className="load-more-container">
             <button className="load-more-btn btn-premium btn-primary-glow" onClick={handleViewGallery}>
               <span className="btn-text">View Full Gallery</span>
@@ -272,6 +323,7 @@ function ImageCarousel3D() {
               <span className="btn-count">{carouselImages.length} Designs</span>
             </button>
           </div>
+
         </div>
       </div>
     </section>

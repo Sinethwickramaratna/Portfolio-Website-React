@@ -27,7 +27,6 @@ import CustomCursor from './Components/CustomCursor.jsx';
 function HomePage() {
   return (
     <>
-      <CustomCursor />
       <NavBar />
       <HeroSection />
       <CoreTelemetry />
@@ -49,6 +48,7 @@ function HomePage() {
 function App() {
   return (
     <AudioProvider>
+      <CustomCursor />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/gallery" element={<GalleryPage />} />

@@ -4,9 +4,6 @@ import './AtmosphericBackground.css';
 function AtmosphericBackground({ type = 'hero' }) {
   const canvasRef = useRef(null);
   const containerRef = useRef(null);
-  const videoRef = useRef(null);
-  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
-  const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
   const [theme, setTheme] = useState('dark');
 
   // Track active theme
@@ -21,26 +18,7 @@ function AtmosphericBackground({ type = 'hero' }) {
     return () => observer.disconnect();
   }, []);
 
-  // Intersection Observer to Lazy-Load video loops
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setShouldLoadVideo(true);
-            observer.disconnect(); // Only load once
-          }
-        });
-      },
-      { rootMargin: '200px' }
-    );
 
-    if (containerRef.current) {
-      observer.observe(containerRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
 
   // Autoplay disable on Mobile/Tablet Check
   const isMobile = typeof window !== 'undefined' && window.matchMedia('(max-width: 768px)').matches;
@@ -477,45 +455,12 @@ function AtmosphericBackground({ type = 'hero' }) {
     };
   }, [theme, type]);
 
-  // Handle Video autoplay on desktop
-  useEffect(() => {
-    if (!videoRef.current || !shouldLoadVideo || isMobile) return;
-    
-    videoRef.current.load();
-    const playPromise = videoRef.current.play();
-    
-    if (playPromise !== undefined) {
-      playPromise.then(() => {
-        setIsVideoLoaded(true);
-      }).catch((e) => {
-        // Autoplay blocked or failed, canvas fallback will run
-        setIsVideoLoaded(false);
-      });
-    }
-  }, [shouldLoadVideo]);
+
 
   return (
     <div className={`shogun-atmospheric-bg bg-${type}`} ref={containerRef}>
-      {/* Canvas Layer (renders on top of video, always active) */}
+      {/* Canvas Layer (always active) */}
       <canvas className="canvas-atmosphere" ref={canvasRef} />
-      
-      {/* Video Loop Layer (lazy loaded on Desktop only) */}
-      {shouldLoadVideo && !isMobile && (
-        <video
-          className={`video-atmosphere ${isVideoLoaded ? 'loaded' : 'loading'}`}
-          ref={videoRef}
-          loop
-          muted
-          playsInline
-          style={{ display: isVideoLoaded ? 'block' : 'none' }}
-        >
-          {theme === 'dark' ? (
-            <source src={`/videos/${type}.webm`} type="video/webm" />
-          ) : (
-            <source src={`/videos/${type}-light.webm`} type="video/webm" />
-          )}
-        </video>
-      )}
     </div>
   );
 }

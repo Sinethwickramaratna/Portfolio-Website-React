@@ -189,7 +189,7 @@ export function AudioProvider({ children }) {
         if (!audioCtxRef.current) initSynth();
       })
       .catch((err) => {
-        console.log("Autoplay blocked on load. Waiting for user interaction to begin playback:", err);
+        console.log("Audio autoplay waiting for user interaction.");
         
         const handleFirstInteraction = (e) => {
           if (

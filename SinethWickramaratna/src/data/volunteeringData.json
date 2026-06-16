@@ -173,10 +173,25 @@
       "month": "Nov"
     },
     "endDate": {
+      "year": "2026",
+      "month": "May"
+    },
+    "icon": "💻",
+    "description": "Leading design and development of projects for the SLIoT Challenge 2026"
+  },
+  {
+    "id": 13,
+    "organization": "IEEE Student Branch Chapter of University of Moratuwa",
+    "position": "Design Committee Co-lead of Moraforesight 4.0",
+    "startDate": {
+      "year": 2026,
+      "month": "Feb"
+    },
+    "endDate": {
       "year": "Present",
       "month": ""
     },
     "icon": "💻",
-    "description": "Leading design and development of projects for the SLIoT Challenge 2026"
+    "description": "Leading design and development of projects for the Moraforesight 4.0"
   }
 ]

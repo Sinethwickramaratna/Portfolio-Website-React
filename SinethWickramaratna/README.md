@@ -1,224 +1,89 @@
-# Sineth Wickramaratna - Portfolio
+# Sineth Wickramaratna — Portfolio
 
-A modern, fully responsive portfolio website showcasing projects, skills, experience, and expertise in software development, hardware design, and supply chain management.
+A compact, responsive portfolio built with React and Vite that showcases projects, certificates, skills, and contact options. The site includes interactive visuals (3D carousel, canvas scenes), audio controls, custom cursor, and performance telemetry.
 
-## 🌐 Live Demo
+**Live demo:** Add your deployed URL or GitHub Pages/Vercel link here.
 
-Visit the portfolio: [Your Portfolio URL]
+## Key Features
 
-## ✨ Features
+- Hero section with animated visuals and `CyberSamurai` artwork
+- Interactive 3D image carousel (`ImageCarousel3D`) and gallery pages
+- Projects showcase populated from `src/data/projectsData.json`
+- Skills and statistics (`SkillsSection`, `StatCard`, `StatItem`)
+- Certificates gallery and certificate detail cards
+- Contact form powered by EmailJS (`@emailjs/browser`) and social links
+- Global audio control and custom cursor for immersive UX
+- Scroll progress/katana-style indicator and smooth scroll animations
+- Lightweight telemetry for Core Web Vitals (`CoreTelemetry` components)
 
-- **Modern Design**: Sleek, gradient-based UI with smooth animations and transitions
-- **Fully Responsive**: Optimized for desktop, tablet, and mobile devices
-- **Project Showcase**: Display of completed and ongoing projects with GitHub links
-- **Skills Section**: Comprehensive skills categorized by expertise area
-- **About Section**: Professional background and statistics
-- **Certificates & Achievements**: Display of professional certifications
-- **Volunteering Experience**: Showcase of volunteer work and contributions
-- **Design Gallery**: Interactive 3D carousel and gallery of design works
-- **Contact Section**: Easy-to-use contact form with multiple ways to connect
-- **Blog Section**: Share articles and insights (coming soon)
-- **Smooth Animations**: Fade-in effects, scroll animations, and hover transitions
+## Tech Stack
 
-## 🛠️ Tech Stack
+- React (v19) + JSX
+- Vite (dev server and build)
+- CSS modules / component-level CSS (project uses plain CSS files)
+- Optional: Tailwind and Three.js are included in dependencies for advanced visuals
+- EmailJS for client-side contact form integration
 
-- **Frontend**: React 18, JavaScript/JSX
-- **Build Tool**: Vite
-- **Styling**: CSS3 with modern gradients and animations
-- **State Management**: React Hooks (useState, useEffect, useRef)
-- **Routing**: React Router (for page navigation)
-- **Data Format**: JSON for dynamic content (skills, projects, certificates, etc.)
+## Project layout (high level)
 
-## 📁 Project Structure
+- `src/` — application source
+  - `components/` — UI components (Hero, About, Projects, Skills, Contact, Gallery, etc.)
+  - `components/public/` — `NavBar`, `Footer`, global UI
+  - `data/` — JSON content: `projectsData.json`, `skillsData.json`, `certificatesData.json`, `contactData.json`
+  - `assets/` — images, logos, certificates
+  - `hooks/` — custom hooks (e.g., `useInView`, `useAmbientSynth`)
 
-```
-SinethWickramaratna/
-├── src/
-│   ├── components/
-│   │   ├── AboutSection.jsx
-│   │   ├── BlogSection.jsx
-│   │   ├── CertificatesSection.jsx
-│   │   ├── ContactSection.jsx
-│   │   ├── GalleryPage.jsx
-│   │   ├── HeroSection.jsx
-│   │   ├── ImageCarousel3D.jsx
-│   │   ├── ProjectsSection.jsx
-│   │   ├── SkillsSection.jsx
-│   │   ├── VolunteeringSection.jsx
-│   │   ├── public/
-│   │   │   ├── NavBar.jsx
-│   │   │   └── Footer.jsx
-│   │   ├── AboutComponents/
-│   │   ├── ContactComponents/
-│   │   ├── SkillsComponents/
-│   │   └── VolunteeringComponents/
-│   ├── data/
-│   │   ├── certificatesData.json
-│   │   ├── contactData.json
-│   │   ├── galleryImages.json
-│   │   ├── projectsData.json
-│   │   ├── skillsData.json
-│   │   └── volunteeringData.json
-│   ├── hooks/
-│   │   └── useInView.js
-│   ├── assets/
-│   │   ├── Images/
-│   │   ├── Certificates/
-│   │   ├── Logos/
-│   │   └── Icons/
-│   ├── App.jsx
-│   ├── main.jsx
-│   └── index.css
-├── public/
-├── vite.config.js
-├── package.json
-└── README.md
-```
-
-## 🚀 Getting Started
+## Getting started
 
 ### Prerequisites
 
-- Node.js (v16 or higher)
-- npm or yarn
+- Node.js (v16+)
+- npm (or yarn)
 
-### Installation
+### Install and run (development)
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/Sinethwickramaratna/Portfolio.git
-   cd SinethWickramaratna
-   ```
+```bash
+npm install
+npm run dev
+```
 
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
+Open the app at `http://localhost:5173` (Vite default).
 
-3. **Start the development server**
-   ```bash
-   npm run dev
-   ```
-
-   The portfolio will be available at `http://localhost:5173`
-
-### Build for Production
+### Build & preview
 
 ```bash
 npm run build
-```
-
-This creates an optimized production build in the `dist` folder.
-
-### Preview Production Build
-
-```bash
 npm run preview
 ```
 
-## 📊 Projects Included
+Available npm scripts (from `package.json`):
 
-### 1. 4-bit Nano Processor Implementation
-- **Category**: Hardware Design
-- **Status**: Completed (2024)
-- **Technologies**: VHDL, FPGA, Digital Logic
-- **Repository**: [GitHub Link](https://github.com/NirmalKBandara/microProcessorDesign.git)
+- `dev` — start Vite dev server
+- `build` — create production build
+- `preview` — preview production build locally
+- `lint` — run ESLint
 
-### 2. Student Task Management
-- **Category**: Full-Stack Development
-- **Status**: In Progress (2025)
-- **Technologies**: Flutter, Spring Boot, Java 17, PostgreSQL, JWT
-- **Repository**: [GitHub Link](https://github.com/Sinethwickramaratna/Student-Task-Manager.git)
+## Customize content
 
-### 3. Maze Solver Using Floodfill Algorithm
-- **Category**: Algorithm & Data Structures
-- **Status**: Completed (2024)
-- **Technologies**: C++, BFS, Pathfinding
-- **Repository**: [GitHub Link](https://github.com/Sinethwickramaratna/Maze-solving-algorithm-using-Flood-Fill-algorithm.git)
+Edit the JSON files in [src/data](src/data):
 
-### 4. KandyPack Railway
-- **Category**: Supply Chain Management
-- **Status**: In Progress (2025)
-- **Technologies**: React, TypeScript, Python, FastAPI, WebSocket
-- **Repository**: [GitHub Link](#)
+- [src/data/projectsData.json](src/data/projectsData.json)
+- [src/data/skillsData.json](src/data/skillsData.json)
+- [src/data/certificatesData.json](src/data/certificatesData.json)
+- [src/data/contactData.json](src/data/contactData.json)
 
-## 📝 Customization
+Update component styles in `src/Components/` if you need to change layout or visuals.
 
-### Update Personal Information
+## Notes & tips
 
-Edit the data files in `src/data/` to customize content:
+- Email sending is handled client-side using EmailJS — configure your EmailJS service ID and template keys in the contact form component or environment variables.
+- Tailwind and Three.js are present for optional use in experimental visuals.
+- If you add images, place them under `src/assets/Images` and reference them from the data JSON files.
 
-- **Skills**: `skillsData.json`
-- **Projects**: `projectsData.json`
-- **Certificates**: `certificatesData.json`
-- **Volunteering**: `volunteeringData.json`
-- **Contact Info**: `contactData.json`
-- **Gallery**: `galleryImages.json`
+## Contributing & License
 
-### Update Links
+This is a personal portfolio project. Contributions are welcome as suggestions — open an issue or reach out if you'd like to propose changes.
 
-Replace placeholder URLs and links:
-- GitHub repositories in projects
-- Social media links in footer
-- Email and contact information
-- Portfolio images and assets
-
-### Customize Styling
-
-Main style files:
-- `src/index.css` - Global styles
-- `src/theme.css` - Theme variables
-- Component-specific CSS files in `src/Components/`
-
-## 🎨 Color Scheme
-
-The portfolio uses a modern teal and cyan color palette:
-- Primary: `#0d7377` (Teal)
-- Accent: `#20b2aa` (Light Teal)
-- Secondary: `#17a2b8` (Light Blue)
-- Background: Dark gradients with transparency
-
-## 📱 Responsive Breakpoints
-
-- **Mobile**: < 480px
-- **Tablet**: 480px - 768px
-- **Desktop**: 768px - 1024px
-- **Large Desktop**: > 1024px
-
-## 🔗 Social Links
-
-Update social media links in:
-- `src/Components/public/Footer.jsx`
-- `src/Components/ContactSection.jsx`
-- `src/data/contactData.json`
-
-## 📄 License
-
-This portfolio is personal work created in 2025. Feel free to use it as inspiration for your own portfolio, but please credit and respect intellectual property rights.
-
-## 🤝 Contributing
-
-This is a personal portfolio, but suggestions and feedback are welcome! Feel free to:
-- Report bugs or issues
-- Suggest design improvements
-- Request new features
-
-## 📧 Contact
-
-For inquiries, feedback, or collaborations:
-- **Email**: [your-email@example.com]
-- **GitHub**: [github.com/Sinethwickramaratna](https://github.com/Sinethwickramaratna)
-- **LinkedIn**: [Your LinkedIn Profile]
-- **Twitter/X**: [Your Twitter Handle]
-
-## 🙏 Acknowledgments
-
-- Built with React and Vite
-- Inspired by modern portfolio designs
-- Thanks to the open-source community
-
----
-
-**Last Updated**: February 2025
+**Last updated:** 2026-06-16
 
 Made with ❤️ by Sineth Wickramaratna

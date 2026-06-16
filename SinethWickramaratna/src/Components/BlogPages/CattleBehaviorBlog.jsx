@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Footer from '../public/Footer';
+import AtmosphericBackground from '../AtmosphericBackground';
 import './CattleBehaviorBlog.css';
 
 function CattleBehaviorBlog() {
@@ -13,24 +14,31 @@ function CattleBehaviorBlog() {
   return (
     <>
       <div className="blog-article-page">
+        {/* Background Scrolls Canvas */}
+        <AtmosphericBackground type="scrolls" />
+
         <header className="blog-article-header">
-          <button className="blog-back-button" onClick={() => navigate('/')}>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <button className="blog-back-button btn-premium btn-outline" onClick={() => navigate('/')}>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ marginRight: '6px' }}>
               <path d="M19 12H5M12 19l-7-7 7-7" />
             </svg>
-            Back to Portfolio
+            [ BACK_TO_OS ]
           </button>
 
-          <p className="blog-article-category">IoT + Machine Learning</p>
-          <h1 className="blog-article-title">
-            From Sensors to Insights: Detecting Cattle Behavior Using IoT, Feature Engineering, and Machine Learning
+          <p className="blog-article-category monospace-val">IoT + Machine Learning</p>
+          <h1 className="blog-article-title section-title-hud font-display">
+            <span className="text-gradient">From Sensors to Insights: Detecting Cattle Behavior Using IoT, Feature Engineering, and Machine Learning</span>
           </h1>
           <p className="blog-article-subtitle">
             Building an end-to-end livestock intelligence pipeline from wearable sensor streams to behavior prediction APIs.
           </p>
         </header>
 
-        <article className="blog-article-content">
+        <article className="blog-article-content shogun-card">
+          <div className="hud-corner top-left"></div>
+          <div className="hud-corner top-right"></div>
+          <div className="hud-corner bottom-left"></div>
+          <div className="hud-corner bottom-right"></div>
           <section>
             <p>
               Modern agriculture is rapidly evolving with the integration of Artificial Intelligence (AI) and Internet of Things (IoT) technologies. One significant challenge in livestock farming is efficiently monitoring animal behavior. Traditionally, farmers observe cattle behavior manually, but this method becomes impractical as herd sizes increase.
@@ -53,7 +61,7 @@ function CattleBehaviorBlog() {
             </p>
 
             <figure className="blog-image-figure">
-              <img src="/blog/cattle-iot-hero.svg" alt="Cattle wearing IoT collar and cloud analytics flow" loading="lazy" />
+              <img src="/blog/cattle-iot-hero.png" alt="Cattle wearing IoT collar and cloud analytics flow" loading="lazy" />
               <figcaption>Figure 1: High-level concept of IoT-based cattle behavior monitoring.</figcaption>
             </figure>
           </section>
@@ -143,7 +151,7 @@ function CattleBehaviorBlog() {
             </p>
 
             <figure className="blog-image-figure">
-              <img src="/blog/sliding-window.svg" alt="Sliding windows over an IMU time series" loading="lazy" />
+              <img src="/blog/sliding-window.png" alt="Sliding windows over an IMU time series" loading="lazy" />
               <figcaption>Figure 2: Overlapping windows convert continuous signals into supervised samples.</figcaption>
             </figure>
           </section>
@@ -339,7 +347,7 @@ function CattleBehaviorBlog() {
           <section>
             <h2>Architecture Diagram</h2>
             <figure className="blog-image-figure">
-              <img src="/blog/pipeline-architecture.svg" alt="Architecture pipeline from IoT sensor to farm dashboard" loading="lazy" />
+              <img src="/blog/pipeline-architecture.png" alt="Architecture pipeline from IoT sensor to farm dashboard" loading="lazy" />
               <figcaption>Figure 3: End-to-end pipeline from sensor signals to behavior insights.</figcaption>
             </figure>
           </section>

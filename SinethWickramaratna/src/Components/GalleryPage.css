@@ -1,16 +1,8 @@
 .gallery-page {
   position: relative;
   min-height: 100vh;
-  background-image: linear-gradient(rgba(11, 11, 11, 0.75), rgba(11, 11, 11, 0.75)), url('../assets/Images/temple_courtyard.jpg');
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
+  background-color: var(--bg-primary);
   padding: 120px 24px 60px;
-  overflow: hidden;
-}
-
-[data-theme="light"] .gallery-page {
-  background-image: linear-gradient(rgba(248, 245, 239, 0.85), rgba(248, 245, 239, 0.85)), url('../assets/Images/temple_courtyard.jpg');
 }
 
 .gallery-header {
@@ -22,7 +14,6 @@
   align-items: flex-end;
   padding-bottom: 20px;
   border-bottom: 1px solid var(--border-hairline);
-  z-index: 10;
 }
 
 .back-button {
@@ -51,8 +42,6 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 24px;
-  position: relative;
-  z-index: 10;
 }
 
 .gallery-item {

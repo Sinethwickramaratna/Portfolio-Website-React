@@ -47,9 +47,9 @@ function GalleryPage() {
   return (
     <>
       <div className="gallery-page">
-        {/* Background Atmosphere */}
-        <AtmosphericBackground type="hero" />
-        
+        {/* Background Grids & Radar */}
+        <AtmosphericBackground type="archive" />
+
         {/* Header */}
         <header className="gallery-header section-header-hud">
           <button className="back-button btn-premium btn-outline" onClick={handleBackClick}>
