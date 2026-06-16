@@ -143,11 +143,11 @@
 /* Layer 4: Holographic Profile ID Card */
 .samurai-hologram-face {
   position: absolute;
-  bottom: 40px;
-  left: 40px;
+  bottom: 30px;
+  left: 30px;
   right: auto;
-  width: 180px;
-  height: 235px;
+  width: 120px;
+  height: 155px;
   border-radius: 6px;
   border: 1px solid var(--primary);
   background: rgba(22, 22, 22, 0.85);
@@ -168,35 +168,12 @@
   background-size: 100% 4px;
 }
 
-.samurai-hologram-face.status-scanning {
-  animation: hologram-flicker-scanning 2s infinite alternate;
-  border-color: var(--accent-neon);
-}
-
-.samurai-hologram-face.status-glitching {
+.reveal-mode-glitching .samurai-hologram-face {
   animation: hologram-glitch 0.6s ease infinite;
 }
 
-.samurai-hologram-face.status-revealed,
-.samurai-hologram-face.status-separating,
-.samurai-hologram-face.status-pulse {
+.reveal-mode-revealed .samurai-hologram-face {
   animation: hologram-float-pulse 3s ease-in-out infinite;
-}
-
-@keyframes hologram-flicker-scanning {
-  0%, 100% {
-    opacity: 0.7;
-    filter: brightness(0.9) saturate(100%);
-    box-shadow: 0 0 10px var(--primary-glow);
-  }
-  50% {
-    opacity: 0.95;
-    filter: brightness(1.15) saturate(140%);
-    box-shadow: 0 0 20px var(--primary-glow-heavy);
-  }
-  48%, 52% {
-    opacity: 0.5; /* Hologram scan flicker drop */
-  }
 }
 
 @keyframes hologram-glitch {

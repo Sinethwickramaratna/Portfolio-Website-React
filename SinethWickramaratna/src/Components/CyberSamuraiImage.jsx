@@ -1,13 +1,8 @@
 import { useEffect } from 'react';
-import { preload } from 'react-dom';
 import './CyberSamuraiImage.css';
-import samuraiCutout from '../assets/Images/samurai_cutout.webp';
-import samuraiBg from '../assets/Images/samurai_with_bg.webp';
-import faceProfile from '../assets/Images/profile.webp';
-
-// Preload critical images as early as possible
-preload(samuraiCutout, { as: 'image', fetchPriority: 'high' });
-preload(samuraiBg, { as: 'image', fetchPriority: 'high' });
+import samuraiCutout from '../assets/Images/samurai_cutout.png';
+import samuraiBg from '../assets/Images/samurai_with_bg.jpg';
+import faceProfile from '../assets/Images/profile.png';
 
 function CyberSamuraiImage({ revealState, setRevealState }) {
   
@@ -47,9 +42,6 @@ function CyberSamuraiImage({ revealState, setRevealState }) {
           className="samurai-bg-img" 
           width="800"
           height="550"
-          loading="eager"
-          fetchPriority="high"
-          decoding="sync"
         />
       </div>
 
@@ -61,9 +53,6 @@ function CyberSamuraiImage({ revealState, setRevealState }) {
           className="samurai-cutout-img" 
           width="800"
           height="550"
-          loading="eager"
-          fetchPriority="high"
-          decoding="sync"
         />
       </div>
 
@@ -77,25 +66,13 @@ function CyberSamuraiImage({ revealState, setRevealState }) {
         </div>
       )}
 
-      {/* Layer 4: Holographic Profile ID Card glitches/scans in */}
-      {revealState !== 'idle' && (
-        <div className={`samurai-hologram-face status-${revealState}`}>
+      {/* Layer 4: Holographic Profile ID Card glitches in */}
+      {(revealState === 'glitching' || revealState === 'revealed') && (
+        <div className="samurai-hologram-face">
           <div className="hologram-grid-glitch"></div>
-          <img 
-            src={faceProfile} 
-            alt="Sineth Profile Hologram" 
-            className="hologram-face-img" 
-            width="162"
-            height="199"
-            loading="lazy"
-            decoding="sync"
-          />
+          <img src={faceProfile} alt="Sineth Profile Hologram" className="hologram-face-img" />
           <div className="hologram-glow-bar"></div>
-          <span className="hologram-tag monospace-val">
-            {revealState === 'scanning' ? 'SCANNING_PROFILE...' : 
-             revealState === 'separating' || revealState === 'pulse' || revealState === 'glitching' ? 'PROCESSING...' : 
-             'IDENTITY_VERIFIED'}
-          </span>
+          <span className="hologram-tag monospace-val">IDENTITY_VERIFIED</span>
         </div>
       )}
 

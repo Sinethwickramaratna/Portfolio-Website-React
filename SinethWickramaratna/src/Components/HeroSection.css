@@ -74,7 +74,7 @@
 
 .hud-panel {
   width: 100%;
-  height: 430px; /* fixed height to prevent CLS */
+  min-height: 420px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -306,7 +306,6 @@
   }
 
   .hud-panel {
-    height: auto; /* allow natural wrap height on mobile */
     min-height: auto;
   }
 }

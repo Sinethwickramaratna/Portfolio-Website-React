@@ -79,10 +79,12 @@ function HeroSection() {
         <div className="hero-grid-overlay"></div>
 
         {/* Centerpiece Image background layer */}
-        <CyberSamuraiImage 
-          revealState={revealState} 
-          setRevealState={setRevealState} 
-        />
+        {isLoaded && (
+          <CyberSamuraiImage 
+            revealState={revealState} 
+            setRevealState={setRevealState} 
+          />
+        )}
 
         <div className="hero-command-center">
           
