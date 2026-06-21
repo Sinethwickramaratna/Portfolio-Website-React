@@ -169,6 +169,37 @@
       "repoUrl": "https://github.com/Sinethwickramaratna/Movie-Recommendation-Website.git",
       "status": "Completed",
       "year": "2026"
+    },
+    {
+      "id": 7,
+      "title": "VeriText AI 🛡️",
+      "category": "AI / Full-Stack Development",
+      "shortDescription": "A high-fidelity, containerized AI text classification system built to identify machine-generated text using a custom fine-tuned BERT model, optimized FastAPI backend, and modern glassmorphic React interface.",
+      "description": "VeriText AI is an enterprise-grade, CPU-optimized AI text detector built to analyze linguistic patterns, perplexity, and burstiness to separate human creativity from synthetic generation. It features a custom-trained Transformer classifier based on sentence-transformers/all-MiniLM-L6-v2, a FastAPI server supporting direct copy-paste and PDF document uploads, and a modern glassmorphic React application. The entire stack is containerized with Docker, incorporating CPU-optimized PyTorch setups to reduce the footprint by ~2 GB and local volume model caching.",
+      "technologies": [
+        "React 19",
+        "Tailwind CSS v4",
+        "FastAPI",
+        "Python 3.10",
+        "PyTorch",
+        "Hugging Face Hub",
+        "Docker Compose",
+        "Nginx"
+      ],
+      "features": [
+        "Linguistic Fingerprinting: Detects mathematical markers and lack of natural variance characteristic of LLMs",
+        "Context-Aware Transformer: Custom-trained classifier using bidirectional semantic encoders",
+        "Dual-Input Modalities: Supports both direct text entry and PDF document uploads via pypdf extraction",
+        "Safety & Constraints: Multi-level validation rules including a 1000-word limit and empty text check",
+        "Hugging Face Hub Integration: Dynamic checkpoint uploading and tokenizers/weights loading",
+        "Lightweight Container Optimization: Tailored PyTorch configuration reducing Docker footprint by 2 GB",
+        "Docker Orchestration: Complete ecosystem deployment with model caching volumes and Nginx routing"
+      ],
+      "image": null,
+      "repoUrl": "https://github.com/Sinethwickramaratna/AI-Text-Checker.git",
+      "liveUrl": "https://veritextai.sinethwickramaratna.dev/",
+      "status": "Completed",
+      "year": "2026"
     }
   ]
 }

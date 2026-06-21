@@ -138,9 +138,27 @@ npm run preview
 
 ### 4. KandyPack Railway
 - **Category**: Supply Chain Management
-- **Status**: In Progress (2025)
+- **Status**: Completed (2025)
 - **Technologies**: React, TypeScript, Python, FastAPI, WebSocket
-- **Repository**: [GitHub Link](#)
+- **Repository**: [GitHub Link](https://github.com/yasiboy989/kandypack-railway.git)
+
+### 5. Personal Portfolio Website
+- **Category**: Web Development
+- **Status**: Completed (2026)
+- **Technologies**: React 18, JavaScript, Vite, CSS3
+- **Repository**: [GitHub Link](https://github.com/Sinethwickramaratna/Portfolio-Website-React.git)
+
+### 6. CineMatch AI 🎬
+- **Category**: AI / Full-Stack Development
+- **Status**: Completed (2026)
+- **Technologies**: React 19, Vite, Tailwind CSS v4, FastAPI, Python, scikit-learn, pandas
+- **Repository**: [GitHub Link](https://github.com/Sinethwickramaratna/Movie-Recommendation-Website.git)
+
+### 7. VeriText AI 🛡️
+- **Category**: AI / Full-Stack Development
+- **Status**: Completed (2026)
+- **Technologies**: React 19, Tailwind CSS v4, FastAPI, PyTorch, Hugging Face Hub, Docker Compose
+- **Repository**: [GitHub Link](https://github.com/Sinethwickramaratna/AI_Text_Checker.git)
 
 ## 📝 Customization
 
