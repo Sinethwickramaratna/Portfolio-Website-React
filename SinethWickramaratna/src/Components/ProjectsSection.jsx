@@ -111,12 +111,12 @@ function ProjectsSection() {
                         </a>
                       )}
                       <a 
-                        href={project.repoUrl || '#'} 
+                        href={project.liveUrl || '#'} 
                         target="_blank" 
                         rel="noopener noreferrer" 
                         className="btn-premium btn-primary-glow mission-action-btn"
                         onClick={(e) => {
-                          if (!project.repoUrl) {
+                          if (!project.liveUrl) {
                             e.preventDefault();
                             alert('[ LOG: SYSTEM OFFLINE - STAGING DEPLOYMENT TERMINATED ]');
                           }
