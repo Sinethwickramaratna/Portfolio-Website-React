@@ -32,35 +32,6 @@
     },
     {
       "id": 2,
-      "title": "Student Task Management",
-      "category": "Full-Stack Development",
-      "shortDescription": "A full-stack application with Flutter client and Spring Boot backend featuring JWT authentication and role-based access control for Admin, Teacher, and Student users.",
-      "description": "A comprehensive task management system with Flutter mobile client and Spring Boot REST API. Implements JWT authentication with role-based access control, secure BCrypt password hashing, and PostgreSQL database with role segregation. Supports separate dashboards for Admin, Teacher, and Student roles.",
-      "technologies": [
-        "Flutter",
-        "Dart",
-        "Spring Boot",
-        "Java 17",
-        "PostgreSQL",
-        "JWT",
-        "Spring Security 6",
-        "BCrypt"
-      ],
-      "features": [
-        "JWT authentication with role-based access control (Admin, Teacher, Student)",
-        "Secure password hashing with BCrypt",
-        "Role-specific dashboards and navigation",
-        "Spring Boot REST API with security",
-        "PostgreSQL database with user roles"
-      ],
-      "image": null,
-      "repoUrl": "https://github.com/Sinethwickramaratna/Student-Task-Manager.git",
-      "liveUrl": null,
-      "status": "In Progress",
-      "year": "2025"
-    },
-    {
-      "id": 3,
       "title": "Maze Solver Using Floodfill Algorithm",
       "category": "Algorithm & Data Structures",
       "shortDescription": "A C++ implementation of maze-solving using the Floodfill (BFS) algorithm, simulating robot navigation with dynamic wall discovery and shortest path computation.",
@@ -87,7 +58,7 @@
       "year": "2024"
     },
     {
-      "id": 4,
+      "id": 3,
       "title": "KandyPack Railway",
       "category": "Supply Chain Management",
       "shortDescription": "A rail and road-based supply chain distribution system for KandyPack FMCG manufacturer, replacing Excel-based logistics with a modern web platform.",
@@ -116,7 +87,7 @@
       "year": "2025"
     },
     {
-      "id": 5,
+      "id": 4,
       "title": "Personal Portfolio Website",
       "category": "Web Development",
       "shortDescription": "A modern, fully responsive portfolio website showcasing projects, skills, experience, and expertise in software development, hardware design, and supply chain management.",
@@ -141,12 +112,12 @@
       ],
       "image": null,
       "repoUrl": "https://github.com/Sinethwickramaratna/Portfolio-Website-React.git",
-      "liveUrl": null,
+      "liveUrl": "https://sinethwickramaratna.dev/",
       "status": "Completed",
       "year": "2026"
     },
     {
-      "id": 6,
+      "id": 5,
       "title": "CineMatch AI 🎬",
       "category": "AI / Full-Stack Development",
       "shortDescription": "A modern, responsive web application that provides personalized movie recommendations powered by artificial intelligence.",
@@ -172,12 +143,12 @@
       ],
       "image": null,
       "repoUrl": "https://github.com/Sinethwickramaratna/Movie-Recommendation-Website.git",
-      "liveUrl": null,
+      "liveUrl": "https://cinematchai.sinethwickramaratna.dev/",
       "status": "Completed",
       "year": "2026"
     },
     {
-      "id": 7,
+      "id": 6,
       "title": "VeriText AI 🛡️",
       "category": "AI / Full-Stack Development",
       "shortDescription": "A high-fidelity, containerized AI text classification system built to identify machine-generated text using a custom fine-tuned BERT model, optimized FastAPI backend, and modern glassmorphic React interface.",
