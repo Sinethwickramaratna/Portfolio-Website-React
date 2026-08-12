@@ -1,93 +1,193 @@
-/* Shogun OS Design System Custom Properties */
+/* ============================================================
+   SYNTHESIS — Design System Tokens
+   A digital universe. Mostly black, white and grey; cyan,
+   violet and magenta appear only where attention is earned.
+   ============================================================ */
 
 :root {
-  /* Fonts */
-  --font-display: 'Asimovian', -apple-system, sans-serif;
+  /* ---------- Typeface Stack ---------- */
+  --font-display: 'Chakra Petch', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-body: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
-  
-  /* Color Palette Tokens */
-  --color-crimson: #b91717;
-  --color-crimson-dark: #840b0b;
-  --color-crimson-neon: #ff3b3b;
-  --color-obsidian: #161616;
-  --color-obsidian-deep: #0a0a0a;
-  --color-steel: #9d9d9d;
-  --color-steel-light: #c0c0c0;
-  --color-gold: #dbc40e;
-  --color-gold-soft: #f4e490;
-  --color-ivory: #f8f5ef;
-  
-  /* Transitions */
-  --transition-fast: all 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  --transition-smooth: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-cinematic: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* ---------- Core Palette ---------- */
+  --void: #030407;          /* base — the space everything floats in */
+  --void-2: #080b12;        /* secondary surface */
+  --void-3: #0e131c;        /* raised surface */
+  --light: #f5f7fa;         /* main light */
+
+  --cyan: #00e5ff;          /* electric cyan — primary signal */
+  --violet: #7b61ff;        /* violet — secondary energy */
+  --magenta: #ff4ecd;       /* accent — rarest, highest attention */
+
+  /* Neutral ramp — the majority of the interface lives here */
+  --grey-100: #e6eaf2;
+  --grey-300: #a8b0c0;
+  --grey-500: #6b7383;
+  --grey-700: #3a4150;
+  --grey-900: #1a1f2a;
+
+  /* ---------- Spatial Depth ---------- */
+  --z-abyss: -900px;
+  --z-far: -450px;
+  --z-mid: -180px;
+  --z-base: 0px;
+  --z-near: 90px;
+  --z-fore: 220px;
+
+  --perspective-deep: 1600px;
+  --perspective-mid: 1000px;
+  --perspective-tight: 620px;
+
+  /* ---------- Motion ---------- */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  --transition-fast: 0.18s var(--ease-out-expo);
+  --transition-smooth: 0.4s var(--ease-out-expo);
+  --transition-cinematic: 0.9s var(--ease-out-expo);
+
+  /* ---------- Runtime scroll outputs ---------- */
+  --scroll-progress: 0;
+  --scroll-velocity: 0;
+  --scroll-depth: 0px;
 }
 
-/* SHADOW SHOGUN (Default Dark Mode) */
+/* ============================================================
+   THE VOID — default (and canonical) dark
+   ============================================================ */
 :root,
 [data-theme="dark"] {
-  /* Backgrounds (60% Obsidian Black) */
-  --bg-primary: var(--color-obsidian);
-  --bg-secondary: var(--color-obsidian-deep);
-  --bg-card: rgba(22, 22, 22, 0.75);
-  --bg-card-hover: rgba(30, 10, 10, 0.85);
-  
-  /* Glowing / Accent Colors (25% Crimson Red) */
-  --primary: var(--color-crimson);
-  --primary-glow: rgba(185, 23, 23, 0.4);
-  --primary-glow-heavy: rgba(185, 23, 23, 0.7);
-  --secondary: var(--color-crimson-dark);
-  --accent-neon: var(--color-crimson-neon);
-  
-  /* Typography (10% Steel Gray) */
-  --text-main: #ffffff;
-  --text-muted: var(--color-steel);
-  --text-dim: #555555;
-  
-  /* Borders */
-  --border-color: rgba(157, 157, 157, 0.15);
-  --border-hover: rgba(185, 23, 23, 0.3);
-  --border-hairline: rgba(157, 157, 157, 0.1);
-  
-  /* Rare Accents (5% Samurai Gold) */
-  --accent-gold: var(--color-gold);
-  --accent-gold-glow: rgba(219, 196, 14, 0.4);
-  
-  /* Ambient shadow depths (subtle purple) */
-  --ambient-purple-glow: rgba(33, 16, 47, 0.35);
-  --card-shadow: 0 12px 40px -15px rgba(0, 0, 0, 0.8), 0 0 1px 1px rgba(185, 23, 23, 0.15);
+  color-scheme: dark;
+
+  --bg-void: var(--void);
+  --bg-primary: var(--void);
+  --bg-secondary: var(--void-2);
+  --bg-elevated: var(--void-3);
+
+  /* Frosted glass — the material for all information surfaces */
+  --glass-surface: linear-gradient(
+    155deg,
+    rgba(245, 247, 250, 0.055) 0%,
+    rgba(245, 247, 250, 0.022) 42%,
+    rgba(8, 11, 18, 0.55) 100%
+  );
+  --glass-surface-hover: linear-gradient(
+    155deg,
+    rgba(0, 229, 255, 0.09) 0%,
+    rgba(123, 97, 255, 0.05) 45%,
+    rgba(14, 19, 28, 0.66) 100%
+  );
+  --glass-blur: 20px;
+  --glass-edge: rgba(245, 247, 250, 0.14);
+
+  --primary: var(--cyan);
+  --primary-deep: #00b8cc;
+  --primary-glow: rgba(0, 229, 255, 0.34);
+  --primary-glow-heavy: rgba(0, 229, 255, 0.6);
+  --secondary: var(--violet);
+  --secondary-glow: rgba(123, 97, 255, 0.36);
+  --accent-warm: var(--magenta);
+  --accent-warm-glow: rgba(255, 78, 205, 0.32);
+  --accent-alert: var(--magenta);
+
+  --text-main: var(--light);
+  --text-muted: var(--grey-300);
+  --text-dim: var(--grey-500);
+
+  --border-color: rgba(245, 247, 250, 0.1);
+  --border-hover: rgba(0, 229, 255, 0.45);
+  --border-hairline: rgba(245, 247, 250, 0.055);
+
+  --bloom-primary: 0 0 28px var(--primary-glow);
+  --bloom-soft: 0 0 60px rgba(0, 229, 255, 0.12);
+
+  --shadow-panel:
+    0 1px 0 0 rgba(245, 247, 250, 0.06) inset,
+    0 24px 60px -22px rgba(0, 0, 0, 0.95),
+    0 0 0 1px rgba(245, 247, 250, 0.03);
+  --shadow-panel-hover:
+    0 1px 0 0 rgba(245, 247, 250, 0.12) inset,
+    0 36px 80px -24px rgba(0, 0, 0, 1),
+    0 0 34px -8px var(--primary-glow);
+
+  --grid-line: rgba(245, 247, 250, 0.032);
+  --scanline: rgba(0, 229, 255, 0.025);
 }
 
-/* IMPERIAL STUDIO (Ivory Light Mode) */
+/* ============================================================
+   DAYLIGHT — light mode.
+   The universe is inherently dark; this is a legibility mode,
+   deliberately restrained rather than a second identity.
+   ============================================================ */
 [data-theme="light"] {
-  /* Backgrounds (Ivory / Design Studio concrete) */
-  --bg-primary: var(--color-ivory);
+  color-scheme: light;
+
+  --bg-void: #eef0f5;
+  --bg-primary: #f5f7fa;
   --bg-secondary: #ffffff;
-  --bg-card: rgba(255, 255, 255, 0.8);
-  --bg-card-hover: rgba(244, 228, 144, 0.15);
-  
-  /* Accents */
-  --primary: var(--color-crimson);
-  --primary-glow: rgba(185, 23, 23, 0.15);
-  --primary-glow-heavy: rgba(185, 23, 23, 0.3);
-  --secondary: var(--color-crimson-dark);
-  --accent-neon: var(--color-crimson);
-  
-  /* Typography */
-  --text-main: #161616;
-  --text-muted: #666666;
-  --text-dim: #999999;
-  
-  /* Borders */
-  --border-color: rgba(22, 22, 22, 0.1);
-  --border-hover: var(--color-gold);
-  --border-hairline: rgba(22, 22, 22, 0.05);
-  
-  /* Highlights (Gold Reflections) */
-  --accent-gold: var(--color-gold);
-  --accent-gold-glow: rgba(219, 196, 14, 0.25);
-  
-  /* Ambient shadow depths */
-  --ambient-purple-glow: rgba(157, 157, 157, 0.05);
-  --card-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.1), 0 0 1px 1px rgba(219, 196, 14, 0.2);
+  --bg-elevated: #ffffff;
+
+  --glass-surface: linear-gradient(
+    155deg,
+    rgba(0, 229, 255, 0.06) 0%,
+    rgba(123, 97, 255, 0.04) 45%,
+    rgba(255, 255, 255, 0.85) 100%
+  );
+  --glass-surface-hover: linear-gradient(
+    155deg,
+    rgba(0, 229, 255, 0.12) 0%,
+    rgba(123, 97, 255, 0.07) 45%,
+    rgba(255, 255, 255, 0.94) 100%
+  );
+  --glass-blur: 18px;
+  --glass-edge: rgba(3, 4, 7, 0.1);
+
+  --primary: #0089a8;
+  --primary-deep: #006b85;
+  --primary-glow: rgba(0, 137, 168, 0.22);
+  --primary-glow-heavy: rgba(0, 137, 168, 0.4);
+  --secondary: #5a3fe0;
+  --secondary-glow: rgba(90, 63, 224, 0.2);
+  --accent-warm: #d61fa3;
+  --accent-warm-glow: rgba(214, 31, 163, 0.2);
+  --accent-alert: #d61fa3;
+
+  --text-main: #05070c;
+  --text-muted: #4b5464;
+  --text-dim: #7d8698;
+
+  --border-color: rgba(3, 4, 7, 0.11);
+  --border-hover: rgba(0, 137, 168, 0.5);
+  --border-hairline: rgba(3, 4, 7, 0.05);
+
+  --bloom-primary: 0 0 22px rgba(0, 137, 168, 0.18);
+  --bloom-soft: 0 0 50px rgba(0, 137, 168, 0.1);
+
+  --shadow-panel:
+    0 1px 0 0 rgba(255, 255, 255, 0.9) inset,
+    0 20px 44px -24px rgba(5, 12, 30, 0.28),
+    0 0 0 1px rgba(3, 4, 7, 0.035);
+  --shadow-panel-hover:
+    0 1px 0 0 rgba(255, 255, 255, 1) inset,
+    0 30px 60px -26px rgba(5, 12, 30, 0.34),
+    0 0 26px -8px var(--primary-glow);
+
+  --grid-line: rgba(3, 4, 7, 0.045);
+  --scanline: rgba(3, 4, 7, 0.02);
+}
+
+/* Collapse the spatial system entirely when motion is unwelcome. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --z-abyss: 0px;
+    --z-far: 0px;
+    --z-mid: 0px;
+    --z-near: 0px;
+    --z-fore: 0px;
+    --transition-fast: 0.01ms linear;
+    --transition-smooth: 0.01ms linear;
+    --transition-cinematic: 0.01ms linear;
+  }
 }

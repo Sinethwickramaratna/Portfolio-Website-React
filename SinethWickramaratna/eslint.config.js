@@ -26,4 +26,16 @@ export default defineConfig([
       'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
     },
   },
+  {
+    // The 3D layer drives three.js imperatively: useFrame callbacks run
+    // outside React's render phase and are *expected* to mutate the
+    // camera, the scene and the shared world singleton every frame.
+    // react-hooks/immutability reasons about render purity and cannot
+    // see that distinction, so it reports these idioms as errors.
+    // Scoped narrowly to the WebGL code — the rule stays on everywhere else.
+    files: ['src/synthesis/world/**/*.jsx', 'src/synthesis/environments/**/*.jsx'],
+    rules: {
+      'react-hooks/immutability': 'off',
+    },
+  },
 ])

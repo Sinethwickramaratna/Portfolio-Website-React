@@ -4,32 +4,34 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/ico" href="./src/assets/Logos/logo-icon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>sinethwickramaratna</title>
+    <meta name="theme-color" content="#04060d" />
 
-    <!-- Preconnect to Google Fonts -->
+    <title>Sineth Wickramaratna — AI Engineer &amp; Data Scientist</title>
+    <meta
+      name="description"
+      content="Portfolio of Sineth Wickramaratna — Computer Science &amp; Engineering student at the University of Moratuwa, specialising in Data Science, machine learning and data-driven systems."
+    />
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    
-    <!-- Preload critical font for better LCP -->
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Asimovian&family=Space+Grotesk:wght@300;400;500;600;700&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Asimovian&family=Space+Grotesk:wght@300;400;500;600;700&display=swap">
-    
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+    >
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+    >
+
     <link href="/src/index.css" rel="stylesheet">
-    
-    <!-- Optimize painting for LCP -->
+
+    <!-- Paint the void immediately so there is no white flash before CSS
+         and the WebGL backdrop are ready. -->
     <style>
-      #root { display: contents; }
-      .hero-section { contain: layout style; }
-      /* Defer background animations to after LCP */
-      body {
-        animation-delay: 2s;
-      }
-      body::before {
-        animation-delay: 2s;
-      }
-      body::after {
-        animation-delay: 2.5s;
-      }
+      html { background-color: #04060d; }
+      html[data-theme="light"] { background-color: #eef1f7; }
     </style>
   </head>
   <body>
