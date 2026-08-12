@@ -1,4 +1,4 @@
-import { useMemo, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import EnvGroup from '../world/EnvGroup';
@@ -27,6 +27,40 @@ export default function Portal({ open }) {
     []
   );
 
+  /**
+   * Radial falloff for the light beyond the aperture.
+   *
+   * A flat additive disc at this scale simply saturates to solid cyan
+   * and swallows the copy sitting on top of it. Painting the gradient
+   * into a texture keeps a bright core with a soft edge — which is what
+   * actually reads as depth behind an opening.
+   */
+  const discTexture = useMemo(() => {
+    const size = 256;
+    const canvas = document.createElement('canvas');
+    canvas.width = size;
+    canvas.height = size;
+    const ctx = canvas.getContext('2d');
+
+    const g = ctx.createRadialGradient(
+      size / 2, size / 2, 0,
+      size / 2, size / 2, size / 2
+    );
+    g.addColorStop(0, 'rgba(180, 245, 255, 0.95)');
+    g.addColorStop(0.28, 'rgba(0, 229, 255, 0.42)');
+    g.addColorStop(0.62, 'rgba(123, 97, 255, 0.14)');
+    g.addColorStop(1, 'rgba(0, 0, 0, 0)');
+
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, size, size);
+
+    const tex = new THREE.CanvasTexture(canvas);
+    tex.colorSpace = THREE.SRGBColorSpace;
+    return tex;
+  }, []);
+
+  useEffect(() => () => discTexture.dispose(), [discTexture]);
+
   useFrame((state, delta) => {
     const t = state.clock.elapsedTime;
     // 0 → 1 across the final approach.
@@ -45,13 +79,14 @@ export default function Portal({ open }) {
     }
 
     if (disc.current) {
-      disc.current.material.opacity = 0.06 + aperture * 0.5;
-      disc.current.scale.setScalar(0.6 + aperture * 0.55);
+      disc.current.material.opacity = 0.14 + aperture * 0.3;
+      disc.current.scale.setScalar(0.72 + aperture * 0.3);
     }
 
     if (shimmer.current) {
       shimmer.current.rotation.z -= delta * 0.22;
-      shimmer.current.material.opacity = 0.1 + Math.sin(t * 1.4) * 0.05 + aperture * 0.2;
+      shimmer.current.material.opacity =
+        0.05 + Math.sin(t * 1.4) * 0.02 + aperture * 0.07;
     }
   });
 
@@ -66,11 +101,11 @@ export default function Portal({ open }) {
 
         {/* The light beyond */}
         <mesh ref={disc} position={[0, 0, -2]}>
-          <circleGeometry args={[RING_RADIUS, 96]} />
+          <planeGeometry args={[RING_RADIUS * 2.1, RING_RADIUS * 2.1]} />
           <meshBasicMaterial
-            color={PALETTE.cyan}
+            map={discTexture}
             transparent
-            opacity={0.2}
+            opacity={0.35}
             toneMapped={false}
             blending={THREE.AdditiveBlending}
             depthWrite={false}

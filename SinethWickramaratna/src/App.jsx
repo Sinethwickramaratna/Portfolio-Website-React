@@ -2,7 +2,7 @@ import { Suspense, lazy } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import './App.css'
 
-import SynthesisPage from './synthesis/SynthesisPage.jsx'
+import AetherPage from './aether/AetherPage.jsx'
 
 /* The previous build shipped an ambient samurai-flute track and a
    floating audio toggle. Both belonged to the old identity, and the
@@ -22,7 +22,7 @@ function App() {
   return (
     <Suspense fallback={null}>
       <Routes>
-        <Route path="/" element={<SynthesisPage />} />
+        <Route path="/" element={<AetherPage />} />
         <Route path="/gallery" element={<GalleryPage />} />
         <Route path="/certificates" element={<CertificatesPage />} />
         <Route
