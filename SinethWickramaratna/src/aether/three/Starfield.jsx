@@ -48,7 +48,7 @@ export default function Starfield() {
 
   useFrame((state) => {
     const t = state.clock.elapsedTime;
-    const y = flight.station * STATION_SPREAD;
+    const y = flight.station * STATION_SPREAD * flight.fit;
     refs.forEach((r, i) => {
       if (!r.current) return;
       const rate = layers[i].rate;

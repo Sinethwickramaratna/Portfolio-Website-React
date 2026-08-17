@@ -37,15 +37,31 @@
   --body: 'Inter', 'Space Grotesk', system-ui, sans-serif;
   --mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', monospace;
 
-  /* The single scale every headline is cut from. */
-  --t-colossal: clamp(3.6rem, 15.5vw, 17rem);
-  --t-huge: clamp(2.8rem, 9.2vw, 9.5rem);
+  /* The single scale every headline is cut from.
+     ----------------------------------------------------------------
+     Capped against the viewport's *height* as well as its width. Type
+     sized purely in vw is correct on a 16:9 monitor and far too tall on
+     a 1366×768 laptop, where a two-line headline eats the vertical
+     space the side panels and read-outs are anchored in — which is how
+     the project titles ended up on top of their own blurbs. The vh term
+     only ever wins on a short screen; at 1080p and above the clamp
+     ceiling is still what applies. */
+  --t-colossal: clamp(3.6rem, min(15.5vw, 25vh), 17rem);
+  --t-huge: clamp(2.8rem, min(9.2vw, 13.5vh), 9.5rem);
   --t-large: clamp(2rem, 5.6vw, 5.4rem);
   --t-mid: clamp(1.15rem, 2.05vw, 2rem);
   --t-body: clamp(0.95rem, 1.05vw, 1.14rem);
   --t-mono: clamp(0.6rem, 0.68vw, 0.72rem);
 
   --gutter: clamp(1.25rem, 4.2vw, 5rem);
+
+  /* The navigation rail is fixed to the right edge and painted above
+     every section, so that margin is not the free space it looks like:
+     anything anchored to `--gutter` on the right lands underneath the
+     marks. This is the lane the rail owns, and `--gutter-r` is the
+     inset for right-anchored content that has to clear it. */
+  --rail-lane: clamp(3.4rem, 5.2vw, 5rem);
+  --gutter-r: calc(var(--gutter) + var(--rail-lane));
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
 
   color: var(--bright);
@@ -170,23 +186,27 @@ html.ae-locked body {
   display: block;
 }
 
+/* The document sits above the canvas, so its own box would swallow
+   every pointer event before the world ever saw one. The wrapper is
+   therefore transparent to the cursor and each section opts back in —
+   which keeps the body copy selectable, unlike blanking the whole
+   layer. */
 .ae-doc {
   position: relative;
   z-index: 2;
+  pointer-events: none;
+}
+.ae-frame,
+.ae-footer {
+  pointer-events: auto;
 }
 
 /* ------------------------------------------------------------------
    4. STATIONS
    ------------------------------------------------------------------ */
-/* The document sits *above* the canvas, so by default it would swallow
-   every pointer event before the world ever saw one — and the neural
-   map and the exhibition are both hover-driven. Sections are therefore
-   transparent to the cursor, and only the handful of things that are
-   genuinely interactive opt back in. */
 .ae-frame {
   position: relative;
   width: 100%;
-  pointer-events: none;
 }
 
 .ae-pin {
@@ -197,9 +217,20 @@ html.ae-locked body {
   width: 100%;
   overflow: hidden;
 }
-.ae-frame a,
-.ae-frame button,
-.ae-frame [data-interactive] {
+
+/* The two stations that are *explored* with the cursor rather than read
+   with it. Their sections hand pointer events through to the world so
+   the map's nodes and the exhibition's plates can be hovered; the few
+   things in them that are clickable take their events back. */
+#skills,
+#creative {
+  pointer-events: none;
+}
+#skills a,
+#skills button,
+#creative a,
+#creative button,
+[data-interactive] {
   pointer-events: auto;
 }
 
@@ -213,6 +244,26 @@ html.ae-locked body {
   letter-spacing: -0.038em;
   text-transform: uppercase;
   margin: 0;
+}
+
+/* Display type that is allowed to be as big as it likes, but not bigger
+   than its longest word.
+   ------------------------------------------------------------------
+   Every headline here is sized in vw, which measures the screen and
+   knows nothing about the words on it — so RECOMMENDATION renders at
+   the same size as MOVIE and runs off the edge, and `.ae-line`'s reveal
+   mask crops the overflow instead of letting it show. `--chars` is the
+   longest line's length, published by <Lines>; 0.58em is this face's
+   average advance at these weights once the negative tracking is
+   counted. The second term is therefore the size at which the longest
+   line exactly spans `--fit-measure`, and `min()` takes whichever of
+   the two is smaller.
+   ------------------------------------------------------------------ */
+.ae-fit {
+  font-size: min(
+    var(--fit-max),
+    calc(var(--fit-measure) / (var(--chars, 10) * 0.58))
+  );
 }
 
 .ae-mono {
@@ -243,12 +294,15 @@ html.ae-locked body {
   white-space: nowrap;
 }
 
-/* Masked line reveals. */
+/* Masked line reveals. The mask has to be a little taller than the line
+   box — at a line-height of 0.86 the glyphs overshoot it, and `overflow:
+   hidden` would shave the bottom off every cap. */
 .ae-lines { display: block; }
 .ae-line {
   display: block;
   overflow: hidden;
-  padding-bottom: 0.04em;
+  padding-bottom: 0.12em;
+  margin-bottom: -0.08em;
 }
 .ae-line-in {
   display: block;
@@ -282,8 +336,10 @@ html.ae-locked body {
   transform: translateY(-50%);
 }
 /* Clear of the navigation rail, which lives in the same margin. */
+/* Vertically centred, which is exactly where the rail is — so this one
+   is inset past the rail lane rather than sitting at the edge. */
 .ae-vert--right {
-  right: clamp(2.6rem, 4.4vw, 4.2rem);
+  right: calc(var(--rail-lane) + 2.5rem);
   top: 50%;
   transform: translateY(-50%) rotate(180deg);
 }
@@ -540,9 +596,18 @@ html.ae-locked body {
   top: clamp(4.5rem, 9vh, 7rem);
   left: var(--gutter);
 }
+/* INTO INTELLIGENCE. is eighteen characters; at the unconstrained size
+   it exceeded the measure and broke to a third line, wrecking the
+   two-line composition. Fitted, the break stays where it was written. */
 .ae-thesis-head {
-  font-size: var(--t-huge);
-  max-width: 14ch;
+  --fit-max: var(--t-huge);
+  --fit-measure: 76vw;
+  /* Hugs its longest line. Left to fill the grid, the line boxes run
+     out to the right edge and under the navigation rail — invisibly,
+     since the glyphs stop far short, but it makes the block's real
+     extent impossible to reason about. */
+  width: max-content;
+  max-width: 100%;
   margin-left: clamp(0rem, 6vw, 8rem);
 }
 .ae-thesis-sub {
@@ -593,15 +658,26 @@ html.ae-locked body {
 }
 
 .ae-back-profile { place-items: center; }
+
+/* The eclipsed word.
+   ------------------------------------------------------------------
+   Set centred and enormous it ran straight through the copy column:
+   outlined type is still type, and a reader hitting "SRI LANKA" over
+   the crossbar of an R reads noise, not depth. It is sized to span
+   roughly the right half of the frame (7 characters at ~0.58em each)
+   and pushed into that half, where it belongs to the portrait — close
+   enough to be eclipsed by the figure and the 3D halo, far enough that
+   it never touches a line anyone has to read.
+   ------------------------------------------------------------------ */
 .ae-ghost {
   grid-area: 1 / 1;
   font-family: var(--display);
   font-weight: 700;
-  font-size: clamp(4rem, 22vw, 24rem);
+  font-size: clamp(3.2rem, 11.5vw, 13rem);
   letter-spacing: 0.02em;
   color: transparent;
   -webkit-text-stroke: 1px rgba(0, 217, 245, 0.14);
-  transform: translateY(6vh);
+  transform: translate(22vw, 4vh);
 }
 .ae-orbits--profile {
   grid-area: 1 / 1;
@@ -610,70 +686,82 @@ html.ae-locked body {
 
 /* The portrait runs past the right and bottom edges of the section on
    purpose — it is a plate bled off the page, not an image in a slot.
-   ------------------------------------------------------------------
-   The source photograph was shot against a light studio backdrop, and
-   there is no alpha cutout of it. Rather than drop a white rectangle
-   into a near-black room, the plate is duotoned: a cyan disc is laid
-   down first and the photograph multiplies onto it. Multiply leaves the
-   backdrop wherever the photo is white and darkens wherever the figure
-   is, so the studio background *becomes* the disc and the figure reads
-   as a silhouette carved out of it. Past the edge of the disc the
-   ground is the void, and multiplying against it dissolves the figure
-   into the dark — which is why no cutout is needed.
-   ------------------------------------------------------------------ */
+   The source is a true alpha cutout, so the figure is silhouetted
+   directly against the void: no container, no frame, no blend mode
+   standing in for a mask. */
 .ae-portrait {
   position: absolute;
-  right: -4vw;
-  bottom: -6vh;
-  width: clamp(19rem, 46vw, 44rem);
+  /* The bleed is capped in absolute units, not left in vw. The cutout
+     carries roughly 11% transparent margin down its right side, so a
+     bleed measured as a share of the viewport eventually exceeds that
+     margin on a wide monitor and starts cutting the figure's arm — a
+     crop that only appears once the window is large enough. */
+  right: max(-2vw, -2.25rem);
+  bottom: -5vh;
+  /* Grows further on a large display: capped at 38rem the figure read
+     as a small object stranded in a wide frame. */
+  width: clamp(17rem, 40vw, 46rem);
   margin: 0;
   z-index: 1;
-  /* Contain the blending so it never reaches the page behind. */
-  isolation: isolate;
-  /* Every edge dissolves, so the plate has no rectangle anywhere. */
-  mask-image: radial-gradient(
-    76% 74% at 54% 44%,
-    #000 44%,
-    rgba(0, 0, 0, 0.55) 74%,
-    transparent 97%
-  );
 }
-/* The ground the photograph multiplies onto. Opaque edge to edge — a
-   transparent falloff would leave the studio backdrop showing through
-   as a white field, since multiplying against nothing is a no-op. */
+
+/* The disc behind the figure. A single flat circle of light is the one
+   piece of solid colour on the whole site, and it is what stops the
+   cutout from floating: the head breaks its upper edge, the shoulders
+   sit inside it, and the legs walk out of the bottom of it. */
 .ae-portrait::before {
   content: '';
   position: absolute;
-  inset: -6% -8% 0;
-  background:
-    radial-gradient(
-      46% 42% at 52% 30%,
-      #00d9f5 0%,
-      #0a95aa 38%,
-      #0a4655 62%,
-      #0a1b21 82%,
-      #060809 100%
-    ),
-    #060809;
+  left: 57%;
+  top: 6%;
+  width: 78%;
+  aspect-ratio: 1;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 50% 44%,
+    rgba(0, 217, 245, 0.5) 0%,
+    rgba(0, 217, 245, 0.28) 46%,
+    rgba(0, 143, 168, 0.12) 68%,
+    transparent 78%
+  );
 }
+
+/* A hairline ring just inside the disc, so it reads as drawn rather
+   than as a glow. */
+.ae-portrait::after {
+  content: '';
+  position: absolute;
+  left: 57%;
+  top: 2%;
+  width: 86%;
+  aspect-ratio: 1;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  border: 1px solid rgba(0, 217, 245, 0.38);
+}
+
 .ae-portrait img {
   display: block;
   position: relative;
   width: 100%;
   height: auto;
-  filter: grayscale(1) contrast(1.16) brightness(1.14);
-  mix-blend-mode: multiply;
+  /* Monochrome, then a cyan rim thrown by the silhouette itself.
+     `drop-shadow` follows the alpha channel rather than the box, which
+     is the whole reason a cutout is worth having — the light wraps the
+     figure instead of outlining a rectangle. */
+  filter: grayscale(1) contrast(1.14) brightness(1.04)
+    drop-shadow(0 0 34px rgba(0, 217, 245, 0.42))
+    drop-shadow(0 0 90px rgba(0, 217, 245, 0.16));
+  /* Bleeds off the bottom edge of the section. */
+  mask-image: linear-gradient(to bottom, #000 82%, transparent 99%);
 }
-/* A violet rim over the top, screened back in — one detail of another
-   colour keeps the duotone from reading as a filter preset. */
+
+/* One violet accent raking across the figure from the upper left. */
 .ae-portrait-cast {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    215deg,
-    rgba(124, 92, 255, 0.22),
-    transparent 42%
-  );
+  background: linear-gradient(215deg, rgba(124, 92, 255, 0.16), transparent 40%);
   mix-blend-mode: screen;
   pointer-events: none;
 }
@@ -696,6 +784,23 @@ html.ae-locked body {
   margin: clamp(1.4rem, 3vh, 2.2rem) 0 clamp(1.6rem, 3.5vh, 2.6rem);
   max-width: 42ch;
 }
+.ae-profile-cv {
+  margin-top: clamp(1.2rem, 3vh, 2rem);
+  text-decoration: none;
+}
+.ae-profile-cv svg {
+  width: 17px;
+  height: 17px;
+}
+.ae-profile-cv svg path {
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+/* The arrow drops rather than slides — it is a download, and the
+   gesture should say so. */
+.ae-profile-cv:hover svg { transform: translateY(3px); }
+
 .ae-vert--profile {
   left: calc(var(--gutter) * 0.35);
   bottom: var(--gutter);
@@ -781,6 +886,11 @@ html.ae-locked body {
   user-select: none;
 }
 .nm-tag.is-on { color: var(--cyan); }
+.nm-tag.is-left {
+  transform: translate(calc(-100% - 1.4rem), -50%);
+  text-align: right;
+  align-items: flex-end;
+}
 .nm-tag-name { white-space: nowrap; }
 .nm-tag-note {
   font-size: 0.55rem;
@@ -814,7 +924,9 @@ html.ae-locked body {
   right: var(--gutter);
   font-family: var(--display);
   font-weight: 700;
-  font-size: clamp(6rem, 21vw, 21rem);
+  /* Height-capped for the same reason as the display scale: at 21vw on
+     a short laptop this outline reached down into the project eyebrow. */
+  font-size: clamp(6rem, min(21vw, 26vh), 21rem);
   line-height: 0.75;
   color: transparent;
   -webkit-text-stroke: 1px rgba(160, 165, 170, 0.16);
@@ -825,24 +937,37 @@ html.ae-locked body {
   left: var(--gutter);
 }
 
+/* Wide enough for the longest project title. The head is vertically
+   centred and the side panel sits at the bottom of the frame, so they
+   do not compete for this space. */
 .ae-work-head {
   position: absolute;
   left: var(--gutter);
   top: 50%;
   transform: translateY(-58%);
-  max-width: 60vw;
+  /* Same reason as the thesis heading: the box hugs the title so its
+     extent is its ink, not the width of the grid. */
+  width: max-content;
+  max-width: 88vw;
 }
+/* Flipped titles are vertically centred and right-aligned, so they run
+   straight into the rail unless inset past its lane. */
 .ae-work.is-flipped .ae-work-head {
   left: auto;
-  right: var(--gutter);
+  right: var(--gutter-r);
   text-align: right;
 }
 .ae-work-eyebrow { display: block; margin-bottom: 1.1rem; }
-.ae-work-title { font-size: var(--t-huge); }
+
+/* RECOMMENDATION is the line that forces the fit — see `.ae-fit`. */
+.ae-work-title {
+  --fit-max: var(--t-huge);
+  --fit-measure: calc(100vw - var(--gutter) * 2.4);
+}
 
 .ae-work-side {
   position: absolute;
-  right: var(--gutter);
+  right: var(--gutter-r);
   bottom: clamp(3.5rem, 9vh, 6.5rem);
   width: min(38ch, 42vw);
   display: grid;
@@ -867,11 +992,14 @@ html.ae-locked body {
   height: 100%;
   padding: var(--gutter);
 }
+/* The whole written column: mark, headline, standfirst, read-out. The
+   trajectory runs low across this side of the frame and climbs away to
+   the right, so the column above it stays clear at every size. */
 .ae-journey-head {
   position: absolute;
   left: var(--gutter);
-  top: clamp(7rem, 13vh, 9.5rem);
-  max-width: 40vw;
+  top: clamp(5.5rem, 11vh, 8rem);
+  width: min(42ch, 40vw);
 }
 .ae-journey-title { font-size: clamp(1.8rem, 4.6vw, 4.4rem); }
 .ae-journey-sub {
@@ -891,50 +1019,85 @@ html.ae-locked body {
   gap: 1.2rem;
 }
 .ae-journey-track {
+  position: relative;
   flex: 1;
   height: 1px;
-  background: linear-gradient(
-    to right,
-    var(--hair),
-    var(--hair-cyan) 60%,
-    var(--cyan)
-  );
+  background: var(--hair);
+  overflow: hidden;
+}
+.ae-journey-track i {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, var(--hair-cyan), var(--cyan));
+  transform-origin: left;
+  transition: transform 0.7s var(--ease);
 }
 
-/* Milestone labels riding the 3D trajectory. Narrow, and thrown well
-   clear of the node in alternating directions — seven read-outs on one
-   curve will collide at any smaller offset. */
-.tj-node {
+/* The read-out. One milestone at a time, in a place that never moves.
+   Bottom-right: the heading owns the top-left, the trajectory begins
+   low on the left and climbs, so this is the one corner the curve
+   never crosses. Anchored bottom-left it sat directly on the first two
+   milestones' node keys. */
+.ae-milestone {
+  margin-top: clamp(1.6rem, 4vh, 3rem);
+  width: min(38ch, 100%);
   display: grid;
-  gap: 0.22rem;
-  width: 15ch;
-  user-select: none;
-  font-family: var(--mono);
+  gap: 0.55rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--hair-cyan);
 }
-.tj-node--up { transform: translate(-50%, -155%); }
-.tj-node--down { transform: translate(-50%, 58%); }
-.tj-key {
-  font-size: 0.58rem;
-  letter-spacing: 0.24em;
-  color: var(--cyan);
-}
-.tj-title {
-  font-family: var(--display);
-  font-size: 0.86rem;
-  letter-spacing: -0.01em;
-  color: var(--bright);
-  text-transform: uppercase;
-}
-.tj-detail {
-  font-family: var(--body);
-  font-size: 0.68rem;
-  line-height: 1.45;
-  color: rgba(160, 165, 170, 0.72);
-}
-.tj-year {
-  font-size: 0.56rem;
-  letter-spacing: 0.18em;
+.ae-milestone-step {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   color: var(--faint);
+}
+.ae-milestone-step b {
+  color: var(--bright);
+  font-weight: 400;
+}
+.ae-milestone-step i {
+  width: 1.4rem;
+  height: 1px;
+  background: var(--hair);
+}
+.ae-milestone-key { letter-spacing: 0.26em; }
+.ae-milestone-title {
+  font-family: var(--display);
+  font-size: clamp(1.15rem, 1.9vw, 1.9rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.06;
+  margin: 0;
+  color: var(--bright);
+}
+.ae-milestone-detail {
+  margin: 0;
+  font-size: calc(var(--t-body) * 0.94);
+  line-height: 1.6;
+  color: var(--muted);
+  min-height: 3.2em;
+}
+.ae-milestone-year { letter-spacing: 0.2em; }
+
+
+/* The one-word key riding each 3D node. Short enough never to wrap,
+   which is what keeps seven of them from colliding on one curve. */
+.tj-key-wrap { user-select: none; }
+.tj-key {
+  display: block;
+  transform: translate(-50%, -230%);
+  font-family: var(--mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.24em;
+  white-space: nowrap;
+  color: rgba(160, 165, 170, 0.4);
+  transition: color 0.45s var(--ease), transform 0.45s var(--ease);
+}
+.tj-key.is-past { color: rgba(0, 217, 245, 0.5); }
+.tj-key.is-active {
+  color: var(--cyan);
+  transform: translate(-50%, -270%);
 }
 
 /* ------------------------------------------------------------------
@@ -962,7 +1125,7 @@ html.ae-locked body {
 /* Four read-outs in four corners, each beside its instrument. */
 .ae-pillar {
   position: absolute;
-  width: min(28ch, 26vw);
+  width: min(26ch, 21vw);
   display: grid;
   gap: 0.5rem;
 }
@@ -994,9 +1157,19 @@ html.ae-locked body {
 }
 .ae-pillar-stat em { font-style: normal; }
 .ae-pillar--0 { top: clamp(7rem, 15vh, 10rem); left: var(--gutter); }
-.ae-pillar--1 { top: clamp(7rem, 15vh, 10rem); right: var(--gutter); }
+.ae-pillar--1 { top: clamp(7rem, 15vh, 10rem); right: var(--gutter-r); }
 .ae-pillar--2 { bottom: clamp(8rem, 18vh, 12rem); left: var(--gutter); }
-.ae-pillar--3 { bottom: clamp(8rem, 18vh, 12rem); right: var(--gutter); }
+.ae-pillar--3 { bottom: clamp(8rem, 18vh, 12rem); right: var(--gutter-r); }
+
+/* Below roughly 1400px the four corners cannot hold a paragraph *and*
+   an instrument without the two running into each other — the read-outs
+   are sized in characters and stay put while the frame narrows around
+   them. The prose is the part that goes: what the section is actually
+   claiming is in the label and the number, and those stay. */
+@media (max-width: 1400px) {
+  .ae-pillar { width: min(22ch, 20vw); }
+  .ae-pillar-body { display: none; }
+}
 
 .ae-fields {
   position: absolute;
@@ -1015,7 +1188,7 @@ html.ae-locked body {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: var(--muted);
+  color: var(--bright);
 }
 
 /* ------------------------------------------------------------------
@@ -1040,29 +1213,26 @@ html.ae-locked body {
   max-width: 32ch;
   margin-top: 1.3rem;
 }
+/* Under the copy, in the left column. Down the right margin it sat on
+   top of the hanging artwork — the plates own that half of the frame. */
 .ae-disciplines {
-  position: absolute;
-  right: var(--gutter);
-  top: 50%;
-  transform: translateY(-50%);
   list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  gap: 0.75rem;
-  text-align: right;
+  margin: 1.9rem 0 0;
+  padding: 1.2rem 0 0;
+  border-top: 1px solid var(--hair);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.4rem;
   color: var(--muted);
 }
+/* The rule is on the list now, not under every item — a hairline per
+   entry made sense in a vertical stack and reads as a broken table in a
+   wrapped row. */
 .ae-disciplines li {
-  padding-top: 0.5rem;
-  border-top: 1px solid var(--hair);
+  white-space: nowrap;
 }
 .ae-creative-hint {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: clamp(2.5rem, 6vh, 4rem);
-  margin: 0;
+  margin: 1.6rem 0 0;
 }
 
 /* Plate captions in the exhibition. */
@@ -1204,7 +1374,7 @@ html.ae-locked body {
 
 .ae-channels {
   position: absolute;
-  right: var(--gutter);
+  right: var(--gutter-r);
   bottom: clamp(3rem, 8vh, 5.5rem);
   list-style: none;
   margin: 0;
@@ -1324,6 +1494,7 @@ html.ae-locked body {
   justify-items: end;
 }
 .ae-rail-item {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 0.6rem;
@@ -1336,12 +1507,21 @@ html.ae-locked body {
 }
 .ae-rail-item:hover,
 .ae-rail-item.is-on { color: var(--cyan); }
+
+/* Taken out of flow. Left in it, this label reserved its full width at
+   all times even though it is invisible until hover — which made the
+   rail's box 161px wide instead of ~70px, and pushed the marks left
+   into the sections' right margin. It now expands leftward into empty
+   space and costs the rail nothing. */
 .ae-rail-label {
+  position: absolute;
+  right: calc(100% + 0.6rem);
   font-size: 0.55rem;
   opacity: 0;
   transform: translateX(8px);
   transition: opacity 0.4s var(--ease), transform 0.4s var(--ease);
   white-space: nowrap;
+  pointer-events: none;
 }
 .ae-rail-item:hover .ae-rail-label {
   opacity: 1;
@@ -1807,23 +1987,40 @@ html.ae-locked body {
   .ae-thesis-node--3 { bottom: 12%; right: 6%; }
 
   .ae-portrait {
-    width: 78vw;
-    right: -14vw;
-    bottom: -4vh;
-    opacity: 0.5;
+    /* Portrait to the top half, copy to the bottom. At this width there
+       is no room to run body text across a figure and still read it. */
+    width: 62vw;
+    right: -6vw;
+    top: 3vh;
+    bottom: auto;
+    opacity: 0.75;
+  }
+  /* The ghost word is a layer of depth on a wide screen and a smear
+     behind the body copy on a narrow one. It moves up behind the
+     portrait and drops most of its weight. */
+  .ae-ghost {
+    font-size: 15vw;
+    transform: translate(0, -24vh);
+    -webkit-text-stroke-color: rgba(0, 217, 245, 0.08);
   }
   .ae-profile-copy {
     width: auto;
     right: var(--gutter);
     top: auto;
-    bottom: 8vh;
+    bottom: 5vh;
     transform: none;
   }
+  .ae-profile-body { margin: 1rem 0 1.2rem; }
 
+  /* Base rule centres this both ways; on a narrow frame it moves to the
+     top but stays horizontally centred — dropping the transform without
+     also dropping `left: 50%` would leave it hanging off to one side. */
   .ae-research-head {
     top: clamp(7rem, 15vh, 9rem);
-    transform: none;
-    max-width: 70vw;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 82vw;
+    text-align: center;
   }
   .ae-research-pillars {
     position: absolute;
@@ -1839,19 +2036,24 @@ html.ae-locked body {
     width: auto;
   }
   .ae-pillar-body { display: none; }
+  /* Above the read-outs rather than under them — at this width the
+     bottom of the frame belongs to the four numbers. */
+  .ae-fields {
+    bottom: auto;
+    top: clamp(13rem, 30vh, 20rem);
+    gap: 0.5rem 1.1rem;
+  }
 
   .ae-creative-head { max-width: 70vw; }
-  .ae-disciplines {
-    top: auto;
-    bottom: 9vh;
-    transform: none;
-  }
 
   .ae-doctrine-row { flex-direction: column; align-items: flex-start; gap: 0.2rem; }
   .ae-doctrine-row--1,
   .ae-doctrine-row--3 { margin-left: 1.5rem; }
   .ae-doctrine-row--2 { margin-left: 0.75rem; }
 
+  /* Lift the display type so the availability list and the call to
+     action get the bottom third to themselves. */
+  .ae-contact-head { transform: translateY(-14vh); }
   .ae-contact-avail,
   .ae-channels {
     position: static;
@@ -1876,7 +2078,25 @@ html.ae-locked body {
   }
   .ae-work-number { font-size: 30vw; top: 3%; }
 
+  /* The prompt drops below the section mark rather than sharing the
+     top rule with it, and the node tags shrink so ten of them fit
+     across a phone without running off the edge. */
+  .ae-skills-prompt {
+    top: clamp(6.5rem, 13vh, 9rem);
+    right: auto;
+    left: var(--gutter);
+  }
+  .nm-tag {
+    width: 9ch;
+    transform: translate(0.7rem, -50%);
+  }
+  .nm-tag.is-left { transform: translate(calc(-100% - 0.7rem), -50%); }
+  .nm-tag-name { font-size: 0.5rem; letter-spacing: 0.14em; }
+  .nm-tag-note { display: none; }
+
   .ae-journey-head { max-width: 80vw; }
+  .ae-milestone { width: 100%; }
+  .ae-milestone-detail { min-height: 0; }
 
   .ae-case-sheet { width: 100%; border-left: 0; }
 }

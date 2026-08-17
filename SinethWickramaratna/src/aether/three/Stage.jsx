@@ -142,6 +142,7 @@ export default function Stage({
   quality = 'high',
   portalOpen = false,
   onSkillHover,
+  onMilestone,
   onReady,
 }) {
   return (
@@ -207,7 +208,7 @@ export default function Stage({
         </Station>
 
         <Station index={STATION_INDEX.journey}>
-          <Trajectory />
+          <Trajectory onActive={onMilestone} />
         </Station>
 
         <Station index={STATION_INDEX.research}>

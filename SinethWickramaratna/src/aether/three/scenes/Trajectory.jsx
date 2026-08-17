@@ -3,7 +3,7 @@ import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import { flight } from '../../state/flight';
 import { PALETTE, JOURNEY, STATION_INDEX } from '../../config';
-import { holo, chrome, emissive } from '../materials';
+import { holo, chrome, chromeDark, emissive } from '../materials';
 import { mulberry } from '../rng';
 import Label from '../Label';
 
@@ -12,27 +12,36 @@ import Label from '../Label';
  *
  * A vertical timeline says "these things happened in order". A curve
  * through space says "this went somewhere", which is the truer claim.
- * Milestones are placed by their position along the curve; a light runs
- * the whole path continuously, and the section's own scroll position
- * decides how much of the trajectory has been travelled.
+ *
+ * The hard part is not the curve — it is the writing. Seven full
+ * read-outs projected onto one path will always collide, because their
+ * screen positions are decided by 3D geometry and their sizes by the
+ * text. So the path carries only the *keys*: one short word per node,
+ * which can be placed tightly and never wraps. The prose lives in a
+ * single panel in the document layer, and scrolling the section walks
+ * the active milestone along the path. One thing is being read at a
+ * time, which is also how a trajectory is actually travelled.
  */
 
 const INDEX = STATION_INDEX.journey;
 
-export default function Trajectory() {
+export default function Trajectory({ onActive }) {
   const group = useRef();
   const travellerRef = useRef();
   const nodeRefs = useRef([]);
+  const labelRefs = useRef([]);
   const dustRef = useRef();
+  const activeRef = useRef(-1);
 
   /* A single sweeping curve — hand-placed control points, because a
-     generated spline always looks like a spring. */
+     generated spline always looks like a spring. Kept below the
+     headline block, which owns the upper-left of the frame. */
+  /* Low on the left, climbing to the right — which is also the shape of
+     the thing it describes. The document is laid out around this: the
+     heading takes the top-left, above where the curve begins, and the
+     read-out takes the bottom-right, below where it ends. */
   const curve = useMemo(
     () =>
-      /* Kept below the headline block, which occupies the upper-left of
-         the frame. The path dips, climbs and dips again so consecutive
-         milestones are never at the same height — their labels have to
-         sit above and below the curve without meeting. */
       new THREE.CatmullRomCurve3([
         new THREE.Vector3(-8.4, -4.4, -3.0),
         new THREE.Vector3(-5.6, -2.4, 1.4),
@@ -86,33 +95,54 @@ export default function Trajectory() {
     const g = group.current;
     if (!g) return;
 
-    /* Position along the section decides how far the camera has slid
-       down the trajectory. The path scrolls past you, not the reverse. */
+    /* Position within the section decides how far along the trajectory
+       the reader has travelled. The path slides past; the camera does
+       not chase it. */
     const local = THREE.MathUtils.clamp(flight.station - INDEX + 0.5, 0, 1);
     g.position.x = -(local - 0.5) * 7;
-    /* Below the headline block, which owns the top-left of the frame —
-       the milestone read-outs need that band to stay clear. */
     g.position.y = -1.1;
     g.rotation.y = flight.px * 0.2 + (local - 0.5) * 0.35;
     g.rotation.x = -flight.py * 0.12;
 
+    /* The traveller is driven by the reader, not by a clock: it is the
+       playhead for the section, and it stops where they stop. */
+    const head = THREE.MathUtils.clamp(local * 1.04 - 0.02, 0, 1);
     if (travellerRef.current) {
-      const at = (t * 0.055) % 1;
-      curve.getPointAt(at, v);
+      curve.getPointAt(head, v);
       travellerRef.current.position.copy(v);
       travellerRef.current.rotation.y = t * 0.8;
       travellerRef.current.rotation.x = t * 0.5;
     }
 
+    /* Whichever milestone the playhead has most recently passed is the
+       one being read. */
+    let active = 0;
+    for (let i = 0; i < nodes.length; i += 1) {
+      if (head >= nodes[i].t - 0.04) active = i;
+    }
+    if (active !== activeRef.current) {
+      activeRef.current = active;
+      onActive?.(active);
+    }
+
     nodeRefs.current.forEach((m, i) => {
       if (!m) return;
-      /* A milestone lights as the traveller's progress passes it. */
-      const reached = local * 1.05 > nodes[i].t;
-      const pulse = 0.9 + Math.sin(t * 1.5 + i * 1.3) * 0.12;
-      const target = (reached ? 1 : 0.45) * pulse;
-      m.scale.lerp({ x: target, y: target, z: target }, 0.1);
+      const reached = head >= nodes[i].t - 0.04;
+      const isActive = i === active;
+      const pulse = 0.9 + Math.sin(t * 1.5 + i * 1.3) * 0.1;
+      const target = (isActive ? 1.55 : reached ? 0.9 : 0.5) * pulse;
+      m.scale.lerp({ x: target, y: target, z: target }, 0.12);
       m.rotation.y = t * 0.25 + i;
       m.rotation.z = t * 0.14;
+    });
+
+    /* Keys fade back once passed, so the eye is never asked to read
+       seven words at once. */
+    labelRefs.current.forEach((el, i) => {
+      if (!el) return;
+      const reached = head >= nodes[i].t - 0.04;
+      el.classList.toggle('is-active', i === active);
+      el.classList.toggle('is-past', reached && i !== active);
     });
 
     if (dustRef.current) dustRef.current.rotation.y = t * 0.01;
@@ -135,7 +165,7 @@ export default function Trajectory() {
       </mesh>
 
       <mesh ref={travellerRef}>
-        <octahedronGeometry args={[0.12, 0]} />
+        <octahedronGeometry args={[0.15, 0]} />
         <meshStandardMaterial {...emissive(PALETTE.rose, 4)} />
       </mesh>
 
@@ -146,27 +176,29 @@ export default function Trajectory() {
               nodeRefs.current[i] = el;
             }}
           >
-            <icosahedronGeometry args={[0.28, 1]} />
-            <meshStandardMaterial {...chrome} />
+            <icosahedronGeometry args={[0.24, 1]} />
+            <meshStandardMaterial {...(i % 2 ? chrome : chromeDark)} />
           </mesh>
           <mesh>
-            <torusGeometry args={[0.5, 0.004, 3, 60]} />
-            <meshBasicMaterial {...holo(PALETTE.cyan, 0.5)} />
+            <torusGeometry args={[0.46, 0.004, 3, 60]} />
+            <meshBasicMaterial {...holo(PALETTE.cyan, 0.45)} />
           </mesh>
           <mesh>
-            <sphereGeometry args={[0.075, 12, 12]} />
+            <sphereGeometry args={[0.06, 12, 12]} />
             <meshStandardMaterial {...emissive(PALETTE.cyan, 3.6)} />
           </mesh>
 
-          <Label
-            station={INDEX}
-            center
-            className={`tj-node tj-node--${i % 2 ? 'down' : 'up'}`}
-          >
-            <span className="tj-key">{n.key}</span>
-            <span className="tj-title">{n.title}</span>
-            <span className="tj-detail">{n.detail}</span>
-            <span className="tj-year">{n.year}</span>
+          {/* One short word. Never wraps, so it can sit close to its
+              node without colliding with its neighbours. */}
+          <Label station={INDEX} center className="tj-key-wrap">
+            <span
+              className="tj-key"
+              ref={(el) => {
+                labelRefs.current[i] = el;
+              }}
+            >
+              {n.key}
+            </span>
           </Label>
         </group>
       ))}

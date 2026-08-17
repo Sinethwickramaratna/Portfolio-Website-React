@@ -35,6 +35,13 @@ export const flight = {
   /** Viewport, cached so scenes never touch layout during a frame. */
   vw: 1,
   vh: 1,
+  /**
+   * How far the camera has retreated to fit a narrow frame, 1 on a wide
+   * screen. Published by the rig and read by anything spaced in world
+   * units — pull the camera back without spreading the stations to
+   * match and the next composition drifts into view behind this one.
+   */
+  fit: 1,
   /** True once the intro curtain has lifted. */
   entered: false,
 };

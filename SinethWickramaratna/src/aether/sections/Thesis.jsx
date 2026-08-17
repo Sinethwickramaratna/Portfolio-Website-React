@@ -25,7 +25,7 @@ export default function Thesis() {
 
         <Lines
           tag="h2"
-          className="ae-display ae-thesis-head"
+          className="ae-display ae-fit ae-thesis-head"
           text={['I TURN DATA', 'INTO INTELLIGENCE.']}
         />
 

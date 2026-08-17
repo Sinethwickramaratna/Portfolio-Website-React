@@ -55,7 +55,7 @@ function ProjectStation({ project, flip, onOpen }) {
           </span>
           <Lines
             tag="h3"
-            className="ae-display ae-work-title"
+            className="ae-display ae-fit ae-work-title"
             text={project.lines}
           />
         </div>

@@ -3,7 +3,7 @@ import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import { flight } from '../../state/flight';
 import { PALETTE, STATION_INDEX } from '../../config';
-import { holo, chrome, chromeDark, metal, acrylic, emissive } from '../materials';
+import { holo, chrome, chromeDark, acrylic, emissive } from '../materials';
 import { mulberry, range } from '../rng';
 
 /**
@@ -290,7 +290,7 @@ export function VisionAperture() {
      so the scan plane crossing it has something to reveal. */
   const cloud = useMemo(() => {
     const rng = mulberry(6023);
-    const n = 900;
+    const n = 1600;
     const pos = new Float32Array(n * 3);
     for (let i = 0; i < n; i += 1) {
       const a = rng() * Math.PI * 2;
@@ -323,7 +323,9 @@ export function VisionAperture() {
       irisRef.current.rotation.x = -flight.py * 0.4;
     }
 
-    const open = 0.55 + Math.sin(t * 0.35) * 0.12 + Math.abs(flight.px) * 0.2;
+    /* The aperture breathes, and opens further as the cursor moves off
+       centre — the instrument reacting to being looked away from. */
+    const open = 0.92 + Math.sin(t * 0.35) * 0.1 + Math.abs(flight.px) * 0.22;
     bladesRef.current.forEach((b, i) => {
       if (!b) return;
       const a = (i / blades.length) * Math.PI * 2;

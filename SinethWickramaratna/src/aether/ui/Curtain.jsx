@@ -24,7 +24,14 @@ export default function Curtain({ worldReady, onEnter }) {
   const [count, setCount] = useState(0);
   const [ready, setReady] = useState(false);
   const [gone, setGone] = useState(false);
-  const shown = useRef(performance.now());
+  /* Stamped in an effect rather than at render: reading the clock
+     during render is impure, and the value would change on any
+     re-render that happened before the ref settled. */
+  const shown = useRef(0);
+
+  useEffect(() => {
+    shown.current = performance.now();
+  }, []);
 
   useEffect(() => {
     let raf = 0;

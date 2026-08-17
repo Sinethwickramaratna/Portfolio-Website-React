@@ -10,6 +10,7 @@ import {
   DOCTRINE,
   AVAILABLE_FOR,
   LINKS,
+  CV_URL,
 } from './config';
 import portrait from '../assets/Images/profile.webp';
 import portraitFallback from '../assets/Images/profile.png';
@@ -184,6 +185,13 @@ export default function Flat({ reason }) {
               </a>
             </li>
           ))}
+          {CV_URL && (
+            <li>
+              <a className="ae-mono" href={CV_URL} target="_blank" rel="noreferrer">
+                CV — Download résumé
+              </a>
+            </li>
+          )}
         </ul>
       </section>
 

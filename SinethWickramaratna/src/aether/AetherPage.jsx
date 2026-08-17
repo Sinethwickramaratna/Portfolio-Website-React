@@ -59,7 +59,7 @@ function detectQuality() {
 }
 
 export default function AetherPage() {
-  const supportsWebGL = useMemo(detectWebGL, []);
+  const supportsWebGL = useMemo(() => detectWebGL(), []);
   const [reduced, setReduced] = useState(false);
 
   useEffect(() => {
@@ -78,7 +78,7 @@ export default function AetherPage() {
 }
 
 function Aether() {
-  const quality = useMemo(detectQuality, []);
+  const quality = useMemo(() => detectQuality(), []);
   const [entered, setEntered] = useState(false);
   const active = useFlightDriver(entered);
 
@@ -86,6 +86,7 @@ function Aether() {
      by the document, which is the only coupling between the two layers
      — everything else the world needs it reads from `flight`. */
   const [skill, setSkill] = useState(null);
+  const [milestone, setMilestone] = useState(0);
   const [portalOpen, setPortalOpen] = useState(false);
   const [study, setStudy] = useState(null);
   const [worldReady, setWorldReady] = useState(false);
@@ -125,6 +126,7 @@ function Aether() {
             quality={quality}
             portalOpen={portalOpen}
             onSkillHover={setSkill}
+            onMilestone={setMilestone}
             onReady={markReady}
           />
         </Suspense>
@@ -139,7 +141,7 @@ function Aether() {
         <Profile />
         <Skills hovered={skill} />
         <Work onOpen={openStudy} />
-        <Journey />
+        <Journey active={milestone} />
         <Research />
         <Creative />
         <Philosophy />

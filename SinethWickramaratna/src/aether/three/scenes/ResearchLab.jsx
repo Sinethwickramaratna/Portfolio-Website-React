@@ -5,6 +5,7 @@ import { flight } from '../../state/flight';
 import { PALETTE, STATION_INDEX } from '../../config';
 import { holo, chrome, chromeDark, glass, emissive } from '../materials';
 import { mulberry, range } from '../rng';
+import { useFrameExtent } from '../useFrameExtent';
 
 /**
  * The research lab.
@@ -18,8 +19,40 @@ import { mulberry, range } from '../rng';
 
 const INDEX = STATION_INDEX.research;
 
+/* Where each instrument sits, as a fraction of the visible frame rather
+   than as a world coordinate. The four read-outs are pinned to the four
+   corners of the *screen*, so the instruments have to be placed against
+   the same frame or they drift under the text as the window changes —
+   which is exactly what happened at large sizes. Kept inside ±0.5 so
+   the outer fifth of the frame stays clear for the words. */
+const BENCH = [
+  { key: 'data', fx: -0.37, fy: 0.30, z: -1.2 },
+  { key: 'models', fx: 0.37, fy: 0.36, z: -2.6 },
+  { key: 'search', fx: -0.36, fy: -0.42, z: 1.6 },
+  { key: 'result', fx: 0.38, fy: -0.36, z: 0.8 },
+];
+
 export default function ResearchLab() {
   const group = useRef();
+  const slots = useRef(BENCH.map(() => null));
+  const extent = useFrameExtent();
+
+  useFrame(() => {
+    const { hw, hh } = extent.current;
+    BENCH.forEach((slot, i) => {
+      const g = slots.current[i];
+      if (!g) return;
+      g.position.set(slot.fx * hw, slot.fy * hh, slot.z);
+      /* Shrink with the frame too. Held at a fixed world size, an
+         instrument that clears the read-outs on a wide monitor grows
+         into them the moment the window narrows. */
+      g.scale.setScalar(THREE.MathUtils.clamp(hh / 5.3, 0.62, 1.15) * 0.85);
+    });
+  });
+
+  const bind = (i) => (el) => {
+    slots.current[i] = el;
+  };
 
   return (
     <group ref={group}>
@@ -28,10 +61,10 @@ export default function ResearchLab() {
       <pointLight position={[6, -3, 2]} color={PALETTE.rose} intensity={1.8} distance={16} />
 
       <Bench />
-      <DatasetCloud position={[-5.6, 2.0, -1.2]} />
-      <DecisionSurface position={[4.9, 2.4, -2.6]} />
-      <ParameterSearch position={[-4.4, -2.6, 1.6]} />
-      <ResultCurve position={[5.2, -2.2, 0.8]} />
+      <group ref={bind(0)}><DatasetCloud /></group>
+      <group ref={bind(1)}><DecisionSurface /></group>
+      <group ref={bind(2)}><ParameterSearch /></group>
+      <group ref={bind(3)}><ResultCurve /></group>
     </group>
   );
 }
@@ -51,8 +84,10 @@ function Bench() {
 
   return (
     <mesh ref={ref} geometry={gridGeo} rotation={[-Math.PI / 2.15, 0, 0]} position={[0, -5.4, -3]}>
+      {/* Faint enough that the strip of technical labels running along
+          the bottom of the section stays readable over it. */}
       <meshBasicMaterial
-        {...holo(PALETTE.cyan, 0.05)}
+        {...holo(PALETTE.cyan, 0.03)}
         wireframe
         depthWrite={false}
         blending={THREE.AdditiveBlending}
@@ -63,7 +98,7 @@ function Bench() {
 
 /* DATA — a labelled cloud with a sampling window sliding through it,
    which is literally how the sensor series was segmented. */
-function DatasetCloud({ position }) {
+function DatasetCloud() {
   const ref = useRef();
   const windowRef = useRef();
 
@@ -105,7 +140,7 @@ function DatasetCloud({ position }) {
   });
 
   return (
-    <group position={position} scale={1.3}>
+    <group scale={1.3}>
       <group ref={ref}>
         <points geometry={geo}>
           <pointsMaterial
@@ -140,7 +175,7 @@ function DatasetCloud({ position }) {
 
 /* MODELS — a saddle. The one honest picture of what a classifier does:
    bend a space until two things fall on opposite sides. */
-function DecisionSurface({ position }) {
+function DecisionSurface() {
   const ref = useRef();
   const geo = useMemo(() => {
     const g = new THREE.PlaneGeometry(3.4, 3.4, 30, 30);
@@ -162,7 +197,7 @@ function DecisionSurface({ position }) {
   });
 
   return (
-    <group position={position}>
+    <group>
       <mesh ref={ref} geometry={geo}>
         <meshBasicMaterial
           {...holo(PALETTE.cyan, 0.28)}
@@ -185,7 +220,7 @@ function DecisionSurface({ position }) {
 
 /* EXPERIMENTS — candidates scattered over a parameter grid, with the
    current best held in glass. */
-function ParameterSearch({ position }) {
+function ParameterSearch() {
   const ref = useRef();
   const marksRef = useRef();
   const bestRef = useRef();
@@ -224,7 +259,7 @@ function ParameterSearch({ position }) {
   });
 
   return (
-    <group position={position} scale={1.25}>
+    <group scale={1.25}>
       <group ref={ref}>
         <instancedMesh ref={marksRef} args={[markGeo, null, marks.length]}>
           <meshStandardMaterial {...chrome} />
@@ -244,7 +279,7 @@ function ParameterSearch({ position }) {
 
 /* RESULTS — a learning curve lifted into three dimensions, with the
    final value marked. */
-function ResultCurve({ position }) {
+function ResultCurve() {
   const ref = useRef();
   const markerRef = useRef();
 
@@ -274,7 +309,7 @@ function ResultCurve({ position }) {
   });
 
   return (
-    <group position={position} ref={ref} scale={1.15}>
+    <group ref={ref} scale={1.15}>
       <mesh geometry={tube}>
         <meshStandardMaterial {...emissive(PALETTE.cyan, 2.2)} />
       </mesh>

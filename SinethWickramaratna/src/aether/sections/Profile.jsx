@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import Frame from '../ui/Frame';
-import { Lines, useReveal } from '../ui/reveal';
-import { PROFILE_META } from '../config';
+import { Lines, useReveal, useMagnetic } from '../ui/reveal';
+import { PROFILE_META, CV_URL } from '../config';
 import portrait from '../../assets/Images/profile.webp';
 import portraitFallback from '../../assets/Images/profile.png';
 
@@ -20,7 +20,9 @@ import portraitFallback from '../../assets/Images/profile.png';
  */
 export default function Profile() {
   const ref = useRef();
+  const cv = useRef();
   useReveal(ref);
+  useMagnetic(cv, 0.24);
 
   return (
     <Frame id="profile" className="ae-profile">
@@ -70,6 +72,28 @@ export default function Profile() {
               </div>
             ))}
           </dl>
+
+          {/* Rendered only when there is somewhere for it to go — a
+              download that leads nowhere is worse than none. */}
+          {CV_URL && (
+            <a
+              ref={cv}
+              className="ae-cta ae-cta--ghost ae-profile-cv"
+              href={CV_URL}
+              target="_blank"
+              rel="noreferrer"
+              data-fade
+            >
+              <span className="ae-mono">DOWNLOAD CV</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  d="M12 3v13M6.5 11l5.5 5.5L17.5 11M4 20.5h16"
+                  fill="none"
+                  stroke="currentColor"
+                />
+              </svg>
+            </a>
+          )}
         </div>
 
         <span className="ae-vert ae-vert--profile ae-mono ae-dim" data-fade>

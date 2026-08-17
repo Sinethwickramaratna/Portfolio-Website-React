@@ -204,11 +204,17 @@ export default function NeuralMap({ onHover }) {
             />
           </mesh>
 
+          {/* Tags on the right half of the map hang to the *left* of
+              their node. Always trailing to the right would push the
+              outermost four off the edge of a narrow screen, and into
+              the navigation rail on a wide one. */}
           <Label
             station={INDEX}
             position={node.p}
             center
-            className={`nm-tag${hover === i ? ' is-on' : ''}`}
+            className={`nm-tag${hover === i ? ' is-on' : ''}${
+              node.p[0] > 1.5 ? ' is-left' : ''
+            }`}
           >
             <span className="nm-tag-name">{node.name}</span>
             <span className="nm-tag-note">{node.note}</span>

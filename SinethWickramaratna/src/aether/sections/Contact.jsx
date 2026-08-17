@@ -1,7 +1,12 @@
 import { useRef } from 'react';
 import Frame from '../ui/Frame';
 import { useReveal, useMagnetic } from '../ui/reveal';
-import { AVAILABLE_FOR, LINKS } from '../config';
+import { AVAILABLE_FOR, LINKS, CV_URL } from '../config';
+
+/* The CV joins the channels only when there is a link for it. */
+const CHANNELS = CV_URL
+  ? [...LINKS, { key: 'CV', value: 'Download résumé', href: CV_URL }]
+  : LINKS;
 
 /**
  * The connection.
@@ -61,7 +66,7 @@ export default function Contact({ open, onOpen }) {
         </button>
 
         <ul className={`ae-channels${open ? ' is-open' : ''}`}>
-          {LINKS.map((l, i) => (
+          {CHANNELS.map((l, i) => (
             <li key={l.key} style={{ '--ci': i }}>
               <a href={l.href} target="_blank" rel="noreferrer">
                 <span className="ae-mono ae-dim">{l.key}</span>

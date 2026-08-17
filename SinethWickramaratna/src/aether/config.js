@@ -387,8 +387,8 @@ export const EXHIBITION = [
     title: 'BOT TALK 3.0',
     kind: 'EVENT IDENTITY',
     src: 'https://i.imgur.com/7Azjxca.jpg',
-    p: [-5.5, -2.5, 1.8],
-    scale: 3.0,
+    p: [-4.9, -1.9, 1.6],
+    scale: 2.9,
     tilt: 0.16,
   },
   {
@@ -452,6 +452,22 @@ export const AVAILABLE_FOR = [
   'INNOVATIVE PROJECTS',
   'CREATIVE TECHNOLOGY',
 ];
+
+/* ------------------------------------------------------------------ *
+ * CV
+ *
+ * >>> PASTE YOUR CV LINK HERE. <<<
+ *
+ * This is the only place the address appears — the button in the
+ * profile section and the entry in the contact channels both read it,
+ * so changing this one line changes both.
+ *
+ * If it is a Google Drive share link, use the /preview or /view form
+ * (the /edit form will not open for anyone but you). Leave it as an
+ * empty string and the button is not rendered at all, which is better
+ * than shipping one that 404s.
+ * ------------------------------------------------------------------ */
+export const CV_URL = '';
 
 export const LINKS = [
   {

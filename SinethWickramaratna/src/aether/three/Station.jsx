@@ -37,7 +37,10 @@ export default function Station({
     const d = flight.station - index;
     const a = Math.abs(d);
 
-    g.position.y = -d * spread;
+    /* Spread with the camera. On a narrow frame the rig retreats to fit
+       the composition, which would otherwise bring the neighbouring
+       stations into shot behind and in front of this one. */
+    g.position.y = -d * spread * flight.fit;
     g.position.z = z + dolly * (1 - Math.min(1, a)) * -1;
     g.visible = a < 1.6;
 

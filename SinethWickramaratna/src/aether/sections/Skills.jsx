@@ -28,7 +28,10 @@ export default function Skills({ hovered }) {
             letterforms rather than sitting behind them. */}
 
         <p className="ae-skills-prompt" data-fade>
-          <span className="ae-mono ae-dim">MOVE THE CURSOR OVER A NODE</span>
+          {/* Neutral wording: the map answers a tap as readily as a
+              hover, and telling a phone user to move their cursor is
+              the fastest way to look like a desktop site in a costume. */}
+          <span className="ae-mono ae-dim">HOVER OR TAP A NODE</span>
         </p>
 
         {/* One read-out, bottom left, rather than ten tooltips. */}

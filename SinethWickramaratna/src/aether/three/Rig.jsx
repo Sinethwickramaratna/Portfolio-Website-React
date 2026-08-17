@@ -50,14 +50,39 @@ function sample(t) {
 
 const damp = (c, t, l, dt) => c + (t - c) * (1 - Math.exp(-l * dt));
 
+/**
+ * How far to pull back so a composition still fits the frame.
+ *
+ * Every scene in this world is arranged for a wide screen — nodes at
+ * x = ±6, a trajectory running to x = ±10. On a portrait phone the
+ * frustum is a third as wide and half of each composition falls outside
+ * it, which is the single biggest thing that breaks the site on a
+ * narrow viewport.
+ *
+ * Rather than give thirteen scenes their own breakpoints, the camera
+ * retreats: the horizontal field is what matters, so the distance is
+ * scaled by how far the viewport's aspect falls short of the one the
+ * work was composed in. The exponent softens it — a literal correction
+ * on a tall phone would push everything to a speck.
+ */
+const COMPOSED_FOR = 1.6;
+
+function fitDistance(aspect) {
+  const need = COMPOSED_FOR / Math.max(aspect, 0.3);
+  return Math.min(2.35, Math.max(1, need ** 0.82));
+}
+
 export default function Rig() {
-  const { camera } = useThree();
+  const camera = useThree((s) => s.camera);
+  const size = useThree((s) => s.size);
   const state = useRef({ z: 13.5, x: 0, y: 0, fov: 42, roll: 0 });
 
   useFrame((_, delta) => {
     const dt = Math.min(0.05, delta);
     const mark = sample(flight.station);
     const s = state.current;
+    const fit = fitDistance(size.width / Math.max(1, size.height));
+    flight.fit = fit;
 
     /* Parallax is applied on top of the mark, not instead of it, and is
        small — the pointer suggests the camera, it does not drive it. */
@@ -66,7 +91,7 @@ export default function Rig() {
 
     s.x = damp(s.x, targetX, 2.6, dt);
     s.y = damp(s.y, targetY, 2.6, dt);
-    s.z = damp(s.z, mark.z, 3.0, dt);
+    s.z = damp(s.z, mark.z * fit, 3.0, dt);
     s.fov = damp(s.fov, mark.fov, 3.0, dt);
     /* A degree of roll against scroll direction. Barely perceptible, and
        the entire reason the flight feels like it has weight. */
