@@ -13,7 +13,6 @@ import {
   CV_URL,
 } from './config';
 import portrait from '../assets/Images/profile.webp';
-import portraitFallback from '../assets/Images/profile.png';
 
 /**
  * The flat document.
@@ -57,10 +56,7 @@ export default function Flat({ reason }) {
 
       <section className="af-sec">
         <span className="ae-mono ae-accent">01 / PROFILE</span>
-        <picture>
-          <source srcSet={portrait} type="image/webp" />
-          <img className="af-portrait" src={portraitFallback} alt="Sineth Wickramaratna" />
-        </picture>
+        <img className="af-portrait" src={portrait} alt="Sineth Wickramaratna" />
         <p className="af-body">
           I am a Computer Science &amp; Engineering undergraduate specialising in
           Data Science Engineering — interested in building intelligent systems,

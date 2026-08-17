@@ -48,7 +48,7 @@
      ceiling is still what applies. */
   --t-colossal: clamp(3.6rem, min(15.5vw, 25vh), 17rem);
   --t-huge: clamp(2.8rem, min(9.2vw, 13.5vh), 9.5rem);
-  --t-large: clamp(2rem, 5.6vw, 5.4rem);
+  --t-large: clamp(1.7rem, min(5.6vw, 9vh), 5.4rem);
   --t-mid: clamp(1.15rem, 2.05vw, 2rem);
   --t-body: clamp(0.95rem, 1.05vw, 1.14rem);
   --t-mono: clamp(0.6rem, 0.68vw, 0.72rem);
@@ -697,10 +697,15 @@ html.ae-locked body {
      margin on a wide monitor and starts cutting the figure's arm — a
      crop that only appears once the window is large enough. */
   right: max(-2vw, -2.25rem);
-  bottom: -5vh;
-  /* Grows further on a large display: capped at 38rem the figure read
-     as a small object stranded in a wide frame. */
-  width: clamp(17rem, 40vw, 46rem);
+  /* Stands on the bottom edge of the frame rather than bleeding through
+     it. Anything that has to be given up is given up at the top, where
+     it costs a little headroom — never at the feet. */
+  bottom: 0;
+  /* Sized by whichever runs out first, the width or the height. The
+     second term is the height cap expressed as a width (the cutout is
+     500×751, so width ≈ height × 0.666); without it a short window
+     would push the figure's head off the top of the frame. */
+  width: min(clamp(17rem, 40vw, 46rem), 62vh);
   margin: 0;
   z-index: 1;
 }
@@ -753,8 +758,9 @@ html.ae-locked body {
   filter: grayscale(1) contrast(1.14) brightness(1.04)
     drop-shadow(0 0 34px rgba(0, 217, 245, 0.42))
     drop-shadow(0 0 90px rgba(0, 217, 245, 0.16));
-  /* Bleeds off the bottom edge of the section. */
-  mask-image: linear-gradient(to bottom, #000 82%, transparent 99%);
+  /* No bottom fade. It was dissolving the figure from the upper thigh
+     down, which read as the photograph being cut off rather than as a
+     plate bled off the page. The cutout now shows whole. */
 }
 
 /* One violet accent raking across the figure from the upper left. */
@@ -1549,7 +1555,12 @@ html.ae-locked body {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 60;
+  /* Above everything, the curtain included. The native cursor is
+     suppressed site-wide, so anything painted over the reticle leaves
+     the visitor with no pointer at all — which is what happened on the
+     loading screen, where the curtain (70) covered it. Nothing should
+     ever stack above the cursor. */
+  z-index: 90;
   pointer-events: none;
   border-radius: 50%;
   opacity: 0;
@@ -1968,9 +1979,34 @@ html.ae-locked body {
 @media (max-width: 900px) {
   .ae { --gutter: 1.25rem; }
 
+  /* What a phone gives up.
+     ----------------------------------------------------------------
+     Every one of these is a decorative or duplicate layer that, on a
+     screen this size, has nowhere to go except on top of the content.
+     They were each colliding with something the visitor actually needs
+     to read, and the fix in every case is the same: on a 390px frame
+     there is room for one thing per region, so the ornament goes and
+     the substance stays.
+
+     · rail        — 13 fixed marks in a right margin that no longer
+                     exists; it was printing over project titles and
+                     the doctrine notes. Scrolling is the navigation.
+     · skills core — the giant DATA / INTELLIGENCE behind the neural
+                     map. The node names are the content and they were
+                     landing on top of it.
+     · node keys   — the milestone words riding the trajectory. The
+                     read-out panel already names the active one.
+     · walk hint   — "MOVE TO WALK THE ROOM" asks for a pointer that a
+                     touch device does not have, and it sat on the
+                     exhibition captions.
+     ---------------------------------------------------------------- */
   .ae-vert,
   .ae-hero-labels,
-  .ae-rail-label { display: none; }
+  .ae-rail-label,
+  .ae-rail,
+  .ae-skills-core,
+  .tj-key,
+  .ae-creative-hint { display: none; }
 
   .ae-hero-first { transform: translate(0, -18vh); }
   .ae-hero-front { justify-content: flex-start; bottom: 34vh; }
@@ -1989,9 +2025,9 @@ html.ae-locked body {
   .ae-portrait {
     /* Portrait to the top half, copy to the bottom. At this width there
        is no room to run body text across a figure and still read it. */
-    width: 62vw;
+    width: min(62vw, 42vh);
     right: -6vw;
-    top: 3vh;
+    top: 2vh;
     bottom: auto;
     opacity: 0.75;
   }
@@ -2094,7 +2130,13 @@ html.ae-locked body {
   .nm-tag-name { font-size: 0.5rem; letter-spacing: 0.14em; }
   .nm-tag-note { display: none; }
 
-  .ae-journey-head { max-width: 80vw; }
+  /* `width`, not `max-width` — the base rule sets an explicit width of
+     40vw, which on a phone is 156px and was chopping the headline in
+     half. A max-width cannot widen it back. */
+  .ae-journey-head {
+    width: calc(100% - var(--gutter) * 2);
+    max-width: none;
+  }
   .ae-milestone { width: 100%; }
   .ae-milestone-detail { min-height: 0; }
 
@@ -2106,6 +2148,127 @@ html.ae-locked body {
   .ae-pillar--2, .ae-pillar--3 { display: none; }
   .ae-fields { gap: 0.8rem; }
   .ae-footer-in { flex-direction: column; align-items: flex-start; }
+}
+
+/* ------------------------------------------------------------------
+   24b. SHORT VIEWPORTS — landscape phones, small windows
+   ------------------------------------------------------------------
+   Keyed on height, not width, because this is a different problem from
+   a narrow screen. The mobile rules above stack each composition
+   vertically, which is right for a 390×844 phone and wrong for the same
+   phone turned sideways: 844×390 has width to spare and almost no
+   height, so a stacked layout puts the project number on the title on
+   the blurb.
+
+   Two moves. Anything that exists to fill vertical space goes, and
+   anything still standing is re-laid across the width that is now the
+   plentiful dimension.
+   ------------------------------------------------------------------ */
+@media (max-height: 560px) and (max-width: 1180px) {
+  /* Ornament that needs height it does not have. The outlined project
+     number alone was 30vw — 253px of a 390px frame. */
+  .ae-work-number,
+  .ae-ghost,
+  .ae-fields,
+  .ae-journey-sub,
+  .ae-hero-desc,
+  .ae-disciplines,
+  .ae-pillar-body { display: none; }
+
+  /* The statement stays — it is the one thing the hero is actually
+     saying. The role list under it is what goes instead. */
+  .ae-hero-statement {
+    bottom: 4vh;
+    font-size: 0.82em;
+    line-height: 1.35;
+  }
+
+  .ae-sec-mark { top: 1.4rem; }
+
+  /* The note under each thesis node is what reached the section mark;
+     dropping it clears the corner without moving the node itself into
+     the headline. */
+  .ae-thesis-node em { display: none; }
+
+  /* The profile column ran the full height of the frame and put its
+     headline level with the section mark. The metadata becomes a single
+     wrapped row, which is where the height comes back from. */
+  .ae-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem 1.4rem;
+  }
+  .ae-meta-row {
+    display: flex;
+    gap: 0.5rem;
+    padding-top: 0;
+    border-top: 0;
+  }
+  .ae-profile-body {
+    font-size: 0.92em;
+    line-height: 1.5;
+    margin: 0.7rem 0 0.9rem;
+  }
+  .ae-profile-cv { margin-top: 0.9rem; }
+
+  /* Four stacked words at 19vh filled three quarters of the frame.
+     Shrunk, and pushed to the left half so the availability list and
+     the call to action can hold the right — stacked one above the
+     other, there is not enough height for both. */
+  .ae-contact-head {
+    font-size: min(8vw, 12vh);
+    transform: translate(-26vw, 0);
+  }
+  .ae-contact-grid {
+    align-content: center;
+    justify-items: end;
+    text-align: right;
+    padding-bottom: var(--gutter);
+  }
+  .ae-cta--portal { justify-self: end; }
+  .ae-hero-first { transform: translate(0, -8vh); }
+  .ae-hero-front { bottom: 20vh; justify-content: flex-start; }
+  .ae-scrollcue { bottom: 2vh; }
+
+  /* Back to two columns: width is no longer what is scarce. */
+  .ae-profile-copy {
+    width: min(44ch, 54vw);
+    right: auto;
+    bottom: 4vh;
+  }
+  .ae-portrait {
+    width: min(30vw, 58vh);
+    right: 2vw;
+    top: auto;
+    bottom: 0;
+    opacity: 0.9;
+  }
+
+  .ae-work-head {
+    max-width: 54vw;
+    transform: translateY(-56%);
+  }
+  .ae-work-side,
+  .ae-work.is-flipped .ae-work-side {
+    left: auto;
+    right: var(--gutter);
+    width: min(34ch, 38vw);
+    bottom: 5vh;
+  }
+  .ae-work.is-flipped .ae-work-side { right: auto; left: var(--gutter); }
+  .ae-work.is-flipped .ae-work-head { left: auto; right: var(--gutter); text-align: right; }
+
+  .ae-journey-head { width: min(40ch, 46vw); }
+  .ae-milestone { margin-top: 0.9rem; }
+
+  .ae-research-pillars {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    bottom: 4vh;
+  }
+  .ae-creative-head { max-width: 44vw; }
+  .ae-contact-grid { gap: 0.6rem; }
+  .ae-contact-avail,
+  .ae-channels { font-size: 0.9em; }
 }
 
 /* ------------------------------------------------------------------

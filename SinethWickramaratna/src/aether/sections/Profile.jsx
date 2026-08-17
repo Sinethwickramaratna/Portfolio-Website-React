@@ -3,7 +3,6 @@ import Frame from '../ui/Frame';
 import { Lines, useReveal, useMagnetic } from '../ui/reveal';
 import { PROFILE_META, CV_URL } from '../config';
 import portrait from '../../assets/Images/profile.webp';
-import portraitFallback from '../../assets/Images/profile.png';
 
 /**
  * 01 / PROFILE.
@@ -36,16 +35,20 @@ export default function Profile() {
         {/* The orbital curves and the ghost word are painted by
             BackLayer, under the canvas, so the halo crosses them. */}
 
+        {/* The webp is the cropped derivative, not merely a smaller
+            encoding: the source PNG carries a background-remover's
+            toolbar baked across its bottom edge, which the old fade-out
+            was quietly hiding. There is no PNG fallback because falling
+            back would put the watermark on screen. */}
         <figure className="ae-portrait">
-          <picture>
-            <source srcSet={portrait} type="image/webp" />
-            <img
-              src={portraitFallback}
-              alt="Sineth Wickramaratna"
-              loading="lazy"
-              decoding="async"
-            />
-          </picture>
+          <img
+            src={portrait}
+            alt="Sineth Wickramaratna"
+            width="500"
+            height="730"
+            loading="lazy"
+            decoding="async"
+          />
           <span className="ae-portrait-cast" aria-hidden="true" />
         </figure>
 
