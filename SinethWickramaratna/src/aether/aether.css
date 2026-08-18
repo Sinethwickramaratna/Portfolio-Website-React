@@ -841,15 +841,23 @@ html.ae-locked body {
   justify-items: center;
   font-family: var(--display);
   font-weight: 600;
-  font-size: clamp(2.4rem, 7.4vw, 7.5rem);
+  /* Smaller and lifted clear of the node field. At the old size the
+     outlined second word spanned nearly the full width of the map and
+     ran straight through the labels sitting on either side of it. */
+  font-size: clamp(2rem, 5.8vw, 5.6rem);
+  transform: translateY(-7vh);
   line-height: 0.85;
   letter-spacing: -0.04em;
   text-transform: uppercase;
-  color: var(--bright);
+  /* This is the back layer — it belongs behind the map, not in front of
+     it. At full brightness the solid word sat on the nucleus and the
+     filaments and out-shouted the ten labels that are the actual
+     content here. */
+  color: rgba(245, 245, 245, 0.42);
 }
 .ae-skills-core b:last-child {
   color: transparent;
-  -webkit-text-stroke: 1px rgba(0, 217, 245, 0.5);
+  -webkit-text-stroke: 1px rgba(0, 217, 245, 0.3);
 }
 
 .ae-skills-prompt {
@@ -878,41 +886,61 @@ html.ae-locked body {
   min-height: 3.2em;
 }
 
-/* Labels attached to the 3D nodes, rendered through drei's HTML
-   portal. Collapsed to a hairline name until hovered. */
+/* Labels attached to the 3D nodes, rendered through drei's HTML portal.
+   ------------------------------------------------------------------
+   These names are the content of this section, not chrome around it,
+   and they were set like chrome: 9.6px at 75% grey on near-black, which
+   is unreadable at any normal viewing distance. They are now sized and
+   weighted as something meant to be read, with a shadow so they survive
+   crossing a filament or a lit node.
+
+   The offset also has to clear the node's own geometry — these meshes
+   have an on-screen radius far larger than the old 1.4rem gap, so a
+   label could land on the very object it was naming.
+   ------------------------------------------------------------------ */
 .nm-tag {
-  transform: translate(1.4rem, -50%);
+  position: relative;
+  /* drei's `center` already places this box on the node, so the offset
+     has to clear the label's own half-width as well as the node's
+     on-screen radius — otherwise it merely nudges the label and it ends
+     up printed across the object it names. */
+  transform: translate(calc(50% + 3.4rem), 0);
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
-  width: 15ch;
+  gap: 0.32rem;
+  width: 17ch;
   font-family: var(--mono);
-  font-size: 0.6rem;
-  letter-spacing: 0.2em;
+  font-size: clamp(0.68rem, 0.78vw, 0.82rem);
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: rgba(160, 165, 170, 0.75);
+  color: rgba(245, 245, 245, 0.92);
+  text-shadow: 0 0 12px rgba(5, 5, 5, 0.95), 0 0 4px rgba(5, 5, 5, 0.9);
   transition: color 0.35s var(--ease);
   user-select: none;
 }
 .nm-tag.is-on { color: var(--cyan); }
 .nm-tag.is-left {
-  transform: translate(calc(-100% - 1.4rem), -50%);
+  transform: translate(calc(-50% - 3.4rem), 0);
   text-align: right;
   align-items: flex-end;
 }
-.nm-tag-name { white-space: nowrap; }
-.nm-tag-note {
-  font-size: 0.55rem;
-  letter-spacing: 0.06em;
-  text-transform: none;
-  color: rgba(160, 165, 170, 0.7);
-  opacity: 0;
-  transform: translateY(-4px);
-  transition: opacity 0.35s var(--ease), transform 0.35s var(--ease);
+
+/* A tick pointing back at the node, so which label names which object
+   is never a guess. */
+.nm-tag-name { position: relative; white-space: nowrap; }
+.nm-tag-name::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: calc(100% + 0.55rem);
+  width: 0.9rem;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.5;
 }
-.nm-tag.is-on .nm-tag-note {
-  opacity: 1;
-  transform: translateY(0);
+.nm-tag.is-left .nm-tag-name::before {
+  right: auto;
+  left: calc(100% + 0.55rem);
 }
 
 /* ------------------------------------------------------------------
@@ -2402,13 +2430,18 @@ html.ae-locked body {
     right: auto;
     left: var(--gutter);
   }
+  /* Same centring model as the desktop rule — these still have to clear
+     their own half-width plus the node. The old override used the
+     pre-fix `-100%`/`-50%` form and set the names at 8px, which is the
+     size that made the map unreadable in the first place. */
   .nm-tag {
-    width: 9ch;
-    transform: translate(0.7rem, -50%);
+    width: 11ch;
+    transform: translate(calc(50% + 1.5rem), 0);
   }
-  .nm-tag.is-left { transform: translate(calc(-100% - 0.7rem), -50%); }
-  .nm-tag-name { font-size: 0.5rem; letter-spacing: 0.14em; }
-  .nm-tag-note { display: none; }
+  .nm-tag.is-left { transform: translate(calc(-50% - 1.5rem), 0); }
+  .nm-tag-name { font-size: 0.6rem; letter-spacing: 0.12em; }
+  .nm-tag-name::before { width: 0.5rem; right: calc(100% + 0.3rem); }
+  .nm-tag.is-left .nm-tag-name::before { left: calc(100% + 0.3rem); }
 
   /* `width`, not `max-width` — the base rule sets an explicit width of
      40vw, which on a phone is 156px and was chopping the headline in

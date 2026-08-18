@@ -216,8 +216,12 @@ export default function NeuralMap({ onHover }) {
               node.p[0] > 1.5 ? ' is-left' : ''
             }`}
           >
+            {/* Name only. The description belongs to the read-out
+                panel, which has a fixed home and room to set it
+                properly — printing it here as well put the same
+                sentence on screen twice, in a three-line block landing
+                at whatever position the projection happened to give it. */}
             <span className="nm-tag-name">{node.name}</span>
-            <span className="nm-tag-note">{node.note}</span>
           </Label>
         </group>
       ))}

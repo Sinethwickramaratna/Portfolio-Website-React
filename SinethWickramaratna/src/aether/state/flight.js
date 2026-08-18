@@ -163,8 +163,31 @@ export function useFlightDriver(enabled = true) {
       lenis.raf(now);
 
       const prev = flight.y;
-      flight.y = lenis.scroll;
-      flight.progress = lenis.progress || 0;
+      /* The document, not Lenis, is the source of truth.
+         ----------------------------------------------------------------
+         `lenis.scroll` is Lenis's own animated value, and it only tracks
+         scrolling that Lenis itself performed. Anything that moves the
+         page natively — a keyboard PageDown or End, the browser
+         restoring position on reload, a fragment jump, an extension —
+         moves the document while that value stays put, and the entire
+         3D world silently stays behind at whatever station it was on.
+         The page reads as broken: the copy says one thing and the
+         world shows another.
+
+         Lenis writes its smoothed position to the document every frame,
+         so `window.scrollY` already carries the easing *and* survives
+         every scroll Lenis did not perform. Reading it costs nothing —
+         it is a cached value, not a reflow. */
+      flight.y = window.scrollY;
+      const span = document.documentElement.scrollHeight - flight.vh;
+      flight.progress = span > 0 ? Math.min(1, flight.y / span) : 0;
+
+      /* Keep Lenis's internal value from drifting away from the document
+         after such a jump, or its next eased scroll would start from a
+         stale position and lurch. */
+      if (Math.abs(lenis.scroll - flight.y) > 4) {
+        lenis.scrollTo(flight.y, { immediate: true, force: true });
+      }
       flight.velocity = damp(
         flight.velocity,
         (flight.y - prev) / Math.max(1, flight.vh) / Math.max(dt, 0.001) * 0.06,
