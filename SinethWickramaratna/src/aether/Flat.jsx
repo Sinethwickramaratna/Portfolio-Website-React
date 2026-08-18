@@ -11,6 +11,7 @@ import {
   AVAILABLE_FOR,
   LINKS,
   CV_URL,
+  CERTIFICATES,
 } from './config';
 import portrait from '../assets/Images/profile.webp';
 
@@ -146,7 +147,23 @@ export default function Flat({ reason }) {
       </section>
 
       <section className="af-sec">
-        <span className="ae-mono ae-accent">05 / CREATIVE ENGINE</span>
+        <span className="ae-mono ae-accent">05 / CREDENTIALS</span>
+        <ul className="af-list">
+          {CERTIFICATES.map((c) => (
+            <li key={c.title}>
+              <b className="ae-mono">
+                {c.date} — {c.title}
+              </b>
+              <span>
+                {c.issuer} · {c.note}
+              </span>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section className="af-sec">
+        <span className="ae-mono ae-accent">06 / CREATIVE ENGINE</span>
         <ul className="af-gallery">
           {EXHIBITION.map((e) => (
             <li key={e.title}>
@@ -170,7 +187,7 @@ export default function Flat({ reason }) {
       </section>
 
       <section className="af-sec">
-        <span className="ae-mono ae-accent">06 / CONNECTION</span>
+        <span className="ae-mono ae-accent">07 / CONNECTION</span>
         <h2 className="af-h2">Let&rsquo;s build what&rsquo;s next.</h2>
         <p className="ae-mono ae-dim">AVAILABLE FOR · {AVAILABLE_FOR.join(' · ')}</p>
         <ul className="af-list">

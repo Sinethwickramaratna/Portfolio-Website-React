@@ -24,7 +24,11 @@ import {
   MediaOrbit,
   VisionAperture,
   KnowledgeArchitecture,
+  AgentGraph,
+  SeverityAtlas,
+  HerdTelemetry,
 } from './scenes/ProjectVisuals';
+import CredentialStack from './scenes/CredentialStack';
 
 /**
  * The world.
@@ -143,6 +147,10 @@ export default function Stage({
   portalOpen = false,
   onSkillHover,
   onMilestone,
+  credential,
+  onCredential,
+  galleryFocus,
+  onGalleryFocus,
   onReady,
 }) {
   return (
@@ -194,17 +202,29 @@ export default function Stage({
           <NeuralMap onHover={onSkillHover} />
         </Station>
 
-        <Station index={STATION_INDEX['work-1']} z={-1}>
+        {/* One metaphor per project, none of them reused. The order
+            matches PROJECTS, and each is mounted lazily because seven
+            distinct compositions is more than any one visitor sees. */}
+        <Station index={STATION_INDEX['work-1']} z={-1} lazy>
+          <AgentGraph />
+        </Station>
+        <Station index={STATION_INDEX['work-2']} z={-1} lazy>
           <LanguageFilaments />
         </Station>
-        <Station index={STATION_INDEX['work-2']} z={-1}>
-          <MediaOrbit />
-        </Station>
-        <Station index={STATION_INDEX['work-3']} z={-1}>
+        <Station index={STATION_INDEX['work-3']} z={-1} lazy>
           <VisionAperture />
         </Station>
-        <Station index={STATION_INDEX['work-4']} z={-1}>
+        <Station index={STATION_INDEX['work-4']} z={-1} lazy>
+          <SeverityAtlas />
+        </Station>
+        <Station index={STATION_INDEX['work-5']} z={-1} lazy>
+          <HerdTelemetry />
+        </Station>
+        <Station index={STATION_INDEX['work-6']} z={-1} lazy>
           <KnowledgeArchitecture />
+        </Station>
+        <Station index={STATION_INDEX['work-7']} z={-1} lazy>
+          <MediaOrbit />
         </Station>
 
         <Station index={STATION_INDEX.journey}>
@@ -215,10 +235,15 @@ export default function Stage({
           <ResearchLab />
         </Station>
 
-        {/* The only station that unmounts: five remote textures should
-            not be fetched by someone who never scrolls this far. */}
+        <Station index={STATION_INDEX.credentials} lazy>
+          <CredentialStack active={credential} onSelect={onCredential} />
+        </Station>
+
+        {/* The only station the camera goes *inside*. Fourteen remote
+            textures should not be fetched by someone who never scrolls
+            this far, so it unmounts when out of range. */}
         <Station index={STATION_INDEX.creative} lazy>
-          <Exhibition />
+          <Exhibition focus={galleryFocus} onFocus={onGalleryFocus} />
         </Station>
 
         <Station index={STATION_INDEX.philosophy}>

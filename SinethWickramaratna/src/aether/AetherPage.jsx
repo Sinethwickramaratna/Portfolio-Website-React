@@ -1,7 +1,7 @@
 import { Suspense, lazy, useCallback, useEffect, useMemo, useState } from 'react';
 import './aether.css';
 
-import { TOTAL_VH } from './config';
+import { TOTAL_VH, STATION_INDEX } from './config';
 import { useFlightDriver } from './state/flight';
 
 import Hero from './sections/Hero';
@@ -12,6 +12,7 @@ import Work from './sections/Work';
 import Journey from './sections/Journey';
 import Research from './sections/Research';
 import Creative from './sections/Creative';
+import Credentials from './sections/Credentials';
 import Philosophy from './sections/Philosophy';
 import Contact from './sections/Contact';
 
@@ -87,6 +88,8 @@ function Aether() {
      — everything else the world needs it reads from `flight`. */
   const [skill, setSkill] = useState(null);
   const [milestone, setMilestone] = useState(0);
+  const [credential, setCredential] = useState(-1);
+  const [gallery, setGallery] = useState(-1);
   const [portalOpen, setPortalOpen] = useState(false);
   const [study, setStudy] = useState(null);
   const [worldReady, setWorldReady] = useState(false);
@@ -108,6 +111,15 @@ function Aether() {
     return () => document.documentElement.classList.remove('ae-locked');
   }, [entered, study]);
 
+  /* An open work belongs to its station. Rather than clearing the state
+     in an effect when the flight leaves — which queues a render on every
+     station change and can cascade — the *visible* selection is derived
+     here. The stored value survives, so coming back to the gallery finds
+     it where it was left. */
+  const shownGallery = active === STATION_INDEX.creative ? gallery : -1;
+  const shownCredential =
+    active === STATION_INDEX.credentials ? credential : -1;
+
   const openStudy = useCallback((p) => setStudy(p), []);
   const closeStudy = useCallback(() => setStudy(null), []);
 
@@ -127,6 +139,10 @@ function Aether() {
             portalOpen={portalOpen}
             onSkillHover={setSkill}
             onMilestone={setMilestone}
+            credential={shownCredential}
+            onCredential={setCredential}
+            galleryFocus={shownGallery}
+            onGalleryFocus={setGallery}
             onReady={markReady}
           />
         </Suspense>
@@ -143,7 +159,8 @@ function Aether() {
         <Work onOpen={openStudy} />
         <Journey active={milestone} />
         <Research />
-        <Creative />
+        <Credentials active={shownCredential} onActive={setCredential} />
+        <Creative focus={shownGallery} onFocus={setGallery} />
         <Philosophy />
         <Contact open={portalOpen} onOpen={setPortalOpen} />
         <Footer />

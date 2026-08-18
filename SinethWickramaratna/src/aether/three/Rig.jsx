@@ -18,13 +18,21 @@ const MARKS = {
   intro: { z: 15.0, x: 0.6, y: 0.2, fov: 40 },
   profile: { z: 12.0, x: -1.4, y: 0.1, fov: 38 },
   skills: { z: 15.5, x: 0, y: 0, fov: 46 },
+  /* The project marks alternate side to side, so seven of them in a row
+     read as a sequence of different rooms rather than one long corridor. */
   'work-1': { z: 12.6, x: 1.2, y: 0, fov: 40 },
   'work-2': { z: 13.0, x: -1.2, y: 0, fov: 40 },
   'work-3': { z: 11.8, x: 1.0, y: 0.2, fov: 42 },
   'work-4': { z: 13.2, x: -1.0, y: -0.1, fov: 40 },
+  'work-5': { z: 12.4, x: 1.1, y: 0.1, fov: 41 },
+  'work-6': { z: 13.4, x: -1.1, y: 0, fov: 39 },
+  'work-7': { z: 12.2, x: 0.9, y: -0.1, fov: 42 },
   journey: { z: 16.5, x: 0, y: 0.4, fov: 44 },
   research: { z: 14.2, x: 0.8, y: 0, fov: 41 },
-  creative: { z: 10.5, x: 0, y: 0, fov: 52 },
+  credentials: { z: 13.0, x: -0.9, y: 0, fov: 40 },
+  /* The gallery is the one station the camera is *inside* rather than
+     looking at, so it goes wide and close. */
+  creative: { z: 6.4, x: 0, y: 0, fov: 58 },
   philosophy: { z: 15.0, x: -0.6, y: 0, fov: 38 },
   contact: { z: 11.0, x: 0, y: 0, fov: 44 },
 };

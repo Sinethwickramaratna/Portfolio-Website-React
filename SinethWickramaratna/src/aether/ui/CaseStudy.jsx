@@ -50,6 +50,13 @@ export default function CaseStudy({ project, onClose }) {
           ))}
         </h2>
 
+        {/* Whose work this was. On a group project that is the first
+            thing a reader is entitled to know, so it sits above the
+            description rather than in a footnote. */}
+        {project.note && (
+          <p className="ae-mono ae-dim ae-case-note">{project.note}</p>
+        )}
+
         <p className="ae-case-lede">{project.blurb}</p>
 
         <div className="ae-case-body">
@@ -57,6 +64,13 @@ export default function CaseStudy({ project, onClose }) {
             <p key={p.slice(0, 24)}>{p}</p>
           ))}
         </div>
+
+        {project.contribution && (
+          <div className="ae-case-mine">
+            <span className="ae-mono ae-accent">MY CONTRIBUTION</span>
+            <p>{project.contribution}</p>
+          </div>
+        )}
 
         <dl className="ae-case-facts">
           {project.facts.map(([k, v]) => (
@@ -71,8 +85,21 @@ export default function CaseStudy({ project, onClose }) {
           </div>
         </dl>
 
-        {(project.repo || project.live) && (
+        {(project.repo || project.live || project.extra) && (
           <nav className="ae-case-links">
+            {project.extra && (
+              <a
+                href={project.extra.href}
+                target="_blank"
+                rel="noreferrer"
+                className="ae-mono"
+              >
+                {project.extra.label}
+                <svg viewBox="0 0 24 12" aria-hidden="true">
+                  <path d="M0 6h21M16 1l5 5-5 5" fill="none" stroke="currentColor" />
+                </svg>
+              </a>
+            )}
             {project.live && (
               <a href={project.live} target="_blank" rel="noreferrer" className="ae-mono">
                 VISIT LIVE
