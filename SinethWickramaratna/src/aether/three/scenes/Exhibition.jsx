@@ -231,6 +231,21 @@ function Plate({
         />
       </mesh>
 
+      {/* Until the artwork arrives, the plate says so.
+          ------------------------------------------------------------
+          Fourteen posters are fetched from a remote host, and on a
+          phone they trickle in. An unfilled plate is otherwise a plain
+          dark rectangle, which reads as a broken image rather than as
+          one still loading — a wall of them is the first thing a
+          visitor on a slow connection sees of this section. A drawn
+          edge is enough to say "a work belongs here". */}
+      {!texture && (
+        <lineSegments>
+          <edgesGeometry args={[new THREE.PlaneGeometry(w, h)]} />
+          <lineBasicMaterial {...holo(PALETTE.cyan, 0.35)} />
+        </lineSegments>
+      )}
+
       {/* A hairline under the plate rather than a pool of light on a
           floor — a lit quad lying flat in the void reads as a stray
           polygon, not as a spill. */}

@@ -886,6 +886,45 @@ html.ae-locked body {
   min-height: 3.2em;
 }
 
+/* The phone's neural map.
+   ------------------------------------------------------------------
+   Hidden wherever the 3D diagram can actually be read. Below that, it
+   is the section: the same ten disciplines and the same notes, set as
+   type instead of as a constellation viewed from too far away. */
+.ae-skill-list {
+  display: none;
+  position: absolute;
+  left: var(--gutter);
+  right: var(--gutter);
+  top: 50%;
+  transform: translateY(-50%);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.ae-skill-list li {
+  display: grid;
+  grid-template-columns: 2.4rem 1fr;
+  align-items: baseline;
+  gap: 0 0.6rem;
+  padding: 0.62rem 0;
+  border-bottom: 1px solid var(--hair);
+}
+.ae-skill-n { grid-row: span 2; font-size: 0.6rem; }
+.ae-skill-name {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--bright);
+}
+.ae-skill-note {
+  font-size: 0.72rem;
+  line-height: 1.45;
+  color: var(--muted);
+  margin-top: 0.18rem;
+}
+
 /* Labels attached to the 3D nodes, rendered through drei's HTML portal.
    ------------------------------------------------------------------
    These names are the content of this section, not chrome around it,
@@ -2308,7 +2347,20 @@ html.ae-locked body {
   .ae-skills-core,
   .tj-key,
   .ex-plate,
+  .nm-tag,
+  .ae-skills-prompt,
+  .ae-readout,
   .ae-creative-hint { display: none; }
+
+  /* The list takes over as the section's content here. */
+  .ae-skill-list { display: block; }
+
+  /* The system strip and the boxed edition mark share the top line and
+     are anchored to opposite margins. On a phone the strip is wider
+     than the room left beside the box, so "DIGITAL PORTFOLIO 2026" ran
+     underneath it. The strip keeps the line; the mark drops below. */
+  .ae-hero-sys { max-width: calc(100% - var(--gutter) * 2); }
+  .ae-hero-edition { top: clamp(6rem, 12vh, 8rem); }
 
   .ae-hero-first { transform: translate(0, -18vh); }
   /* The vertical strips are hidden here, so the name takes the full
