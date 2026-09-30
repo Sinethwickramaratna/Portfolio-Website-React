@@ -136,17 +136,21 @@ html.ae-locked body {
    near-black fields from banding on 6-bit panels. */
 .ae-grain {
   position: fixed;
-  inset: -50%;
+  /* Was inset -50%: a layer four times the viewport, which on a 4K
+     screen is a ~130 MB compositor texture. The jitter only needs a few
+     pixels of overscan. */
+  inset: -6%;
   z-index: 41;
   pointer-events: none;
   opacity: 0.035;
+  will-change: transform;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
   animation: ae-grain 720ms steps(3) infinite;
 }
 @keyframes ae-grain {
   0% { transform: translate(0, 0); }
-  33% { transform: translate(-3%, 2%); }
-  66% { transform: translate(2%, -3%); }
+  33% { transform: translate(-2%, 1.5%); }
+  66% { transform: translate(1.5%, -2%); }
   100% { transform: translate(0, 0); }
 }
 

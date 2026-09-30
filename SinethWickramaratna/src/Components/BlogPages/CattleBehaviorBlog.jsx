@@ -61,7 +61,7 @@ function CattleBehaviorBlog() {
             </p>
 
             <figure className="blog-image-figure">
-              <img src="/blog/cattle-iot-hero.png" alt="Cattle wearing IoT collar and cloud analytics flow" loading="lazy" />
+              <img src="/blog/cattle-iot-hero.webp" alt="Cattle wearing IoT collar and cloud analytics flow" loading="lazy" />
               <figcaption>Figure 1: High-level concept of IoT-based cattle behavior monitoring.</figcaption>
             </figure>
           </section>
@@ -151,7 +151,7 @@ function CattleBehaviorBlog() {
             </p>
 
             <figure className="blog-image-figure">
-              <img src="/blog/sliding-window.png" alt="Sliding windows over an IMU time series" loading="lazy" />
+              <img src="/blog/sliding-window.webp" alt="Sliding windows over an IMU time series" loading="lazy" />
               <figcaption>Figure 2: Overlapping windows convert continuous signals into supervised samples.</figcaption>
             </figure>
           </section>
@@ -347,7 +347,7 @@ function CattleBehaviorBlog() {
           <section>
             <h2>Architecture Diagram</h2>
             <figure className="blog-image-figure">
-              <img src="/blog/pipeline-architecture.png" alt="Architecture pipeline from IoT sensor to farm dashboard" loading="lazy" />
+              <img src="/blog/pipeline-architecture.webp" alt="Architecture pipeline from IoT sensor to farm dashboard" loading="lazy" />
               <figcaption>Figure 3: End-to-end pipeline from sensor signals to behavior insights.</figcaption>
             </figure>
           </section>

@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { flight } from '../state/flight';
+import { StationContext } from './useStationFrame';
 import { STATION_SPREAD } from '../config';
 
 /**
@@ -30,6 +31,9 @@ export default function Station({
   const ref = useRef();
   const [live, setLive] = useState(!lazy);
   const liveRef = useRef(!lazy);
+  /* Read by useStationFrame: scenes idle while their station is out of
+     range instead of animating something nobody can see. */
+  const activeRef = useRef(true);
 
   useFrame(() => {
     const g = ref.current;
@@ -43,6 +47,7 @@ export default function Station({
     g.position.y = -d * spread * flight.fit;
     g.position.z = z + dolly * (1 - Math.min(1, a)) * -1;
     g.visible = a < 1.6;
+    activeRef.current = a < 1.7;
 
     if (lazy) {
       /* Hysteresis: mount early, release late. Flipping on a single
@@ -55,5 +60,11 @@ export default function Station({
     }
   });
 
-  return <group ref={ref}>{live ? children : null}</group>;
+  return (
+    <group ref={ref}>
+      <StationContext.Provider value={activeRef}>
+        {live ? children : null}
+      </StationContext.Provider>
+    </group>
+  );
 }

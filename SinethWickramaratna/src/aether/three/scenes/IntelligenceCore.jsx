@@ -1,5 +1,5 @@
 import { useMemo, useRef } from 'react';
-import { useFrame } from '@react-three/fiber';
+import { useFrame } from '../useStationFrame';
 import { MeshDistortMaterial } from '@react-three/drei';
 import * as THREE from 'three';
 import { flight, presence } from '../../state/flight';

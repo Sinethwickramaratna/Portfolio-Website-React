@@ -1,6 +1,6 @@
-import { Suspense, useRef } from 'react';
+import { Suspense, useCallback, useRef, useState } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Environment, Lightformer, AdaptiveDpr, Preload } from '@react-three/drei';
+import { Environment, Lightformer, PerformanceMonitor, Preload } from '@react-three/drei';
 import { EffectComposer, Bloom } from '@react-three/postprocessing';
 import { KernelSize } from 'postprocessing';
 import * as THREE from 'three';
@@ -103,12 +103,15 @@ function Studio() {
  * has nothing to act on where the buffer is empty. Both are done in CSS
  * over the whole page instead, where they also cover the document.
  */
-function Grade({ quality }) {
-  if (quality === 'low') return null;
+function Grade({ tier }) {
+  /* Tier 2 is the only one that pays for bloom. It runs at 2x MSAA, not
+     4x: on a HiDPI panel the multisampled half-float buffers dominate
+     the frame, and hairline geometry still resolves cleanly at 2x. */
+  if (tier < 2) return null;
   return (
-    <EffectComposer disableNormalPass multisampling={quality === 'high' ? 4 : 0}>
+    <EffectComposer disableNormalPass multisampling={2}>
       <Bloom
-        intensity={quality === 'high' ? 0.95 : 0.7}
+        intensity={0.9}
         luminanceThreshold={0.22}
         luminanceSmoothing={0.35}
         kernelSize={KernelSize.LARGE}
@@ -142,6 +145,15 @@ function FirstFrame({ onReady }) {
   return null;
 }
 
+/* Render tiers. The starting tier comes from a coarse device probe, and
+   PerformanceMonitor then walks *down* if the measured frame rate says
+   the guess was optimistic — a static guess is wrong on half the
+   machines, a measurement is not.
+     2 — bloom + up to 1.5x pixel ratio
+     1 — no post-processing, up to 1.5x
+     0 — no post-processing, 1x pixel ratio (fill-rate floor) */
+const DPR = { 2: [1, 1.5], 1: [1, 1.5], 0: [1, 1] };
+
 export default function Stage({
   quality = 'high',
   portalOpen = false,
@@ -153,17 +165,32 @@ export default function Stage({
   onGalleryFocus,
   onReady,
 }) {
+  const [tier, setTier] = useState(quality === 'high' ? 2 : 1);
+  /* Shader compilation and texture uploads during start-up drop frames
+     that say nothing about steady-state cost, so declines are ignored
+     until the world has been on screen for a few seconds. */
+  const readyAt = useRef(0);
+  const handleReady = useCallback(() => {
+    readyAt.current = performance.now();
+    onReady?.();
+  }, [onReady]);
+  const stepDown = useCallback(() => {
+    if (!readyAt.current || performance.now() - readyAt.current < 5000) return;
+    if (document.hidden) return;
+    setTier((t) => Math.max(0, t - 1));
+  }, []);
+
   return (
     <Canvas
       className="ae-canvas"
-      dpr={quality === 'high' ? [1, 1.75] : [1, 1.25]}
+      dpr={DPR[tier]}
       /* Transparent, and it has to stay that way: the giant display
          type on the hero, the neural map and the portal is painted by
          the document *underneath* this canvas, and is eclipsed by the
          3D objects drawn over it. An opaque clear colour would erase
          the whole depth trick. The void itself is a CSS background. */
       gl={{
-        antialias: quality === 'high',
+        antialias: true,
         powerPreference: 'high-performance',
         alpha: true,
         stencil: false,
@@ -257,9 +284,9 @@ export default function Stage({
         <Preload all />
       </Suspense>
 
-      <Grade quality={quality} />
-      <AdaptiveDpr pixelated={false} />
-      <FirstFrame onReady={onReady} />
+      <Grade tier={tier} />
+      <PerformanceMonitor onDecline={stepDown} flipflops={3} onFallback={stepDown} />
+      <FirstFrame onReady={handleReady} />
     </Canvas>
   );
 }

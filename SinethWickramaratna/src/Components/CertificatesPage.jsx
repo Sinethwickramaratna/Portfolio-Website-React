@@ -4,10 +4,10 @@ import './CertificatesPage.css';
 import Footer from './public/Footer';
 import AtmosphericBackground from './AtmosphericBackground';
 import robofest2025 from '../assets/Certificates/RoboFest.jpg';
-import kaggleML from '../assets/Certificates/Sineth Wickramaratna - Intro to Machine Learning.png';
-import kagglePandas from '../assets/Certificates/Sineth Wickramaratna - Pandas.png';
-import kaggleDataCleaning from '../assets/Certificates/Sineth Wickramaratna - Data Cleaning.png';
-import kaggleFeatureEngineering from '../assets/Certificates/Sineth Wickramaratna - Feature Engineering.png';
+import kaggleML from '../assets/Certificates/Sineth Wickramaratna - Intro to Machine Learning.webp';
+import kagglePandas from '../assets/Certificates/Sineth Wickramaratna - Pandas.webp';
+import kaggleDataCleaning from '../assets/Certificates/Sineth Wickramaratna - Data Cleaning.webp';
+import kaggleFeatureEngineering from '../assets/Certificates/Sineth Wickramaratna - Feature Engineering.webp';
 import rotaractMembership from '../assets/Certificates/Rotaract Active Membership.jpg';
 import rotaracrDirectorsAppreciation from '../assets/Certificates/Board of Directors.jpg';
 import certificatesDataRaw from '../data/certificatesData.json';
@@ -19,10 +19,10 @@ function CertificatesPage() {
   // Map image filenames to imported images
   const imageMap = {
     'RoboFest.jpg': robofest2025,
-    'Sineth Wickramaratna - Intro to Machine Learning.png': kaggleML,
-    'Sineth Wickramaratna - Pandas.png': kagglePandas,
-    'Sineth Wickramaratna - Data Cleaning.png': kaggleDataCleaning,
-    'Sineth Wickramaratna - Feature Engineering.png': kaggleFeatureEngineering,
+    'Sineth Wickramaratna - Intro to Machine Learning.webp': kaggleML,
+    'Sineth Wickramaratna - Pandas.webp': kagglePandas,
+    'Sineth Wickramaratna - Data Cleaning.webp': kaggleDataCleaning,
+    'Sineth Wickramaratna - Feature Engineering.webp': kaggleFeatureEngineering,
     'Rotaract Active Membership.jpg': rotaractMembership,
     'Board of Directors.jpg': rotaracrDirectorsAppreciation
   };

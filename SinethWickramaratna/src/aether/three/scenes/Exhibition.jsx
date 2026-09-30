@@ -1,5 +1,6 @@
 import { useMemo, useRef, useState } from 'react';
-import { useFrame, useThree } from '@react-three/fiber';
+import { useThree } from '@react-three/fiber';
+import { useFrame } from '../useStationFrame';
 import * as THREE from 'three';
 import { flight } from '../../state/flight';
 import { PALETTE, EXHIBITION, STATION_INDEX } from '../../config';

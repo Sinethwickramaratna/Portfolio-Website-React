@@ -716,7 +716,7 @@ export const CERTIFICATES = [
     date: 'Feb 2026',
     kind: 'COURSE',
     note: 'Model fitting, validation and underfitting/overfitting.',
-    image: 'Sineth Wickramaratna - Intro to Machine Learning.png',
+    image: 'Sineth Wickramaratna - Intro to Machine Learning.webp',
   },
   {
     title: 'Pandas',
@@ -724,7 +724,7 @@ export const CERTIFICATES = [
     date: 'Feb 2026',
     kind: 'COURSE',
     note: 'Indexing, grouping, joins and reshaping.',
-    image: 'Sineth Wickramaratna - Pandas.png',
+    image: 'Sineth Wickramaratna - Pandas.webp',
   },
   {
     title: 'Data Cleaning',
@@ -732,7 +732,7 @@ export const CERTIFICATES = [
     date: 'Feb 2026',
     kind: 'COURSE',
     note: 'Missing values, scaling, parsing dates, character encodings.',
-    image: 'Sineth Wickramaratna - Data Cleaning.png',
+    image: 'Sineth Wickramaratna - Data Cleaning.webp',
   },
   {
     title: 'Feature Engineering',
@@ -740,6 +740,6 @@ export const CERTIFICATES = [
     date: 'Feb 2026',
     kind: 'COURSE',
     note: 'Mutual information, target encoding, clustering as a feature.',
-    image: 'Sineth Wickramaratna - Feature Engineering.png',
+    image: 'Sineth Wickramaratna - Feature Engineering.webp',
   },
 ];
