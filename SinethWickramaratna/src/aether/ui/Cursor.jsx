@@ -46,14 +46,25 @@ export default function Cursor() {
       ring.current?.classList.remove('is-live');
     };
 
+    /* Only touch the DOM when something moved. This used to rewrite two
+       inline styles on every frame forever — even with a still pointer —
+       and every rewrite is a mutation that page-scanning browser
+       extensions (and DevTools) have to process. */
+    const last = { dx: NaN, dy: NaN, rx: NaN, ry: NaN };
     const frame = () => {
       eased.x += (target.x - eased.x) * 0.16;
       eased.y += (target.y - eased.y) * 0.16;
-      if (dot.current) {
+      if (dot.current && (target.x !== last.dx || target.y !== last.dy)) {
+        last.dx = target.x;
+        last.dy = target.y;
         dot.current.style.transform = `translate3d(${target.x}px, ${target.y}px, 0)`;
       }
-      if (ring.current) {
-        ring.current.style.transform = `translate3d(${eased.x}px, ${eased.y}px, 0)`;
+      const rx = Math.round(eased.x * 10) / 10;
+      const ry = Math.round(eased.y * 10) / 10;
+      if (ring.current && (rx !== last.rx || ry !== last.ry)) {
+        last.rx = rx;
+        last.ry = ry;
+        ring.current.style.transform = `translate3d(${rx}px, ${ry}px, 0)`;
       }
       raf = requestAnimationFrame(frame);
     };
