@@ -62,10 +62,25 @@ export const flight = {
 const anchors = [];
 const elements = new Map();
 
+/* Registrations arrive in a burst — one per section, inside React's
+   commit — and each used to measure() straight away. Reading offsetTop
+   between DOM writes forces a synchronous layout every time, seventeen
+   times over (Lighthouse flagged ~230 ms of forced reflow at load).
+   Collapse the burst into one measurement after the frame's layout. */
+let measureQueued = false;
+function scheduleMeasure() {
+  if (measureQueued || typeof window === 'undefined') return;
+  measureQueued = true;
+  requestAnimationFrame(() => {
+    measureQueued = false;
+    measure();
+  });
+}
+
 export function registerStation(index, el) {
   if (el) elements.set(index, el);
   else elements.delete(index);
-  measure();
+  scheduleMeasure();
 }
 
 function measure() {

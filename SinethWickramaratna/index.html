@@ -20,10 +20,10 @@
       as="style"
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@300;400;500;600;700&family=Chakra+Petch:wght@400;500;600;700&display=swap"
     >
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@300;400;500;600;700&family=Chakra+Petch:wght@400;500;600;700&display=swap"
-    >
+    <!-- Non-blocking: the stylesheet was render-blocking (~350 ms on FCP).
+         The page paints under the curtain with system fonts, then swaps. -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@300;400;500;600;700&family=Chakra+Petch:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@300;400;500;600;700&family=Chakra+Petch:wght@400;500;600;700&display=swap"></noscript>
 
     <!-- Paint the void immediately so there is no white flash before CSS
          and the WebGL backdrop are ready. -->
