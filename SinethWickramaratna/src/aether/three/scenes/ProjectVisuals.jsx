@@ -1,5 +1,6 @@
 import { useMemo, useRef } from 'react';
 import { useFrame } from '../useStationFrame';
+import StationLights from '../StationLights';
 import * as THREE from 'three';
 import { flight } from '../../state/flight';
 import { PALETTE, STATION_INDEX } from '../../config';
@@ -114,8 +115,10 @@ export function LanguageFilaments() {
 
   return (
     <group ref={group}>
-      <pointLight position={[0, 0, 3]} color={PALETTE.cyan} intensity={6} distance={14} />
-      <pointLight position={[-4, 3, -2]} color={PALETTE.violet} intensity={3} distance={14} />
+      <StationLights>
+        <pointLight position={[0, 0, 3]} color={PALETTE.cyan} intensity={6} distance={14} />
+        <pointLight position={[-4, 3, -2]} color={PALETTE.violet} intensity={3} distance={14} />
+      </StationLights>
 
       {strands.map((s, i) => (
         <mesh
@@ -224,8 +227,10 @@ export function MediaOrbit() {
 
   return (
     <group ref={group}>
-      <pointLight position={[0, 0, 2]} color={PALETTE.cyan} intensity={7} distance={16} />
-      <pointLight position={[4, -2, 3]} color={PALETTE.rose} intensity={2.6} distance={14} />
+      <StationLights>
+        <pointLight position={[0, 0, 2]} color={PALETTE.cyan} intensity={7} distance={16} />
+        <pointLight position={[4, -2, 3]} color={PALETTE.rose} intensity={2.6} distance={14} />
+      </StationLights>
 
       <group ref={hubRef}>
         <mesh>
@@ -355,8 +360,10 @@ export function VisionAperture() {
 
   return (
     <group ref={group}>
-      <pointLight position={[0, 0, 4]} color={PALETTE.cyan} intensity={8} distance={14} />
-      <pointLight position={[-5, 2, -2]} color={PALETTE.violet} intensity={2.4} distance={16} />
+      <StationLights>
+        <pointLight position={[0, 0, 4]} color={PALETTE.cyan} intensity={8} distance={14} />
+        <pointLight position={[-5, 2, -2]} color={PALETTE.violet} intensity={2.4} distance={16} />
+      </StationLights>
 
       <group ref={irisRef}>
         {/* Aperture blades. Chrome rather than dark metal: against a
@@ -503,8 +510,10 @@ export function KnowledgeArchitecture() {
 
   return (
     <group ref={group}>
-      <pointLight position={[0, 1, 3]} color={PALETTE.cyan} intensity={6} distance={16} />
-      <pointLight position={[3, -3, -2]} color={PALETTE.violet} intensity={3} distance={16} />
+      <StationLights>
+        <pointLight position={[0, 1, 3]} color={PALETTE.cyan} intensity={6} distance={16} />
+        <pointLight position={[3, -3, -2]} color={PALETTE.violet} intensity={3} distance={16} />
+      </StationLights>
 
       <group ref={towerRef}>
         {floors.map((f, i) => (
@@ -621,8 +630,10 @@ export function AgentGraph() {
 
   return (
     <group ref={group}>
-      <pointLight position={[0, 1, 4]} color={PALETTE.cyan} intensity={6} distance={18} />
-      <pointLight position={[5, -2, 2]} color={PALETTE.violet} intensity={2.6} distance={14} />
+      <StationLights>
+        <pointLight position={[0, 1, 4]} color={PALETTE.cyan} intensity={6} distance={18} />
+        <pointLight position={[5, -2, 2]} color={PALETTE.violet} intensity={2.6} distance={14} />
+      </StationLights>
 
       <lineSegments geometry={linkGeo}>
         <lineBasicMaterial
@@ -738,8 +749,10 @@ export function SeverityAtlas() {
 
   return (
     <group ref={group}>
-      <pointLight position={[2, 3, 5]} color={PALETTE.cyan} intensity={5} distance={16} />
-      <pointLight position={[-4, -2, 2]} color={PALETTE.rose} intensity={2} distance={14} />
+      <StationLights>
+        <pointLight position={[2, 3, 5]} color={PALETTE.cyan} intensity={5} distance={16} />
+        <pointLight position={[-4, -2, 2]} color={PALETTE.rose} intensity={2} distance={14} />
+      </StationLights>
 
       <group ref={ringRef}>
         <lineSegments geometry={graticule}>
@@ -861,8 +874,10 @@ export function HerdTelemetry() {
 
   return (
     <group ref={group}>
-      <pointLight position={[0, 2, 5]} color={PALETTE.cyan} intensity={6} distance={18} />
-      <pointLight position={[-4, -2, 2]} color={PALETTE.violet} intensity={2.2} distance={14} />
+      <StationLights>
+        <pointLight position={[0, 2, 5]} color={PALETTE.cyan} intensity={6} distance={18} />
+        <pointLight position={[-4, -2, 2]} color={PALETTE.violet} intensity={2.2} distance={14} />
+      </StationLights>
 
       {/* The live trace. */}
       <line ref={traceRef} geometry={traceGeo}>

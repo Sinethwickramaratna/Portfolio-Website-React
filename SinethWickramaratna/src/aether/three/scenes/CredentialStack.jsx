@@ -1,5 +1,6 @@
 import { useMemo, useRef } from 'react';
 import { useFrame } from '../useStationFrame';
+import StationLights from '../StationLights';
 import * as THREE from 'three';
 import { flight, presence } from '../../state/flight';
 import { PALETTE, STATION_INDEX, CERTIFICATES } from '../../config';
@@ -82,9 +83,11 @@ export default function CredentialStack({ active = -1, onSelect }) {
     /* Offset right and up: the ledger owns the left half of the frame,
        and the fan descends as it recedes. */
     <group ref={group} position={[2.4, 0.5, 0]}>
-      <pointLight position={[0, 1, 5]} color={PALETTE.cyan} intensity={5} distance={18} />
-      <pointLight position={[-5, 3, 1]} color={PALETTE.violet} intensity={2.2} distance={16} />
-      <pointLight position={[4, -3, 2]} color={PALETTE.rose} intensity={1.2} distance={14} />
+      <StationLights>
+        <pointLight position={[0, 1, 5]} color={PALETTE.cyan} intensity={5} distance={18} />
+        <pointLight position={[-5, 3, 1]} color={PALETTE.violet} intensity={2.2} distance={16} />
+        <pointLight position={[4, -3, 2]} color={PALETTE.rose} intensity={1.2} distance={14} />
+      </StationLights>
 
       {panes.map((p, i) => (
         <Pane

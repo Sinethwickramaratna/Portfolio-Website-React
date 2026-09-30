@@ -1,6 +1,6 @@
-import { Suspense, useCallback, useRef, useState } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { Environment, Lightformer, PerformanceMonitor, Preload } from '@react-three/drei';
+import { Suspense, useCallback, useEffect, useRef, useState } from 'react';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import { Environment, Lightformer, PerformanceMonitor } from '@react-three/drei';
 import { EffectComposer, Bloom } from '@react-three/postprocessing';
 import { KernelSize } from 'postprocessing';
 import * as THREE from 'three';
@@ -122,6 +122,33 @@ function Grade({ tier }) {
 }
 
 /**
+ * Compiles every shader up front, without stalling the page.
+ *
+ * Replaces drei's <Preload all />, which forces *every* object visible
+ * and renders — so each material was compiled against all thirty-odd
+ * scene lights at once, a huge unrolled shader that is never used again
+ * (the live light count is three; see StationLights) and that froze the
+ * tab on load. Compiling from the real, three-light state builds the
+ * programs the site will actually run, and compileAsync uses the
+ * browser's parallel shader compilation so the main thread stays free.
+ */
+function Warmup() {
+  const gl = useThree((s) => s.gl);
+  const scene = useThree((s) => s.scene);
+  const camera = useThree((s) => s.camera);
+  useEffect(() => {
+    const run = gl.compileAsync ?? gl.compile;
+    try {
+      const p = run.call(gl, scene, camera);
+      p?.catch?.(() => {});
+    } catch {
+      /* Compilation happens on first draw regardless. */
+    }
+  }, [gl, scene, camera]);
+  return null;
+}
+
+/**
  * Reports the world genuinely ready.
  *
  * Not on mount and not on `onCreated` — both fire before a single
@@ -149,10 +176,10 @@ function FirstFrame({ onReady }) {
    PerformanceMonitor then walks *down* if the measured frame rate says
    the guess was optimistic — a static guess is wrong on half the
    machines, a measurement is not.
-     2 — bloom + up to 1.5x pixel ratio
-     1 — no post-processing, up to 1.5x
+     2 — bloom + up to 1.25x pixel ratio
+     1 — no post-processing, up to 1.25x
      0 — no post-processing, 1x pixel ratio (fill-rate floor) */
-const DPR = { 2: [1, 1.5], 1: [1, 1.5], 0: [1, 1] };
+const DPR = { 2: [1, 1.25], 1: [1, 1.25], 0: [1, 1] };
 
 export default function Stage({
   quality = 'high',
@@ -281,7 +308,7 @@ export default function Stage({
           <Portal open={portalOpen} />
         </Station>
 
-        <Preload all />
+        <Warmup />
       </Suspense>
 
       <Grade tier={tier} />

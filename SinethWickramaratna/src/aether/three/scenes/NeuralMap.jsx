@@ -1,5 +1,6 @@
 import { useMemo, useRef, useState } from 'react';
 import { useFrame } from '../useStationFrame';
+import StationLights from '../StationLights';
 import * as THREE from 'three';
 import { flight } from '../../state/flight';
 import { PALETTE, SKILL_NODES, STATION_INDEX } from '../../config';
@@ -197,9 +198,11 @@ export default function NeuralMap({ onHover }) {
 
   return (
     <group ref={group}>
-      <pointLight position={[0, 0, 2]} color={PALETTE.cyan} intensity={4} distance={16} />
-      <pointLight position={[6, 4, -4]} color={PALETTE.violet} intensity={2.6} distance={20} />
-      <pointLight position={[-6, -3, 3]} color={PALETTE.rose} intensity={1.4} distance={16} />
+      <StationLights>
+        <pointLight position={[0, 0, 2]} color={PALETTE.cyan} intensity={4} distance={16} />
+        <pointLight position={[6, 4, -4]} color={PALETTE.violet} intensity={2.6} distance={20} />
+        <pointLight position={[-6, -3, 3]} color={PALETTE.rose} intensity={1.4} distance={16} />
+      </StationLights>
 
       {/* Nucleus — the words DATA / INTELLIGENCE sit over this in the
           document layer, so in 3D it is only mass and reflection. */}

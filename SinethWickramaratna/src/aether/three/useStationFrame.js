@@ -19,9 +19,9 @@ import { useFrame as useRawFrame } from '@react-three/fiber';
 export const StationContext = createContext(null);
 
 export function useFrame(callback, priority) {
-  const active = useContext(StationContext);
+  const ctx = useContext(StationContext);
   useRawFrame((state, delta, frame) => {
-    if (active && !active.current) return;
+    if (ctx && !ctx.active.current) return;
     callback(state, delta, frame);
   }, priority);
 }

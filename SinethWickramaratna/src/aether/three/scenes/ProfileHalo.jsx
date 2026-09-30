@@ -1,5 +1,6 @@
 import { useMemo, useRef } from 'react';
 import { useFrame } from '../useStationFrame';
+import StationLights from '../StationLights';
 import * as THREE from 'three';
 import { flight } from '../../state/flight';
 import { PALETTE, STATION_INDEX } from '../../config';
@@ -96,8 +97,10 @@ export default function ProfileHalo() {
 
   return (
     <group ref={group} position={OFFSET}>
-      <pointLight position={[2.5, 1.5, 3]} color={PALETTE.cyan} intensity={7} distance={14} />
-      <pointLight position={[-3, -2, 1]} color={PALETTE.violet} intensity={3} distance={12} />
+      <StationLights>
+        <pointLight position={[2.5, 1.5, 3]} color={PALETTE.cyan} intensity={7} distance={14} />
+        <pointLight position={[-3, -2, 1]} color={PALETTE.violet} intensity={3} distance={12} />
+      </StationLights>
 
       <mesh ref={haloRef} geometry={haloGeo}>
         <meshStandardMaterial {...chrome} />

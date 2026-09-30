@@ -1,5 +1,6 @@
 import { useMemo, useRef } from 'react';
 import { useFrame } from '../useStationFrame';
+import StationLights from '../StationLights';
 import { MeshDistortMaterial } from '@react-three/drei';
 import * as THREE from 'three';
 import { flight, presence } from '../../state/flight';
@@ -215,13 +216,15 @@ export default function IntelligenceCore() {
     <group ref={group} position={[1.5, -1.15, -0.6]} scale={0.86}>
       {/* Volumetric suggestion: two coloured lights inside the shell so
           the chrome has something to be reflecting. */}
-      <pointLight position={[0, 0, 0]} color={PALETTE.cyan} intensity={9} distance={9} />
-      <pointLight position={[2.6, 1.8, 2.2]} color={PALETTE.violet} intensity={5} distance={11} />
-      <pointLight position={[-2.8, -1.4, 1.6]} color={PALETTE.rose} intensity={2.2} distance={9} />
+      <StationLights>
+        <pointLight position={[0, 0, 0]} color={PALETTE.cyan} intensity={9} distance={9} />
+        <pointLight position={[2.6, 1.8, 2.2]} color={PALETTE.violet} intensity={5} distance={11} />
+        <pointLight position={[-2.8, -1.4, 1.6]} color={PALETTE.rose} intensity={2.2} distance={9} />
+      </StationLights>
 
       {/* 1 — the restless chrome mass */}
       <mesh ref={massRef} castShadow={false}>
-        <icosahedronGeometry args={[1.62, 24]} />
+        <icosahedronGeometry args={[1.62, 16]} />
         <MeshDistortMaterial
           {...chrome}
           distort={0.34}

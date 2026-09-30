@@ -1,5 +1,6 @@
 import { useMemo, useRef } from 'react';
 import { useFrame } from '../useStationFrame';
+import StationLights from '../StationLights';
 import * as THREE from 'three';
 import { flight } from '../../state/flight';
 import { PALETTE, THESIS_NODES, STATION_INDEX } from '../../config';
@@ -136,8 +137,10 @@ export default function Constellation() {
 
   return (
     <group ref={group}>
-      <pointLight position={[0, 0, 4]} color={PALETTE.cyan} intensity={5} distance={16} />
-      <pointLight position={[-6, 3, -3]} color={PALETTE.violet} intensity={3} distance={18} />
+      <StationLights>
+        <pointLight position={[0, 0, 4]} color={PALETTE.cyan} intensity={5} distance={16} />
+        <pointLight position={[-6, 3, -3]} color={PALETTE.violet} intensity={3} distance={18} />
+      </StationLights>
 
       <lineSegments ref={linesRef} geometry={geometry}>
         <lineBasicMaterial

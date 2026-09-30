@@ -56,6 +56,22 @@ function detectQuality() {
   const mem = navigator.deviceMemory || 4;
   const coarse = window.matchMedia('(pointer: coarse)').matches;
   if (coarse || cores <= 4 || mem <= 4 || window.innerWidth < 760) return 'low';
+  /* CPU core count says nothing about the GPU, and this scene is
+     fill-rate bound. Integrated graphics (Intel UHD/Iris/Xe, Apple-less
+     ARM parts, software rasterisers) cannot afford the bloom chain at
+     full resolution, and a laptop with a fast CPU is exactly the case
+     the probe above gets wrong. */
+  try {
+    const gl = document.createElement('canvas').getContext('webgl');
+    const ext = gl?.getExtension('WEBGL_debug_renderer_info');
+    const name = ext ? String(gl.getParameter(ext.UNMASKED_RENDERER_WEBGL)) : '';
+    gl?.getExtension('WEBGL_lose_context')?.loseContext();
+    if (/intel|uhd|iris|mali|adreno|swiftshader|llvmpipe|microsoft basic|software/i.test(name)) {
+      return 'low';
+    }
+  } catch {
+    /* fall through */
+  }
   return 'high';
 }
 

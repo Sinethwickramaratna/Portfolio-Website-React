@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { flight } from '../state/flight';
 import { StationContext } from './useStationFrame';
@@ -34,6 +34,10 @@ export default function Station({
   /* Read by useStationFrame: scenes idle while their station is out of
      range instead of animating something nobody can see. */
   const activeRef = useRef(true);
+  /* True for exactly one station at a time — the one the camera is at.
+     Drives StationLights, which keeps the live light count constant. */
+  const nearestRef = useRef(index === 0);
+  const ctxValue = useMemo(() => ({ active: activeRef, nearest: nearestRef }), []);
 
   useFrame(() => {
     const g = ref.current;
@@ -48,6 +52,7 @@ export default function Station({
     g.position.z = z + dolly * (1 - Math.min(1, a)) * -1;
     g.visible = a < 1.6;
     activeRef.current = a < 1.7;
+    nearestRef.current = Math.round(flight.station) === index;
 
     if (lazy) {
       /* Hysteresis: mount early, release late. Flipping on a single
@@ -62,7 +67,7 @@ export default function Station({
 
   return (
     <group ref={ref}>
-      <StationContext.Provider value={activeRef}>
+      <StationContext.Provider value={ctxValue}>
         {live ? children : null}
       </StationContext.Provider>
     </group>

@@ -1,5 +1,6 @@
 import { useMemo, useRef } from 'react';
 import { useFrame } from '../useStationFrame';
+import StationLights from '../StationLights';
 import * as THREE from 'three';
 import { flight } from '../../state/flight';
 import { PALETTE, STATION_INDEX } from '../../config';
@@ -109,8 +110,10 @@ export default function Portal({ open = false }) {
 
   return (
     <group ref={group}>
-      <pointLight position={[0, 0, 1.5]} color={PALETTE.cyan} intensity={7} distance={16} />
-      <pointLight position={[0, 0, -3]} color={PALETTE.violet} intensity={3.5} distance={14} />
+      <StationLights>
+        <pointLight position={[0, 0, 1.5]} color={PALETTE.cyan} intensity={7} distance={16} />
+        <pointLight position={[0, 0, -3]} color={PALETTE.violet} intensity={3.5} distance={14} />
+      </StationLights>
 
       {/* machined collar */}
       <group ref={collarRef}>

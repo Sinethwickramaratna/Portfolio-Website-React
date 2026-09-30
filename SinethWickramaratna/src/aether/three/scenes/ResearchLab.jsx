@@ -1,9 +1,10 @@
 import { useMemo, useRef } from 'react';
 import { useFrame } from '../useStationFrame';
+import StationLights from '../StationLights';
 import * as THREE from 'three';
 import { flight } from '../../state/flight';
 import { PALETTE, STATION_INDEX } from '../../config';
-import { holo, chrome, chromeDark, glass, emissive } from '../materials';
+import { holo, chrome, chromeDark, acrylic, emissive } from '../materials';
 import { mulberry, range } from '../rng';
 import { useFrameExtent } from '../useFrameExtent';
 
@@ -56,9 +57,11 @@ export default function ResearchLab() {
 
   return (
     <group ref={group}>
-      <pointLight position={[0, 1, 5]} color={PALETTE.cyan} intensity={7} distance={20} />
-      <pointLight position={[-7, 3, -3]} color={PALETTE.violet} intensity={3.4} distance={20} />
-      <pointLight position={[6, -3, 2]} color={PALETTE.rose} intensity={1.8} distance={16} />
+      <StationLights>
+        <pointLight position={[0, 1, 5]} color={PALETTE.cyan} intensity={7} distance={20} />
+        <pointLight position={[-7, 3, -3]} color={PALETTE.violet} intensity={3.4} distance={20} />
+        <pointLight position={[6, -3, 2]} color={PALETTE.rose} intensity={1.8} distance={16} />
+      </StationLights>
 
       <Bench />
       <group ref={bind(0)}><DatasetCloud /></group>
@@ -271,7 +274,7 @@ function ParameterSearch() {
       </group>
       <mesh ref={bestRef} position={[0.4, 0.2, 0]}>
         <octahedronGeometry args={[0.34, 0]} />
-        <meshPhysicalMaterial {...glass} />
+        <meshPhysicalMaterial {...acrylic} />
       </mesh>
     </group>
   );

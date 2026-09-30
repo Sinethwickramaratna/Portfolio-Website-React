@@ -1,5 +1,6 @@
 import { useMemo, useRef } from 'react';
 import { useFrame } from '../useStationFrame';
+import StationLights from '../StationLights';
 import * as THREE from 'three';
 import { flight } from '../../state/flight';
 import { PALETTE, STATION_INDEX } from '../../config';
@@ -103,8 +104,10 @@ export default function Doctrine() {
 
   return (
     <group ref={group}>
-      <pointLight position={[0, 0, 3]} color={PALETTE.cyan} intensity={6} distance={14} />
-      <pointLight position={[-4, 2, -2]} color={PALETTE.violet} intensity={3} distance={14} />
+      <StationLights>
+        <pointLight position={[0, 0, 3]} color={PALETTE.cyan} intensity={6} distance={14} />
+        <pointLight position={[-4, 2, -2]} color={PALETTE.violet} intensity={3} distance={14} />
+      </StationLights>
 
       <mesh ref={bodyRef}>
         <icosahedronGeometry args={[1.15, 1]} />

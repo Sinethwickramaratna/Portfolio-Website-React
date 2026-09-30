@@ -1,5 +1,6 @@
 import { useMemo, useRef } from 'react';
 import { useFrame } from '../useStationFrame';
+import StationLights from '../StationLights';
 import * as THREE from 'three';
 import { flight } from '../../state/flight';
 import { PALETTE, JOURNEY, STATION_INDEX } from '../../config';
@@ -150,8 +151,10 @@ export default function Trajectory({ onActive }) {
 
   return (
     <group ref={group}>
-      <pointLight position={[0, 2, 4]} color={PALETTE.cyan} intensity={6} distance={22} />
-      <pointLight position={[8, 2, 0]} color={PALETTE.violet} intensity={3} distance={20} />
+      <StationLights>
+        <pointLight position={[0, 2, 4]} color={PALETTE.cyan} intensity={6} distance={22} />
+        <pointLight position={[8, 2, 0]} color={PALETTE.violet} intensity={3} distance={20} />
+      </StationLights>
 
       <mesh geometry={haloGeo}>
         <meshBasicMaterial

@@ -1,6 +1,7 @@
 import { useMemo, useRef, useState } from 'react';
 import { useThree } from '@react-three/fiber';
 import { useFrame } from '../useStationFrame';
+import StationLights from '../StationLights';
 import * as THREE from 'three';
 import { flight } from '../../state/flight';
 import { PALETTE, EXHIBITION, STATION_INDEX } from '../../config';
@@ -70,9 +71,11 @@ export default function Exhibition({ focus = -1, onFocus }) {
     <group ref={group}>
       {/* Gallery lighting: enough to read the chrome edges, nowhere near
           enough to lift the room. The plates are their own light. */}
-      <pointLight position={[0, 3, 6]} color={PALETTE.bright} intensity={4} distance={24} />
-      <pointLight position={[-8, -2, 0]} color={PALETTE.cyan} intensity={3} distance={20} />
-      <pointLight position={[8, 2, -4]} color={PALETTE.violet} intensity={2.2} distance={20} />
+      <StationLights>
+        <pointLight position={[0, 3, 6]} color={PALETTE.bright} intensity={4} distance={24} />
+        <pointLight position={[-8, -2, 0]} color={PALETTE.cyan} intensity={3} distance={20} />
+        <pointLight position={[8, 2, -4]} color={PALETTE.violet} intensity={2.2} distance={20} />
+      </StationLights>
 
       {EXHIBITION.map((piece, i) => (
         <Plate
