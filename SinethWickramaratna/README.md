@@ -1,89 +1,30 @@
 # Sineth Wickramaratna — Portfolio
 
-A compact, responsive portfolio built with React and Vite that showcases projects, certificates, skills, and contact options. The site includes interactive visuals (3D carousel, canvas scenes), audio controls, custom cursor, and performance telemetry.
+A fast, flat, recruiter-friendly portfolio built with React + Vite. Light and dark themes, no 3D/WebGL.
 
-**Live demo:** Add your deployed URL or GitHub Pages/Vercel link here.
-
-## Key Features
-
-- Hero section with animated visuals and `CyberSamurai` artwork
-- Interactive 3D image carousel (`ImageCarousel3D`) and gallery pages
-- Projects showcase populated from `src/data/projectsData.json`
-- Skills and statistics (`SkillsSection`, `StatCard`, `StatItem`)
-- Certificates gallery and certificate detail cards
-- Contact form powered by EmailJS (`@emailjs/browser`) and social links
-- Global audio control and custom cursor for immersive UX
-- Scroll progress/katana-style indicator and smooth scroll animations
-- Lightweight telemetry for Core Web Vitals (`CoreTelemetry` components)
-
-## Tech Stack
-
-- React (v19) + JSX
-- Vite (dev server and build)
-- CSS modules / component-level CSS (project uses plain CSS files)
-- Optional: Tailwind and Three.js are included in dependencies for advanced visuals
-- EmailJS for client-side contact form integration
-
-## Project layout (high level)
-
-- `src/` — application source
-  - `components/` — UI components (Hero, About, Projects, Skills, Contact, Gallery, etc.)
-  - `components/public/` — `NavBar`, `Footer`, global UI
-  - `data/` — JSON content: `projectsData.json`, `skillsData.json`, `certificatesData.json`, `contactData.json`
-  - `assets/` — images, logos, certificates
-  - `hooks/` — custom hooks (e.g., `useInView`, `useAmbientSynth`)
-
-## Getting started
-
-### Prerequisites
-
-- Node.js (v16+)
-- npm (or yarn)
-
-### Install and run (development)
+## Run
 
 ```bash
 npm install
-npm run dev
+npm run dev      # http://localhost:5173
+npm run build    # production build in dist/
+npm run lint
 ```
 
-Open the app at `http://localhost:5173` (Vite default).
+## Edit your content
 
-### Build & preview
+Everything on the home page comes from [`src/data/content.js`](src/data/content.js):
+`PROJECTS`, `JOURNEY`, `RESEARCH_PILLARS`, `DESIGN_WORKS`, `CERTIFICATES`, `LINKS`, `AVAILABLE_FOR` and `CV_URL`.
+Skill groups, the nav and the hero stats live in [`src/data/site.js`](src/data/site.js). Hero/About/Contact copy is in
+`src/components/sections/`.
 
-```bash
-npm run build
-npm run preview
-```
+- **CV button** — set `CV_URL` in `content.js`; while it is empty the button is not rendered.
+- **Gallery** — `src/data/galleryImages.json`.
 
-Available npm scripts (from `package.json`):
+## Design system
 
-- `dev` — start Vite dev server
-- `build` — create production build
-- `preview` — preview production build locally
-- `lint` — run ESLint
+- Colour tokens and both themes: [`src/styles/tokens.css`](src/styles/tokens.css) (the 10 supplied palette colours are
+  declared once and mapped to theme roles). The theme is chosen from the OS setting on first visit, then remembered.
+- Layout and components: [`src/styles/site.css`](src/styles/site.css).
 
-## Customize content
-
-Edit the JSON files in [src/data](src/data):
-
-- [src/data/projectsData.json](src/data/projectsData.json)
-- [src/data/skillsData.json](src/data/skillsData.json)
-- [src/data/certificatesData.json](src/data/certificatesData.json)
-- [src/data/contactData.json](src/data/contactData.json)
-
-Update component styles in `src/Components/` if you need to change layout or visuals.
-
-## Notes & tips
-
-- Email sending is handled client-side using EmailJS — configure your EmailJS service ID and template keys in the contact form component or environment variables.
-- Tailwind and Three.js are present for optional use in experimental visuals.
-- If you add images, place them under `src/assets/Images` and reference them from the data JSON files.
-
-## Contributing & License
-
-This is a personal portfolio project. Contributions are welcome as suggestions — open an issue or reach out if you'd like to propose changes.
-
-**Last updated:** 2026-06-16
-
-Made with ❤️ by Sineth Wickramaratna
+Previous 3D version is kept in `_legacy/` for reference; it is not part of the build.

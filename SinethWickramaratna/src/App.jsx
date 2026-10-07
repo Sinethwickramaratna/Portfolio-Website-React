@@ -1,31 +1,33 @@
-import { Suspense, lazy } from 'react'
-import { Routes, Route } from 'react-router-dom'
-import './App.css'
+import { Suspense, lazy, useEffect } from 'react'
+import { Routes, Route, useLocation } from 'react-router-dom'
+import Home from './pages/Home.jsx'
 
-import AetherPage from './aether/AetherPage.jsx'
+// Secondary pages are code-split; most visitors never open them.
+const GalleryPage = lazy(() => import('./pages/GalleryPage.jsx'))
+const CertificatesPage = lazy(() => import('./pages/CertificatesPage.jsx'))
+const CattleBlog = lazy(() => import('./pages/CattleBlog.jsx'))
 
-// Secondary routes are code-split: the universe is the primary
-// experience and should not wait on pages most visitors never open.
-const GalleryPage = lazy(() => import('./Components/GalleryPage.jsx'))
-const CertificatesPage = lazy(() => import('./Components/CertificatesPage.jsx'))
-const CattleBehaviorBlog = lazy(() =>
-  import('./Components/BlogPages/CattleBehaviorBlog.jsx')
-)
-
-function App() {
-  return (
-    <Suspense fallback={null}>
-      <Routes>
-        <Route path="/" element={<AetherPage />} />
-        <Route path="/gallery" element={<GalleryPage />} />
-        <Route path="/certificates" element={<CertificatesPage />} />
-        <Route
-          path="/blog/cattle-behavior-iot-ml"
-          element={<CattleBehaviorBlog />}
-        />
-      </Routes>
-    </Suspense>
-  )
+function ScrollToTop() {
+  const { pathname, hash } = useLocation()
+  useEffect(() => {
+    if (!hash) window.scrollTo(0, 0)
+  }, [pathname, hash])
+  return null
 }
 
-export default App
+export default function App() {
+  return (
+    <>
+      <ScrollToTop />
+      <Suspense fallback={null}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/gallery" element={<GalleryPage />} />
+          <Route path="/certificates" element={<CertificatesPage />} />
+          <Route path="/blog/cattle-behavior-iot-ml" element={<CattleBlog />} />
+          <Route path="*" element={<Home />} />
+        </Routes>
+      </Suspense>
+    </>
+  )
+}

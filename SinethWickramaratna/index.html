@@ -2,34 +2,36 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/ico" href="./src/assets/Logos/logo-icon.ico" />
+    <link rel="icon" type="image/x-icon" href="./src/assets/Logos/logo-icon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#050505" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#fffaf4" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#170030" media="(prefers-color-scheme: dark)" />
 
-    <title>Sineth Wickramaratna — AI Engineer &amp; Data Scientist</title>
+    <title>Sineth Wickramaratna | Data Science &amp; AI Engineer</title>
     <meta
       name="description"
-      content="Portfolio of Sineth Wickramaratna — Computer Science &amp; Engineering student at the University of Moratuwa, specialising in Data Science, machine learning and data-driven systems."
+      content="Portfolio of Sineth Wickramaratna, a Computer Science &amp; Engineering undergraduate at the University of Moratuwa building machine learning, NLP and full-stack systems."
     />
+    <meta property="og:title" content="Sineth Wickramaratna | Data Science &amp; AI Engineer" />
+    <meta property="og:description" content="Machine learning, NLP and full-stack projects from raw data to shipped product." />
+    <meta property="og:type" content="website" />
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-      rel="preload"
-      as="style"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@300;400;500;600;700&family=Chakra+Petch:wght@400;500;600;700&display=swap"
-    >
-    <!-- Non-blocking: the stylesheet was render-blocking (~350 ms on FCP).
-         The page paints under the curtain with system fonts, then swaps. -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@300;400;500;600;700&family=Chakra+Petch:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@300;400;500;600;700&family=Chakra+Petch:wght@400;500;600;700&display=swap"></noscript>
+    <!-- Set the theme before first paint so there is no flash of the wrong one. -->
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem('theme');
+          var theme = saved === 'light' || saved === 'dark'
+            ? saved
+            : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+          document.documentElement.setAttribute('data-theme', theme);
+        } catch (e) {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      })();
+    </script>
 
-    <!-- Paint the void immediately so there is no white flash before CSS
-         and the WebGL backdrop are ready. -->
-    <style>
-      html, body { background-color: #050505; }
-    </style>
   </head>
   <body>
     <div id="root"></div>

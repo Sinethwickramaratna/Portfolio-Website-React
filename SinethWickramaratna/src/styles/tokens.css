@@ -1,0 +1,121 @@
+/* ==========================================================================
+   Design tokens — the supplied 10-colour palette plus theme roles.
+   Warm oranges carry attention; the violets carry depth and text.
+   ========================================================================== */
+
+:root {
+  /* ---- Supplied palette ---- */
+  --pumpkin-spice: #ff6d00;
+  --harvest-orange: #ff7900;
+  --princeton-orange: #ff8500;
+  --deep-saffron: #ff9100;
+  --amber-glow: #ff9e00;
+  --dark-amethyst: #240046;
+  --indigo-ink: #3c096c;
+  --indigo-velvet: #5a189a;
+  --royal-violet: #7b2cbf;
+  --lavender-purple: #9d4edd;
+
+  /* ---- Type ---- */
+  --font-display: 'Plus Jakarta Sans Variable', 'DM Sans Variable', system-ui, sans-serif;
+  --font-serif: 'Instrument Serif', 'Iowan Old Style', Georgia, serif;
+  --font-body: 'DM Sans Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* ---- Shape + rhythm ---- */
+  --radius-sm: 10px;
+  --radius: 18px;
+  --radius-lg: 28px;
+  --gutter: clamp(16px, 4vw, 40px);
+  --section-y: clamp(72px, 10vw, 128px);
+  --max: 1180px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ---- Light theme ---- */
+:root,
+:root[data-theme='light'] {
+  color-scheme: light;
+  --bg: #fffaf4;
+  --bg-soft: #fff0e0;
+  --surface: #ffffff;
+  --surface-2: #fff6ec;
+  --text: var(--dark-amethyst);
+  --text-2: #55406e;
+  --line: rgba(36, 0, 70, 0.12);
+  --line-strong: rgba(36, 0, 70, 0.28);
+
+  --accent: var(--pumpkin-spice);
+  --accent-2: var(--amber-glow);
+  --on-accent: var(--dark-amethyst);
+  --link: var(--indigo-velvet);
+  --accent-text: var(--indigo-velvet);
+  --focus: var(--indigo-velvet);
+  --violet: var(--royal-violet);
+  --violet-soft: rgba(123, 44, 191, 0.1);
+  --accent-soft: rgba(255, 109, 0, 0.14);
+  --highlight: rgba(255, 158, 0, 0.55);
+
+  --shadow: 0 1px 2px rgba(36, 0, 70, 0.06), 0 12px 32px -12px rgba(36, 0, 70, 0.18);
+  --shadow-lg: 0 2px 4px rgba(36, 0, 70, 0.06), 0 28px 60px -20px rgba(90, 24, 154, 0.35);
+
+  --mark-ink: var(--dark-amethyst);
+  --mark-bar: rgba(255, 158, 0, 0.55);
+  --cover-base: linear-gradient(135deg, #3c096c, #240046);
+  --cool-glow: #9d4edd;
+  --band-bg: var(--dark-amethyst);
+  --band-bg-2: var(--indigo-ink);
+  --band-text: #f8f1ff;
+  --band-text-2: #d9c8f0;
+  --band-line: rgba(248, 241, 255, 0.18);
+  --band-card: rgba(255, 255, 255, 0.07);
+  --band-accent: var(--amber-glow);
+  --hero-glow-1: rgba(255, 145, 0, 0.28);
+  --hero-glow-2: rgba(157, 78, 221, 0.2);
+  --dot: rgba(36, 0, 70, 0.1);
+  --nav-bg: rgba(255, 250, 244, 0.82);
+}
+
+/* ---- Dark theme ---- */
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #100e0c;
+  --bg-soft: #17130f;
+  --surface: #1c1814;
+  --surface-2: #26211b;
+  --text: #f7f1e8;
+  --text-2: #c4b8a8;
+  --line: rgba(247, 241, 232, 0.12);
+  --line-strong: rgba(247, 241, 232, 0.3);
+
+  --accent: var(--princeton-orange);
+  --accent-2: var(--amber-glow);
+  --on-accent: var(--dark-amethyst);
+  --link: var(--amber-glow);
+  --accent-text: var(--amber-glow);
+  --focus: var(--amber-glow);
+  --violet: var(--lavender-purple);
+  --violet-soft: rgba(157, 78, 221, 0.14);
+  --accent-soft: rgba(255, 133, 0, 0.15);
+  --highlight: rgba(255, 109, 0, 0.45);
+
+  --mark-ink: var(--amber-glow);
+  --mark-bar: rgba(255, 109, 0, 0.3);
+  --cover-base: linear-gradient(135deg, #2b2119, #14100d);
+  --cool-glow: rgba(255, 145, 0, 0.55);
+  --band-bg: #17130f;
+  --band-bg-2: #1f1913;
+  --band-text: #f7f1e8;
+  --band-text-2: #c4b8a8;
+  --band-line: rgba(247, 241, 232, 0.14);
+  --band-card: rgba(247, 241, 232, 0.05);
+  --band-accent: var(--amber-glow);
+
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 14px 34px -14px rgba(0, 0, 0, 0.6);
+  --shadow-lg: 0 2px 4px rgba(0, 0, 0, 0.4), 0 30px 60px -22px rgba(255, 109, 0, 0.18);
+
+  --hero-glow-1: rgba(255, 109, 0, 0.2);
+  --hero-glow-2: rgba(157, 78, 221, 0.1);
+  --dot: rgba(247, 241, 232, 0.08);
+  --nav-bg: rgba(16, 14, 12, 0.8);
+}
