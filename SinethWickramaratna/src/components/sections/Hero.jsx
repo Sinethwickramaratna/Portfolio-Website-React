@@ -1,14 +1,11 @@
 import Icon from '../Icons.jsx'
 import portrait from '../../assets/Images/profile.webp'
-import { LINKS, CV_URL, PROJECTS } from '../../data/content.js'
+import { LINKS, CV_URL } from '../../data/content.js'
 import { STATS } from '../../data/site.js'
 
 const social = { GITHUB: 'github', LINKEDIN: 'linkedin', EMAIL: 'mail' }
 
 export default function Hero() {
-  const clario = PROJECTS[0]
-  const headline = clario.facts.find(([k]) => /CATEGORY/.test(k))
-
   return (
     <header className="hero" id="top">
       <div className="container hero-grid">
@@ -17,12 +14,12 @@ export default function Hero() {
             <i aria-hidden="true" /> Open to internships &amp; collaborations
           </p>
           <h1>
-            Hi, I&rsquo;m Sineth. I turn data into <span className="mark">intelligent products</span>.
+            Hi, I&rsquo;m Sineth. I build <span className="mark">software</span> powered by data.
           </h1>
           <p className="hero-lead">
-            Computer Science &amp; Engineering undergraduate at the University of Moratuwa, specialising in
-            Data Science. I take machine learning from the notebook to a deployed, usable product and
-            design the interface it ships in.
+            Software engineer and data scientist in the making, studying Computer Science &amp; Engineering at
+            the University of Moratuwa. I love building software end to end, from the backend and the
+            interface to the machine learning that powers it.
           </p>
           <div className="hero-cta">
             <a href="#projects" className="btn btn--primary">
@@ -60,11 +57,11 @@ export default function Hero() {
             <img src={portrait} alt="Portrait of Sineth Wickramaratna" width="500" height="730" fetchPriority="high" />
           </div>
           <div className="float-chip float-chip--a">
-            <strong>{headline[1]}</strong>
+            <strong>Full stack</strong>
             <span>
-              category accuracy
+              web, mobile
               <br />
-              on Clario triage
+              &amp; backend
             </span>
           </div>
           <div className="float-chip float-chip--b">

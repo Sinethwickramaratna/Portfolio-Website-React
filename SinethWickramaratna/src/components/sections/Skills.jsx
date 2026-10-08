@@ -3,7 +3,6 @@ import Icon from '../Icons.jsx'
 import TechLogo from '../TechLogo.jsx'
 import { SKILL_GROUPS } from '../../data/site.js'
 
-const PALETTE = ['#ff6d00', '#ff7900', '#ff8500', '#ff9100', '#ff9e00', '#240046', '#3c096c', '#5a189a', '#7b2cbf', '#9d4edd']
 const SPAN = ['ml', 'data', 'web', 'design']
 
 export default function Skills() {
@@ -39,13 +38,6 @@ export default function Skills() {
                 <div className="tool-grid">
                   {g.tools.map((t) => (
                     <TechLogo key={t} name={t} />
-                  ))}
-                </div>
-              )}
-              {SPAN[i] === 'design' && (
-                <div className="swatches" role="img" aria-label="The ten colour palette used across this site">
-                  {PALETTE.map((c) => (
-                    <i key={c} style={{ background: c }} />
                   ))}
                 </div>
               )}

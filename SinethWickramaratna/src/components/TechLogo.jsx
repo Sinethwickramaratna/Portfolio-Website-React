@@ -1,4 +1,4 @@
-import { iconFor, monogram } from '../data/techIcons.js'
+import { iconFor, monogram, TILES } from '../data/techIcons.js'
 
 const lum = (hex) => {
   const n = parseInt(hex, 16)
@@ -17,12 +17,15 @@ export default function TechLogo({ name, className = '' }) {
       '--b-dark': l < 0.12 ? 'var(--text-2)' : `#${icon.hex}`,
     }
   }
+  const tile = TILES[name]
   return (
     <span className={`tech ${className}`} style={style}>
       {icon ? (
         <svg viewBox="0 0 24 24" aria-hidden="true" className="tech-logo" data-logo="svg">
           <path d={icon.path} fill="currentColor" />
         </svg>
+      ) : tile ? (
+        <span className="tech-mono tech-tile" aria-hidden="true" style={{ background: tile.bg, color: tile.fg }}>{tile.label}</span>
       ) : (
         <span className="tech-mono" aria-hidden="true">{monogram(name)}</span>
       )}

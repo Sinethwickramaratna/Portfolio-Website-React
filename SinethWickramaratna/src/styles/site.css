@@ -5,7 +5,17 @@
 html { scroll-behavior: smooth; scroll-padding-top: 92px; -webkit-text-size-adjust: 100%; }
 body {
   margin: 0;
-  background: var(--bg);
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(760px 620px at 100% 9%, var(--amb-o), transparent 70%),
+    radial-gradient(820px 680px at 0% 24%, var(--amb-p), transparent 70%),
+    radial-gradient(760px 620px at 100% 46%, var(--amb-p), transparent 70%),
+    radial-gradient(820px 680px at 0% 64%, var(--amb-o), transparent 70%),
+    radial-gradient(760px 620px at 100% 84%, var(--amb-o), transparent 70%),
+    radial-gradient(820px 680px at 0% 97%, var(--amb-p), transparent 70%),
+    radial-gradient(var(--amb-dot) 1.3px, transparent 1.4px);
+  background-size: auto, auto, auto, auto, auto, auto, 28px 28px;
+  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, repeat;
   color: var(--text);
   font-family: var(--font-body);
   font-size: 1.0625rem;
@@ -168,7 +178,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .portrait { position: relative; justify-self: center; width: min(100%, 420px); }
 .portrait-frame {
   position: relative; aspect-ratio: 5 / 6; border-radius: 220px 220px var(--radius-lg) var(--radius-lg); overflow: hidden;
-  background: linear-gradient(160deg, var(--amber-glow) 0%, var(--pumpkin-spice) 45%, var(--indigo-velvet) 130%);
+  background: var(--portrait-bg);
   box-shadow: var(--shadow-lg);
 }
 .portrait-frame::after {
@@ -255,9 +265,6 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .skill-blurb { color: var(--text-2); max-width: 46ch; }
 .tool-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; margin-top: 6px; }
 .tool-grid .tech { border-radius: 14px; background: var(--surface-2); }
-.swatches { display: flex; gap: 6px; margin-top: auto; padding-top: 10px; }
-.swatches i { flex: 1; height: 38px; border-radius: 10px; border: 1px solid var(--line); transition: transform 0.3s var(--ease); }
-.swatches i:hover { transform: translateY(-5px); }
 @media (max-width: 1000px) { .skill-card--ml, .skill-card--data, .skill-card--web, .skill-card--design { grid-column: span 12; } }
 @media (max-width: 520px) { .skill-card { padding: 22px; } .tool-grid { grid-template-columns: repeat(2, 1fr); } .tool-grid .tech { padding-right: 10px; font-size: 0.86rem; } }
 
@@ -353,7 +360,7 @@ dialog.modal::backdrop { background: rgba(23, 0, 48, 0.62); backdrop-filter: blu
 :root[data-theme='dark'] .research { border-block: 1px solid var(--line); }
 .research .container { position: relative; }
 .research .eyebrow, .research .section-head p { color: var(--band-text-2); }
-.research .mark { color: var(--band-accent); }
+.research .mark { color: var(--band-mark); }
 .research-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
 .stat-card { padding: 26px 24px; border-radius: var(--radius); background: var(--band-card); border: 1px solid var(--band-line); display: grid; gap: 14px; align-content: start; }
 .stat-card .k { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.12em; color: var(--band-accent); }
@@ -436,7 +443,7 @@ dialog.modal::backdrop { background: rgba(23, 0, 48, 0.62); backdrop-filter: blu
 .contact-card::after { content: ''; position: absolute; z-index: -1; width: 380px; height: 380px; left: -120px; bottom: -200px; border-radius: 50%; background: radial-gradient(circle, var(--amber-glow), transparent 66%); opacity: 0.22; }
 .contact-card .eyebrow { color: var(--band-text-2); }
 .contact-card h2 { font-size: clamp(2.2rem, 6vw, 4.6rem); margin: 18px 0; letter-spacing: -0.045em; font-weight: 800; max-width: 14ch; }
-.contact-card h2 .mark { color: var(--band-accent); --mark-bar: rgba(255, 109, 0, 0.35); }
+.contact-card h2 .mark { color: var(--band-mark); --mark-bar: rgba(255, 109, 0, 0.35); }
 .contact-card > p { color: var(--band-text-2); max-width: 52ch; font-size: 1.12rem; }
 .contact-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
 .contact-card .btn--ghost { color: var(--band-text); border-color: var(--band-line); }
@@ -542,3 +549,4 @@ html:has(dialog[open]) { overflow: hidden; }
   .wall-track, .marquee-track { animation: none !important; }
   .marquee-row { overflow-x: auto; }
 }
+.tech-tile { width: 24px; height: 24px; font-weight: 700; font-size: 0.7rem; font-family: var(--font-display); letter-spacing: -0.02em; }

@@ -1,14 +1,8 @@
 import Reveal from '../Reveal.jsx'
-import { DOCTRINE, PROJECTS } from '../../data/content.js'
-import { STATS, titleCase } from '../../data/site.js'
-
-const val = (p, re) => p.facts.find(([k]) => re.test(k))[1]
+import { DOCTRINE } from '../../data/content.js'
+import { STATS, STACK, titleCase } from '../../data/site.js'
 
 export default function About() {
-  const clario = val(PROJECTS[0], /CATEGORY/)
-  const rf = PROJECTS.find((p) => /Malnutrition/.test(p.name))
-  const rfAcc = rf.facts.find(([k]) => /SCORES/.test(k))[1].split(' ')[0]
-
   return (
     <section className="section" id="about">
       <div className="container">
@@ -23,12 +17,13 @@ export default function About() {
           <Reveal className="about-copy">
             <p>
               I&rsquo;m a <strong>Computer Science &amp; Engineering undergraduate</strong> at the{' '}
-              <strong>University of Moratuwa</strong>, Sri Lanka, on the Data Science Engineering track,
-              interested in building intelligent systems and turning technical ideas into
-              experiences that mean something to the person on the other side of the screen.
+              <strong>University of Moratuwa</strong>, Sri Lanka. I am a <strong>software engineer</strong> who loves
+              developing software, and a data science engineer who enjoys making it intelligent. I like
+              turning technical ideas into experiences that mean something to the person on the other
+              side of the screen.
             </p>
             <p>
-              I like the whole loop, from framing the problem to training and evaluating the model to shipping it behind an API and an interface people can use. Think a fine tuned Gemma-3 triage pipeline or a Dockerised AI text detector published on Hugging Face.
+              I like the whole loop, from framing the problem and designing the system to writing the backend, building the interface and shipping it for people to use. Sometimes that includes a machine learning model, like a fine tuned Gemma-3 triage pipeline or a Dockerised AI text detector published on Hugging Face.
             </p>
             <p>
               Away from notebooks I design and lead, with posters and identities for IEEE RAS and the
@@ -44,16 +39,16 @@ export default function About() {
                 <span>projects built, from research to deployment</span>
               </div>
               <div className="card fact">
-                <b>{clario}</b>
-                <span>category accuracy, Clario triage (2,000 ticket held out set)</span>
-              </div>
-              <div className="card fact">
-                <b>{rfAcc}</b>
-                <span>Random Forest accuracy across 136 countries</span>
+                <b>{STATS.live}</b>
+                <span>apps live and in use today</span>
               </div>
               <div className="card fact">
                 <b>{STATS.designs}</b>
                 <span>design works featured, from posters to identities and campaigns</span>
+              </div>
+              <div className="card fact">
+                <b>{STACK.length}</b>
+                <span>technologies used across web, mobile, data and AI</span>
               </div>
             </div>
           </Reveal>

@@ -9,15 +9,15 @@ import { titleCase } from '../../data/site.js'
 const GLOWS = [
   ['#ff6d00', '82% 18%'],
   ['var(--cool-glow)', '15% 85%'],
-  ['#ff9e00', '85% 80%'],
+  ['var(--cool-glow)', '85% 80%'],
   ['#ff7900', '20% 15%'],
   ['var(--cool-glow)', '80% 20%'],
   ['#ff8500', '15% 80%'],
-  ['#ff9100', '85% 25%'],
+  ['var(--cool-glow)', '85% 25%'],
 ]
 const cover = (i) => {
   const [c, at] = GLOWS[i % GLOWS.length]
-  return `radial-gradient(circle at ${at}, ${c} 0%, transparent 58%), var(--cover-base)`
+  return `radial-gradient(circle at ${at}, color-mix(in srgb, ${c} var(--glow-strength, 100%), transparent) 0%, transparent 58%), var(--cover-base)`
 }
 
 function Links({ p }) {

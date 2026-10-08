@@ -41,7 +41,7 @@ export const SKILL_GROUPS = [
     icon: 'palette',
     blurb: 'Structure, hierarchy and motion before any pixel is chosen.',
     tags: ['UI and UX', 'Posters', 'Branding', 'Event Design', 'Visual Identity'],
-    tools: [],
+    tools: ['Photoshop', 'Illustrator', 'Figma', 'Canva'],
   },
 ]
 
