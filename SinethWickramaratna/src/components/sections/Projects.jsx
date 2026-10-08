@@ -100,7 +100,7 @@ export default function Projects() {
             Projects that <span className="mark">ship</span>
           </h2>
           <p>
-            Agentic AI, mobile safety, computer vision and IoT systems, each one built end to
+            Agentic AI, developer tools, mobile safety, computer vision and IoT systems, each one built end to
             end and put behind an interface.
           </p>
         </Reveal>

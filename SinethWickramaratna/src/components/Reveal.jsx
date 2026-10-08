@@ -17,13 +17,28 @@ export default function Reveal({ as = 'div', delay = 0, className = '', children
         // Also reveal anything already scrolled past (e.g. after an anchor jump).
         if (entry.isIntersecting || entry.boundingClientRect.top < 0) {
           el.classList.add('in')
-          io.disconnect()
+          cleanup()
         }
       },
       { rootMargin: '0px 0px -8% 0px', threshold: 0.05 },
     )
     io.observe(el)
-    return () => io.disconnect()
+
+    // A fast scroll or anchor jump can skip a block between two observer frames, so also check on scroll.
+    const check = () => {
+      if (el.getBoundingClientRect().top < window.innerHeight * 0.92) {
+        el.classList.add('in')
+        cleanup()
+      }
+    }
+    const cleanup = () => {
+      io.disconnect()
+      window.removeEventListener('scroll', check)
+      window.removeEventListener('resize', check)
+    }
+    window.addEventListener('scroll', check, { passive: true })
+    window.addEventListener('resize', check)
+    return cleanup
   }, [])
 
   return (

@@ -2,7 +2,7 @@ import {
   siReact, siDocker, siPytorch, siFastapi, siNextdotjs, siScikitlearn, siMongodb, siInfluxdb,
   siFlutter, siNodedotjs, siExpress, siFirebase, siPandas, siPlotly, siLatex, siMqtt,
   siLangchain, siLanggraph, siGooglegemini, siThemoviedatabase, siPython, siNumpy, siHuggingface,
-  siTypescript, siSupabase, siGithub, siFigma, siDart, siTensorflow,
+  siTypescript, siSupabase, siGithub, siFigma, siDart, siTensorflow, siSpringboot, siPostgresql, siOpenjdk,
 } from 'simple-icons'
 
 /** name as used in content.js -> simple-icons entry. Anything missing gets a monogram tile. */
@@ -12,7 +12,7 @@ const ICONS = {
   Flutter: siFlutter, 'Node.js': siNodedotjs, Express: siExpress, Firebase: siFirebase, pandas: siPandas,
   Plotly: siPlotly, LaTeX: siLatex, MQTT: siMqtt, LangChain: siLangchain, LangGraph: siLanggraph,
   'Google GenAI': siGooglegemini, TMDB: siThemoviedatabase, Python: siPython, NumPy: siNumpy,
-  'Hugging Face': siHuggingface, TypeScript: siTypescript, Supabase: siSupabase, GitHub: siGithub, Figma: siFigma, Dart: siDart, 'TensorFlow Lite': siTensorflow,
+  'Hugging Face': siHuggingface, TypeScript: siTypescript, Supabase: siSupabase, GitHub: siGithub, Figma: siFigma, Dart: siDart, 'Spring Boot': siSpringboot, PostgreSQL: siPostgresql, Java: siOpenjdk, 'TensorFlow Lite': siTensorflow,
 }
 
 export const iconFor = (name) => ICONS[name] || null

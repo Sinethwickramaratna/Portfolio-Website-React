@@ -8,22 +8,6 @@ export const AVAILABLE_FOR = [
 
 export const CERTIFICATES = [
   {
-    "title": "RoboRoarz Sri Lanka 2026 Champions",
-    "issuer": "RoboRoarz Sri Lanka · IEEE SB University of Moratuwa",
-    "date": "2026",
-    "kind": "COMPETITION",
-    "note": "Won the Path Finder category as Champions.",
-    "image": "RoboRoarz - Champions.jpg"
-  },
-  {
-    "title": "Spark Challenge 2025/26 Semi Finalists",
-    "issuer": "SPARK, Electronic Club · University of Moratuwa",
-    "date": "2025/26",
-    "kind": "COMPETITION",
-    "note": "Team Aquilon reached the semi finals.",
-    "image": "Spark Challenge - Semi Finalist.jpg"
-  },
-  {
     "title": "SLIIT Robofest 2025 Finalists",
     "issuer": "SLIIT",
     "date": "Oct 2025",
@@ -46,14 +30,6 @@ export const CERTIFICATES = [
     "kind": "SERVICE",
     "note": "Sustained project and committee work through the year.",
     "image": "Rotaract Active Membership.jpg"
-  },
-  {
-    "title": "BOT TALK 3.0 Certificate of Appreciation",
-    "issuer": "IEEE RAS · University of Moratuwa",
-    "date": "Oct 2025",
-    "kind": "LEADERSHIP",
-    "note": "Design committee lead for Bot Talk 3.0.",
-    "image": "BotTalk 3.0 - Certificate of Appreciation.jpg"
   },
   {
     "title": "Intro to Machine Learning",
@@ -358,6 +334,49 @@ export const PROJECTS = [
   },
   {
     "n": "03",
+    "name": "ORBIT",
+    "year": "2026 to Present",
+    "category": "SYSTEMS / DEVELOPER TOOLS",
+    "stack": [
+      "Next.js",
+      "TypeScript",
+      "Java",
+      "Spring Boot",
+      "PostgreSQL",
+      "Docker"
+    ],
+    "blurb": "A local platform that scans an existing software project, works out its stack and architecture with file and line evidence, and will run it in a Docker sandbox to see what breaks when things fail.",
+    "body": [
+      "ORBIT takes an existing project folder or Git repository and builds a machine readable picture of its languages, build systems, configuration and frameworks. The long term goal is a local laboratory for software systems that runs a project in an isolated sandbox, injects controlled failures and explains the impact with evidence.",
+      "The analyzer is data driven. Languages, build files, configuration files and framework dependencies all live in Flyway seeded tables, so teaching ORBIT something new is a database row rather than a code change. Every result links back to a file, and framework hits to a line and column. Scanning is safe by design, with symbolic links never followed and only the folders the user allowed ever opened.",
+      "Around it sits a full application shell with guided first run setup that needs no terminal, Argon2id password hashing with JWT and refresh tokens, project management with Git clone, and a desktop style workspace with resizable panels. Everything runs in Docker Compose with a static frontend on nginx, a jlink trimmed Java backend, PostgreSQL with automatic backups, and GitHub Actions CI.",
+      "Next on the roadmap are infrastructure detection, Spring service discovery, a Neo4j dependency graph, a local Gemma model that explains the architecture, and the Docker sandbox with controlled failure experiments."
+    ],
+    "facts": [
+      [
+        "ANALYZER STAGES",
+        "4"
+      ],
+      [
+        "FRAMEWORKS DETECTED",
+        "30"
+      ],
+      [
+        "BUILD SYSTEMS",
+        "16"
+      ],
+      [
+        "NEXT",
+        "Docker sandbox"
+      ]
+    ],
+    "note": "Solo project  ·  ongoing",
+    "contribution": "Designed and built everything on my own, including the Next.js frontend, the Spring Boot backend, the PostgreSQL schema and Flyway migrations, the Docker setup, the CI pipeline and the four analyzer stages.",
+    "repo": "https://github.com/Sinethwickramaratna/ORBIT-Intelligent-Software-System-Analysis-Simulation-Platform",
+    "live": null
+  },
+  {
+    "n": "04",
     "name": "CheXpert RAG Agent",
     "year": "2026 to Present",
     "category": "COMPUTER VISION / RAG",
@@ -397,7 +416,7 @@ export const PROJECTS = [
     "live": null
   },
   {
-    "n": "04",
+    "n": "05",
     "name": "Identifying & Predicting Malnutrition Hotspots",
     "year": "2026",
     "category": "RESEARCH / CLASSIFICATION",
@@ -438,7 +457,7 @@ export const PROJECTS = [
     "live": null
   },
   {
-    "n": "05",
+    "n": "06",
     "name": "Cattle.io",
     "year": "2026",
     "category": "IOT / APPLIED ML",
@@ -478,7 +497,7 @@ export const PROJECTS = [
     "live": null
   },
   {
-    "n": "06",
+    "n": "07",
     "name": "Academent",
     "year": "2026",
     "category": "APPLIED AI / EDUCATION",

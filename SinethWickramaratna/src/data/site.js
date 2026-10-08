@@ -55,7 +55,7 @@ export const STATS = {
 export const STACK = [
   'Gemma-3', 'QLoRA', 'LangGraph', 'ChromaDB', 'Next.js', 'PyTorch', 'MiniLM', 'FastAPI', 'Docker', 'React',
   'LangChain', 'scikit-learn', 'XGBoost', 'CatBoost', 'Plotly', 'LaTeX', 'MQTT', 'InfluxDB', 'MongoDB', 'Flutter',
-  'Dart', 'TensorFlow Lite', 'YOLOv8', 'Node.js', 'Express', 'Google GenAI', 'Firebase', 'pandas', 'React 19', 'TMDB',
+  'Dart', 'TensorFlow Lite', 'YOLOv8', 'TypeScript', 'Java', 'Spring Boot', 'PostgreSQL', 'Node.js', 'Express', 'Google GenAI', 'Firebase', 'pandas', 'React 19', 'TMDB',
 ]
 
 /** Wall of posters: curated featured works first, then the rest of the gallery. */
