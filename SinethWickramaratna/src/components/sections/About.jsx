@@ -23,7 +23,7 @@ export default function About() {
               side of the screen.
             </p>
             <p>
-              I like the whole loop, from framing the problem and designing the system to writing the backend, building the interface and shipping it for people to use. Sometimes that includes a machine learning model, like a fine tuned Gemma-3 triage pipeline or a Dockerised AI text detector published on Hugging Face.
+              I like the whole loop, from framing the problem and designing the system to writing the backend, building the interface and shipping it for people to use. Sometimes that includes a machine learning model, like a fine tuned Gemma-3 triage pipeline or the on device AI that checks a ride's number plate in a women's safety app.
             </p>
             <p>
               Away from notebooks I design and lead, with posters and identities for IEEE RAS and the
@@ -39,8 +39,8 @@ export default function About() {
                 <span>projects built, from research to deployment</span>
               </div>
               <div className="card fact">
-                <b>{STATS.live}</b>
-                <span>apps live and in use today</span>
+                <b>{STATS.repos}</b>
+                <span>projects with public code on GitHub</span>
               </div>
               <div className="card fact">
                 <b>{STATS.designs}</b>

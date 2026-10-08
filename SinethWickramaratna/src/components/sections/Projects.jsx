@@ -20,6 +20,9 @@ const cover = (i) => {
   return `radial-gradient(circle at ${at}, color-mix(in srgb, ${c} var(--glow-strength, 100%), transparent) 0%, transparent 58%), var(--cover-base)`
 }
 
+/* When the cards after the featured one do not fill rows of three, the last two share a row. */
+const PAIR = (PROJECTS.length - 1) % 3 === 2
+
 function Links({ p }) {
   return (
     <>
@@ -47,7 +50,7 @@ function Card({ p, i, onOpen }) {
   return (
     <Reveal
       as="article"
-      className={`card project${feature ? ' project--feature' : ''}`}
+      className={`card project${feature ? ' project--feature' : ''}${PAIR && i >= PROJECTS.length - 2 ? ' project--half' : ''}`}
       delay={(i % 3) * 80}
     >
       <div className="project-cover" data-n={p.n} style={{ '--cover': cover(i) }}>
@@ -97,8 +100,8 @@ export default function Projects() {
             Projects that <span className="mark">ship</span>
           </h2>
           <p>
-            Agentic AI, NLP, computer vision, IoT and recommender systems, each one trained,
-            evaluated and put behind an interface.
+            Agentic AI, mobile safety, computer vision and IoT systems, each one built end to
+            end and put behind an interface.
           </p>
         </Reveal>
         <div className="projects-grid">

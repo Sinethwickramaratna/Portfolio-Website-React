@@ -73,8 +73,12 @@ export default function Hero() {
             </span>
           </div>
           <div className="float-chip float-chip--c">
-            <strong>{STATS.live}</strong>
-            <span>apps live today</span>
+            <strong>{STATS.repos}</strong>
+            <span>
+              projects on
+              <br />
+              GitHub
+            </span>
           </div>
         </div>
       </div>

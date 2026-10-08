@@ -8,6 +8,22 @@ export const AVAILABLE_FOR = [
 
 export const CERTIFICATES = [
   {
+    "title": "RoboRoarz Sri Lanka 2026 Champions",
+    "issuer": "RoboRoarz Sri Lanka · IEEE SB University of Moratuwa",
+    "date": "2026",
+    "kind": "COMPETITION",
+    "note": "Won the Path Finder category as Champions.",
+    "image": "RoboRoarz - Champions.jpg"
+  },
+  {
+    "title": "Spark Challenge 2025/26 Semi Finalists",
+    "issuer": "SPARK, Electronic Club · University of Moratuwa",
+    "date": "2025/26",
+    "kind": "COMPETITION",
+    "note": "Team Aquilon reached the semi finals.",
+    "image": "Spark Challenge - Semi Finalist.jpg"
+  },
+  {
     "title": "SLIIT Robofest 2025 Finalists",
     "issuer": "SLIIT",
     "date": "Oct 2025",
@@ -30,6 +46,14 @@ export const CERTIFICATES = [
     "kind": "SERVICE",
     "note": "Sustained project and committee work through the year.",
     "image": "Rotaract Active Membership.jpg"
+  },
+  {
+    "title": "BOT TALK 3.0 Certificate of Appreciation",
+    "issuer": "IEEE RAS · University of Moratuwa",
+    "date": "Oct 2025",
+    "kind": "LEADERSHIP",
+    "note": "Design committee lead for Bot Talk 3.0.",
+    "image": "BotTalk 3.0 - Certificate of Appreciation.jpg"
   },
   {
     "title": "Intro to Machine Learning",
@@ -196,8 +220,8 @@ export const JOURNEY = [
     ]
   },
   {
-    "title": "VeriText · CineMatch · Academent",
-    "detail": "Shipped intelligence that was trained, containerised and deployed.",
+    "title": "Amica · Academent",
+    "detail": "A women's safety app and an AI study companion, built from model training to the interface.",
     "year": "2026"
   },
   {
@@ -289,46 +313,47 @@ export const PROJECTS = [
   },
   {
     "n": "02",
-    "name": "VeriText AI",
+    "name": "Amica",
     "year": "2026",
-    "category": "NLP / DETECTION",
+    "category": "MOBILE / ON DEVICE AI",
     "stack": [
-      "PyTorch",
-      "MiniLM",
-      "FastAPI",
-      "Docker",
-      "React"
+      "Flutter",
+      "Dart",
+      "Firebase",
+      "YOLOv8",
+      "TensorFlow Lite"
     ],
-    "blurb": "A transformer classifier that separates machine generated text from human writing, served over REST and published openly on Hugging Face.",
+    "blurb": "A women's safety app for Sri Lankan commuters. She can ask for help silently, have her journey watched over, and check a ride's number plate with on device AI before she gets in.",
     "body": [
-      "A classifier built on all-MiniLM-L6-v2 was trained in PyTorch to tell synthetic prose from human prose, and the trained model is public on Hugging Face rather than locked inside the repository.",
-      "Around it sits a FastAPI inference service exposing the model over REST with PDF text extraction, and a React and Tailwind interface that accepts either pasted text or an uploaded document.",
-      "The whole stack is containerised with Docker Compose behind Nginx, which makes deployment a single command rather than a runbook."
+      "Amica is an Android safety companion for women who travel alone by bus, train, three wheeler or taxi. Most safety apps focus on the emergency itself. Amica also covers the time before and during the ride, checking the vehicle before she boards, watching the journey while she travels and quietly alerting her trusted circle if something goes wrong.",
+      "Scan Before You Ride runs entirely on the phone. A custom YOLOv8 model finds the plate, ML Kit reads it and validates it against Sri Lankan formats, and a second model identifies the vehicle type and colour. The result is Match, Mismatch or Not sure, so the app warns and never blocks the ride. On held out test sets the plate detector reaches 0.985 mAP50 and the vehicle detector 0.967.",
+      "Around it sit a one hold SOS with a cancel window, SMS from her own SIM and 30 seconds of audio evidence, a Smart Journey Timer with a private live tracking link, a fake call with a secret Voice SOS phrase, and a stop alert for buses and trains. The app runs in English, Sinhala and Tamil, with a Firebase backend and a discreet dark mode."
     ],
     "facts": [
       [
-        "MODEL",
-        "all-MiniLM-L6-v2"
+        "PLATE DETECTOR",
+        "0.985 mAP50"
       ],
       [
-        "INPUT",
-        "Raw text / PDF"
+        "VEHICLE DETECTOR",
+        "0.967 mAP50"
       ],
       [
-        "PUBLISHED",
-        "Hugging Face"
+        "LANGUAGES",
+        "English, Sinhala, Tamil"
       ],
       [
-        "STATUS",
-        "Live"
+        "PLATFORM",
+        "Android, Flutter"
       ]
     ],
-    "note": "Solo project",
-    "repo": "https://github.com/Sinethwickramaratna/AI-Text-Checker",
-    "live": "https://veritextai.sinethwickramaratna.dev/",
+    "note": "Group project  ·  Team Kintsugi  ·  three students",
+    "contribution": "AI and ML engineer, Flutter developer and UI and UX designer. I trained the plate and vehicle detectors and built the scan pipeline, built the app screens in Dart, designed the Blossom design system with light and dark themes, and built the website and final pitch deck. My teammates built the Firebase backend.",
+    "repo": "https://github.com/Kintsugi-Amica-AI",
+    "live": null,
     "extra": {
-      "label": "HUGGING FACE",
-      "href": "https://huggingface.co/SineWick/AITextChecker"
+      "label": "WEBSITE",
+      "href": "https://amica-website-six.vercel.app/"
     }
   },
   {
@@ -490,45 +515,6 @@ export const PROJECTS = [
     "note": "Solo project",
     "repo": "https://github.com/Sinethwickramaratna/Academent-AI-Study-Comapanion",
     "live": null
-  },
-  {
-    "n": "07",
-    "name": "CineMatch AI",
-    "year": "2026",
-    "category": "RECOMMENDER SYSTEMS",
-    "stack": [
-      "scikit-learn",
-      "pandas",
-      "FastAPI",
-      "React 19",
-      "TMDB"
-    ],
-    "blurb": "A discovery engine that treats taste as a coordinate rather than a category, and moves through a catalogue the way a person actually browses.",
-    "body": [
-      "Content similarity is computed over a feature space built from genre, cast, keywords and synopsis, then served through a FastAPI layer that keeps the round trip short enough for a debounced search field to feel instantaneous.",
-      "The interface is deliberately quiet, with a search that responds while you type, a watchlist that persists locally, and no account to create before the product will talk to you."
-    ],
-    "facts": [
-      [
-        "SIGNAL",
-        "Content based similarity"
-      ],
-      [
-        "SOURCE",
-        "TMDB live catalogue"
-      ],
-      [
-        "STATE",
-        "Local first watchlist"
-      ],
-      [
-        "STATUS",
-        "Live"
-      ]
-    ],
-    "note": "Solo project",
-    "repo": "https://github.com/Sinethwickramaratna/Movie-Recommendation-Website.git",
-    "live": "https://cinematchai.sinethwickramaratna.dev/"
   }
 ];
 

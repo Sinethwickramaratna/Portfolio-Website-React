@@ -47,12 +47,16 @@ export const SKILL_GROUPS = [
 
 export const STATS = {
   projects: PROJECTS.length,
-  live: PROJECTS.filter((p) => p.live).length,
+  repos: PROJECTS.filter((p) => p.repo).length,
   designs: DESIGN_WORKS.length,
 }
 
-/** Unique tools across every project, for the marquee. */
-export const STACK = [...new Set(PROJECTS.flatMap((p) => p.stack))]
+/** Tools shown in the marquee. */
+export const STACK = [
+  'Gemma-3', 'QLoRA', 'LangGraph', 'ChromaDB', 'Next.js', 'PyTorch', 'MiniLM', 'FastAPI', 'Docker', 'React',
+  'LangChain', 'scikit-learn', 'XGBoost', 'CatBoost', 'Plotly', 'LaTeX', 'MQTT', 'InfluxDB', 'MongoDB', 'Flutter',
+  'Dart', 'TensorFlow Lite', 'YOLOv8', 'Node.js', 'Express', 'Google GenAI', 'Firebase', 'pandas', 'React 19', 'TMDB',
+]
 
 /** Wall of posters: curated featured works first, then the rest of the gallery. */
 export const WALL = [...DESIGN_WORKS.map((d) => ({ src: d.src, title: d.title, subtitle: `${d.kind.charAt(0)}${d.kind.slice(1).toLowerCase()}` })),

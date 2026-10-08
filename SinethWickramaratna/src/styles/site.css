@@ -275,6 +275,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .project { grid-column: span 2; display: flex; flex-direction: column; overflow: hidden; }
 .project:hover { transform: translateY(-6px); border-color: var(--accent); box-shadow: var(--shadow-lg); }
 .project--feature { grid-column: span 6; flex-direction: row; }
+.project--half { grid-column: span 3; }
 .project-cover {
   position: relative; min-height: 170px; padding: 22px; color: #fff; overflow: hidden; isolation: isolate;
   display: flex; flex-direction: column; justify-content: space-between; background: var(--cover);
@@ -308,7 +309,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 }
 @media (max-width: 760px) {
   .projects-grid { grid-template-columns: 1fr; }
-  .project, .project--feature { grid-column: auto; flex-direction: column; }
+  .project, .project--feature, .project--half { grid-column: auto; flex-direction: column; }
   .project--feature .project-cover { flex: none; min-height: 190px; }
 }
 
