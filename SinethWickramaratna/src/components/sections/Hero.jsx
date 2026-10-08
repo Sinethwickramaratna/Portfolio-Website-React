@@ -1,6 +1,7 @@
 import Icon from '../Icons.jsx'
 import portrait from '../../assets/Images/profile.webp'
-import { LINKS, CV_URL } from '../../data/content.js'
+import { LINKS } from '../../data/content.js'
+import { CV_URL, CV_FILENAME } from '../../data/cv.js'
 import { STATS } from '../../data/site.js'
 
 const social = { GITHUB: 'github', LINKEDIN: 'linkedin', EMAIL: 'mail' }
@@ -29,7 +30,7 @@ export default function Hero() {
               Let&rsquo;s talk
             </a>
             {CV_URL && (
-              <a href={CV_URL} className="btn btn--ghost" target="_blank" rel="noreferrer">
+              <a href={CV_URL} className="btn btn--ghost" download={CV_FILENAME}>
                 <Icon name="download" /> Download CV
               </a>
             )}

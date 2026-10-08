@@ -66,9 +66,7 @@ export const CERTIFICATES = [
 ];
 
 
-// Paste your CV link here (Google Drive, use the /view or /preview form). While empty, the
-// "Download CV" buttons are not rendered at all.
-export const CV_URL = "";
+// The CV now lives in src/assets/CV and is wired up in src/data/cv.js.
 export const DESIGN_WORKS = [
   {
     "title": "BOT TALK 3.0",

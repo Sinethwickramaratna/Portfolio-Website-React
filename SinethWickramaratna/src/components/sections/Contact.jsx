@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import Reveal from '../Reveal.jsx'
 import Icon from '../Icons.jsx'
-import { AVAILABLE_FOR, LINKS, CV_URL } from '../../data/content.js'
+import { AVAILABLE_FOR, LINKS } from '../../data/content.js'
+import { CV_URL, CV_FILENAME } from '../../data/cv.js'
 import { EMAIL, titleCase } from '../../data/site.js'
 
 export default function Contact() {
@@ -44,7 +45,7 @@ export default function Contact() {
               <Icon name={copied ? 'check' : 'copy'} /> {copied ? 'Email copied' : 'Copy email'}
             </button>
             {CV_URL && (
-              <a className="btn btn--ghost" href={CV_URL} target="_blank" rel="noreferrer">
+              <a className="btn btn--ghost" href={CV_URL} download={CV_FILENAME}>
                 <Icon name="download" /> Download CV
               </a>
             )}
