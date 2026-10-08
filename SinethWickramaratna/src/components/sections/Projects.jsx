@@ -4,6 +4,7 @@ import Dialog from '../Dialog.jsx'
 import Icon from '../Icons.jsx'
 import { PROJECTS } from '../../data/content.js'
 import { titleCase } from '../../data/site.js'
+import { imageFor } from '../../data/projectImages.js'
 
 /* Flat covers: a dark violet base with one warm (or lavender) glow. */
 const GLOWS = [
@@ -47,18 +48,31 @@ function Links({ p }) {
 
 function Card({ p, i, onOpen }) {
   const feature = i === 0
+  const img = imageFor(p.name)
   return (
     <Reveal
       as="article"
       className={`card project${feature ? ' project--feature' : ''}${PAIR && i >= PROJECTS.length - 2 ? ' project--half' : ''}`}
       delay={(i % 3) * 80}
     >
-      <div className="project-cover" data-n={p.n} style={{ '--cover': cover(i) }}>
-        {feature ? <span className="project-feature-badge">Featured</span> : <span className="cat">{p.category}</span>}
-        <span className="yr">{p.year}</span>
-      </div>
+      {img ? (
+        <button type="button" className="project-cover project-cover--img" onClick={() => onOpen(i)} aria-label={`Open the ${p.name} case study`}>
+          <img src={img} alt={`${p.name} project overview`} width="1600" height="1000" loading={i < 2 ? 'eager' : 'lazy'} decoding="async" />
+          {feature && <span className="project-feature-badge">Featured</span>}
+        </button>
+      ) : (
+        <div className="project-cover" data-n={p.n} style={{ '--cover': cover(i) }}>
+          {feature ? <span className="project-feature-badge">Featured</span> : <span className="cat">{p.category}</span>}
+          <span className="yr">{p.year}</span>
+        </div>
+      )}
       <div className="project-body">
-        {feature && <span className="chip chip--accent" style={{ alignSelf: 'flex-start' }}>{p.category}</span>}
+        {(feature || img) && (
+          <span className="project-meta">
+            <span className="chip chip--accent">{p.category}</span>
+            <span className="yr-text">{p.year}</span>
+          </span>
+        )}
         <h3>{p.name}</h3>
         <p>{p.blurb}</p>
         <div className="project-metrics">
@@ -124,6 +138,9 @@ export default function Projects() {
               </button>
             </div>
             <div className="modal-body">
+              {imageFor(p.name) && (
+                <img className="modal-shot" src={imageFor(p.name)} alt={`${p.name} project overview`} width="1600" height="1000" />
+              )}
               {p.body.map((para, k) => (
                 <p key={k}>{para}</p>
               ))}

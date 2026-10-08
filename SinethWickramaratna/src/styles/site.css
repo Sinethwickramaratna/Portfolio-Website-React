@@ -551,3 +551,16 @@ html:has(dialog[open]) { overflow: hidden; }
   .marquee-row { overflow-x: auto; }
 }
 .tech-tile { width: 24px; height: 24px; font-weight: 700; font-size: 0.7rem; font-family: var(--font-display); letter-spacing: -0.02em; }
+
+/* Project covers that use a showcase image */
+.project-cover--img { padding: 0; min-height: 0; aspect-ratio: 16 / 10; display: block; border: 0; width: 100%; cursor: pointer; background: #0e0b14; position: relative; }
+.project-cover--img::before { display: none; }
+.project-cover--img img { width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.7s var(--ease); }
+.project:hover .project-cover--img img { transform: scale(1.035); }
+.project-cover--img .project-feature-badge { position: absolute; left: 16px; bottom: 16px; }
+.project--feature .project-cover--img { flex: 0 0 60%; aspect-ratio: auto; min-height: 0; }
+.project--feature .project-cover--img img { object-position: left center; }
+.project-meta { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.project-meta .yr-text { font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-2); letter-spacing: 0.04em; }
+.modal-shot { width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; border-radius: var(--radius-sm); border: 1px solid var(--line); }
+@media (max-width: 760px) { .project--feature .project-cover--img { flex: none; aspect-ratio: 16 / 10; min-height: 0; } }
